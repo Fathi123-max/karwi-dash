@@ -1,6 +1,6 @@
-# Next.js Admin Template with TypeScript & Shadcn UI
+# Karwi Dash
 
-Includes multiple dashboards, authentication layouts, customizable theme presets, and more.
+A modern admin dashboard built with Next.js, TypeScript, and Shadcn UI. Includes multiple dashboards, authentication layouts, and customizable theme presets.
 
 <img src="https://github.com/arhamkhnz/next-shadcn-admin-dashboard/blob/main/media/dashboard.png?version=4" alt="Dashboard Screenshot">
 
