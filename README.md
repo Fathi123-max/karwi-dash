@@ -8,7 +8,7 @@ The idea behind this dashboard aims to offer an alternative to typical admin tem
 
 I’ve taken design inspiration from various sources. Feel free to open an issue or reach out for credits.
 
-> **View demo:** [studio admin](https://next-shadcn-admin-dashboard.vercel.app)
+> **View demo:** [Karwi admin](https://next-shadcn-admin-dashboard.vercel.app)
 
 > [!TIP]
 > I’m also working on Nuxt.js, Svelte, and React (Vite + TanStack Router) versions of this dashboard. They’ll be live soon.
@@ -97,12 +97,20 @@ _Clone and deploy your own copy of this project in one click._
    
 2. **Install dependencies**
    ```bash
-    npm install
+    pnpm install
    ```
 
-3. **Start the development server**
+3. **Set up environment variables**
+   Create a `.env.local` file in the root directory with your Supabase credentials:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+   ```
+
+4. **Start the development server**
    ```bash
-   npm run dev
+   pnpm run dev
    ```
 
 Once running, the app will be available at [http://localhost:3000](http://localhost:3000)
