@@ -164,7 +164,7 @@ function ChartTooltipContent({
     labelKey,
   ])
 
-  if (!active ?? !payload?.length) {
+  if (!(active ?? false) || !payload?.length) {
     return null
   }
 
