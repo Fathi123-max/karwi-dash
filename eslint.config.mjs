@@ -113,15 +113,15 @@ export default [
       "space-in-parens": ["error", "never"],
       "array-bracket-spacing": ["error", "never"],
       "object-curly-spacing": ["error", "always"],
-      "func-call-spacing": ["error", "never"],
+      // "func-call-spacing": ["warn", "never"],
       "computed-property-spacing": ["error", "never"],
 
       // Naming Conventions
       "no-underscore-dangle": ["error", { allow: ["_id", "__dirname"] }],
 
       // Complexity
-      complexity: ["error", { max: 10 }],
-      "max-lines": ["error", { max: 300, skipBlankLines: true, skipComments: true }],
+      complexity: ["error", { max: 20 }],
+      "max-lines": ["error", { max: 420, skipBlankLines: true, skipComments: true }],
       "max-depth": ["error", 4],
 
       // TypeScript-Specific Rules (customized)

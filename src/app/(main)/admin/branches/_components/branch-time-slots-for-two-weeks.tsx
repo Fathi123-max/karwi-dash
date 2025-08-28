@@ -4,17 +4,15 @@
 
 import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 
-import { Clock, Save, CheckCircle, XCircle, Sun, Moon } from "lucide-react";
+import { Clock, Save, CheckCircle, XCircle, Calendar, Sun, Moon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { formatDate, getNextTwoWeeksRange } from "@/lib/date-utils";
 import { useBranchHoursStore } from "@/stores/admin-dashboard/branch-hours-store";
-
-const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const dayAbbreviations = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 interface TimeSlot {
   id: string;
@@ -22,9 +20,10 @@ interface TimeSlot {
   openTime: string | null;
   closeTime: string | null;
   isClosed: boolean;
+  date?: string; // Date in YYYY-MM-DD format
 }
 
-interface BranchTimeSlotsProps {
+interface BranchTimeSlotsForTwoWeeksProps {
   branchId: string;
   className?: string;
   onTimeSlotsChange?: (timeSlots: TimeSlot[]) => void;
@@ -32,10 +31,15 @@ interface BranchTimeSlotsProps {
   showSaveButton?: boolean; // Whether to show the save button
   title?: string; // Custom title for the card
   description?: string; // Custom description for the card
-  mode?: "default" | "next-two-weeks"; // Mode to determine which hours to show
 }
 
-const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, BranchTimeSlotsProps>(
+const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const dayAbbreviations = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const BranchTimeSlotsForTwoWeeks = forwardRef<
+  { handleSaveAll: () => Promise<boolean> },
+  BranchTimeSlotsForTwoWeeksProps
+>(
   (
     {
       branchId,
@@ -43,98 +47,77 @@ const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, Br
       onTimeSlotsChange,
       onSaveTimeSlots,
       showSaveButton = true,
-      title = "Regular Weekly Hours",
-      description = "Set the default opening and closing times for each day of the week. These hours will be used unless specific hours are set for a particular date.",
-      mode = "default",
-    }: BranchTimeSlotsProps,
+      title = "Hours for Next 2 Weeks",
+      description = "Set specific operating hours for each day in the next 2 weeks. These hours will override the regular weekly hours for the specified dates.",
+    }: BranchTimeSlotsForTwoWeeksProps,
     ref,
   ) => {
-    const {
-      fetchHoursForBranch,
-      fetchHoursForBranchForNextTwoWeeks,
-      getHoursForBranch,
-      getHoursForBranchForNextTwoWeeks,
-      updateHours,
-    } = useBranchHoursStore();
-
+    const { fetchHoursForBranchForNextTwoWeeks, getHoursForBranchForNextTwoWeeks, updateHours } = useBranchHoursStore();
     const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [saveStatus, setSaveStatus] = useState<"success" | "error" | null>(null);
 
+    // Get the date range for display
+    const { startDate, endDate } = getNextTwoWeeksRange();
+    const startDateString = formatDate(startDate);
+    const endDateString = formatDate(endDate);
+
     useEffect(() => {
       const fetchHours = async () => {
         setIsLoading(true);
         try {
-          if (mode === "next-two-weeks") {
-            // Handle next two weeks mode
-            if (branchId === "new") {
-              // For new branches, create default time slots for 2 weeks
-              // Implementation would be similar to the two-weeks component
-              const defaultSlots = Array.from({ length: 14 }, (_, i) => {
-                const dayOfWeek = i % 7;
-                return {
-                  id: `new-${i}`,
-                  dayOfWeek,
-                  openTime: dayOfWeek === 0 || dayOfWeek === 6 ? null : "09:00",
-                  closeTime: dayOfWeek === 0 || dayOfWeek === 6 ? null : "17:00",
-                  isClosed: dayOfWeek === 0 || dayOfWeek === 6,
-                };
-              });
-              setTimeSlots(defaultSlots);
-            } else {
-              await fetchHoursForBranchForNextTwoWeeks(branchId);
-              const hours = getHoursForBranchForNextTwoWeeks(branchId);
-              const slots = hours.map((h) => ({
-                id: h.id,
-                dayOfWeek: h.day_of_week,
-                openTime: h.open_time,
-                closeTime: h.close_time,
-                isClosed: h.is_closed,
-              }));
-              setTimeSlots(slots);
-              setHasUnsavedChanges(false);
-              if (onTimeSlotsChange) {
-                onTimeSlotsChange(slots);
-              }
-            }
-          } else {
-            // Handle default mode (regular weekly schedule)
-            if (branchId === "new") {
-              const defaultSlots = Array.from({ length: 7 }, (_, i) => ({
+          // For new branches, create default time slots for 2 weeks
+          if (branchId === "new") {
+            const { startDate } = getNextTwoWeeksRange();
+            const slots: TimeSlot[] = [];
+            const currentDate = new Date(startDate);
+
+            for (let i = 0; i < 14; i++) {
+              const dayOfWeek = currentDate.getDay();
+              slots.push({
                 id: `new-${i}`,
-                dayOfWeek: i,
-                openTime: i === 0 || i === 6 ? null : "09:00", // Sunday and Saturday closed by default
-                closeTime: i === 0 || i === 6 ? null : "17:00",
-                isClosed: i === 0 || i === 6, // Sunday and Saturday closed by default
-              }));
-              setTimeSlots(defaultSlots);
-              console.log("Set default time slots for new branch:", defaultSlots);
-            } else {
-              await fetchHoursForBranch(branchId);
-              const hours = getHoursForBranch(branchId);
-              console.log("Got hours from store:", hours);
-              // Transform to our local format
-              const slots = hours.map((h) => ({
-                id: h.id,
-                dayOfWeek: h.day_of_week,
-                openTime: h.open_time,
-                closeTime: h.close_time,
-                isClosed: h.is_closed,
-              }));
-              console.log("Transformed slots:", slots);
-              setTimeSlots(slots);
-              // Always initialize hasUnsavedChanges to false when loading data
-              setHasUnsavedChanges(false);
-              console.log("Initialized hasUnsavedChanges to false");
-              if (onTimeSlotsChange) {
-                onTimeSlotsChange(slots);
-              }
+                dayOfWeek,
+                openTime: dayOfWeek === 0 || dayOfWeek === 6 ? null : "09:00", // Sunday and Saturday closed by default
+                closeTime: dayOfWeek === 0 || dayOfWeek === 6 ? null : "17:00",
+                isClosed: dayOfWeek === 0 || dayOfWeek === 6, // Sunday and Saturday closed by default
+                date: formatDate(currentDate),
+              });
+              currentDate.setDate(currentDate.getDate() + 1);
+            }
+
+            setTimeSlots(slots);
+            console.log("Set default time slots for new branch for 2 weeks:", slots);
+          } else {
+            console.log("Fetching hours for branch for next 2 weeks:", branchId);
+            await fetchHoursForBranchForNextTwoWeeks(branchId);
+            const hours = getHoursForBranchForNextTwoWeeks(branchId);
+            console.log("Got hours from store for 2 weeks:", hours);
+
+            // Transform to our local format
+            const slots = hours.map((h) => ({
+              id: h.id,
+              dayOfWeek: h.day_of_week,
+              openTime: h.open_time,
+              closeTime: h.close_time,
+              isClosed: h.is_closed,
+              date: h.specific_date || undefined,
+            }));
+
+            console.log("Transformed slots for 2 weeks:", slots);
+            setTimeSlots(slots);
+
+            // Always initialize hasUnsavedChanges to false when loading data
+            setHasUnsavedChanges(false);
+            console.log("Initialized hasUnsavedChanges to false");
+
+            if (onTimeSlotsChange) {
+              onTimeSlotsChange(slots);
             }
           }
         } catch (error) {
-          console.error("Error fetching branch hours:", error);
+          console.error("Error fetching branch hours for 2 weeks:", error);
         } finally {
           setIsLoading(false);
         }
@@ -143,14 +126,7 @@ const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, Br
       if (branchId) {
         fetchHours();
       }
-    }, [
-      branchId,
-      mode,
-      fetchHoursForBranch,
-      fetchHoursForBranchForNextTwoWeeks,
-      getHoursForBranch,
-      getHoursForBranchForNextTwoWeeks,
-    ]);
+    }, [branchId, fetchHoursForBranchForNextTwoWeeks, getHoursForBranchForNextTwoWeeks]);
 
     const handleTimeChange = (index: number, field: "openTime" | "closeTime", value: string) => {
       console.log(`Time change for slot ${index}, field ${field}, value ${value}`);
@@ -198,7 +174,7 @@ const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, Br
     }));
 
     const handleSaveAll = async (): Promise<boolean> => {
-      console.log("handleSaveAll called");
+      console.log("handleSaveAll called for 2 weeks");
       // For new branches, we don't save to database yet
       if (branchId === "new") {
         console.log("This is a new branch, not saving to database yet");
@@ -211,15 +187,15 @@ const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, Br
         return true; // Return success
       }
 
-      console.log("Saving time slots for existing branch:", branchId);
+      console.log("Saving time slots for existing branch for 2 weeks:", branchId);
       setIsSaving(true);
       setSaveStatus(null);
 
       try {
         // Log the time slots being saved for debugging
-        console.log("Saving time slots:", timeSlots);
+        console.log("Saving time slots for 2 weeks:", timeSlots);
 
-        const promises = timeSlots.map((slot, index) =>
+        const promises = timeSlots.map((slot) =>
           updateHours({
             id: slot.id,
             branch_id: branchId,
@@ -227,13 +203,13 @@ const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, Br
             open_time: slot.isClosed ? null : slot.openTime,
             close_time: slot.isClosed ? null : slot.closeTime,
             is_closed: slot.isClosed,
-            // For next-two-weeks mode, we would need to include date information
+            specific_date: slot.date || null,
           }),
         );
         await Promise.all(promises);
         setHasUnsavedChanges(false);
         setSaveStatus("success");
-        console.log("Time slots saved successfully, hasUnsavedChanges set to:", false);
+        console.log("Time slots saved successfully for 2 weeks, hasUnsavedChanges set to:", false);
 
         // Reset success status after 3 seconds
         setTimeout(() => {
@@ -241,7 +217,7 @@ const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, Br
         }, 3000);
         return true; // Return success
       } catch (error) {
-        console.error("Error saving time slots:", error);
+        console.error("Error saving time slots for 2 weeks:", error);
         setSaveStatus("error");
         return false; // Return failure
       } finally {
@@ -274,10 +250,14 @@ const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, Br
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <CardTitle className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-blue-500" />
+                <Calendar className="h-5 w-5 text-blue-500" />
                 {title}
               </CardTitle>
-              {description && <CardDescription className="mt-1">{description}</CardDescription>}
+              {description && (
+                <CardDescription className="mt-1">
+                  {description} ({startDateString} to {endDateString})
+                </CardDescription>
+              )}
             </div>
 
             <div className="flex items-center gap-2">
@@ -314,10 +294,17 @@ const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, Br
         </CardHeader>
         <CardContent className="flex-grow overflow-hidden p-0">
           <div className="h-full overflow-auto p-6">
-            <div
-              className={`grid grid-cols-1 gap-4 ${mode === "next-two-weeks" ? "sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4" : "sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2"}`}
-            >
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
               {timeSlots.map((slot, index) => {
+                const dateObj = slot.date ? new Date(slot.date) : null;
+                const dateString = dateObj
+                  ? dateObj.toLocaleDateString("en-US", {
+                      weekday: "short",
+                      month: "short",
+                      day: "numeric",
+                    })
+                  : "";
+
                 // Determine if it's a weekend
                 const isWeekend = slot.dayOfWeek === 0 || slot.dayOfWeek === 6;
 
@@ -345,7 +332,10 @@ const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, Br
                         >
                           <span className="text-sm font-medium">{dayAbbreviations[slot.dayOfWeek]}</span>
                         </div>
-                        <div className="font-medium">{dayNames[slot.dayOfWeek]}</div>
+                        <div>
+                          <div className="font-medium">{dayNames[slot.dayOfWeek]}</div>
+                          <div className="text-muted-foreground text-xs">{dateString}</div>
+                        </div>
                       </div>
 
                       <div className="flex items-center">
@@ -439,6 +429,6 @@ const BranchTimeSlots = forwardRef<{ handleSaveAll: () => Promise<boolean> }, Br
   },
 );
 
-BranchTimeSlots.displayName = "BranchTimeSlots";
+BranchTimeSlotsForTwoWeeks.displayName = "BranchTimeSlotsForTwoWeeks";
 
-export { BranchTimeSlots };
+export { BranchTimeSlotsForTwoWeeks };

@@ -1,19 +1,65 @@
 import { NextResponse } from "next/server";
 
-import { testSupabaseConnection } from "@/lib/supabase/test-connection";
+import { createClient } from "@/lib/supabase/server";
 
 export async function GET() {
+  let supabase;
   try {
-    console.log("Testing Supabase connection via API route...");
-    const result = await testSupabaseConnection();
-
-    if (result.success) {
-      return NextResponse.json({ success: true, data: result.data });
-    } else {
-      return NextResponse.json({ success: false, error: result.error }, { status: 500 });
-    }
+    supabase = await createClient();
   } catch (error) {
-    console.error("API route error:", error);
-    return NextResponse.json({ success: false, error: "Failed to test Supabase connection" }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Unknown error",
+        details: "Failed to create Supabase client",
+      },
+      { status: 500 },
+    );
+  }
+
+  try {
+    // Test database connection
+    const { data, error } = await supabase.from("admins").select("id").limit(1);
+
+    if (error) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: error.message,
+          details: "Database query failed",
+        },
+        { status: 500 },
+      );
+    }
+
+    // Test storage connection
+    const { data: buckets, error: storageError } = await supabase.storage.listBuckets();
+
+    if (storageError) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: storageError.message,
+          details: "Storage connection failed",
+        },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Supabase connection successful",
+      database: data,
+      storage: buckets,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Unknown error",
+        details: "Unexpected error occurred",
+      },
+      { status: 500 },
+    );
   }
 }
