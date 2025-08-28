@@ -17,8 +17,7 @@ import { useWasherStore } from "@/stores/admin-dashboard/washer-store";
 import { AdminHeader } from "./_components/admin-header";
 import { AdminMetrics } from "./_components/admin-metrics";
 import { BookingsChartInteractive } from "./_components/bookings-chart-interactive";
-import { DebugData } from "./_components/debug-data";
-import { FranchisePerformanceChart } from "./_components/franchise-performance-chart";
+import { BranchPerformanceChart } from "./_components/branch-performance-chart";
 import { PaymentsChart } from "./_components/payments-chart";
 import { RecentActivity } from "./_components/recent-activity";
 import { RecentBookingsTable } from "./_components/recent-bookings-table";
@@ -68,8 +67,6 @@ export default function AdminHomePage() {
   return (
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
       <AdminHeader />
-      {/* Debug component - can be removed later */}
-      <DebugData />
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -99,7 +96,7 @@ export default function AdminHomePage() {
         <TabsContent value="analytics" className="space-y-4">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             <Suspense fallback={<div className="bg-muted h-[350px] animate-pulse rounded-lg" />}>
-              <FranchisePerformanceChart />
+              <BranchPerformanceChart />
             </Suspense>
             <Suspense fallback={<div className="bg-muted h-[350px] animate-pulse rounded-lg" />}>
               <PaymentsChart />
