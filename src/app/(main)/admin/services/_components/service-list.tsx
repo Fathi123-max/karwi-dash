@@ -44,12 +44,11 @@ export function ServiceList() {
   const columns = useServiceColumns();
 
   // Memoize servicesWithBranchNames to prevent infinite re-renders
-  // All services are global by default
   const servicesWithBranchNames = useMemo(() => {
     return services.map((service) => {
       return {
         ...service,
-        branchName: "Global",
+        branchName: service.branchName || "N/A",
       };
     });
   }, [services]);
@@ -71,9 +70,23 @@ export function ServiceList() {
 
   // Memoize branchNames to prevent infinite re-renders
   const branchNames = useMemo(() => {
-    // Only "Global" since all services are global
-    return ["Global"];
-  }, []);
+    // Get unique branch names from services and branches
+    const names = new Set<string>();
+    services.forEach((service) => {
+      if (service.branchName) {
+        names.add(service.branchName);
+      }
+    });
+    // Also add all branch names from the branches store
+    branches.forEach((branch) => {
+      names.add(branch.name);
+    });
+    // Always include "Global" for global services
+    names.add("Global");
+    names.add("N/A");
+
+    return Array.from(names);
+  }, [services, branches]);
 
   const facetedFilters = useMemo(
     () => [

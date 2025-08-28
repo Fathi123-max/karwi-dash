@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef, ChangeEvent } from "react";
+import { useState, useRef, ChangeEvent, useEffect } from "react";
 
-import { X, Upload, Link, Image as ImageIcon, Loader2 } from "lucide-react";
+import { X, Upload, Link, Image as ImageIcon, Loader2, AlertCircle } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -20,12 +20,11 @@ interface BranchPicturesFieldProps {
 }
 
 export function BranchPicturesField({ form, name, label, placeholder }: BranchPicturesFieldProps) {
-  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [externalUrl, setExternalUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Initialize previews from existing values
+  // Get current pictures from form
   const fieldValue = form.watch(name);
   const imageUrls = fieldValue
     ? Array.isArray(fieldValue)
@@ -43,21 +42,24 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
     setIsUploading(true);
 
     try {
-      const newPreviews: string[] = [];
       const newUrls: string[] = [];
 
       for (const file of Array.from(files)) {
-        // Create preview
-        const previewUrl = URL.createObjectURL(file);
-        newPreviews.push(previewUrl);
-
         // Upload to Supabase Storage in the branches bucket
-        const { url, error } = await uploadImage(file, "branches");
+        // Handle various error cases including RLS policy violations
+        const result = await uploadImage(file, "branches");
+        const { url, error } = result;
 
         if (error) {
-          toast.error(`Failed to upload ${file.name}: ${error.message}`);
-          // Clean up preview if upload failed
-          URL.revokeObjectURL(previewUrl);
+          if (error.message.includes("Bucket not found")) {
+            toast.error(`Failed to upload ${file.name}: Storage bucket not found. Please contact administrator.`);
+          } else if (error.message.includes("new row violates row-level security policy")) {
+            toast.error(`Failed to upload ${file.name}: Insufficient permissions. Please contact administrator.`);
+          } else if (error.message.includes("The resource was not found")) {
+            toast.error(`Failed to upload ${file.name}: Storage resource not found.`);
+          } else {
+            toast.error(`Failed to upload ${file.name}: ${error.message}`);
+          }
           continue;
         }
 
@@ -67,10 +69,7 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
       // Update form value
       const currentUrls = form.getValues(name) ?? [];
       const updatedUrls = [...currentUrls, ...newUrls];
-      form.setValue(name, updatedUrls);
-
-      // Update previews
-      setImagePreviews((prev) => [...prev, ...newPreviews]);
+      form.setValue(name, updatedUrls, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
 
       toast.success(`Successfully uploaded ${newUrls.length} image(s)`);
     } catch (error) {
@@ -86,7 +85,7 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
 
     const currentUrls = form.getValues(name) ?? [];
     const updatedUrls = [...currentUrls, externalUrl.trim()];
-    form.setValue(name, updatedUrls);
+    form.setValue(name, updatedUrls, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
 
     setExternalUrl("");
   };
@@ -94,10 +93,7 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
   const removeImage = (index: number) => {
     const currentUrls = form.getValues(name) ?? [];
     const updatedUrls = currentUrls.filter((_: any, i: number) => i !== index);
-    form.setValue(name, updatedUrls);
-
-    // Also remove the preview
-    setImagePreviews((prev) => prev.filter((_, i) => i !== index));
+    form.setValue(name, updatedUrls, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
   };
 
   const triggerFileInput = () => {
@@ -152,6 +148,10 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
               accept="image/*"
               disabled={isUploading}
             />
+            <div className="text-muted-foreground mt-2 flex items-center justify-center gap-1 text-xs">
+              <AlertCircle className="h-3 w-3" />
+              <span>Images will be stored in cloud storage</span>
+            </div>
           </div>
         </TabsContent>
 
@@ -182,17 +182,17 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
             {imageUrls.map((url: string, index: number) => (
               <div key={index} className="group relative">
                 <div className="bg-muted aspect-square overflow-hidden rounded-lg border">
-                  {imagePreviews[index] ? (
-                    <img
-                      src={imagePreviews[index]}
-                      alt={`Preview ${index + 1}`}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center">
-                      <ImageIcon className="text-muted-foreground h-6 w-6" />
-                    </div>
-                  )}
+                  <img
+                    src={url}
+                    alt={`Preview ${index + 1}`}
+                    className="h-full w-full object-cover"
+                    onError={(e) => {
+                      // If the image fails to load, show a placeholder
+                      const target = e.target as HTMLImageElement;
+                      target.src =
+                        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23cccccc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2' ry='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpath d='M21 15l-5-5L5 21'/%3E%3C/svg%3E";
+                    }}
+                  />
                 </div>
                 <Button
                   type="button"
@@ -210,8 +210,8 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
         </div>
       )}
 
-      {/* Hidden textarea for form submission */}
-      <input type="hidden" {...form.register(name)} value={imageUrls.join(",")} />
+      {/* Hidden input for form submission */}
+      <input type="hidden" {...form.register(name)} />
     </div>
   );
 }

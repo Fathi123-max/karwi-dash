@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
@@ -111,43 +110,6 @@ export const columns: ColumnDef<Branch>[] = [
         if (filter === "0") return rating === 0;
         return false;
       });
-    },
-  },
-  {
-    accessorKey: "location",
-    header: "Location",
-    cell: ({ row }) => {
-      const branch = row.original;
-      const locationStr = branch.location;
-      const location = parseLocation(locationStr);
-
-      if (!location) {
-        return <span className="text-muted-foreground">{locationStr ? "Invalid format" : "Not set"}</span>;
-      }
-
-      const { lat, lng } = location;
-      const mapUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
-      const coordinateText = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-
-      return (
-        <div className="flex items-center gap-2">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="cursor-pointer font-mono text-sm">{coordinateText}</span>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Click to view on map</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <a href={mapUrl} target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="sm" className="h-8 px-2">
-              <MapPin className="h-4 w-4" />
-            </Button>
-          </a>
-        </div>
-      );
     },
   },
   {

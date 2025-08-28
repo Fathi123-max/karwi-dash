@@ -8,7 +8,7 @@ import { useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Building2, Loader2, MapPin, Phone, Star, Hash, FileText, Clock } from "lucide-react";
+import { Building2, Loader2, MapPin, Phone, Star, Hash, FileText, Clock, Calendar } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -24,6 +24,7 @@ import { useFranchiseStore } from "@/stores/admin-dashboard/franchise-store";
 
 import { BranchPicturesField } from "./branch-pictures-field";
 import { BranchTimeSlots } from "./branch-time-slots";
+import { BranchTimeSlotsForTwoWeeks } from "./branch-time-slots-for-two-weeks";
 import { Branch } from "./types";
 
 const formSchema = z.object({
@@ -59,7 +60,7 @@ const parseLocation = (locationStr: string | null | undefined): { lat: number; l
   // Check for WKT format
   const match = locationStr.match(/POINT\(([-\d.]+) ([-\d.]+)\)/);
   if (match && match.length === 3) {
-    return { lng: parseFloat(match[1]), lat: parseFloat(match[2]) };
+    return { lat: parseFloat(match[2]), lng: parseFloat(match[1]) };
   }
   // Check for GeoJSON format (from location picker)
   try {
@@ -87,7 +88,8 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
   );
 
   const isEditMode = !!branch;
-  const timeSlotsFormRef = useRef<{ handleSaveAll:() => Promise<boolean> }>(null);
+  const timeSlotsFormRef = useRef<{ handleSaveAll: () => Promise<boolean> }>(null);
+  const timeSlotsForTwoWeeksFormRef = useRef<{ handleSaveAll: () => Promise<boolean> }>(null);
 
   const form = useForm<BranchFormValues>({
     resolver: zodResolver(formSchema),
@@ -99,7 +101,11 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
       city: branch?.city ?? "",
       phone_number: branch?.phone_number ?? "",
       ratings: branch?.ratings ?? 0,
-      pictures: branch?.pictures ?? [],
+      pictures: branch?.pictures
+        ? Array.isArray(branch.pictures)
+          ? branch.pictures
+          : branch.pictures.split(",").map((item: string) => item.trim())
+        : [],
       latitude: branch?.latitude ?? 0,
       longitude: branch?.longitude ?? 0,
     },
@@ -138,13 +144,14 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
           longitude: processedData.longitude,
         });
 
-        // Save time slots if there are any unsaved changes
+        // Save time slots if in edit mode
         if (timeSlotsFormRef.current) {
-          const saveSuccess = await timeSlotsFormRef.current.handleSaveAll();
-          if (!saveSuccess) {
-            toast.error("Branch updated but failed to save operating hours.");
-            return;
-          }
+          await timeSlotsFormRef.current.handleSaveAll();
+        }
+
+        // Save 2-week time slots if in edit mode
+        if (timeSlotsForTwoWeeksFormRef.current) {
+          await timeSlotsForTwoWeeksFormRef.current.handleSaveAll();
         }
 
         toast.success("Branch details updated successfully!");
@@ -171,6 +178,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
       await fetchBranches();
       onSuccess();
     } catch (error) {
+      console.error("Error in branch form submission:", error);
       toast.error(`Failed to ${isEditMode ? "update" : "create"} branch.`);
     }
   };
@@ -182,18 +190,34 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
           {isEditMode ? (
             <>
               <Tabs defaultValue="basic" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="basic" className="flex items-center gap-2">
+                <TabsList className="bg-muted/50 grid w-full grid-cols-4">
+                  <TabsTrigger
+                    value="basic"
+                    className="data-[state=active]:bg-background flex items-center gap-2 data-[state=active]:shadow-sm"
+                  >
                     <Building2 className="h-4 w-4" />
-                    Basic Info
+                    <span className="hidden sm:inline">Basic Info</span>
                   </TabsTrigger>
-                  <TabsTrigger value="location" className="flex items-center gap-2">
+                  <TabsTrigger
+                    value="location"
+                    className="data-[state=active]:bg-background flex items-center gap-2 data-[state=active]:shadow-sm"
+                  >
                     <MapPin className="h-4 w-4" />
-                    Location
+                    <span className="hidden sm:inline">Location</span>
                   </TabsTrigger>
-                  <TabsTrigger value="hours" className="flex items-center gap-2">
+                  <TabsTrigger
+                    value="hours"
+                    className="data-[state=active]:bg-background flex items-center gap-2 data-[state=active]:shadow-sm"
+                  >
                     <Clock className="h-4 w-4" />
-                    Operating Hours
+                    <span className="hidden sm:inline">Regular Hours</span>
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="hours-2weeks"
+                    className="data-[state=active]:bg-background flex items-center gap-2 data-[state=active]:shadow-sm"
+                  >
+                    <Calendar className="h-4 w-4" />
+                    <span className="hidden sm:inline">Next 2 Weeks</span>
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="basic" className="mt-4 space-y-4">
@@ -413,9 +437,18 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                     )}
                   />
                 </TabsContent>
-                <TabsContent value="hours" className="mt-4">
+                <TabsContent value="hours" className="mt-4 h-[calc(100vh-200px)]">
                   <BranchTimeSlots
                     ref={timeSlotsFormRef}
+                    branchId={branch.id}
+                    className="h-full"
+                    showSaveButton={false}
+                    mode="default"
+                  />
+                </TabsContent>
+                <TabsContent value="hours-2weeks" className="mt-4 h-[calc(100vh-200px)]">
+                  <BranchTimeSlotsForTwoWeeks
+                    ref={timeSlotsForTwoWeeksFormRef}
                     branchId={branch.id}
                     className="h-full"
                     showSaveButton={false}
@@ -432,14 +465,20 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
           ) : (
             <>
               <Tabs defaultValue="basic" className="w-full">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="basic" className="flex items-center gap-2">
+                <TabsList className="bg-muted/50 grid w-full grid-cols-2">
+                  <TabsTrigger
+                    value="basic"
+                    className="data-[state=active]:bg-background flex items-center gap-2 data-[state=active]:shadow-sm"
+                  >
                     <Building2 className="h-4 w-4" />
-                    Basic Info
+                    <span className="hidden sm:inline">Basic Info</span>
                   </TabsTrigger>
-                  <TabsTrigger value="location" className="flex items-center gap-2">
+                  <TabsTrigger
+                    value="location"
+                    className="data-[state=active]:bg-background flex items-center gap-2 data-[state=active]:shadow-sm"
+                  >
                     <MapPin className="h-4 w-4" />
-                    Location
+                    <span className="hidden sm:inline">Location</span>
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="basic" className="mt-4 space-y-4">
