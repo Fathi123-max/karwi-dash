@@ -1,6 +1,15 @@
 {
-  "buildCommand": "pnpm run build",
-  "devCommand": "pnpm run dev",
-  "installCommand": "pnpm install",
-  "framework": "nextjs"
+  "github": {
+    "autoJobCancelation": true,
+    "autoAlias": true,
+    "silent": false,
+    "enabled": true,
+    "productionBranch": "main"
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ]
 }
