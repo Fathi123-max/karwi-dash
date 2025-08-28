@@ -14,6 +14,7 @@ import {
   Star,
   Calendar,
   Ticket,
+  Database,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -29,6 +30,7 @@ const adminNavItems = [
   { href: "/admin/reviews", label: "Reviews", icon: Star },
   { href: "/admin/schedule", label: "Schedule", icon: Calendar },
   { href: "/admin/promotions", label: "Promotions", icon: Ticket },
+  { href: "/admin/storage", label: "Storage", icon: Database },
 ];
 
 export function NavAdmin() {

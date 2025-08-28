@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-lines */
-/* eslint-disable complexity */
 
 "use client";
 
@@ -45,7 +44,6 @@ interface ServiceFormProps {
 export function ServiceForm({ service, onClose }: ServiceFormProps) {
   const { branches, fetchBranches } = useBranchStore();
   const addService = useServiceStore((state) => state.addService);
-  const addGlobalService = useServiceStore((state) => state.addGlobalService);
   const updateService = useServiceStore((state) => state.updateService);
 
   useEffect(() => {
@@ -69,6 +67,7 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
           include: service.include ? service.include.join(", ") : "",
           is_global: service.is_global ?? false,
           pictures: service.pictures ?? [],
+          branchId: service.branchId ?? "",
         }
       : {
           name: "",
@@ -79,41 +78,43 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
           include: "",
           is_global: false,
           pictures: [],
+          branchId: "",
         },
   });
 
-  const onSubmit = (data: ServiceFormValues & { branchId?: string; is_global: boolean }) => {
-    // Process the todos, include, and pictures fields
-    const processedData = {
-      ...data,
-      todos: data.todos ? data.todos.split(",").map((item) => item.trim()) : [],
-      include: data.include ? data.include.split(",").map((item) => item.trim()) : [],
-      // Pictures are already handled as an array by the PicturesField component
-      pictures: Array.isArray(data.pictures)
-        ? data.pictures
-        : data.pictures
-          ? data.pictures.split(",").map((item) => item.trim())
-          : [],
-    };
+  const onSubmit = async (data: ServiceFormValues & { branchId?: string; is_global: boolean }) => {
+    try {
+      // Process the todos, include, and pictures fields
+      const processedData = {
+        ...data,
+        todos: data.todos ? data.todos.split(",").map((item) => item.trim()) : [],
+        include: data.include ? data.include.split(",").map((item) => item.trim()) : [],
+        // Pictures are already handled as an array by the PicturesField component
+        pictures: Array.isArray(data.pictures)
+          ? data.pictures
+          : data.pictures
+            ? data.pictures.split(",").map((item) => item.trim())
+            : [],
+      };
 
-    if (service) {
-      updateService({
-        ...service,
-        ...processedData,
-      });
-    } else {
-      if (data.is_global) {
-        // Create global service
-        addGlobalService(processedData);
-      } else if (data.branchId) {
-        // Create branch-specific service
-        addService({
+      if (service) {
+        // Update existing service
+        await updateService({
+          ...service,
+          ...processedData,
+        });
+      } else {
+        // Create new service
+        await addService({
           ...processedData,
           branchId: data.branchId,
         });
       }
+      onClose();
+    } catch (error) {
+      console.error("Error saving service:", error);
+      // TODO: Add error notification to user
     }
-    onClose();
   };
 
   return (
@@ -196,40 +197,6 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                             <DollarSign className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                             <Input type="number" step="0.01" placeholder="e.g., 25.00" {...field} className="pl-10" />
                           </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="todos"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="flex items-center gap-2">
-                          <List className="h-4 w-4" />
-                          To-Dos
-                        </FormLabel>
-                        <FormControl>
-                          <Textarea placeholder="Comma-separated list of to-dos" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="include"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="flex items-center gap-2">
-                          <FileText className="h-4 w-4" />
-                          Include
-                        </FormLabel>
-                        <FormControl>
-                          <Textarea placeholder="Comma-separated list of included items" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -491,8 +458,8 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
               <Button type="button" variant="ghost" onClick={onClose}>
                 Cancel
               </Button>
-              <Button type="submit" disabled={!service && !form.watch("is_global") && !form.watch("branchId")}>
-                {service ? "Update" : "Create"}
+              <Button type="submit" disabled={!form.watch("is_global") && !form.watch("branchId")}>
+                Create
               </Button>
             </div>
           </>
