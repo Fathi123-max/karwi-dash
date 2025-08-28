@@ -23,8 +23,10 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <a href="/admin">
-                <Command />
-                <span className="text-base font-semibold">{APP_CONFIG.name}</span>
+                <Command className="size-6" />
+                <span className="truncate text-base font-semibold group-data-[collapsible=icon]:!hidden">
+                  {APP_CONFIG.name}
+                </span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -32,16 +34,16 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Admin Menu</SidebarGroupLabel>
+          <SidebarGroupLabel className="group-data-[collapsible=icon]:!hidden">Admin Menu</SidebarGroupLabel>
           <NavAdmin />
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel>Marketing</SidebarGroupLabel>
+          <SidebarGroupLabel className="group-data-[collapsible=icon]:!hidden">Marketing</SidebarGroupLabel>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <a href="/admin/email-marketing">
                 <Mail />
-                <span>Email Marketing</span>
+                <span className="group-data-[collapsible=icon]:!hidden">Email Marketing</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

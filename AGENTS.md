@@ -2,11 +2,11 @@
 
 ## Quick Start
 
-- `npm run dev` - Start dev server
-- `npm run build` - Production build
-- `npm run lint` - ESLint check
-- `npm run format` - Prettier fix
-- `npm run format:check` - Prettier validation
+- `pnpm run dev` - Start dev server
+- `pnpm run build` - Production build
+- `pnpm run lint` - ESLint check
+- `pnpm run format` - Prettier fix
+- `pnpm run format:check` - Prettier validation
 
 ## Code Style
 
@@ -20,7 +20,7 @@
 ## Testing
 
 - No test framework configured - add Jest/Vitest if needed
-- Use `npm run lint` and `npm run format:check` before commits
+- Use `pnpm run lint` and `pnpm run format:check` before commits
 
 ## Project Structure
 

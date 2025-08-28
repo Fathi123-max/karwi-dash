@@ -12,14 +12,14 @@ While it started as a general admin template, the current primary focus is on de
 
 This is a standard Node.js/Next.js project. The main commands are defined in `package.json` scripts:
 
-- **Install dependencies:** `npm install`
-- **Run development server:** `npm run dev` (Starts the app, usually on `http://localhost:3000`)
-- **Build for production:** `npm run build`
-- **Start production server:** `npm run start`
-- **Lint code:** `npm run lint`
-- **Format code:** `npm run format` (Formats with Prettier) or `npm run format:check` (Checks formatting)
-- **Generate theme presets:** `npm run generate:presets` (Updates `src/types/preferences/theme.ts` based on CSS files in `src/styles/presets`)
-- **Seed database (if applicable):** `npm run db:seed`
+- **Install dependencies:** `pnpm install`
+- **Run development server:** `pnpm run dev` (Starts the app, usually on `http://localhost:3000`)
+- **Build for production:** `pnpm run build`
+- **Start production server:** `pnpm run start`
+- **Lint code:** `pnpm run lint`
+- **Format code:** `pnpm run format` (Formats with Prettier) or `pnpm run format:check` (Checks formatting)
+- **Generate theme presets:** `pnpm run generate:presets` (Updates `src/types/preferences/theme.ts` based on CSS files in `src/styles/presets`)
+- **Seed database (if applicable):** `pnpm run db:seed`
 
 ## Development Conventions
 
@@ -45,6 +45,6 @@ This is a standard Node.js/Next.js project. The main commands are defined in `pa
   - Generated Supabase types are in `src/types/supabase.ts`.
   - Authentication uses Supabase Auth, implemented via Next.js middleware (`src/middleware/auth-middleware.ts`).
 - **Tooling:** ESLint and Prettier are configured for code quality and formatting.
-  - Run `npm run lint` and `npm run format` after modifications to ensure adherence to project standards.
+  - Run `pnpm run lint` and `pnpm run format` after modifications to ensure adherence to project standards.
 - **Reusable Components:** Always reuse existing components from `src/components/ui` or local `_components` folders before creating new ones.
 - **Theme Customization:** Themes are defined in CSS files within `src/styles/presets`. The `generate:presets` script parses these files to dynamically update the available theme options in `src/types/preferences/theme.ts`.

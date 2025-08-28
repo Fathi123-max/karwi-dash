@@ -1,12 +1,22 @@
+# Dependency directories
 node_modules
+.pnpm-store
+pnpm-lock.yaml
+
+# Logs
+*.log
+
+# Next.js
 .next
-.prettierrc
-components.json
-next.config.mjs
-package-lock.json
-package.json
-postcss.config.mjs
-README.md
-tsconfig.json
-.env
-src/components/ui
+out
+
+# Testing
+coverage
+
+# Other
+.DS_Store
+*.pem
+.env*.local
+.vercel
+*.tsbuildinfo
+next-env.d.ts

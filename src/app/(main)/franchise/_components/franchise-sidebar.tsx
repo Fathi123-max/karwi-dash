@@ -23,8 +23,10 @@ export function FranchiseSidebar({ ...props }: React.ComponentProps<typeof Sideb
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <a href="/franchise">
-                <Command />
-                <span className="text-base font-semibold">{APP_CONFIG.name}</span>
+                <Command className="size-6" />
+                <span className="truncate text-base font-semibold group-data-[collapsible=icon]:!hidden">
+                  {APP_CONFIG.name}
+                </span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -32,7 +34,7 @@ export function FranchiseSidebar({ ...props }: React.ComponentProps<typeof Sideb
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Franchise Menu</SidebarGroupLabel>
+          <SidebarGroupLabel className="group-data-[collapsible=icon]:!hidden">Franchise Menu</SidebarGroupLabel>
           <NavFranchise />
         </SidebarGroup>
       </SidebarContent>

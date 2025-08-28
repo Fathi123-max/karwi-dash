@@ -70,7 +70,7 @@ You can create these buckets in two ways:
 4. Set each bucket to "Public" access
 
 #### Method 2: Using the Application
-1. Start the development server: `npm run dev`
+1. Start the development server: `pnpm run dev`
 2. Navigate to `/admin/storage`
 3. Click "Initialize Storage Buckets"
 
@@ -106,7 +106,7 @@ To configure:
 
 1. Start the development server:
    ```bash
-   npm run dev
+   pnpm run dev
    ```
 
 2. Navigate to `/test` to run the connection test

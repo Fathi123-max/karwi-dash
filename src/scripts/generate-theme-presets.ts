@@ -9,7 +9,7 @@
  *
  * Usage:
  * - During local development, run manually after adding any new theme preset:
- *     npm run generate:presets
+ *     pnpm run generate:presets
  * - Ensure that each new CSS preset includes `label:` and `value:` comments.
  * - This generation step is currently automated using a Husky pre-push hook.
  * - You may optionally integrate it directly into a build step if preferred.
@@ -34,7 +34,6 @@ if (files.length === 0) {
   console.warn("⚠️ No preset CSS files found. Only default preset will be included.");
 }
 
-// eslint-disable-next-line complexity
 const presets = files.map((file) => {
   const filePath = path.join(presetDir, file);
   // eslint-disable-next-line security/detect-non-literal-fs-filename

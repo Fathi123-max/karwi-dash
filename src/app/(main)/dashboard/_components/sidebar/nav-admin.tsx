@@ -1,41 +1,26 @@
-"use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import {
-  Home,
-  Building2,
-  MapPin,
-  UsersRound,
-  Users,
-  CreditCard,
-  ClipboardList,
-  Star,
-  Calendar,
-  Ticket,
-  Database,
-} from "lucide-react";
+import { BarChart3, Building2, Calendar, FileText, Home, Mail, MapPin, UsersRound, Wrench } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 const adminNavItems = [
   { href: "/admin", label: "Dashboard", icon: Home },
-  { href: "/admin/franchises", label: "Franchises", icon: Building2 },
-  { href: "/admin/branches", label: "Branches", icon: MapPin },
-  { href: "/admin/services", label: "Services", icon: ClipboardList },
+  { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
+  { href: "/admin/branches", label: "Branches", icon: Building2 },
+  { href: "/admin/franchises", label: "Franchises", icon: MapPin },
   { href: "/admin/washers", label: "Washers", icon: UsersRound },
-  { href: "/admin/users", label: "Users", icon: Users },
-  { href: "/admin/payments", label: "Payments", icon: CreditCard },
-  { href: "/admin/reviews", label: "Reviews", icon: Star },
+  { href: "/admin/services", label: "Services", icon: Wrench },
+  { href: "/admin/users", label: "Users", icon: UsersRound },
+  { href: "/admin/payments", label: "Payments", icon: FileText },
   { href: "/admin/schedule", label: "Schedule", icon: Calendar },
-  { href: "/admin/promotions", label: "Promotions", icon: Ticket },
-  { href: "/admin/storage", label: "Storage", icon: Database },
+  { href: "/admin/reviews", label: "Reviews", icon: FileText },
+  { href: "/admin/promotions", label: "Promotions", icon: FileText },
 ];
 
 export function NavAdmin() {
   const pathname = usePathname();
-
   return (
     <nav className="grid items-start gap-2">
       {adminNavItems.map((item) => (
@@ -47,7 +32,7 @@ export function NavAdmin() {
             )}
           >
             <item.icon className="mr-2 h-4 w-4" />
-            <span>{item.label}</span>
+            <span className="group-data-[collapsible=icon]:!hidden">{item.label}</span>
           </span>
         </Link>
       ))}

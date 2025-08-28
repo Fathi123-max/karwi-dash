@@ -44,8 +44,8 @@ Authentication is handled by Supabase Auth. The logic is implemented using Next.
 
 ## Scripts & Commands
 
-- **Development:** `npm run dev`
-- **Linting:** `npm run lint`
-- **Formatting:** `npm run format`
+- **Development:** `pnpm run dev`
+- **Linting:** `pnpm run lint`
+- **Formatting:** `pnpm run format`
 
-After any code modifications, run `npm run lint` and `npm run format` to ensure the changes adhere to the project's standards before committing.
+After any code modifications, run `pnpm run lint` and `pnpm run format` to ensure the changes adhere to the project's standards before committing.

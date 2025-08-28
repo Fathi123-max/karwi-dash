@@ -50,7 +50,7 @@ Ensure RLS is properly configured for your tables. The application handles RLS p
 
 ## Testing the Connection
 
-1. Start the development server: `npm run dev`
+1. Start the development server: `pnpm run dev`
 2. Navigate to `/test` to run the connection test
 3. Check the console for detailed error messages if the test fails
 

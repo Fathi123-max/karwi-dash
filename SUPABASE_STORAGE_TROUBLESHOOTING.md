@@ -52,7 +52,7 @@ There might be restrictions on file size or allowed MIME types.
 
 ### Step 1: Apply Storage Policies
 
-1. Start your development server: `npm run dev`
+1. Start your development server: `pnpm run dev`
 2. Navigate to `http://localhost:3000/admin/storage/fix-policies`
 3. Click "Apply Storage Policies"
 4. Check the results to ensure all policies were applied successfully

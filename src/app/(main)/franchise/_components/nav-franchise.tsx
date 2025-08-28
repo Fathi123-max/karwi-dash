@@ -28,7 +28,7 @@ export function NavFranchise() {
             )}
           >
             <item.icon className="mr-2 h-4 w-4" />
-            <span>{item.label}</span>
+            <span className="group-data-[collapsible=icon]:!hidden">{item.label}</span>
           </span>
         </Link>
       ))}
