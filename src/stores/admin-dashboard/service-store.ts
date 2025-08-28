@@ -37,7 +37,17 @@ export const useServiceStore = create<ServiceState>((set, get) => ({
       return;
     }
     const { branches } = useBranchStore.getState();
-    const transformedServices = data.map((service) => ({
+
+    // Filter out duplicate global services, only show one instance
+    const uniqueServices = data.filter((service, index, self) => {
+      // If it's not a global service, always include it
+      if (!service.is_global) return true;
+
+      // For global services, only include the first instance
+      return index === self.findIndex((s) => s.name === service.name && s.is_global);
+    });
+
+    const transformedServices = uniqueServices.map((service) => ({
       id: service.id,
       name: service.name,
       price: service.price,
@@ -46,7 +56,7 @@ export const useServiceStore = create<ServiceState>((set, get) => ({
       todos: service.todos,
       include: service.include,
       branchId: service.branch_id,
-      branchName: branches.find((b) => b.id === service.branch_id)?.name ?? "N/A",
+      branchName: service.is_global ? "Global" : (branches.find((b) => b.id === service.branch_id)?.name ?? "N/A"),
       createdAt: new Date(service.created_at),
       is_global: service.is_global ?? false,
       pictures: service.pictures,
@@ -54,92 +64,90 @@ export const useServiceStore = create<ServiceState>((set, get) => ({
     set({ services: transformedServices as any[] });
   },
   addService: async (service) => {
-    // If it's a global service, create it for all branches
+    // If it's a global service, create it once with null branch_id
     if (service.is_global) {
-      // First get all branches
-      const { branches } = useBranchStore.getState();
-      // Create the service for each branch
-      const servicePromises = branches.map((branch) =>
-        supabase.from("services").insert([
-          {
-            ...service,
-            branch_id: branch.id,
-            is_global: true,
-            pictures: service.pictures,
-          },
-        ]),
-      );
-      await Promise.all(servicePromises);
+      const { error } = await supabase.from("services").insert({
+        name: service.name,
+        description: service.description,
+        price: service.price,
+        duration_min: service.duration_min,
+        todos: service.todos,
+        include: service.include,
+        branch_id: null,
+        is_global: true,
+        pictures: service.pictures,
+      });
+
+      if (error) {
+        console.error("Error adding global service:", error);
+        throw error;
+      }
     } else {
       // Regular branch-specific service
-      await supabase.from("services").insert([
-        {
-          ...service,
-          branch_id: service.branchId,
-          is_global: false,
-          pictures: service.pictures,
-        },
-      ]);
+      const { error } = await supabase.from("services").insert({
+        name: service.name,
+        description: service.description,
+        price: service.price,
+        duration_min: service.duration_min,
+        todos: service.todos,
+        include: service.include,
+        branch_id: service.branchId,
+        is_global: false,
+        pictures: service.pictures,
+      });
+
+      if (error) {
+        console.error("Error adding service:", error);
+        throw error;
+      }
     }
     await get().fetchServices();
   },
   addGlobalService: async (service) => {
-    // Get all branches to create the service for each
-    const { branches } = useBranchStore.getState();
-    if (branches.length === 0) {
-      console.warn("No branches found, cannot create global service");
-      return;
+    // Create a single global service with null branch_id
+    const { error } = await supabase.from("services").insert({
+      name: service.name,
+      description: service.description,
+      price: service.price,
+      duration_min: service.duration_min,
+      todos: service.todos,
+      include: service.include,
+      branch_id: null,
+      is_global: true,
+      pictures: service.pictures,
+    });
+
+    if (error) {
+      console.error("Error adding global service:", error);
+      throw error;
     }
 
-    // Create the service for each branch
-    const servicePromises = branches.map((branch) =>
-      supabase.from("services").insert([
-        {
-          ...service,
-          branch_id: branch.id,
-          is_global: true,
-          pictures: service.pictures,
-        },
-      ]),
-    );
-    await Promise.all(servicePromises);
     await get().fetchServices();
   },
   updateService: async (service) => {
-    // If it's a global service, we need to update all instances
+    // If it's a global service, update the single instance
     if (service.is_global) {
-      // Get all services with the same name (as a way to identify global service instances)
-      const { data: servicesToUpdate, error } = await supabase
+      const { error } = await supabase
         .from("services")
-        .select("id")
-        .eq("name", service.name)
-        .eq("is_global", true);
+        .update({
+          name: service.name,
+          description: service.description,
+          price: service.price,
+          duration_min: service.duration_min,
+          todos: service.todos,
+          include: service.include,
+          is_global: true,
+          pictures: service.pictures,
+        })
+        .eq("id", service.id);
 
       if (error) {
-        console.error("Error finding global services to update:", error);
-        return;
+        console.error("Error updating global service:", error);
+        throw error;
       }
-
-      // Update all instances of this global service
-      const updatePromises = servicesToUpdate.map((s) =>
-        supabase
-          .from("services")
-          .update({
-            name: service.name,
-            description: service.description,
-            price: service.price,
-            duration_min: service.duration_min,
-            todos: service.todos,
-            include: service.include,
-            is_global: true,
-            pictures: service.pictures,
-          })
-          .eq("id", s.id),
-      );
-      await Promise.all(updatePromises);
     } else {
       // Regular branch-specific service update
-      await supabase
+      const { error } = await supabase
         .from("services")
         .update({
           name: service.name,
@@ -153,6 +161,11 @@ export const useServiceStore = create<ServiceState>((set, get) => ({
           pictures: service.pictures,
         })
         .eq("id", service.id);
+
+      if (error) {
+        console.error("Error updating service:", error);
+        throw error;
+      }
     }
     await get().fetchServices();
   },
@@ -161,26 +174,22 @@ export const useServiceStore = create<ServiceState>((set, get) => ({
     const serviceToDelete = get().services.find((s) => s.id === id);
 
     if (serviceToDelete?.is_global) {
-      // Delete all instances of this global service
-      const { data: servicesToDelete, error } = await supabase
-        .from("services")
-        .select("id")
-        .eq("name", serviceToDelete.name)
-        .eq("is_global", true);
+      // For global services, delete all instances with the same name
+      const { error } = await supabase.from("services").delete().eq("name", serviceToDelete.name).eq("is_global", true);
 
       if (error) {
-        console.error("Error finding global services to delete:", error);
-        return;
+        console.error("Error deleting global service:", error);
+        throw error;
       }
-
-      // Delete all instances
-      const deletePromises = servicesToDelete.map((s) => supabase.from("services").delete().eq("id", s.id));
-      await Promise.all(deletePromises);
     } else {
       // Regular branch-specific service deletion
-      await supabase.from("services").delete().eq("id", id);
+      const { error } = await supabase.from("services").delete().eq("id", id);
+      if (error) {
+        console.error("Error deleting service:", error);
+        throw error;
+      }
     }
-    set((state) => ({ services: state.services.filter((s) => s.id !== id) }));
+    await get().fetchServices();
   },
   removeService: (id) => {
     set((state) => ({ services: state.services.filter((s) => s.id !== id) }));
