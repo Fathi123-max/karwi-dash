@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 "use client";
 
 import React from "react";
@@ -44,7 +43,7 @@ export default function BranchDetailPage({ params }: { params: Promise<{ id: str
     // Check for WKT format (POINT(lng lat))
     const match = locationStr.match(/POINT\(([-\d.]+) ([-\d.]+)\)/);
     if (match && match.length === 3) {
-      return { lng: parseFloat(match[1]), lat: parseFloat(match[2]) };
+      return { lat: parseFloat(match[2]), lng: parseFloat(match[1]) };
     }
 
     // Handle GeoJSON format if stored as string
@@ -52,7 +51,7 @@ export default function BranchDetailPage({ params }: { params: Promise<{ id: str
       try {
         const parsed = JSON.parse(locationStr);
         if (parsed.type === "Point" && Array.isArray(parsed.coordinates) && parsed.coordinates.length === 2) {
-          return { lng: parsed.coordinates[0], lat: parsed.coordinates[1] };
+          return { lat: parsed.coordinates[1], lng: parsed.coordinates[0] };
         }
       } catch (e) {
         // Not a valid GeoJSON string

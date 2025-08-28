@@ -2,7 +2,7 @@
 
 import { useState, useRef, ChangeEvent } from "react";
 
-import { X, Upload, Link, Image as ImageIcon, Loader2 } from "lucide-react";
+import { X, Upload, Link, Image as ImageIcon, Loader2, AlertCircle } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -54,10 +54,20 @@ export function PicturesField({ form, name, label, placeholder }: PicturesFieldP
         newPreviews.push(previewUrl);
 
         // Upload to Supabase Storage
-        const { url, error } = await uploadImage(file);
+        // Handle various error cases including RLS policy violations
+        const result = await uploadImage(file, "services");
+        const { url, error } = result;
 
         if (error) {
-          toast.error(`Failed to upload ${file.name}: ${error.message}`);
+          if (error.message.includes("Bucket not found")) {
+            toast.error(`Failed to upload ${file.name}: Storage bucket not found. Please contact administrator.`);
+          } else if (error.message.includes("new row violates row-level security policy")) {
+            toast.error(`Failed to upload ${file.name}: Insufficient permissions. Please contact administrator.`);
+          } else if (error.message.includes("The resource was not found")) {
+            toast.error(`Failed to upload ${file.name}: Storage resource not found.`);
+          } else {
+            toast.error(`Failed to upload ${file.name}: ${error.message}`);
+          }
           // Clean up preview if upload failed
           URL.revokeObjectURL(previewUrl);
           continue;
@@ -154,6 +164,10 @@ export function PicturesField({ form, name, label, placeholder }: PicturesFieldP
               accept="image/*"
               disabled={isUploading}
             />
+            <div className="text-muted-foreground mt-2 flex items-center justify-center gap-1 text-xs">
+              <AlertCircle className="h-3 w-3" />
+              <span>Images will be stored in cloud storage</span>
+            </div>
           </div>
         </TabsContent>
 

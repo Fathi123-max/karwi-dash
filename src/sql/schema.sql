@@ -19,11 +19,11 @@ CREATE TABLE public.bookings (
   status text DEFAULT 'pending'::text,
   created_at timestamp with time zone DEFAULT now(),
   CONSTRAINT bookings_pkey PRIMARY KEY (id),
-  CONSTRAINT bookings_washer_id_fkey FOREIGN KEY (washer_id) REFERENCES public.washers(id),
-  CONSTRAINT bookings_service_id_fkey FOREIGN KEY (service_id) REFERENCES public.services(id),
   CONSTRAINT bookings_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
-  CONSTRAINT bookings_car_id_fkey FOREIGN KEY (car_id) REFERENCES public.cars(id),
-  CONSTRAINT bookings_branch_id_fkey FOREIGN KEY (branch_id) REFERENCES public.branches(id)
+  CONSTRAINT bookings_service_id_fkey FOREIGN KEY (service_id) REFERENCES public.services(id),
+  CONSTRAINT bookings_washer_id_fkey FOREIGN KEY (washer_id) REFERENCES public.washers(id),
+  CONSTRAINT bookings_branch_id_fkey FOREIGN KEY (branch_id) REFERENCES public.branches(id),
+  CONSTRAINT bookings_car_id_fkey FOREIGN KEY (car_id) REFERENCES public.cars(id)
 );
 CREATE TABLE public.branch_hours (
   branch_id uuid,
@@ -158,9 +158,9 @@ CREATE TABLE public.users (
   name text,
   phone text,
   cars integer DEFAULT 0,
-  bookings integer DEFAULT 0,
   total_washes integer DEFAULT 0,
   created_at timestamp with time zone DEFAULT now(),
+  bookings integer DEFAULT 0,
   CONSTRAINT users_pkey PRIMARY KEY (id),
   CONSTRAINT users_id_fk_auth FOREIGN KEY (id) REFERENCES auth.users(id)
 );
