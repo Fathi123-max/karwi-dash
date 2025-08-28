@@ -11,8 +11,5 @@
       "src": "package.json",
       "use": "@vercel/next"
     }
-  ],
-  "engines": {
-    "pnpm": "10.x"
-  }
+  ]
 }
