@@ -49,7 +49,29 @@ function LocationMarker({
             const result = results[0];
             const address = result.label;
             // Try to extract city from the result
-            const city = result?.raw?.display_name?.split(",")[0] ?? "";
+            // Look for city in address components, defaulting to a meaningful part of the address
+            const addressParts = result?.raw?.display_name?.split(",") ?? [];
+            // City is typically not the first part (which is usually street address)
+            // Look for the part that represents the city (often 2nd or 3rd from the end)
+            let city = "";
+            if (addressParts.length > 2) {
+              // Try to find a part that looks like a city (not a street number or country)
+              for (let i = addressParts.length - 2; i >= 0; i--) {
+                const part = addressParts[i].trim();
+                // Skip parts that look like street numbers or are too short
+                if (part && part.length > 2 && !/^\d+[a-zA-Z]?$/.test(part)) {
+                  city = part;
+                  break;
+                }
+              }
+            }
+            // Fallback to last resort parts if no city found
+            if (!city && addressParts.length > 1) {
+              city = addressParts[addressParts.length - 2].trim(); // Usually the city
+            }
+            if (!city && addressParts.length > 0) {
+              city = addressParts[0].trim(); // Last fallback
+            }
 
             onLocationSelect({
               lat: e.latlng.lat,
@@ -89,7 +111,29 @@ function LocationMarker({
               const result = results[0];
               const address = result.label;
               // Try to extract city from the result
-              const city = result?.raw?.display_name?.split(",")[0] ?? "";
+              // Look for city in address components, defaulting to a meaningful part of the address
+              const addressParts = result?.raw?.display_name?.split(",") ?? [];
+              // City is typically not the first part (which is usually street address)
+              // Look for the part that represents the city (often 2nd or 3rd from the end)
+              let city = "";
+              if (addressParts.length > 2) {
+                // Try to find a part that looks like a city (not a street number or country)
+                for (let i = addressParts.length - 2; i >= 0; i--) {
+                  const part = addressParts[i].trim();
+                  // Skip parts that look like street numbers or are too short
+                  if (part && part.length > 2 && !/^\d+[a-zA-Z]?$/.test(part)) {
+                    city = part;
+                    break;
+                  }
+                }
+              }
+              // Fallback to last resort parts if no city found
+              if (!city && addressParts.length > 1) {
+                city = addressParts[addressParts.length - 2].trim(); // Usually the city
+              }
+              if (!city && addressParts.length > 0) {
+                city = addressParts[0].trim(); // Last fallback
+              }
 
               onLocationSelect({
                 lat: e.latlng.lat,
@@ -153,7 +197,29 @@ const SearchField = ({
             const result = results[0];
             const address = result.label;
             // Try to extract city from the result
-            const city = result?.raw?.display_name?.split(",")[0] ?? "";
+            // Look for city in address components, defaulting to a meaningful part of the address
+            const addressParts = result?.raw?.display_name?.split(",") ?? [];
+            // City is typically not the first part (which is usually street address)
+            // Look for the part that represents the city (often 2nd or 3rd from the end)
+            let city = "";
+            if (addressParts.length > 2) {
+              // Try to find a part that looks like a city (not a street number or country)
+              for (let i = addressParts.length - 2; i >= 0; i--) {
+                const part = addressParts[i].trim();
+                // Skip parts that look like street numbers or are too short
+                if (part && part.length > 2 && !/^\d+[a-zA-Z]?$/.test(part)) {
+                  city = part;
+                  break;
+                }
+              }
+            }
+            // Fallback to last resort parts if no city found
+            if (!city && addressParts.length > 1) {
+              city = addressParts[addressParts.length - 2].trim(); // Usually the city
+            }
+            if (!city && addressParts.length > 0) {
+              city = addressParts[0].trim(); // Last fallback
+            }
 
             onLocationSelect({
               lat: latlng.lat,
