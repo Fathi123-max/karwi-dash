@@ -34,9 +34,10 @@ export const columns: ColumnDef<Payment>[] = [
     header: "Status",
     cell: ({ row }) => {
       const status = row.getValue("status");
-      let variant: "default" | "destructive" | "outline" = "outline";
+      let variant: "default" | "destructive" | "outline" | "secondary" = "outline";
       if (status === "succeeded") variant = "default";
       if (status === "failed") variant = "destructive";
+      if (status === "pending") variant = "secondary";
       return <Badge variant={variant}>{status}</Badge>;
     },
   },

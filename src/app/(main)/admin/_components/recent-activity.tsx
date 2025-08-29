@@ -123,7 +123,11 @@ export function RecentActivity() {
               )}
               {activity.type === "payment" && "amount" in activity && (
                 <p className="text-sm leading-none font-medium">
-                  Payment of ${(activity as any).amount.toFixed(2)} {(activity as any).status}
+                  Payment of ${(activity as any).amount.toFixed(2)}{" "}
+                  {((activity as any).status === "succeeded" && "completed") ||
+                    ((activity as any).status === "failed" && "failed") ||
+                    ((activity as any).status === "pending" && "pending") ||
+                    (activity as any).status}
                 </p>
               )}
               {activity.type === "booking" && (

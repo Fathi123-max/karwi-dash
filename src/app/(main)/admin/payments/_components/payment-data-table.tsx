@@ -33,6 +33,7 @@ export function PaymentDataTable({ data }: PaymentDataTableProps) {
               { label: "Succeeded", value: "succeeded" },
               { label: "Failed", value: "failed" },
               { label: "Pending", value: "pending" },
+              { label: "Refunded", value: "refunded" },
             ],
           },
         ]}

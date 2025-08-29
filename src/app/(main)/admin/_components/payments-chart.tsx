@@ -8,7 +8,10 @@ import { usePaymentStore } from "@/stores/admin-dashboard/payment-store";
 export function PaymentsChart() {
   const { payments } = usePaymentStore();
 
-  const chartData = payments
+  // Filter for successful payments only
+  const successfulPayments = payments.filter((payment) => payment.status === "succeeded");
+
+  const chartData = successfulPayments
     .reduce(
       (acc, payment) => {
         const date = new Date(payment.created_at).toLocaleDateString();
@@ -38,7 +41,7 @@ export function PaymentsChart() {
               fontSize={12}
               tickLine={false}
               axisLine={false}
-              tickFormatter={(value) => `$${value}`}
+              tickFormatter={(value) => `${value}`}
             />
             <Tooltip />
             <Line type="monotone" dataKey="total" stroke="currentColor" className="stroke-primary" />
