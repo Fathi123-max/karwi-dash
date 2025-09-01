@@ -21,8 +21,6 @@ const formSchema = z
       message: "Franchise name must be at least 2 characters.",
     }),
     status: z.enum(["active", "inactive"]),
-    branches: z.coerce.number().min(0),
-    washers: z.coerce.number().min(0),
     adminEmail: z
       .string()
       .email({
@@ -68,14 +66,10 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
       ? {
           name: franchise.name,
           status: franchise.status as "active" | "inactive",
-          branches: franchise.branches,
-          washers: franchise.washers,
         }
       : {
           name: "",
           status: "inactive",
-          branches: 0,
-          washers: 0,
           adminEmail: "",
           adminPassword: "",
         },
@@ -97,8 +91,6 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
           ...franchise,
           name: data.name,
           status: data.status,
-          branches: data.branches,
-          washers: data.washers,
         });
       } else {
         // For new franchises, we need to create an admin user first
@@ -106,8 +98,8 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
         await addFranchise({
           name: data.name,
           status: data.status,
-          branches: data.branches,
-          washers: data.washers,
+          branches: 0, // Default value
+          washers: 0, // Default value
           adminEmail: data.adminEmail!,
           adminPassword: data.adminPassword!,
         });
@@ -154,32 +146,6 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
                   <SelectItem value="inactive">Inactive</SelectItem>
                 </SelectContent>
               </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="branches"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Branches</FormLabel>
-              <FormControl>
-                <Input type="number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="washers"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Washers</FormLabel>
-              <FormControl>
-                <Input type="number" {...field} />
-              </FormControl>
               <FormMessage />
             </FormItem>
           )}

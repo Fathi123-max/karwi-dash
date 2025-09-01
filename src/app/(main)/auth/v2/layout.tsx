@@ -8,9 +8,9 @@ import { Separator } from "@/components/ui/separator";
 import { APP_CONFIG } from "@/config/app-config";
 
 const videos = [
-  "https://dm0qx8t0i9gc9.cloudfront.net/watermarks/video/HjH5lgeHeix7kfhup/videoblocks-67_car-fam_4k_1_b_enwex6f__56a73b4856adf5b1a9cbe8a83adad2ae__P360.mp4",
-  "https://dm0qx8t0i9gc9.cloudfront.net/watermarks/video/HjH5lgeHeix7kfhup/videoblocks-66_car-fam_4k_1_bqmqbeq6y__485a9566890d406f6517a62c196d0ead__P360.mp4",
-  "https://dm0qx8t0i9gc9.cloudfront.net/watermarks/video/HjH5lgeHeix7kfhup/videoblocks-62_car-fam_4k_1_stqir1qtt__4d7289ce43c862bc08fb600446c3e758__P360.mp4",
+  "https://assets.mixkit.co/videos/45755/45755-720.mp4",
+  "https://assets.mixkit.co/videos/36522/36522-720.mp4",
+  "https://assets.mixkit.co/videos/47585/47585-720.mp4",
 ];
 
 export default function Layout({ children }: Readonly<{ children: ReactNode }>) {
