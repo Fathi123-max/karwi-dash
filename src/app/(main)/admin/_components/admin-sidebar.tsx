@@ -1,8 +1,9 @@
 "use client";
 
-import { Command, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 import { NavAdmin } from "@/app/(main)/dashboard/_components/sidebar/nav-admin";
+import { AppLogo } from "@/components/app-logo";
 import {
   Sidebar,
   SidebarContent,
@@ -23,10 +24,7 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <a href="/admin">
-                <Command className="size-6" />
-                <span className="truncate text-base font-semibold group-data-[collapsible=icon]:!hidden">
-                  {APP_CONFIG.name}
-                </span>
+                <AppLogo size="md" className="group-data-[collapsible=icon]:!hidden" />
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

@@ -4,6 +4,7 @@ import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { branchAdminLogout } from "@/app/(main)/auth/_actions/branch-admin-logout";
+import { AppLogo } from "@/components/app-logo";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -22,6 +23,7 @@ export function BranchAdminHeader() {
   return (
     <header className="flex h-16 items-center justify-between border-b px-4 md:px-6">
       <div className="flex items-center gap-4">
+        <AppLogo size="sm" />
         <h1 className="text-lg font-semibold md:text-xl">Branch Dashboard</h1>
       </div>
       <div className="flex items-center gap-4">

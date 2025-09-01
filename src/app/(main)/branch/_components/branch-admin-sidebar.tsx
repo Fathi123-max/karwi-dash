@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { BarChart, Calendar, Car, Home, LogOut, Menu, Package, Users, Wrench } from "lucide-react";
 
 import { branchAdminLogout } from "@/app/(main)/auth/_actions/branch-admin-logout";
+import { AppLogo } from "@/components/app-logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -68,7 +69,7 @@ export function BranchAdminSidebar() {
         <SheetContent side="left" className="w-64 p-0">
           <div className="flex h-full flex-col">
             <div className="border-b p-4">
-              <h2 className="text-lg font-semibold">Branch Admin</h2>
+              <AppLogo size="md" />
             </div>
             <nav className="flex-1 overflow-y-auto p-2">
               <ul className="space-y-1">
@@ -102,7 +103,7 @@ export function BranchAdminSidebar() {
       <div className="hidden md:flex md:w-64 md:flex-col md:border-r">
         <div className="flex h-full flex-col">
           <div className="border-b p-4">
-            <h2 className="text-lg font-semibold">Branch Admin</h2>
+            <AppLogo size="md" />
           </div>
           <nav className="flex-1 overflow-y-auto p-2">
             <ul className="space-y-1">

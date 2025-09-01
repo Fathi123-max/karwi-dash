@@ -1,8 +1,6 @@
 "use client";
 
-import { Command } from "lucide-react";
-
-import { NavFranchise } from "@/app/(main)/franchise/_components/nav-franchise";
+import { AppLogo } from "@/components/app-logo";
 import {
   Sidebar,
   SidebarContent,
@@ -15,6 +13,8 @@ import {
 } from "@/components/ui/sidebar";
 import { APP_CONFIG } from "@/config/app-config";
 
+import { NavFranchise } from "./nav-franchise";
+
 export function FranchiseSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
@@ -23,10 +23,7 @@ export function FranchiseSidebar({ ...props }: React.ComponentProps<typeof Sideb
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <a href="/franchise">
-                <Command className="size-6" />
-                <span className="truncate text-base font-semibold group-data-[collapsible=icon]:!hidden">
-                  {APP_CONFIG.name}
-                </span>
+                <AppLogo size="md" className="group-data-[collapsible=icon]:!hidden" />
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
