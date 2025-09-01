@@ -39,7 +39,6 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^3.6.0",
-    "dotenv": "^17.2.1",
     "embla-carousel-react": "^8.6.0",
     "eslint-plugin-unicorn": "^56.0.1",
     "input-otp": "^1.4.2",
@@ -74,6 +73,7 @@
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "@typescript-eslint/parser": "^8.26.0",
+    "dotenv": "^17.2.1",
     "eslint": "^9.31.0",
     "eslint-config-next": "^15.4.2",
     "eslint-plugin-import": "^2.32.0",
@@ -90,6 +90,7 @@
     "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "^4.1.5",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.5",
     "tw-animate-css": "^1.3.5",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.37.0"

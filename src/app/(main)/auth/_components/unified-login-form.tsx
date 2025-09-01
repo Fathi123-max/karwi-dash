@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { Eye, EyeOff } from "lucide-react";
 import { useFormState, useFormStatus } from "react-dom";
 
 import { Button } from "@/components/ui/button";
@@ -32,10 +33,15 @@ function SubmitButton() {
 export function UnifiedLoginForm({ role }: { role: "admin" | "franchise" }) {
   const [state, formAction] = useFormState(unifiedRoleLogin, initialState);
   const [isClient, setIsClient] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <form action={formAction} className="space-y-4">
@@ -46,7 +52,23 @@ export function UnifiedLoginForm({ role }: { role: "admin" | "franchise" }) {
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">Password</Label>
-        <Input id="password" name="password" type="password" placeholder="••••••••" required disabled={!isClient} />
+        <div className="relative">
+          <Input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="••••••••"
+            required
+            disabled={!isClient}
+          />
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="text-muted-foreground absolute inset-y-0 right-0 flex items-center pr-3"
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
+        </div>
       </div>
 
       {state?.message && (

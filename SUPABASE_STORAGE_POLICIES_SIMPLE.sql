@@ -25,11 +25,16 @@ ON storage.objects FOR SELECT
 TO anon
 USING (bucket_id = 'services');
 
+CREATE POLICY "Public read access for products"
+ON storage.objects FOR SELECT
+TO anon
+USING (bucket_id = 'products');
+
 -- Create policies for authenticated uploads
 CREATE POLICY "Allow authenticated uploads"
 ON storage.objects FOR INSERT
 TO authenticated
-WITH CHECK (bucket_id IN ('images', 'branches', 'services'));
+WITH CHECK (bucket_id IN ('images', 'branches', 'services', 'products'));
 
 -- Create policies for owners to update and delete
 CREATE POLICY "Allow owners to update"

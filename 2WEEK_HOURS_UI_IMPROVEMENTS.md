@@ -1,11 +1,13 @@
 # 2-Week Operating Hours UI/UX Improvements
 
 ## Overview
+
 This document summarizes the UI/UX improvements made to the 2-week operating hours feature to make it more visually appealing and user-friendly.
 
 ## Key Improvements
 
 ### 1. Visual Design Enhancements
+
 - **Card-based Layout**: Each day now has a distinct card with rounded corners and subtle shadows
 - **Color-coded Days**: Weekends (Saturday/Sunday) are highlighted with orange accents to distinguish them from weekdays
 - **Improved Icons**: Added Sun and Moon icons to clearly indicate open/close times
@@ -13,6 +15,7 @@ This document summarizes the UI/UX improvements made to the 2-week operating hou
 - **Sticky Header**: The header remains visible when scrolling through days
 
 ### 2. Responsive Design
+
 - **Grid Layout**: Days are arranged in a responsive grid that adapts to different screen sizes:
   - Mobile: 1 column
   - Tablet: 2 columns
@@ -21,8 +24,9 @@ This document summarizes the UI/UX improvements made to the 2-week operating hou
 - **Scrollable Container**: The content area scrolls independently to prevent layout issues
 
 ### 3. User Experience Improvements
+
 - **Clearer Labels**: Time inputs now have descriptive labels with icons
-- **Visual Feedback**: 
+- **Visual Feedback**:
   - Closed days have a muted appearance
   - Hover states provide visual feedback
   - Success/error messages are clearly displayed
@@ -30,6 +34,7 @@ This document summarizes the UI/UX improvements made to the 2-week operating hou
 - **Weekend Highlighting**: Weekends are visually distinct to help users quickly identify them
 
 ### 4. Component Structure
+
 - **Consistent Styling**: Both regular hours and 2-week hours components now share a similar visual style
 - **Improved Tab Navigation**: Tabs in the branch form are more visually distinct
 - **Better Error Handling**: Clear visual indicators for success/error states
@@ -37,6 +42,7 @@ This document summarizes the UI/UX improvements made to the 2-week operating hou
 ## Technical Implementation
 
 ### BranchTimeSlotsForTwoWeeks Component
+
 - Enhanced visual design with color-coded weekends
 - Improved responsive grid layout
 - Sticky header and save button
@@ -44,16 +50,19 @@ This document summarizes the UI/UX improvements made to the 2-week operating hou
 - Consistent styling with the regular hours component
 
 ### BranchTimeSlots Component
+
 - Updated to match the new visual style
 - Improved responsive behavior
 - Consistent styling across both components
 
 ### Branch Form
+
 - Enhanced tab navigation with better visual feedback
 - Responsive layout for all form elements
 - Consistent styling with the time slots components
 
 ## Benefits
+
 1. **Improved Usability**: Users can quickly identify weekends and closed days
 2. **Better Responsiveness**: Works well on all device sizes
 3. **Visual Consistency**: Unified design language across all components
@@ -61,7 +70,9 @@ This document summarizes the UI/UX improvements made to the 2-week operating hou
 5. **Accessibility**: Improved contrast and clearer labels enhance accessibility
 
 ## Testing
+
 The improved components have been tested with:
+
 - Various screen sizes (mobile, tablet, desktop)
 - Different branch states (new branches, existing branches)
 - Edge cases (all days closed, all days open)

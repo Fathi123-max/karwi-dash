@@ -1,4 +1,3 @@
-import { type Table } from "@tanstack/react-table";
 import { toast } from "sonner";
 
 /**
@@ -29,9 +28,9 @@ function convertToCSV<TData>(data: TData[], columns: (keyof TData)[]): string {
  * @param table The TanStack Table instance.
  * @param filename The desired filename for the downloaded CSV.
  */
-export function exportToCSV<TData>(table: Table<TData>, filename: string) {
+export function exportTableToCSV<TData>(table: any, filename: string) {
   try {
-    const data = table.getFilteredRowModel().rows.map((row) => row.original);
+    const data = table.getFilteredRowModel().rows.map((row: any) => row.original);
     if (!data.length) {
       toast.warning("No data to export.");
       return;
@@ -39,10 +38,40 @@ export function exportToCSV<TData>(table: Table<TData>, filename: string) {
 
     const columnKeys = table
       .getVisibleLeafColumns()
-      .map((col) => col.id)
-      .filter((id) => id !== "actions"); // Exclude actions column
+      .map((col: any) => col.id)
+      .filter((id: string) => id !== "actions"); // Exclude actions column
 
     const csv = convertToCSV(data, columnKeys as (keyof TData)[]);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", filename);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success("Data exported successfully!");
+  } catch (error) {
+    console.error("Failed to export data to CSV:", error);
+    toast.error("Failed to export data. Please try again.");
+  }
+}
+
+/**
+ * Exports raw data to a CSV file.
+ * @param data The data to export.
+ * @param filename The desired filename for the downloaded CSV.
+ * @param columns The columns to include in the CSV.
+ */
+export function exportToCSV<TData>(data: TData[], filename: string, columns: (keyof TData)[]) {
+  try {
+    if (!data.length) {
+      toast.warning("No data to export.");
+      return;
+    }
+
+    const csv = convertToCSV(data, columns);
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");

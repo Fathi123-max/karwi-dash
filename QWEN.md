@@ -48,3 +48,7 @@ This is a standard Node.js/Next.js project. The main commands are defined in `pa
   - Run `pnpm run lint` and `pnpm run format` after modifications to ensure adherence to project standards.
 - **Reusable Components:** Always reuse existing components from `src/components/ui` or local `_components` folders before creating new ones.
 - **Theme Customization:** Themes are defined in CSS files within `src/styles/presets`. The `generate:presets` script parses these files to dynamically update the available theme options in `src/types/preferences/theme.ts`.
+
+## Qwen Added Memories
+
+- User wants to implement a product store where admins can add products with categories, and franchises can purchase these products in bulk quantities. Users will not be purchasing products directly.

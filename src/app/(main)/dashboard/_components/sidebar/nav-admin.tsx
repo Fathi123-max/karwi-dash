@@ -1,17 +1,36 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { BarChart3, Building2, Calendar, FileText, Home, Mail, MapPin, UsersRound, Wrench } from "lucide-react";
+import {
+  Building2,
+  Calendar,
+  FileText,
+  Home,
+  Mail,
+  MapPin,
+  Package,
+  ShoppingCart,
+  UsersRound,
+  Wrench,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 const adminNavItems = [
   { href: "/admin", label: "Dashboard", icon: Home },
-  { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/admin/branches", label: "Branches", icon: Building2 },
   { href: "/admin/franchises", label: "Franchises", icon: MapPin },
   { href: "/admin/washers", label: "Washers", icon: UsersRound },
   { href: "/admin/services", label: "Services", icon: Wrench },
+  {
+    href: "/admin/products",
+    label: "Products",
+    icon: Package,
+    subItems: [
+      { href: "/admin/products", label: "Manage Products" },
+      { href: "/admin/products/orders", label: "Orders" },
+    ],
+  },
   { href: "/admin/users", label: "Users", icon: UsersRound },
   { href: "/admin/payments", label: "Payments", icon: FileText },
   { href: "/admin/schedule", label: "Schedule", icon: Calendar },
@@ -21,20 +40,43 @@ const adminNavItems = [
 
 export function NavAdmin() {
   const pathname = usePathname();
+
   return (
     <nav className="grid items-start gap-2">
       {adminNavItems.map((item) => (
-        <Link key={item.href} href={item.href}>
-          <span
-            className={cn(
-              "group hover:bg-accent hover:text-accent-foreground flex items-center rounded-md px-3 py-2 text-sm font-medium",
-              pathname === item.href ? "bg-accent" : "transparent",
-            )}
-          >
-            <item.icon className="mr-2 h-4 w-4" />
-            <span className="group-data-[collapsible=icon]:!hidden">{item.label}</span>
-          </span>
-        </Link>
+        <div key={item.href}>
+          <Link href={item.href}>
+            <span
+              className={cn(
+                "group hover:bg-accent hover:text-accent-foreground flex items-center rounded-md px-3 py-2 text-sm font-medium",
+                pathname === item.href ||
+                  (item.subItems && item.subItems.some((subItem) => pathname.startsWith(subItem.href)))
+                  ? "bg-accent"
+                  : "transparent",
+              )}
+            >
+              <item.icon className="mr-2 h-4 w-4" />
+              <span className="group-data-[collapsible=icon]:!hidden">{item.label}</span>
+            </span>
+          </Link>
+          {item.subItems && (
+            <div className="mt-1 ml-8 space-y-1">
+              {item.subItems.map((subItem) => (
+                <Link key={subItem.href} href={subItem.href}>
+                  <span
+                    className={cn(
+                      "group hover:bg-accent hover:text-accent-foreground flex items-center rounded-md px-3 py-2 text-sm font-medium",
+                      pathname === subItem.href ? "bg-accent" : "transparent",
+                    )}
+                  >
+                    {subItem.href.includes("orders") && <ShoppingCart className="mr-2 h-4 w-4" />}
+                    <span className="group-data-[collapsible=icon]:!hidden">{subItem.label}</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
       ))}
     </nav>
   );

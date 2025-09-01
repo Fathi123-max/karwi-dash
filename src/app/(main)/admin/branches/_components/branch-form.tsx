@@ -27,25 +27,56 @@ import { BranchTimeSlots } from "./branch-time-slots";
 import { BranchTimeSlotsForTwoWeeks } from "./branch-time-slots-for-two-weeks";
 import { Branch } from "./types";
 
-const formSchema = z.object({
-  name: z.string().min(2, "Branch name must be at least 2 characters."),
-  franchise_id: z.string().uuid({ message: "Please select a franchise." }),
-  location: z
-    .object({
-      lat: z.number(),
-      lng: z.number(),
-    })
-    .refine((data) => data.lat && data.lng, {
-      message: "Please select a location on the map.",
-    }),
-  address: z.string().optional(),
-  city: z.string().optional(),
-  phone_number: z.string().optional(),
-  ratings: z.coerce.number().min(0).max(5).optional(),
-  pictures: z.union([z.array(z.string()), z.string()]).optional(),
-  latitude: z.coerce.number().optional(),
-  longitude: z.coerce.number().optional(),
-});
+const formSchema = z
+  .object({
+    name: z.string().min(2, "Branch name must be at least 2 characters."),
+    franchise_id: z.string().uuid({ message: "Please select a franchise." }),
+    location: z
+      .object({
+        lat: z.number(),
+        lng: z.number(),
+      })
+      .refine((data) => data.lat && data.lng, {
+        message: "Please select a location on the map.",
+      }),
+    address: z.string().optional(),
+    city: z.string().optional(),
+    phone_number: z.string().optional(),
+    ratings: z.coerce.number().min(0).max(5).optional(),
+    pictures: z.union([z.array(z.string()), z.string()]).optional(),
+    latitude: z.coerce.number().optional(),
+    longitude: z.coerce.number().optional(),
+    adminEmail: z
+      .string()
+      .email({
+        message: "Please enter a valid email address.",
+      })
+      .optional(),
+    adminPassword: z
+      .string()
+      .min(6, {
+        message: "Password must be at least 6 characters.",
+      })
+      .optional(),
+    adminRole: z
+      .enum(["general", "franchise", "branch"], {
+        message: "Please select a valid admin role.",
+      })
+      .default("branch"),
+  })
+  .refine(
+    (data) => {
+      // If creating a new branch, both adminEmail and adminPassword are required
+      if (!data.adminEmail && !data.adminPassword) {
+        return true; // Allow empty for existing branches
+      }
+      return data.adminEmail && data.adminPassword;
+    },
+    {
+      message: "Both admin email and password are required for new branches.",
+      path: ["adminEmail"], // This will attach the error to the adminEmail field
+    },
+  );
 
 type BranchFormValues = z.infer<typeof formSchema>;
 
@@ -108,6 +139,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
         : [],
       latitude: branch?.latitude ?? 0,
       longitude: branch?.longitude ?? 0,
+      adminRole: "branch", // Default to branch admin for new branches
     },
   });
 
@@ -171,6 +203,9 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
           pictures: processedData.pictures,
           latitude: processedData.latitude,
           longitude: processedData.longitude,
+          adminEmail: processedData.adminEmail,
+          adminPassword: processedData.adminPassword,
+          adminRole: processedData.adminRole,
         });
 
         toast.success("Branch created successfully!");
@@ -516,6 +551,54 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                                 {franchise.name}
                               </SelectItem>
                             ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="adminEmail"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Admin Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., admin@karwi-branch.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="adminPassword"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Admin Password</FormLabel>
+                        <FormControl>
+                          <Input type="password" placeholder="Enter password" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="adminRole"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Admin Role</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select admin role" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="general">General Admin</SelectItem>
+                            <SelectItem value="franchise">Franchise Admin</SelectItem>
+                            <SelectItem value="branch">Branch Admin</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />

@@ -5,6 +5,7 @@ This document explains how to set up Supabase Storage for the Karwi Dash applica
 ## Required Buckets
 
 The application requires the following storage buckets:
+
 - `images` - Default bucket for general image storage
 - `branches` - Bucket for branch-related images
 - `services` - Bucket for service-related images

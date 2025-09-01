@@ -1,7 +1,8 @@
 import Link from "next/link";
 
-import { Globe } from "lucide-react";
+import { Globe, Sparkles, Shield } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { APP_CONFIG } from "@/config/app-config";
 
 export default function LoginV2() {
@@ -9,23 +10,34 @@ export default function LoginV2() {
     <>
       <div className="mx-auto flex w-full flex-col justify-center space-y-8 sm:w-[350px]">
         <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-medium">Welcome to Karwi</h1>
-          <p className="text-muted-foreground text-sm">Select your login type to access your dashboard.</p>
+          <div className="bg-primary mx-auto flex h-16 w-16 items-center justify-center rounded-full">
+            <Sparkles className="text-primary-foreground size-8" />
+          </div>
+          <h1 className="text-3xl font-bold">Welcome to {APP_CONFIG.name}</h1>
+          <p className="text-muted-foreground text-sm">Professional Car Care Management System</p>
         </div>
-        <div className="space-y-4">
+
+        <div className="space-y-6">
           <div className="grid grid-cols-1 gap-4">
-            <Link
-              href="/admin/login"
-              className="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-12 items-center justify-center rounded-md border px-4 py-2 text-sm font-medium shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-            >
-              Admin Login
+            <Link href="/admin/login">
+              <Button variant="outline" className="h-14 w-full justify-start gap-3 text-base">
+                <Shield className="size-5" />
+                <span>Admin Login</span>
+              </Button>
             </Link>
-            <Link
-              href="/franchise/login"
-              className="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-12 items-center justify-center rounded-md border px-4 py-2 text-sm font-medium shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-            >
-              Franchise Login
+            <Link href="/franchise/login">
+              <Button variant="outline" className="h-14 w-full justify-start gap-3 text-base">
+                <Sparkles className="size-5" />
+                <span>Franchise Login</span>
+              </Button>
             </Link>
+          </div>
+
+          <div className="rounded-lg border p-4">
+            <h3 className="font-medium">New to our platform?</h3>
+            <p className="text-muted-foreground mt-1 text-sm">
+              Contact your system administrator to get started with our car care management solution.
+            </p>
           </div>
         </div>
       </div>

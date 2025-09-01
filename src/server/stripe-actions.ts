@@ -14,55 +14,9 @@ export async function fetchStripePayments() {
       return { success: false, error: "Stripe not configured" };
     }
 
-    // For development, we can return mock data if using test keys
-    if (process.env.STRIPE_SECRET_KEY.startsWith("sk_test")) {
-      console.log("Using mock Stripe data for development");
-      return {
-        success: true,
-        data: [
-          {
-            id: "pi_mock_1",
-            booking_id: "BK001",
-            amount: 49.99,
-            status: "succeeded",
-            provider: "Stripe",
-            provider_txn_id: "pi_mock_1",
-            created_at: new Date().toISOString(),
-          },
-          {
-            id: "pi_mock_2",
-            booking_id: "BK002",
-            amount: 79.99,
-            status: "pending",
-            provider: "Stripe",
-            provider_txn_id: "pi_mock_2",
-            created_at: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
-          },
-          {
-            id: "pi_mock_3",
-            booking_id: "BK003",
-            amount: 39.99,
-            status: "failed",
-            provider: "Stripe",
-            provider_txn_id: "pi_mock_3",
-            created_at: new Date(Date.now() - 172800000).toISOString(), // 2 days ago
-          },
-          {
-            id: "pi_mock_4",
-            booking_id: "BK004",
-            amount: 59.99,
-            status: "refunded",
-            provider: "Stripe",
-            provider_txn_id: "pi_mock_4",
-            created_at: new Date(Date.now() - 259200000).toISOString(), // 3 days ago
-          },
-        ],
-      };
-    }
-
     // Initialize Stripe with your secret key
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: "2024-06-20",
+      apiVersion: "2025-02-24.acacia",
     });
 
     // Fetch payments from Stripe
@@ -101,26 +55,9 @@ export async function fetchStripePaymentById(paymentId: string) {
       return { success: false, error: "Stripe not configured" };
     }
 
-    // For development, we can return mock data if using test keys
-    if (process.env.STRIPE_SECRET_KEY.startsWith("sk_test")) {
-      console.log("Using mock Stripe data for development");
-      return {
-        success: true,
-        data: {
-          id: paymentId,
-          booking_id: "BK001",
-          amount: 49.99,
-          status: "succeeded",
-          provider: "Stripe",
-          provider_txn_id: paymentId,
-          created_at: new Date().toISOString(),
-        },
-      };
-    }
-
     // Initialize Stripe with your secret key
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: "2024-06-20",
+      apiVersion: "2025-02-24.acacia",
     });
 
     // Fetch payment from Stripe
@@ -141,5 +78,37 @@ export async function fetchStripePaymentById(paymentId: string) {
   } catch (error) {
     console.error(`Error fetching payment ${paymentId} from Stripe:`, error);
     return { success: false, error: "Failed to fetch payment from Stripe" };
+  }
+}
+
+/**
+ * Refund a payment in Stripe
+ * @param paymentIntentId The Stripe payment intent ID to refund
+ * @param amount The amount to refund (in dollars)
+ * @returns Refund details or error
+ */
+export async function refundStripePayment(paymentIntentId: string, amount: number) {
+  try {
+    // Check if Stripe secret key is configured
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.warn("STRIPE_SECRET_KEY not configured, skipping Stripe integration");
+      return { success: false, error: "Stripe not configured" };
+    }
+
+    // Initialize Stripe with your secret key
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: "2025-02-24.acacia",
+    });
+
+    // Create refund
+    const refund = await stripe.refunds.create({
+      payment_intent: paymentIntentId,
+      amount: Math.round(amount * 100), // Convert to cents
+    });
+
+    return { success: true, data: refund };
+  } catch (error) {
+    console.error(`Error refunding payment ${paymentIntentId}:`, error);
+    return { success: false, error: "Failed to refund payment" };
   }
 }

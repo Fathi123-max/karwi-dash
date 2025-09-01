@@ -33,7 +33,12 @@ export function MultiSelect({ options, selected, onChange, className }: MultiSel
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" role="combobox" aria-expanded={open} className={cn("w-full justify-between", className)}>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className={cn("w-full justify-between", className)}
+        >
           <div className="flex flex-wrap gap-1">
             {selected.length > 0
               ? selected.map((value) => (

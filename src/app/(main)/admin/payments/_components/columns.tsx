@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
@@ -38,6 +40,7 @@ export const columns: ColumnDef<Payment>[] = [
       if (status === "succeeded") variant = "default";
       if (status === "failed") variant = "destructive";
       if (status === "pending") variant = "secondary";
+      if (status === "refunded") variant = "secondary";
       return <Badge variant={variant}>{status}</Badge>;
     },
   },
@@ -68,8 +71,18 @@ export const columns: ColumnDef<Payment>[] = [
               Copy Payment ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View Booking Details</DropdownMenuItem>
-            <DropdownMenuItem>Refund Payment</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={`/admin/bookings/${payment.booking_id}`}>View Booking Details</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={`/admin/payments/${payment.id}`}>View Payment Details</Link>
+            </DropdownMenuItem>
+            {payment.status === "succeeded" && (
+              <>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="text-red-600">Refund Payment</DropdownMenuItem>
+              </>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       );

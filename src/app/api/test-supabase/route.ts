@@ -19,14 +19,28 @@ export async function GET() {
 
   try {
     // Test database connection
-    const { data, error } = await supabase.from("admins").select("id").limit(1);
+    const { data: admins, error: adminsError } = await supabase.from("admins").select("id").limit(1);
 
-    if (error) {
+    if (adminsError) {
       return NextResponse.json(
         {
           success: false,
-          error: error.message,
-          details: "Database query failed",
+          error: adminsError.message,
+          details: "Database query failed for admins",
+        },
+        { status: 500 },
+      );
+    }
+
+    // Check for products
+    const { data: products, error: productsError } = await supabase.from("products").select("*");
+
+    if (productsError) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: productsError.message,
+          details: "Database query failed for products",
         },
         { status: 500 },
       );
@@ -49,7 +63,8 @@ export async function GET() {
     return NextResponse.json({
       success: true,
       message: "Supabase connection successful",
-      database: data,
+      admins: admins,
+      products: products,
       storage: buckets,
     });
   } catch (error) {

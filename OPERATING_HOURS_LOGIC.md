@@ -1,12 +1,15 @@
 # Operating Hours Feature - Detailed Logic Explanation
 
 ## Overview
+
 This document provides a detailed explanation of the logic behind the Operating Hours feature implementation. It covers the core algorithms, data flow, state management, and business rules that govern how the feature works.
 
 ## Core Concepts
 
 ### Time Slot Representation
+
 Each day of the week is represented as a TimeSlot object with the following properties:
+
 - `id`: Unique identifier (UUID from database or generated default ID)
 - `branch_id`: Reference to the branch this time slot belongs to
 - `day_of_week`: Integer representing the day (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
@@ -15,7 +18,9 @@ Each day of the week is represented as a TimeSlot object with the following prop
 - `is_closed`: Boolean indicating if the branch is closed on this day
 
 ### Default Time Slots
+
 When a branch has no operating hours defined in the database, the system generates default time slots:
+
 - Weekdays (Monday-Friday): 9:00 AM - 5:00 PM
 - Weekends (Saturday-Sunday): Closed all day
 
@@ -24,22 +29,21 @@ When a branch has no operating hours defined in the database, the system generat
 ### 1. Loading Time Slots
 
 #### Step 1: Fetch from Supabase
+
 ```javascript
 // Fetch existing hours from database
-const { data, error } = await supabase
-  .from('branch_hours')
-  .select('*')
-  .eq('branch_id', branchId);
+const { data, error } = await supabase.from("branch_hours").select("*").eq("branch_id", branchId);
 ```
 
 #### Step 2: Process Database Results
+
 The system processes the database results to ensure all 7 days are represented:
 
 ```javascript
 getHoursForBranch: (branchId: string) => {
   // Get existing hours from store
   const branchHours = get().hours.filter((h) => h.branch_id === branchId);
-  
+
   // Ensure all 7 days are present
   const days = Array.from({ length: 7 }, (_, i) => i);
   return days.map((day) => {
@@ -48,7 +52,7 @@ getHoursForBranch: (branchId: string) => {
     if (existing) {
       return existing; // Return existing record
     }
-    
+
     // Create default record if none exists
     return {
       id: `default-${branchId}-${day}`,
@@ -63,6 +67,7 @@ getHoursForBranch: (branchId: string) => {
 ```
 
 #### Step 3: Transform for UI
+
 The database records are transformed into a format suitable for the UI components:
 
 ```javascript
@@ -79,6 +84,7 @@ const slots = hours.map((h) => ({
 ### 2. Handling User Changes
 
 #### Time Changes
+
 When a user modifies the open or close time for a day:
 
 ```javascript
@@ -92,7 +98,7 @@ const handleTimeChange = (dayIndex: number, field: "openTime" | "closeTime", val
         }
       : slot,
   );
-  
+
   // Update state and mark as having unsaved changes
   setTimeSlots(updatedSlots);
   setHasUnsavedChanges(true);
@@ -100,6 +106,7 @@ const handleTimeChange = (dayIndex: number, field: "openTime" | "closeTime", val
 ```
 
 #### Closed Status Changes
+
 When a user marks a day as closed:
 
 ```javascript
@@ -124,6 +131,7 @@ const handleClosedChange = (dayIndex: number, checked: boolean) => {
 ### 3. Saving Changes
 
 #### Individual Time Slot Updates
+
 Each time slot is saved individually to handle different scenarios:
 
 ```javascript
@@ -140,7 +148,7 @@ const handleSaveAll = async (): Promise<boolean> => {
         is_closed: slot.isClosed,
       })
     );
-    
+
     await Promise.all(promises);
     setHasUnsavedChanges(false);
     setSaveStatus("success");
@@ -153,6 +161,7 @@ const handleSaveAll = async (): Promise<boolean> => {
 ```
 
 #### Supabase Update Logic
+
 The update logic handles both existing records and default records:
 
 ```javascript
@@ -162,7 +171,9 @@ updateHours: async (updatedHour) => {
     // Try to insert new record
     const { data, error } = await supabase
       .from("branch_hours")
-      .insert([/* hour data */])
+      .insert([
+        /* hour data */
+      ])
       .select();
 
     if (error) {
@@ -195,15 +206,16 @@ updateHours: async (updatedHour) => {
       })
       .eq("id", updatedHour.id)
       .select();
-    
+
     // Update store with updated data
   }
-}
+};
 ```
 
 ## State Management Logic
 
 ### hasUnsavedChanges Flag
+
 The `hasUnsavedChanges` flag is managed through the following logic:
 
 1. **Initialization**: Set to `false` when time slots are loaded
@@ -223,34 +235,40 @@ setHasUnsavedChanges(false);
 ```
 
 ### Save Button Visibility
+
 The save button is shown based on two conditions:
+
 1. `hasUnsavedChanges` is `true`
 2. Either `showSaveButton` prop is `true` OR we're using the dedicated save button
 
 ```javascript
 // Show save button when there are unsaved changes
-{hasUnsavedChanges && (
-  <Button onClick={() => handleSaveAll()}>
-    Save Hours
-  </Button>
-)}
+{
+  hasUnsavedChanges && <Button onClick={() => handleSaveAll()}>Save Hours</Button>;
+}
 ```
 
 ## Business Rules
 
 ### Default Values Logic
+
 Default values are applied based on the day of the week:
+
 - Sunday (0) and Saturday (6): `is_closed = true`
 - Monday-Friday (1-5): `open_time = "09:00"`, `close_time = "17:00"`
 
 ### Time Validation
+
 The system enforces the following validation rules:
+
 - Open time must be before close time (when not closed)
 - Time values must be in "HH:MM" format
 - Closed days have null open/close times
 
 ### Conflict Resolution
+
 When a unique constraint violation occurs:
+
 1. Detect the error code (23505)
 2. Fall back to update operation using branch_id and day_of_week
 3. Update the local store with the result
@@ -258,7 +276,9 @@ When a unique constraint violation occurs:
 ## Error Handling Logic
 
 ### Network Errors
+
 Network errors are handled by:
+
 1. Displaying user-friendly error messages
 2. Preserving unsaved changes
 3. Providing retry mechanisms
@@ -273,13 +293,17 @@ catch (error) {
 ```
 
 ### Validation Errors
+
 Validation errors are handled by:
+
 1. Checking data format before sending to Supabase
 2. Displaying specific error messages
 3. Preventing invalid data from being saved
 
 ### Constraint Violations
+
 Unique constraint violations are handled by:
+
 1. Detecting the specific error code
 2. Automatically falling back to update operation
 3. Updating the local state with the result
@@ -287,6 +311,7 @@ Unique constraint violations are handled by:
 ## Performance Optimizations
 
 ### Batch Operations
+
 Multiple time slot updates are performed as batch operations:
 
 ```javascript
@@ -298,13 +323,17 @@ await Promise.all(promises);
 ```
 
 ### Efficient State Updates
+
 State updates are optimized to minimize re-renders:
+
 - Using functional updates for complex state changes
 - Batching related state updates
 - Using memoization for expensive calculations
 
 ### Caching
+
 The system implements caching to reduce database queries:
+
 - Storing fetched hours in the Zustand store
 - Reusing existing data when possible
 - Only fetching when necessary
@@ -312,25 +341,32 @@ The system implements caching to reduce database queries:
 ## Edge Cases Handling
 
 ### New Branches
+
 For new branches without any database records:
+
 1. Generate default time slots with special IDs
 2. Mark as having no unsaved changes initially
 3. Allow creation of actual records when first saved
 
 ### Partial Data
+
 When only some days have database records:
+
 1. Load existing records
 2. Generate defaults for missing days
 3. Allow independent modification of each day
 
 ### Concurrent Modifications
+
 When multiple users modify the same branch:
+
 1. Last-write-wins semantics
 2. Potential for conflict detection in future enhancements
 
 ## Mobile Implementation Considerations
 
 ### Platform Differences
+
 The mobile implementation follows the same logic but with platform-specific considerations:
 
 1. **UI Components**: Flutter widgets instead of React components
@@ -339,7 +375,9 @@ The mobile implementation follows the same logic but with platform-specific cons
 4. **Navigation**: Flutter navigation instead of React Router
 
 ### Data Synchronization
+
 Mobile implementation includes additional considerations:
+
 1. Offline support with local caching
 2. Conflict resolution for offline edits
 3. Background sync when connectivity is restored
@@ -347,21 +385,27 @@ Mobile implementation includes additional considerations:
 ## Testing Logic
 
 ### Unit Tests
+
 Unit tests cover:
+
 1. Time slot transformation functions
 2. Default value generation
 3. State management functions
 4. Validation logic
 
 ### Integration Tests
+
 Integration tests cover:
+
 1. Supabase database operations
 2. Unique constraint handling
 3. Error recovery scenarios
 4. End-to-end user flows
 
 ### UI Tests
+
 UI tests cover:
+
 1. Component rendering
 2. User interaction flows
 3. State transitions

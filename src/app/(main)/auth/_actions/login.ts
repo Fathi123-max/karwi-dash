@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -46,11 +45,11 @@ export async function login(prevState: any, formData: FormData) {
       };
     }
 
-    // Check if the user is an admin
+    // Check if the user is an admin and their role
     const { data: adminProfile, error: adminError } = await supabase
       .from("admins")
-      .select("id")
-      .eq("email", user.email)
+      .select("id, role")
+      .eq("id", user.id) // Use user.id instead of email for more reliable matching
       .single();
 
     if (adminError) {
@@ -68,32 +67,51 @@ export async function login(prevState: any, formData: FormData) {
       };
     }
 
-    // Check if the admin is associated with a franchise
-    const { data: franchise, error: franchiseError } = await supabase
-      .from("franchises")
-      .select("id")
-      .eq("admin_id", adminProfile.id)
-      .limit(1)
-      .single();
+    // Redirect based on admin role
+    switch (adminProfile.role) {
+      case "franchise": {
+        // Check if the franchise admin is associated with a franchise
+        const { data: franchise, error: franchiseError } = await supabase
+          .from("franchises")
+          .select("id")
+          .eq("admin_id", adminProfile.id)
+          .limit(1)
+          .single();
 
-    // Handle the case where no franchise is found
-    if (franchiseError && franchiseError.code !== "PGRST116") {
-      // PGRST116 is "no rows found"
-      console.error("Franchise check error:", franchiseError);
-      await supabase.auth.signOut();
-      return {
-        message: "System error. Please try again later.",
-      };
-    }
+        // Handle the case where no franchise is found
+        if (franchiseError && franchiseError.code !== "PGRST116") {
+          // PGRST116 is "no rows found"
+          console.error("Franchise check error:", franchiseError);
+          await supabase.auth.signOut();
+          return {
+            message: "System error. Please try again later.",
+          };
+        }
 
-    if (franchise) {
-      // This admin manages a franchise, redirect to franchise dashboard
-      revalidatePath("/", "layout");
-      redirect("/franchise");
-    } else {
-      // This is a general admin, redirect to the main admin dashboard
-      revalidatePath("/", "layout");
-      redirect("/admin");
+        if (franchise) {
+          // This admin manages a franchise, redirect to franchise dashboard
+          revalidatePath("/", "layout");
+          redirect("/franchise");
+        } else {
+          // This is a franchise admin but not associated with a franchise, redirect to admin dashboard
+          revalidatePath("/", "layout");
+          redirect("/admin");
+        }
+        break;
+      }
+
+      case "branch": {
+        // Redirect branch admins to branch dashboard
+        revalidatePath("/", "layout");
+        redirect("/branch");
+        break;
+      }
+
+      case "general":
+      default:
+        // This is a general admin, redirect to the main admin dashboard
+        revalidatePath("/", "layout");
+        redirect("/admin");
     }
   } catch (error) {
     console.error("Unexpected error in login:", error);

@@ -2,6 +2,7 @@
 -- Table order and constraints may not be valid for execution.
 
 CREATE TABLE public.admins (
+  role text NOT NULL DEFAULT 'general'::text CHECK (role = ANY (ARRAY['general'::text, 'franchise'::text, 'branch'::text])),
   name text,
   email text NOT NULL UNIQUE,
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -26,6 +27,7 @@ CREATE TABLE public.bookings (
   CONSTRAINT bookings_car_id_fkey FOREIGN KEY (car_id) REFERENCES public.cars(id)
 );
 CREATE TABLE public.branch_hours (
+  specific_date date,
   branch_id uuid,
   day_of_week integer NOT NULL,
   open_time time without time zone,
@@ -45,6 +47,7 @@ CREATE TABLE public.branches (
   latitude numeric,
   longitude numeric,
   franchise_id uuid,
+  admin_id uuid,
   name text NOT NULL,
   location USER-DEFINED,
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -52,7 +55,8 @@ CREATE TABLE public.branches (
   active_bookings integer DEFAULT 0,
   created_at timestamp with time zone DEFAULT now(),
   CONSTRAINT branches_pkey PRIMARY KEY (id),
-  CONSTRAINT branches_franchise_id_fkey FOREIGN KEY (franchise_id) REFERENCES public.franchises(id)
+  CONSTRAINT branches_franchise_id_fkey FOREIGN KEY (franchise_id) REFERENCES public.franchises(id),
+  CONSTRAINT branches_admin_id_fkey FOREIGN KEY (admin_id) REFERENCES auth.users(id)
 );
 CREATE TABLE public.cars (
   user_id uuid,
@@ -184,4 +188,50 @@ CREATE TABLE public.washers (
   created_at timestamp with time zone DEFAULT now(),
   CONSTRAINT washers_pkey PRIMARY KEY (id),
   CONSTRAINT washers_branch_id_fkey FOREIGN KEY (branch_id) REFERENCES public.branches(id)
+);
+
+CREATE TABLE public.product_categories (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  name text NOT NULL,
+  description text,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT product_categories_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.products (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  category_id uuid REFERENCES public.product_categories(id),
+  name text NOT NULL,
+  description text,
+  price numeric NOT NULL,
+  stock_quantity integer DEFAULT 0,
+  pictures ARRAY,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT products_pkey PRIMARY KEY (id),
+  CONSTRAINT products_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.product_categories(id)
+);
+
+CREATE TABLE public.product_orders (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  franchise_id uuid REFERENCES public.franchises(id),
+  total_amount numeric NOT NULL,
+  status text DEFAULT 'pending'::text,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT product_orders_pkey PRIMARY KEY (id),
+  CONSTRAINT product_orders_franchise_id_fkey FOREIGN KEY (franchise_id) REFERENCES public.franchises(id)
+);
+
+CREATE TABLE public.order_items (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  order_id uuid NOT NULL REFERENCES public.product_orders(id),
+  product_id uuid NOT NULL REFERENCES public.products(id),
+  quantity integer NOT NULL,
+  price_per_unit numeric NOT NULL,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT order_items_pkey PRIMARY KEY (id),
+  CONSTRAINT order_items_order_id_fkey FOREIGN KEY (order_id) REFERENCES public.product_orders(id),
+  CONSTRAINT order_items_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id)
 );

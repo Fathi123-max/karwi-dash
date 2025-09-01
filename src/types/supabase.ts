@@ -73,3 +73,45 @@ export type ServiceAvailability = {
   is_active: boolean;
   created_at: string;
 };
+
+export type ProductCategory = {
+  id: string;
+  name: string;
+  description: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type Product = {
+  id: string;
+  category_id: string | null;
+  name: string;
+  description: string | null;
+  price: number;
+  stock_quantity: number;
+  pictures: string[] | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ProductOrder = {
+  id: string;
+  franchise_id: string;
+  total_amount: number;
+  status: "pending" | "processing" | "shipped" | "delivered" | "cancelled";
+  created_at: string;
+  updated_at: string;
+};
+
+export type OrderItem = {
+  id: string;
+  order_id: string;
+  product_id: string;
+  quantity: number;
+  price_per_unit: number;
+  created_at: string;
+};
+
+export type OrderItemWithProduct = OrderItem & {
+  product: Product | null;
+};

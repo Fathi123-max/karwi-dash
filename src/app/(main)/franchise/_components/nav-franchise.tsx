@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { BarChart3, FileText, MapPin, UsersRound, History, Wrench, Tag } from "lucide-react";
+import { BarChart3, FileText, MapPin, UsersRound, History, Wrench, Tag, Package } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -13,6 +13,7 @@ const franchiseNavItems = [
   { href: "/franchise/branch-management", label: "Branch Management", icon: MapPin },
   { href: "/franchise/washer-management", label: "Washer Management", icon: UsersRound },
   { href: "/franchise/booking-history", label: "Booking History", icon: History },
+  { href: "/franchise/products", label: "Products", icon: Package },
 ];
 
 export function NavFranchise() {

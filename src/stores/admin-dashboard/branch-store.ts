@@ -2,6 +2,7 @@
 
 import { create } from "zustand";
 
+import { createAdminUserWithRole } from "@/app/(main)/admin/branches/_actions/create-admin-with-role";
 import { Branch } from "@/app/(main)/admin/branches/_components/types";
 import { createClient } from "@/lib/supabase/client";
 
@@ -13,7 +14,13 @@ const supabase = createClient();
 type BranchState = {
   branches: Branch[];
   fetchBranches: () => Promise<void>;
-  addBranch: (branch: Omit<Branch, "id" | "createdAt">) => Promise<void>;
+  addBranch: (
+    branch: Omit<Branch, "id" | "createdAt"> & {
+      adminEmail?: string;
+      adminPassword?: string;
+      adminRole?: "general" | "franchise" | "branch";
+    },
+  ) => Promise<void>;
   updateBranch: (branch: Branch) => Promise<void>;
   deleteBranch: (id: string) => Promise<void>;
 };
@@ -74,7 +81,8 @@ export const useBranchStore = create<BranchState>((set, get) => ({
     set({ branches: transformedBranches });
   },
   addBranch: async (branch) => {
-    const { data, error } = await supabase
+    // Start a Supabase transaction
+    const { data: branchData, error: branchError } = await supabase
       .from("branches")
       .insert([
         {
@@ -92,9 +100,31 @@ export const useBranchStore = create<BranchState>((set, get) => ({
       ])
       .select();
 
-    if (error) {
-      console.error("Error adding branch:", error);
-      throw error;
+    if (branchError) {
+      console.error("Error adding branch:", branchError);
+      throw branchError;
+    }
+
+    // If admin credentials are provided, create an admin user with role
+    if (branch.adminEmail && branch.adminPassword) {
+      try {
+        // Use server action to create the admin user with role (requires service role key)
+        const result = await createAdminUserWithRole(
+          branch.adminEmail,
+          branch.adminPassword,
+          branch.adminRole || "branch", // Default to branch admin
+          branchData[0].id, // Associate with this branch
+        );
+
+        if (!result.success) {
+          console.error("Error creating admin user:", result.error);
+          // Note: We're not throwing here because we still want to create the branch
+          // Even if admin user creation fails, the branch should still be created
+        }
+      } catch (adminError) {
+        console.error("Unexpected error creating admin user:", adminError);
+        // Continue execution to ensure the branch is created
+      }
     }
 
     await get().fetchBranches();

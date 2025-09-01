@@ -11,11 +11,13 @@ This project has been migrated from npm to pnpm for better performance and disk 
 ## Migration Steps
 
 1. Install pnpm globally:
+
    ```bash
    npm install -g pnpm
    ```
 
 2. Install dependencies:
+
    ```bash
    pnpm install
    ```

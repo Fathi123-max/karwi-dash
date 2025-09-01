@@ -9,7 +9,7 @@ export type Payment = {
   id: string;
   booking_id: string;
   amount: number;
-  status: "succeeded" | "failed" | "pending" | "refunded";
+  status: "succeeded" | "failed" | "pending" | "refunded" | "canceled";
   provider: string;
   provider_txn_id: string;
   created_at: string;
@@ -27,8 +27,10 @@ export const usePaymentStore = create<PaymentState>((set) => ({
       // Fetch payments from Stripe via server action
       const stripeResult = await fetchStripePayments();
 
-      if (stripeResult.success) {
-        set({ payments: stripeResult.data });
+      if (stripeResult.success && stripeResult.data) {
+        // Filter out canceled payments and map to our type
+        const filteredPayments = stripeResult.data.filter((payment) => payment.status !== "canceled") as Payment[];
+        set({ payments: filteredPayments });
         return;
       }
 

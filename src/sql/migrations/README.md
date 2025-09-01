@@ -27,6 +27,7 @@ This migration adds support for global services that apply to all branches.
 ### After Migration
 
 After running the migration, you can:
+
 1. Create new global services that will automatically be available at all branches
 2. Existing branch-specific services will continue to work as before
 
@@ -83,6 +84,7 @@ This migration adds support for tracking when services are available for booking
 ### After Migration
 
 After running the migration, you can:
+
 1. Set availability schedules for services
 2. Track when services are available for booking
 
@@ -113,6 +115,7 @@ This migration adds support for linking services with promotions for branch-spec
 ### After Migration
 
 After running the migration, you can:
+
 1. Associate promotions with specific services
 2. Create branch-specific promotional offers for services
 
@@ -147,6 +150,7 @@ This migration adds new fields to the services table to store additional service
 ### After Migration
 
 After running the migration, you can:
+
 1. Store additional details for services
 2. Maintain backward compatibility with existing data
 
@@ -181,6 +185,7 @@ This migration adds location and contact fields to the services table.
 ### After Migration
 
 After running the migration, you can:
+
 1. Store location and contact information for services
 2. Maintain backward compatibility with existing data
 
@@ -215,5 +220,70 @@ This migration adds location and contact fields to the branches table.
 ### After Migration
 
 After running the migration, you can:
+
 1. Store location and contact information for branches
 2. Maintain backward compatibility with existing data
+
+## Product Orders Admin Access Migration
+
+This migration adds RLS policies to allow general admins to access all product orders and order items in the system.
+
+### Files
+
+- `20250830_add_general_admin_product_orders_access.sql` - Migration script to add admin access policies
+- `README-product-orders-admin-access.md` - Documentation for the changes
+
+### How to Run
+
+1. Connect to your Supabase database
+2. Run the migration script in the Supabase SQL editor:
+   ```sql
+   -- Copy and paste the contents of 20250830_add_general_admin_product_orders_access.sql here
+   ```
+3. Verify the migration was successful by checking the policies on the product_orders and order_items tables
+
+### What the Migration Does
+
+1. Adds policies allowing general admins to SELECT, INSERT, UPDATE, and DELETE on product_orders
+2. Adds policies allowing general admins to SELECT, INSERT, UPDATE, and DELETE on order_items
+3. Maintains existing franchise admin access policies
+
+### After Migration
+
+After running the migration, you can:
+
+1. General admins will be able to view and manage all product orders
+2. Franchise admins will continue to only have access to their own orders
+3. Test the new functionality with the provided test scripts
+
+## Product Stock Management Migration
+
+This migration adds automatic stock management for products through database triggers.
+
+### Files
+
+- `20250830_add_product_stock_management_triggers.sql` - Migration script to add stock management triggers
+- `README-product-stock-management.md` - Documentation for the changes
+
+### How to Run
+
+1. Connect to your Supabase database
+2. Run the migration script in the Supabase SQL editor:
+   ```sql
+   -- Copy and paste the contents of 20250830_add_product_stock_management_triggers.sql here
+   ```
+3. Verify the migration was successful by checking the triggers on the order_items table
+
+### What the Migration Does
+
+1. Creates a function to automatically manage product stock when order items are inserted, updated, or deleted
+2. Adds triggers to the order_items table to call the stock management function
+3. Updates the products table comments to document the stock_quantity field
+
+### After Migration
+
+After running the migration, you can:
+
+1. Product stock will be automatically managed when orders are placed, modified, or cancelled
+2. The application will check stock availability before placing orders
+3. Stock information will be displayed in order details for both admins and franchise users

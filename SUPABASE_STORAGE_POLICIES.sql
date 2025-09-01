@@ -8,9 +8,11 @@ ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Allow public read access on images bucket" ON storage.objects;
 DROP POLICY IF EXISTS "Allow public read access on branches bucket" ON storage.objects;
 DROP POLICY IF EXISTS "Allow public read access on services bucket" ON storage.objects;
+DROP POLICY IF EXISTS "Allow public read access on products bucket" ON storage.objects;
 DROP POLICY IF EXISTS "Allow authenticated uploads to images bucket" ON storage.objects;
 DROP POLICY IF EXISTS "Allow authenticated uploads to branches bucket" ON storage.objects;
 DROP POLICY IF EXISTS "Allow authenticated uploads to services bucket" ON storage.objects;
+DROP POLICY IF EXISTS "Allow authenticated uploads to products bucket" ON storage.objects;
 DROP POLICY IF EXISTS "Allow owners to update their own objects" ON storage.objects;
 DROP POLICY IF EXISTS "Allow owners to delete their own objects" ON storage.objects;
 
@@ -30,6 +32,11 @@ ON storage.objects FOR SELECT
 TO anon
 USING (bucket_id = 'services');
 
+CREATE POLICY "Allow public read access on products bucket"
+ON storage.objects FOR SELECT
+TO anon
+USING (bucket_id = 'products');
+
 -- Create policies for authenticated uploads
 CREATE POLICY "Allow authenticated uploads to images bucket"
 ON storage.objects FOR INSERT
@@ -46,6 +53,11 @@ ON storage.objects FOR INSERT
 TO authenticated
 WITH CHECK (bucket_id = 'services');
 
+CREATE POLICY "Allow authenticated uploads to products bucket"
+ON storage.objects FOR INSERT
+TO authenticated
+WITH CHECK (bucket_id = 'products');
+
 -- Create policies for owners to update and delete their own objects
 CREATE POLICY "Allow owners to update their own objects"
 ON storage.objects FOR UPDATE
@@ -57,7 +69,3 @@ CREATE POLICY "Allow owners to delete their own objects"
 ON storage.objects FOR DELETE
 TO authenticated
 USING (owner_id = auth.uid());
-
--- Refresh the schema cache
-SELECT extensions.grant_privileges_on_schema('storage', 'anon', 'USAGE');
-SELECT extensions.grant_privileges_on_schema('storage', 'authenticated', 'USAGE');

@@ -3,6 +3,7 @@
 This document provides detailed instructions for setting up and configuring Supabase for the Karwi Dash application.
 
 ## Table of Contents
+
 1. [Prerequisites](#prerequisites)
 2. [Project Setup](#project-setup)
 3. [Environment Configuration](#environment-configuration)
@@ -32,6 +33,7 @@ This document provides detailed instructions for setting up and configuring Supa
 ## Environment Configuration
 
 1. Copy the `.env.example` file to `.env.local`:
+
    ```bash
    cp .env.example .env.local
    ```
@@ -55,6 +57,7 @@ This document provides detailed instructions for setting up and configuring Supa
 ## Storage Configuration
 
 The application requires three storage buckets:
+
 - `images` (default bucket for general images)
 - `branches` (for branch-related images)
 - `services` (for service-related images)
@@ -64,12 +67,14 @@ The application requires three storage buckets:
 You can create these buckets in two ways:
 
 #### Method 1: Using the Admin Interface
+
 1. Navigate to your Supabase project dashboard
 2. Go to Storage > Buckets
 3. Click "New Bucket" and create each of the three buckets
 4. Set each bucket to "Public" access
 
 #### Method 2: Using the Application
+
 1. Start the development server: `pnpm run dev`
 2. Navigate to `/admin/storage`
 3. Click "Initialize Storage Buckets"
@@ -95,6 +100,7 @@ with check ( bucket_id = 'images' );
 The application uses Supabase Auth for authentication. By default, email/password authentication is enabled.
 
 To configure:
+
 1. Go to Authentication > Settings in your Supabase dashboard
 2. Enable/disable providers as needed
 3. Configure email templates if required
@@ -105,6 +111,7 @@ To configure:
 ### Automated Testing
 
 1. Start the development server:
+
    ```bash
    pnpm run dev
    ```
@@ -116,12 +123,14 @@ To configure:
 ### Manual Testing
 
 1. Check environment variables:
+
    ```bash
    # Verify .env.local exists and contains the correct values
    cat .env.local
    ```
 
 2. Test database connection using Supabase SQL editor:
+
    ```sql
    SELECT * FROM admins LIMIT 1;
    ```
@@ -180,6 +189,7 @@ To configure:
 4. Enable debug logging in Supabase settings for more detailed information
 
 If you continue to experience issues, please:
+
 1. Verify all environment variables are correctly set
 2. Check that your Supabase project is not suspended
 3. Ensure you're using the correct region URL
