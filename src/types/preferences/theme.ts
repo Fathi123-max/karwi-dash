@@ -33,6 +33,38 @@ export const THEME_PRESET_OPTIONS = [
     },
   },
   {
+    label: "Champaign",
+    value: "champaign",
+    primary: {
+      light: "#917e2e",
+      dark: "#917e2e",
+    },
+  },
+  {
+    label: "Flutter Champaign",
+    value: "flutter-champaign",
+    primary: {
+      light: "#917e2e",
+      dark: "#917e2e",
+    },
+  },
+  {
+    label: "Midnight",
+    value: "midnight",
+    primary: {
+      light: "oklch(0.65 0.25 280)",
+      dark: "oklch(0.70 0.25 280)",
+    },
+  },
+  {
+    label: "Ocean",
+    value: "ocean",
+    primary: {
+      light: "oklch(0.55 0.15 240)",
+      dark: "oklch(0.65 0.15 240)",
+    },
+  },
+  {
     label: "Soft Pop",
     value: "soft-pop",
     primary: {
