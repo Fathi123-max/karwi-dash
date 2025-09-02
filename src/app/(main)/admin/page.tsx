@@ -21,7 +21,6 @@ import { BranchPerformanceChart } from "./_components/branch-performance-chart";
 import { PaymentsChart } from "./_components/payments-chart";
 import { RecentActivity } from "./_components/recent-activity";
 import { RecentBookingsTable } from "./_components/recent-bookings-table";
-import { ReportsView } from "./_components/reports-view";
 import { WashersActivityTable } from "./_components/washers-activity-table";
 
 export default function AdminHomePage() {
@@ -72,7 +71,6 @@ export default function AdminHomePage() {
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="activity">Recent Activity</TabsTrigger>
-          <TabsTrigger value="reports">Reports</TabsTrigger>
         </TabsList>
         <TabsContent value="overview" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -109,11 +107,6 @@ export default function AdminHomePage() {
         <TabsContent value="activity">
           <Suspense fallback={<div className="bg-muted h-[450px] animate-pulse rounded-lg" />}>
             <RecentBookingsTable />
-          </Suspense>
-        </TabsContent>
-        <TabsContent value="reports">
-          <Suspense fallback={<div className="bg-muted h-[450px] animate-pulse rounded-lg" />}>
-            <ReportsView />
           </Suspense>
         </TabsContent>
       </Tabs>
