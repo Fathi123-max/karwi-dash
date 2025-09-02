@@ -68,6 +68,34 @@ This document summarizes the UI/UX improvements made to the 2-week operating hou
 3. **Visual Consistency**: Unified design language across all components
 4. **Clear Feedback**: Users get immediate visual feedback on their actions
 5. **Accessibility**: Improved contrast and clearer labels enhance accessibility
+6. **Enhanced Customization**: New Midnight and Ocean themes provide additional visual options
+
+## Theme Customization
+
+### Midnight Theme
+
+The new Midnight theme enhances the user experience with:
+
+- A deep blue/purple color scheme that's easy on the eyes
+- Carefully balanced colors for both light and dark modes
+- Improved visual hierarchy through thoughtful contrast ratios
+- Chart colors that coordinate with the overall theme for data visualization
+
+### Ocean Theme
+
+The new Ocean theme enhances the user experience with:
+
+- A refreshing blue color scheme inspired by ocean waters
+- Carefully balanced colors for both light and dark modes
+- Improved visual hierarchy through thoughtful contrast ratios
+- Chart colors that coordinate with the overall theme for data visualization
+
+### Implementation Details
+
+- Created using OKLCH color notation for better color consistency
+- Fully responsive design that works across all device sizes
+- Seamless integration with existing theme switching functionality
+- Automatic persistence of user preferences
 
 ## Testing
 

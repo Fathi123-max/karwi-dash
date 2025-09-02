@@ -160,3 +160,33 @@ Potential improvements that could be made:
 2. Copying hours from one week to another
 3. Visual indicators for holidays or special dates
 4. Export/import functionality for schedules
+5. Additional theme options for UI personalization
+
+## Theme Customization
+
+### Midnight Theme
+
+A new "Midnight" theme has been added to enhance the visual experience:
+
+- Deep blue/purple color scheme for a modern, professional look
+- Carefully tuned colors for both light and dark modes
+- Enhanced contrast for improved readability
+- Coordinated chart colors for better data visualization
+
+### Ocean Theme
+
+A new "Ocean" theme has been added to enhance the visual experience:
+
+- Refreshing blue color scheme inspired by ocean waters
+- Carefully tuned colors for both light and dark modes
+- Enhanced contrast for improved readability
+- Coordinated chart colors for better data visualization
+
+### Implementation
+
+The themes were implemented by:
+
+1. Creating new CSS files with OKLCH color definitions
+2. Adding theme metadata for proper UI integration
+3. Updating the theme generation script to include the new presets
+4. Ensuring seamless integration with existing theme switching functionality
