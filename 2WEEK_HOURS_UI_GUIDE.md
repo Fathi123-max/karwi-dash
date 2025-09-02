@@ -86,3 +86,45 @@ The branch edit form includes tabs for:
 - Overlapping regular and date-specific hours
 - Unique constraint violations in the database
 - Default hours for days with no configuration
+
+## 5. Theme Customization
+
+### Midnight Theme
+
+A new "Midnight" theme has been added to provide a deep blue/purple color scheme that's easy on the eyes during nighttime use. This theme features:
+
+- Deep blue/purple primary colors with excellent contrast
+- Carefully tuned secondary and accent colors that complement the primary palette
+- Optimized dark mode colors for reduced eye strain
+- Subtle border and input styling that maintains visual hierarchy
+- Chart colors that coordinate with the overall theme
+
+### Ocean Theme
+
+A new "Ocean" theme has been added to provide a refreshing blue color scheme inspired by ocean waters. This theme features:
+
+- Calming blue primary colors with excellent contrast
+- Carefully tuned secondary and accent colors that complement the primary palette
+- Optimized light and dark mode colors for all viewing conditions
+- Subtle border and input styling that maintains visual hierarchy
+- Chart colors that coordinate with the overall theme
+
+### Implementation
+
+The themes were implemented by:
+
+1. Creating new CSS files in `src/styles/presets/` for each theme
+2. Defining both light and dark mode color schemes using OKLCH color notation
+3. Adding the themes to the theme preset options via the generation script
+4. Updating the global CSS imports to include the new themes
+
+### Usage
+
+Users can select either theme through the layout controls in the dashboard:
+
+1. Click the Settings icon in the header
+2. Find the "Preset" dropdown in the layout settings popover
+3. Select "Midnight" or "Ocean" from the list of available themes
+4. The theme will be applied immediately and saved as a preference
+
+Both themes provide a professional, modern look while maintaining excellent readability and visual comfort.
