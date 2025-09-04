@@ -1,0 +1,123 @@
+"use client";
+
+import { useState } from "react";
+import { PlusCircle } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { BannerForm } from "./_components/banner-form";
+import { BannerList } from "./_components/banner-list";
+import { OfferForm } from "./_components/offer-form";
+import { OfferList } from "./_components/offer-list";
+import { useBannersOffersStore } from "@/stores/admin-dashboard/banners-offers-store";
+
+export default function BannersOffersPage() {
+  const { fetchBanners, fetchOffers } = useBannersOffersStore();
+  const [activeTab, setActiveTab] = useState("banners");
+  const [isBannerFormOpen, setIsBannerFormOpen] = useState(false);
+  const [isOfferFormOpen, setIsOfferFormOpen] = useState(false);
+  const [selectedBanner, setSelectedBanner] = useState<any>(null);
+  const [selectedOffer, setSelectedOffer] = useState<any>(null);
+
+  const handleEditBanner = (banner: any) => {
+    setSelectedBanner(banner);
+    setIsBannerFormOpen(true);
+  };
+
+  const handleEditOffer = (offer: any) => {
+    setSelectedOffer(offer);
+    setIsOfferFormOpen(true);
+  };
+
+  const handleCloseBannerForm = () => {
+    setIsBannerFormOpen(false);
+    setSelectedBanner(null);
+    // Refresh the banners list after closing the form
+    fetchBanners();
+  };
+
+  const handleCloseOfferForm = () => {
+    setIsOfferFormOpen(false);
+    setSelectedOffer(null);
+    // Refresh the offers list after closing the form
+    fetchOffers();
+  };
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold">Banners & Offers</h1>
+        <p className="text-muted-foreground">
+          Manage site-wide banners and promotional offers
+        </p>
+      </div>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList>
+          <TabsTrigger value="banners">Banners</TabsTrigger>
+          <TabsTrigger value="offers">Offers</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="banners" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>Banners</CardTitle>
+                  <CardDescription>
+                    Manage site-wide banners displayed to users
+                  </CardDescription>
+                </div>
+                <Button onClick={() => setIsBannerFormOpen(true)}>
+                  <PlusCircle className="mr-2 h-4 w-4" />
+                  Add Banner
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <BannerList onEdit={handleEditBanner} />
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="offers" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>Offers</CardTitle>
+                  <CardDescription>
+                    Manage promotional offers for services and products
+                  </CardDescription>
+                </div>
+                <Button onClick={() => setIsOfferFormOpen(true)}>
+                  <PlusCircle className="mr-2 h-4 w-4" />
+                  Add Offer
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <OfferList onEdit={handleEditOffer} />
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+
+      {isBannerFormOpen && (
+        <BannerForm
+          banner={selectedBanner}
+          onClose={handleCloseBannerForm}
+        />
+      )}
+
+      {isOfferFormOpen && (
+        <OfferForm
+          offer={selectedOffer}
+          onClose={handleCloseOfferForm}
+        />
+      )}
+    </div>
+  );
+}

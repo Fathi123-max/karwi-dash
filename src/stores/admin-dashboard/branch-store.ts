@@ -5,6 +5,7 @@ import { create } from "zustand";
 import { createAdminUserWithRole } from "@/app/(main)/admin/branches/_actions/create-admin-with-role";
 import { Branch } from "@/app/(main)/admin/branches/_components/types";
 import { createClient } from "@/lib/supabase/client";
+import { calculateBranchRating } from "@/lib/rating-utils";
 
 import { useFranchiseStore } from "./franchise-store";
 import { useServiceStore } from "./service-store";
@@ -42,7 +43,7 @@ export const useBranchStore = create<BranchState>((set, get) => ({
     const { franchises } = useFranchiseStore.getState();
     const { services } = useServiceStore.getState();
 
-    const transformedBranches = data.map((branch) => {
+    const transformedBranches = await Promise.all(data.map(async (branch) => {
       // Get branch-specific services
       const branchServices = services.filter((s) => s.branchId === branch.id);
 
@@ -58,6 +59,12 @@ export const useBranchStore = create<BranchState>((set, get) => ({
         }
       });
 
+      // Calculate rating if not already set or if it's null
+      let ratings = branch.ratings;
+      if (ratings === null || ratings === undefined) {
+        ratings = await calculateBranchRating(branch.id);
+      }
+
       return {
         id: branch.id,
         name: branch.name,
@@ -71,12 +78,12 @@ export const useBranchStore = create<BranchState>((set, get) => ({
         address: branch.address,
         city: branch.city,
         phone_number: branch.phone_number,
-        ratings: branch.ratings,
+        ratings: ratings,
         pictures: branch.pictures,
         latitude: branch.latitude,
         longitude: branch.longitude,
       };
-    });
+    }));
 
     set({ branches: transformedBranches });
   },
@@ -92,7 +99,7 @@ export const useBranchStore = create<BranchState>((set, get) => ({
           address: branch.address,
           city: branch.city,
           phone_number: branch.phone_number,
-          ratings: branch.ratings,
+          ratings: branch.ratings || null,
           pictures: branch.pictures,
           latitude: branch.latitude,
           longitude: branch.longitude,
@@ -139,7 +146,7 @@ export const useBranchStore = create<BranchState>((set, get) => ({
         address: branch.address,
         city: branch.city,
         phone_number: branch.phone_number,
-        ratings: branch.ratings,
+        ratings: branch.ratings || null,
         pictures: branch.pictures,
         latitude: branch.latitude,
         longitude: branch.longitude,

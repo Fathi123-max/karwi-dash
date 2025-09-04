@@ -12,6 +12,8 @@ import {
   ShoppingCart,
   UsersRound,
   Wrench,
+  Image,
+  Tag,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -36,6 +38,14 @@ const adminNavItems = [
   { href: "/admin/schedule", label: "Schedule", icon: Calendar },
   { href: "/admin/reviews", label: "Reviews", icon: FileText },
   { href: "/admin/promotions", label: "Promotions", icon: FileText },
+  {
+    href: "/admin/banners-offers",
+    label: "Banners & Offers",
+    icon: Image,
+    subItems: [
+      { href: "/admin/banners-offers", label: "Manage All" },
+    ],
+  },
 ];
 
 export function NavAdmin() {
@@ -69,7 +79,6 @@ export function NavAdmin() {
                       pathname === subItem.href ? "bg-accent" : "transparent",
                     )}
                   >
-                    {subItem.href.includes("orders") && <ShoppingCart className="mr-2 h-4 w-4" />}
                     <span className="group-data-[collapsible=icon]:!hidden">{subItem.label}</span>
                   </span>
                 </Link>
