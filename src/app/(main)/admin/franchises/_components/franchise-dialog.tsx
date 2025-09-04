@@ -37,7 +37,8 @@ export function FranchiseDialog({ franchise, children }: FranchiseDialogProps) {
         </DialogHeader>
         {!franchise && (
           <p className="text-muted-foreground text-sm">
-            Note: The franchise admin will need to confirm their email address after creation.
+            Note: The franchise admin will need to confirm their email address after creation. They will receive a
+            verification email.
           </p>
         )}
         <FranchiseForm franchise={franchise} onSuccess={() => setOpen(false)} />
