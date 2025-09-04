@@ -1,0 +1,51 @@
+{
+  "navigation": {
+    "dashboard": "Dashboard",
+    "services": "Services",
+    "bookings": "Bookings",
+    "staff": "Staff",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "notifications": "Notifications",
+    "profile": "Profile"
+  },
+  "auth": {
+    "login": "Login",
+    "loggingIn": "Logging in...",
+    "logout": "Logout",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "welcomeBack": "Hello again",
+    "loginToContinue": "Login to continue",
+    "loginDescription": "Welcome back. Enter your email and password, let's hope you remember them this time.",
+    "welcomeTo": "Welcome to",
+    "professionalCarCare": "Professional Car Care Management System",
+    "adminLogin": "Admin Login",
+    "franchiseLogin": "Franchise Login",
+    "newToPlatform": "New to our platform?",
+    "contactAdmin": "Contact your system administrator to get started with our car care management solution."
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "totalBookings": "Total Bookings",
+    "revenue": "Revenue",
+    "customers": "Customers",
+    "recentBookings": "Recent Bookings"
+  }
+}
