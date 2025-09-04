@@ -17,7 +17,7 @@ export function RecentReviews() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recent Reviews</CardTitle>
+        <CardTitle>{t("admin.reviews.title")}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {reviewsWithUsers.map((review) => (

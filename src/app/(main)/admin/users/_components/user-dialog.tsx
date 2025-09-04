@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
+
 import {
   Dialog,
   DialogContent,
@@ -20,6 +22,7 @@ interface UserDialogProps {
 }
 
 export function UserDialog({ user, children }: UserDialogProps) {
+  const t = useTranslations("admin.users");
   const [open, setOpen] = useState(false);
 
   return (
@@ -27,8 +30,8 @@ export function UserDialog({ user, children }: UserDialogProps) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit User</DialogTitle>
-          <DialogDescription>Update the details of the user.</DialogDescription>
+          <DialogTitle>{t("edit")}</DialogTitle>
+          <DialogDescription>{t("editDescription")}</DialogDescription>
         </DialogHeader>
         <UserForm user={user} onSuccess={() => setOpen(false)} />
       </DialogContent>

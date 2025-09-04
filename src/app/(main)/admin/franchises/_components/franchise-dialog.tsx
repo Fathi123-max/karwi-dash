@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { PlusCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +24,7 @@ interface FranchiseDialogProps {
 }
 
 export function FranchiseDialog({ franchise, children }: FranchiseDialogProps) {
+  const t = useTranslations("admin.franchises");
   const [open, setOpen] = useState(false);
 
   return (
@@ -30,17 +32,10 @@ export function FranchiseDialog({ franchise, children }: FranchiseDialogProps) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{franchise ? "Edit" : "Add"} Franchise</DialogTitle>
-          <DialogDescription>
-            {franchise ? "Update the details of the franchise." : "Add a new franchise to your system."}
-          </DialogDescription>
+          <DialogTitle>{franchise ? t("edit") : t("add")}</DialogTitle>
+          <DialogDescription>{franchise ? t("editDescription") : t("addDescription")}</DialogDescription>
         </DialogHeader>
-        {!franchise && (
-          <p className="text-muted-foreground text-sm">
-            Note: The franchise admin will need to confirm their email address after creation. They will receive a
-            verification email.
-          </p>
-        )}
+        {!franchise && <p className="text-muted-foreground text-sm">{t("note")}</p>}
         <FranchiseForm franchise={franchise} onSuccess={() => setOpen(false)} />
       </DialogContent>
     </Dialog>

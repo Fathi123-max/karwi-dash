@@ -1,6 +1,7 @@
 "use client";
 
 import { MoreHorizontal } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   AlertDialog,
@@ -32,6 +33,7 @@ interface UserActionsProps {
 }
 
 export function UserActions({ user }: UserActionsProps) {
+  const t = useTranslations("admin.users");
   const { deleteUser } = useUserStore();
 
   return (
@@ -44,27 +46,25 @@ export function UserActions({ user }: UserActionsProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => navigator.clipboard.writeText(user.id)}>Copy ID</DropdownMenuItem>
+          <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+          <DropdownMenuItem onClick={() => navigator.clipboard.writeText(user.id)}>{t("copyId")}</DropdownMenuItem>
           <DropdownMenuSeparator />
           <UserDialog user={user}>
-            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>Edit User</DropdownMenuItem>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>{t("edit")}</DropdownMenuItem>
           </UserDialog>
           <AlertDialogTrigger asChild>
-            <DropdownMenuItem className="text-red-600">Delete User</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-600">{t("delete")}</DropdownMenuItem>
           </AlertDialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the user and all their data.
-          </AlertDialogDescription>
+          <AlertDialogTitle>{t("deleteConfirm.title")}</AlertDialogTitle>
+          <AlertDialogDescription>{t("deleteConfirm.description")}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => deleteUser(user.id)}>Continue</AlertDialogAction>
+          <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
+          <AlertDialogAction onClick={() => deleteUser(user.id)}>{t("deleteConfirm.continue")}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

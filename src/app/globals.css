@@ -121,6 +121,38 @@ These serve as the fallback; there is no separate default.css file. */
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* RTL support */
+[dir="rtl"] {
+  /* Flip common layout properties for RTL */
+  .text-left {
+    text-align: right;
+  }
+  
+  .text-right {
+    text-align: left;
+  }
+  
+  .float-left {
+    float: right;
+  }
+  
+  .float-right {
+    float: left;
+  }
+  
+  .ml-0 {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  
+  .mr-0 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  /* Add more RTL-specific styles as needed */
+}
+
 @layer utilities {
   [data-theme-preset]:not([data-theme-preset="default"]) .shadow-2xs {
     box-shadow: var(--shadow-2xs);

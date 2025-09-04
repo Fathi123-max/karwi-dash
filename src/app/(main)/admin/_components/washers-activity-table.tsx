@@ -42,7 +42,7 @@ export function WashersActivityTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Washers Activity</CardTitle>
+        <CardTitle>{t("admin.washersActivity.title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <DataTable table={table} columns={columns} />

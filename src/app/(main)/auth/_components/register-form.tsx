@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -14,22 +15,23 @@ import { register } from "../_actions/register";
 
 const FormSchema = z
   .object({
-    email: z.string().email({ message: "Please enter a valid email address." }),
-    password: z.string().min(6, { message: "Password must be at least 6 characters." }),
-    confirmPassword: z.string().min(6, { message: "Confirm Password must be at least 6 characters." }),
-    role: z.enum(["admin", "franchise"], { required_error: "Please select a role." }),
+    email: z.string().email({ message: "auth.validEmail" }),
+    password: z.string().min(6, { message: "auth.passwordMinLength" }),
+    confirmPassword: z.string().min(6, { message: "auth.confirmPasswordMinLength" }),
+    role: z.enum(["admin", "franchise"], { required_error: "auth.selectRole" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match.",
+    message: "auth.passwordsDoNotMatch",
     path: ["confirmPassword"],
   });
 
 function SubmitButton() {
+  const t = useTranslations("auth");
   const { pending } = useFormStatus();
 
   return (
     <Button className="w-full" type="submit" disabled={pending}>
-      {pending ? "Registering..." : "Register"}
+      {pending ? t("registering") : t("register")}
     </Button>
   );
 }
@@ -39,6 +41,7 @@ const initialState = {
 };
 
 export function RegisterForm() {
+  const t = useTranslations("auth");
   const [state, formAction] = useFormState(register, initialState);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -58,9 +61,16 @@ export function RegisterForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email Address</FormLabel>
+              <FormLabel>{t("email")}</FormLabel>
               <FormControl>
-                <Input id="email" type="email" placeholder="you@example.com" autoComplete="email" {...field} />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder={t("emailPlaceholder")}
+                  autoComplete="email"
+                  {...field}
+                  className="text-left rtl:text-right"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -71,9 +81,16 @@ export function RegisterForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t("password")}</FormLabel>
               <FormControl>
-                <Input id="password" type="password" placeholder="••••••••" autoComplete="new-password" {...field} />
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder={t("passwordPlaceholder")}
+                  autoComplete="new-password"
+                  {...field}
+                  className="text-left rtl:text-right"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -84,14 +101,15 @@ export function RegisterForm() {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
+              <FormLabel>{t("confirmPassword")}</FormLabel>
               <FormControl>
                 <Input
                   id="confirmPassword"
                   type="password"
-                  placeholder="••••••••"
+                  placeholder={t("passwordPlaceholder")}
                   autoComplete="new-password"
                   {...field}
+                  className="text-left rtl:text-right"
                 />
               </FormControl>
               <FormMessage />
@@ -103,24 +121,24 @@ export function RegisterForm() {
           name="role"
           render={({ field }) => (
             <FormItem className="space-y-3">
-              <FormLabel>Select your role</FormLabel>
+              <FormLabel>{t("selectRole")}</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                   className="flex flex-col space-y-1"
                 >
-                  <FormItem className="flex items-center space-y-0 space-x-3">
+                  <FormItem className="flex items-center space-y-0 space-x-3 rtl:space-x-reverse">
                     <FormControl>
                       <RadioGroupItem value="admin" />
                     </FormControl>
-                    <FormLabel className="font-normal">Admin</FormLabel>
+                    <FormLabel className="font-normal">{t("admin")}</FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-y-0 space-x-3">
+                  <FormItem className="flex items-center space-y-0 space-x-3 rtl:space-x-reverse">
                     <FormControl>
                       <RadioGroupItem value="franchise" />
                     </FormControl>
-                    <FormLabel className="font-normal">Franchise Manager</FormLabel>
+                    <FormLabel className="font-normal">{t("franchiseManager")}</FormLabel>
                   </FormItem>
                 </RadioGroup>
               </FormControl>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { MoreHorizontal } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   AlertDialog,
@@ -31,14 +32,16 @@ import { Washer } from "./types";
 import { WasherDialog } from "./washer-dialog";
 
 export function WasherBadge({ washer }: { washer: Washer }) {
+  const t = useTranslations("admin.washers");
   return (
     <Badge variant={washer.status === "active" ? "default" : "destructive"}>
-      {washer.status === "active" ? "Active" : "Inactive"}
+      {washer.status === "active" ? t("active") : t("inactive")}
     </Badge>
   );
 }
 
 export function WasherActions({ washer }: { washer: Washer }) {
+  const t = useTranslations("admin.washers");
   const { deleteWasher } = useWasherStore();
 
   return (
@@ -51,30 +54,28 @@ export function WasherActions({ washer }: { washer: Washer }) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => navigator.clipboard.writeText(washer.id)}>Copy ID</DropdownMenuItem>
+          <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+          <DropdownMenuItem onClick={() => navigator.clipboard.writeText(washer.id)}>{t("copyId")}</DropdownMenuItem>
           <DropdownMenuSeparator />
           <WasherDialog washer={washer}>
-            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>Edit Washer</DropdownMenuItem>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>{t("edit")}</DropdownMenuItem>
           </WasherDialog>
           <Link href={`/admin/washers/${washer.id}/schedule`}>
-            <DropdownMenuItem>Manage Schedule</DropdownMenuItem>
+            <DropdownMenuItem>{t("manageSchedule")}</DropdownMenuItem>
           </Link>
           <AlertDialogTrigger asChild>
-            <DropdownMenuItem className="text-red-600">Delete Washer</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-600">{t("delete")}</DropdownMenuItem>
           </AlertDialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the washer and all their data.
-          </AlertDialogDescription>
+          <AlertDialogTitle>{t("deleteConfirm.title")}</AlertDialogTitle>
+          <AlertDialogDescription>{t("deleteConfirm.description")}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => deleteWasher(washer.id)}>Continue</AlertDialogAction>
+          <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
+          <AlertDialogAction onClick={() => deleteWasher(washer.id)}>{t("deleteConfirm.continue")}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

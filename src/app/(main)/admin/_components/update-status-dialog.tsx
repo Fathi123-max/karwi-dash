@@ -37,8 +37,10 @@ export function UpdateStatusDialog({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Update Booking Status</DialogTitle>
-          <DialogDescription>Update the status of booking {bookingId}</DialogDescription>
+          <DialogTitle>{t("admin.bookings.update.title")}</DialogTitle>
+          <DialogDescription>
+            {t("admin.bookings.update.title")} {bookingId}
+          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
@@ -61,9 +63,9 @@ export function UpdateStatusDialog({
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>
-            Cancel
+            {t("common.cancel")}
           </Button>
-          <Button onClick={handleUpdate}>Update Status</Button>
+          <Button onClick={handleUpdate}>{t("admin.bookings.update.button")}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

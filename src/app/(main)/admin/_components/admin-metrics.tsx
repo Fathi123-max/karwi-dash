@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { Building2, Users, UsersRound } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useBookingStore } from "@/stores/admin-dashboard/booking-store";
@@ -11,6 +12,7 @@ import { useUserStore } from "@/stores/admin-dashboard/user-store";
 import { useWasherStore } from "@/stores/admin-dashboard/washer-store";
 
 export function AdminMetrics() {
+  const t = useTranslations();
   const [metrics, setMetrics] = useState({
     totalRevenue: 0,
     totalBookings: 0,
@@ -70,7 +72,7 @@ export function AdminMetrics() {
     <>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+          <CardTitle className="text-sm font-medium">{t("admin.metrics.totalRevenue")}</CardTitle>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -91,7 +93,7 @@ export function AdminMetrics() {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Bookings</CardTitle>
+          <CardTitle className="text-sm font-medium">{t("admin.metrics.totalBookings")}</CardTitle>
           <Users className="text-muted-foreground h-4 w-4" />
         </CardHeader>
         <CardContent>
@@ -101,7 +103,7 @@ export function AdminMetrics() {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+          <CardTitle className="text-sm font-medium">{t("admin.metrics.totalUsers")}</CardTitle>
           <Building2 className="text-muted-foreground h-4 w-4" />
         </CardHeader>
         <CardContent>
@@ -111,7 +113,7 @@ export function AdminMetrics() {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Active Washers</CardTitle>
+          <CardTitle className="text-sm font-medium">{t("admin.metrics.activeWashers")}</CardTitle>
           <UsersRound className="text-muted-foreground h-4 w-4" />
         </CardHeader>
         <CardContent>

@@ -1,6 +1,7 @@
 "use client";
 
 import { MoreHorizontal } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   AlertDialog,
@@ -32,6 +33,7 @@ interface FranchiseActionsProps {
 }
 
 export function FranchiseActions({ franchise }: FranchiseActionsProps) {
+  const t = useTranslations("admin.franchises");
   const { deleteFranchise } = useFranchiseStore();
 
   return (
@@ -44,27 +46,27 @@ export function FranchiseActions({ franchise }: FranchiseActionsProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => navigator.clipboard.writeText(franchise.id)}>Copy ID</DropdownMenuItem>
+          <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+          <DropdownMenuItem onClick={() => navigator.clipboard.writeText(franchise.id)}>{t("copyId")}</DropdownMenuItem>
           <DropdownMenuSeparator />
           <FranchiseDialog franchise={franchise}>
-            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>Edit Franchise</DropdownMenuItem>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>{t("edit")}</DropdownMenuItem>
           </FranchiseDialog>
           <AlertDialogTrigger asChild>
-            <DropdownMenuItem className="text-red-600">Delete Franchise</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-600">{t("delete")}</DropdownMenuItem>
           </AlertDialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the franchise and all its data.
-          </AlertDialogDescription>
+          <AlertDialogTitle>{t("deleteConfirm.title")}</AlertDialogTitle>
+          <AlertDialogDescription>{t("deleteConfirm.description")}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => deleteFranchise(franchise.id)}>Continue</AlertDialogAction>
+          <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
+          <AlertDialogAction onClick={() => deleteFranchise(franchise.id)}>
+            {t("deleteConfirm.continue")}
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

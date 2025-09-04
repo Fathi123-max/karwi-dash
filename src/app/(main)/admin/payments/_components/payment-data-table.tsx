@@ -7,13 +7,14 @@ import { Payment } from "@/stores/admin-dashboard/payment-store";
 
 import { DataTableToolbar } from "../../_components/data-table-toolbar";
 
-import { columns } from "./columns";
+import { usePaymentColumns } from "./columns";
 
 interface PaymentDataTableProps {
   data: Payment[];
 }
 
 export function PaymentDataTable({ data }: PaymentDataTableProps) {
+  const columns = usePaymentColumns();
   const table = useDataTableInstance({
     data,
     columns,

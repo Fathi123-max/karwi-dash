@@ -2,12 +2,15 @@
 
 import { useEffect } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAdminProductOrderStore } from "@/stores/admin-dashboard/product-order-store";
 
 import { OrderList } from "./_components/order-list";
 
 export default function AdminProductOrdersPage() {
+  const t = useTranslations("admin.products.orders");
   const { fetchOrders, loading } = useAdminProductOrderStore();
 
   useEffect(() => {
@@ -18,15 +21,15 @@ export default function AdminProductOrdersPage() {
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Product Orders</h2>
-          <p className="text-muted-foreground">Manage franchise product orders</p>
+          <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+          <p className="text-muted-foreground">{t("description")}</p>
         </div>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle>Order Management</CardTitle>
-          <CardDescription>View and manage all franchise product orders</CardDescription>
+          <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <OrderList />

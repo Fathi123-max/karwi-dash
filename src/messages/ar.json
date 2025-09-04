@@ -29,6 +29,7 @@
     "emailPlaceholder": "you@example.com",
     "password": "كلمة المرور",
     "passwordPlaceholder": "••••••••",
+    "confirmPassword": "تأكيد كلمة المرور",
     "rememberMe": "تذكرني",
     "forgotPassword": "نسيت كلمة المرور؟",
     "welcomeBack": "مرحباً بك مرة أخرى",
@@ -38,8 +39,34 @@
     "professionalCarCare": "نظام إدارة رعاية السيارات الاحترافي",
     "adminLogin": "تسجيل دخول المشرف",
     "franchiseLogin": "تسجيل دخول الفرع",
+    "branchAdminLogin": "تسجيل دخول مشرف الفرع",
+    "branchAdminLoginDescription": "أدخل بيانات الاعتماد الخاصة بك للوصول إلى لوحة تحكم مشرف الفرع",
+    "franchiseLoginDescription": "أدخل بيانات الاعتماد الخاصة بك للوصول إلى لوحة تحكم الفرع",
     "newToPlatform": "هل أنت جديد على منصتنا؟",
-    "contactAdmin": "اتصل بمسؤول النظام للبدء في استخدام حل إدارة رعاية السيارات لدينا."
+    "contactAdmin": "اتصل بمسؤول النظام للبدء في استخدام حل إدارة رعاية السيارات لدينا.",
+    "validEmail": "الرجاء إدخال عنوان بريد إلكتروني صحيح.",
+    "passwordMinLength": "يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل.",
+    "confirmPasswordMinLength": "يجب أن يكون تأكيد كلمة المرور مكوناً من 6 أحرف على الأقل.",
+    "passwordsDoNotMatch": "كلمات المرور غير متطابقة.",
+    "selectRole": "اختر دورك",
+    "admin": "مشرف",
+    "franchiseManager": "مدير الفرع",
+    "register": "تسجيل",
+    "registering": "جاري التسجيل...",
+    "registerDescription": "املأ التفاصيل الخاصة بك أدناه. نعدك ألا نختبرك حول اسم حيوانك الأليف الأول (هذه المرة).",
+    "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+    "welcome": "مرحباً!",
+    "youAreInRightPlace": "أنت في المكان الصحيح.",
+    "createAccount": "إنشاء حساب",
+    "joinOurPlatform": "انضم إلى منصة رعاية السيارات الاحترافية لدينا",
+    "orContinueWith": "أو تابع باستخدام",
+    "premiumCarCareSolutions": "حلول رعاية السيارات المتميزة",
+    "professionalCarWashServices": "خدمات غسيل السيارات الاحترافية",
+    "ecoFriendlySolutions": "استمتع بأرقى خدمات رعاية السيارات مع حلول التنظيف الصديقة للبيئة.",
+    "supportTitle": "الدعم على مدار الساعة",
+    "supportDescription": "فريقنا مستعد دائماً لمساعدتك في أي احتياجات لرعاية السيارات.",
+    "lookingForFranchiseLogin": "هل تبحث عن تسجيل دخول الفرع؟",
+    "lookingForAdminLogin": "هل تبحث عن تسجيل دخول المشرف؟"
   },
   "dashboard": {
     "welcome": "مرحباً بك مرة أخرى",
@@ -47,5 +74,160 @@
     "revenue": "الإيرادات",
     "customers": "العملاء",
     "recentBookings": "الحجوزات الأخيرة"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "لوحة تحكم مسؤول كاروي",
+      "description": "إشراف على شبكة غسيل السيارات كاروي بأكملها"
+    },
+    "branches": {
+      "title": "الفروع",
+      "description": "إدارة جميع فروع كاروي وخدماتها",
+      "edit": "تعديل الفرع",
+      "add": "إضافة فرع جديد",
+      "editDescription": "تحديث تفاصيل الفرع.",
+      "addDescription": "إضافة فرع جديد إلى نظامك.",
+      "delete": "حذف الفرع",
+      "copyId": "نسخ المعرف",
+      "actions": "الإجراءات",
+      "deleteConfirm": {
+        "title": "هل أنت متأكد تماماً؟",
+        "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف الفرع وجميع بياناته نهائياً.",
+        "continue": "متابعة"
+      }
+    },
+    "franchises": {
+      "title": "الامتيازات",
+      "description": "إدارة جميع امتيازات كاروي وفروعها",
+      "edit": "تعديل الامتياز",
+      "add": "إضافة امتياز",
+      "editDescription": "تحديث تفاصيل الامتياز.",
+      "addDescription": "إضافة امتياز جديد إلى نظامك.",
+      "note": "ملاحظة: سيحتاج مسؤول الامتياز إلى تأكيد عنوان بريده الإلكتروني بعد الإنشاء. سيتلقون رسالة تحقق.",
+      "delete": "حذف الامتياز",
+      "copyId": "نسخ المعرف",
+      "actions": "الإجراءات",
+      "deleteConfirm": {
+        "title": "هل أنت متأكد تماماً؟",
+        "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف الامتياز وجميع بياناته نهائياً.",
+        "continue": "متابعة"
+      }
+    },
+    "payments": {
+      "title": "المدفوعات",
+      "description": "تتبع وإدارة جميع المدفوعات",
+      "copyId": "نسخ معرف الدفع",
+      "viewBooking": "عرض تفاصيل الحجز",
+      "viewPayment": "عرض تفاصيل الدفع",
+      "refund": "استرداد الدفع",
+      "bookingId": "معرف الحجز",
+      "amount": "المبلغ",
+      "status": "الحالة",
+      "provider": "المزود",
+      "transactionId": "معرف المعاملة",
+      "date": "التاريخ",
+      "actions": "الإجراءات"
+    },
+    "users": {
+      "title": "المستخدمون",
+      "description": "إدارة جميع مستخدمي كاروي وسجل حجزهم",
+      "edit": "تعديل المستخدم",
+      "editDescription": "تحديث تفاصيل المستخدم.",
+      "delete": "حذف المستخدم",
+      "copyId": "نسخ المعرف",
+      "actions": "الإجراءات",
+      "deleteConfirm": {
+        "title": "هل أنت متأكد تماماً؟",
+        "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف المستخدم وجميع بياناته نهائياً.",
+        "continue": "متابعة"
+      }
+    },
+    "washers": {
+      "title": "الغسالون",
+      "description": "إدارة جميع غسالات كاروي ومهماتهم",
+      "edit": "تعديل الغسال",
+      "add": "إضافة غسال",
+      "editDescription": "تحديث تفاصيل الغسال.",
+      "addDescription": "إضافة غسال جديد إلى نظامك.",
+      "manageSchedule": "إدارة الجدول",
+      "actions": "الإجراءات",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "deleteConfirm": {
+        "title": "هل أنت متأكد تماماً؟",
+        "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف الغسال وجميع بياناته نهائياً.",
+        "continue": "متابعة"
+      }
+    },
+    "schedule": {
+      "title": "جدول الغسال",
+      "description": "إدارة وعرض جداول الغسال في جميع الفروع"
+    },
+    "services": {
+      "title": "الخدمات"
+    },
+    "bannersOffers": {
+      "title": "البانرات والعروض",
+      "description": "إدارة البنرات والعروض الترويجية على مستوى الموقع",
+      "banners": {
+        "title": "البانرات",
+        "description": "إدارة البنرات المعروضة للمستخدمين على مستوى الموقع"
+      },
+      "offers": {
+        "title": "العروض",
+        "description": "إدارة العروض الترويجية للخدمات والمنتجات"
+      }
+    },
+    "products": {
+      "orders": {
+        "title": "طلبات المنتجات",
+        "description": "إدارة طلبات منتجات الفروع"
+      }
+    },
+    "metrics": {
+      "totalRevenue": "إجمالي الإيرادات",
+      "totalBookings": "إجمالي الحجزات",
+      "totalUsers": "إجمالي المستخدمين",
+      "activeWashers": "الغسالون النشطون"
+    },
+    "bookings": {
+      "title": "الحجوزات",
+      "recent": {
+        "title": "الحجوزات الأخيرة",
+        "description": "تتبع وإدارة أحدث الحجوزات"
+      },
+      "details": {
+        "title": "تفاصيل الحجز"
+      },
+      "cancel": {
+        "title": "إلغاء الحجز",
+        "confirm": "هل أنت متأكد من إلغاء الحجز {bookingId}؟ لا يمكن التراجع عن هذا الإجراء.",
+        "yes": "نعم، إلغاء الحجز",
+        "no": "لا، الاحتفاظ بالحجز"
+      },
+      "update": {
+        "title": "تحديث حالة الحجز",
+        "button": "تحديث الحالة"
+      }
+    },
+    "reports": {
+      "title": "التقارير",
+      "description": "عرض وتحميل التقارير المُولدة"
+    },
+    "activity": {
+      "title": "النشاط الأخير"
+    },
+    "reviews": {
+      "title": "آخر التقييمات"
+    },
+    "washersActivity": {
+      "title": "نشاط الغسالين"
+    },
+    "branchPerformance": {
+      "title": "أداء الفرع"
+    },
+    "paymentsOverview": {
+      "title": "نظرة عامة على المدفوعات"
+    }
   }
 }

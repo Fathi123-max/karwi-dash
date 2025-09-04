@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
+
 import {
   Dialog,
   DialogContent,
@@ -20,6 +22,7 @@ interface WasherDialogProps {
 }
 
 export function WasherDialog({ washer, children }: WasherDialogProps) {
+  const t = useTranslations("admin.washers");
   const [open, setOpen] = useState(false);
 
   return (
@@ -27,10 +30,8 @@ export function WasherDialog({ washer, children }: WasherDialogProps) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{washer ? "Edit" : "Add"} Washer</DialogTitle>
-          <DialogDescription>
-            {washer ? "Update the details of the washer." : "Add a new washer to your system."}
-          </DialogDescription>
+          <DialogTitle>{washer ? t("edit") : t("add")}</DialogTitle>
+          <DialogDescription>{washer ? t("editDescription") : t("addDescription")}</DialogDescription>
         </DialogHeader>
         <WasherForm washer={washer} onSuccess={() => setOpen(false)} />
       </DialogContent>

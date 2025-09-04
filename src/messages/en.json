@@ -29,6 +29,7 @@
     "emailPlaceholder": "you@example.com",
     "password": "Password",
     "passwordPlaceholder": "••••••••",
+    "confirmPassword": "Confirm Password",
     "rememberMe": "Remember me",
     "forgotPassword": "Forgot password?",
     "welcomeBack": "Hello again",
@@ -38,8 +39,34 @@
     "professionalCarCare": "Professional Car Care Management System",
     "adminLogin": "Admin Login",
     "franchiseLogin": "Franchise Login",
+    "branchAdminLogin": "Branch Admin Login",
+    "branchAdminLoginDescription": "Enter your credentials to access the branch admin dashboard",
+    "franchiseLoginDescription": "Enter your credentials to access your franchise dashboard",
     "newToPlatform": "New to our platform?",
-    "contactAdmin": "Contact your system administrator to get started with our car care management solution."
+    "contactAdmin": "Contact your system administrator to get started with our car care management solution.",
+    "validEmail": "Please enter a valid email address.",
+    "passwordMinLength": "Password must be at least 6 characters.",
+    "confirmPasswordMinLength": "Confirm Password must be at least 6 characters.",
+    "passwordsDoNotMatch": "Passwords do not match.",
+    "selectRole": "Select your role",
+    "admin": "Admin",
+    "franchiseManager": "Franchise Manager",
+    "register": "Register",
+    "registering": "Registering...",
+    "registerDescription": "Fill in your details below. We promise not to quiz you about your first pet's name (this time).",
+    "alreadyHaveAccount": "Already have an account?",
+    "welcome": "Welcome!",
+    "youAreInRightPlace": "You're in the right place.",
+    "createAccount": "Create Account",
+    "joinOurPlatform": "Join our professional car care platform",
+    "orContinueWith": "Or continue with",
+    "premiumCarCareSolutions": "Premium Car Care Solutions",
+    "professionalCarWashServices": "Professional Car Wash Services",
+    "ecoFriendlySolutions": "Experience the finest car care with our eco-friendly cleaning solutions.",
+    "supportTitle": "24/7 Support",
+    "supportDescription": "Our team is always ready to help you with any car care needs.",
+    "lookingForFranchiseLogin": "Looking for franchise login?",
+    "lookingForAdminLogin": "Looking for admin login?"
   },
   "dashboard": {
     "welcome": "Welcome back",
@@ -47,5 +74,301 @@
     "revenue": "Revenue",
     "customers": "Customers",
     "recentBookings": "Recent Bookings"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Karwi Admin Dashboard",
+      "description": "Oversee the entire Karwi car wash network"
+    },
+    "branches": {
+      "title": "Branches",
+      "description": "Manage all Karwi branches and their services",
+      "edit": "Edit Branch",
+      "add": "Add New Branch",
+      "editDescription": "Update the details of the branch.",
+      "addDescription": "Add a new branch to your system.",
+      "delete": "Delete Branch",
+      "copyId": "Copy ID",
+      "actions": "Actions",
+      "deleteConfirm": {
+        "title": "Are you absolutely sure?",
+        "description": "This action cannot be undone. This will permanently delete the branch and all its data.",
+        "continue": "Continue"
+      }
+    },
+    "franchises": {
+      "title": "Franchises",
+      "description": "Manage all Karwi franchises and their branches",
+      "edit": "Edit Franchise",
+      "add": "Add Franchise",
+      "editDescription": "Update the details of the franchise.",
+      "addDescription": "Add a new franchise to your system.",
+      "note": "Note: The franchise admin will need to confirm their email address after creation. They will receive a verification email.",
+      "delete": "Delete Franchise",
+      "copyId": "Copy ID",
+      "actions": "Actions",
+      "deleteConfirm": {
+        "title": "Are you absolutely sure?",
+        "description": "This action cannot be undone. This will permanently delete the franchise and all its data.",
+        "continue": "Continue"
+      }
+    },
+    "payments": {
+      "title": "Payments",
+      "description": "Track and manage all payments",
+      "copyId": "Copy Payment ID",
+      "viewBooking": "View Booking Details",
+      "viewPayment": "View Payment Details",
+      "refund": "Refund Payment",
+      "bookingId": "Booking ID",
+      "amount": "Amount",
+      "status": "Status",
+      "provider": "Provider",
+      "transactionId": "Transaction ID",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "users": {
+      "title": "Users",
+      "description": "Manage all Karwi users and their booking history",
+      "edit": "Edit User",
+      "editDescription": "Update the details of the user.",
+      "delete": "Delete User",
+      "copyId": "Copy ID",
+      "actions": "Actions",
+      "deleteConfirm": {
+        "title": "Are you absolutely sure?",
+        "description": "This action cannot be undone. This will permanently delete the user and all their data.",
+        "continue": "Continue"
+      }
+    },
+    "washers": {
+      "title": "Washers",
+      "description": "Manage all Karwi washers and their assignments",
+      "edit": "Edit Washer",
+      "add": "Add Washer",
+      "editDescription": "Update the details of the washer.",
+      "addDescription": "Add a new washer to your system.",
+      "manageSchedule": "Manage Schedule",
+      "actions": "Actions",
+      "active": "Active",
+      "inactive": "Inactive",
+      "deleteConfirm": {
+        "title": "Are you absolutely sure?",
+        "description": "This action cannot be undone. This will permanently delete the washer and all their data.",
+        "continue": "Continue"
+      }
+    },
+    "schedule": {
+      "title": "Washer Schedule",
+      "description": "Manage and view washer schedules across all branches"
+    },
+    "services": {
+      "title": "Services"
+    },
+    "bannersOffers": {
+      "title": "Banners & Offers",
+      "description": "Manage site-wide banners and promotional offers",
+      "banners": {
+        "title": "Banners",
+        "description": "Manage site-wide banners displayed to users"
+      },
+      "offers": {
+        "title": "Offers",
+        "description": "Manage promotional offers for services and products"
+      }
+    },
+    "products": {
+      "orders": {
+        "title": "Product Orders",
+        "description": "Manage franchise product orders"
+      }
+    },
+    "metrics": {
+      "totalRevenue": "Total Revenue",
+      "totalBookings": "Total Bookings",
+      "totalUsers": "Total Users",
+      "activeWashers": "Active Washers"
+    },
+    "bookings": {
+      "title": "Bookings",
+      "recent": {
+        "title": "Recent Bookings",
+        "description": "Track and manage your latest bookings"
+      },
+      "details": {
+        "title": "Booking Details"
+      },
+      "cancel": {
+        "title": "Cancel Booking",
+        "confirm": "Are you sure you want to cancel booking {bookingId}? This action cannot be undone.",
+        "yes": "Yes, Cancel Booking",
+        "no": "No, Keep Booking"
+      },
+      "update": {
+        "title": "Update Booking Status",
+        "button": "Update Status"
+      }
+    },
+    "reports": {
+      "title": "Reports",
+      "description": "View and download generated reports"
+    },
+    "activity": {
+      "title": "Recent Activity"
+    },
+    "reviews": {
+      "title": "Recent Reviews"
+    },
+    "washersActivity": {
+      "title": "Washers Activity"
+    },
+    "branchPerformance": {
+      "title": "Branch Performance"
+    },
+    "paymentsOverview": {
+      "title": "Payments Overview"
+    }
+  },
+  "franchise": {
+    "dashboard": {
+      "title": "Karwi Franchise Dashboard",
+      "description": "Manage your Karwi franchise operations"
+    },
+    "analytics": {
+      "title": "Analytics Dashboard",
+      "description": "View insights and performance metrics for your franchise",
+      "branchAnalytics": {
+        "title": "Branch Analytics",
+        "description": "View performance metrics for specific branches"
+      },
+      "metrics": {
+        "totalBranches": "Total Branches",
+        "totalServices": "Total Services",
+        "activeWashers": "Active Washers",
+        "totalBookings": "Total Bookings"
+      }
+    },
+    "branches": {
+      "title": "Branch Management",
+      "description": "Manage your Karwi branches",
+      "viewAnalytics": "View Analytics",
+      "location": "Location",
+      "viewOnMap": "View on Map",
+      "noServices": "No services",
+      "copyId": "Copy ID",
+      "editBranch": "Edit Branch",
+      "noLocation": "Not set"
+    },
+    "services": {
+      "title": "Service Management",
+      "description": "Manage services across all branches in your franchise",
+      "manage": "Manage",
+      "global": "Global",
+      "availableAllBranches": "Available at all branches",
+      "branchSpecific": "Branch-specific",
+      "noDescription": "No description provided",
+      "duration": "Duration",
+      "mins": "mins",
+      "price": "Price",
+      "todos": "To-Dos",
+      "includes": "Includes",
+      "manageAvailability": "Manage Availability",
+      "managePromotions": "Manage Promotions",
+      "noServicesFound": "No services found",
+      "noServicesBranch": "No services available for the selected branch"
+    },
+    "bookings": {
+      "title": "Booking History",
+      "description": "View and manage booking history for your franchise",
+      "bookingId": "Booking ID",
+      "user": "User",
+      "branch": "Branch",
+      "service": "Service",
+      "date": "Date",
+      "status": {
+        "pending": "Pending",
+        "inProgress": "In Progress",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "updateStatus": "Update Status",
+      "viewDetails": "View Details",
+      "copyId": "Copy ID",
+      "pendingBookings": "Pending Bookings",
+      "noPendingBookings": "No pending bookings"
+    },
+    "products": {
+      "title": "Product Store",
+      "description": "Browse and order products for your franchise",
+      "catalog": {
+        "title": "Available Products",
+        "description": "Browse our catalog of products for your franchise",
+        "orderProduct": "Order Product",
+        "noImage": "No image",
+        "inStock": "In stock",
+        "allCategories": "All Categories",
+        "noProducts": "No products found",
+        "noProductsCategory": "No products available in the selected category"
+      },
+      "orders": {
+        "title": "Order History",
+        "description": "View your previous product orders",
+        "order": "Order",
+        "export": "Export",
+        "total": "Total",
+        "orderItems": "Order Items",
+        "quantity": "Quantity",
+        "each": "each",
+        "currentStock": "Current stock",
+        "noOrders": "No orders found"
+      },
+      "orderForm": {
+        "title": "Order Product",
+        "perUnit": "per unit",
+        "placeOrder": "Place Order",
+        "insufficientStock": "Insufficient stock for this product"
+      }
+    },
+    "promotions": {
+      "title": "Promotion Management",
+      "description": "Create and manage promotions that can be applied to services",
+      "addPromotion": "Add Promotion",
+      "code": "Code",
+      "discount": "Discount",
+      "validityPeriod": "Validity Period",
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "noPromotions": "No promotions found",
+      "createFirstPromotion": "Create your first promotion to offer discounts on services",
+      "editPromotion": "Edit Promotion",
+      "createPromotion": "Create Promotion",
+      "updateDetails": "Update the details of this promotion",
+      "createNewPromotion": "Create a new promotion that can be applied to services"
+    },
+    "reports": {
+      "title": "Reports",
+      "description": "View and download reports for your Karwi franchise",
+      "monthlyBookings": "Monthly Bookings Report",
+      "washerPerformance": "Washer Performance Report",
+      "servicePopularity": "Service Popularity Report",
+      "branchRevenue": "Branch Revenue Report",
+      "dateRange": "Date Range",
+      "generatedOn": "Generated On",
+      "type": "Type",
+      "download": "Download"
+    },
+    "washers": {
+      "title": "Washer Management",
+      "description": "Manage washers across all branches in your franchise",
+      "name": "Name",
+      "branch": "Branch",
+      "status": "Status",
+      "rating": "Rating",
+      "unassigned": "Unassigned",
+      "copyId": "Copy ID"
+    }
   }
 }

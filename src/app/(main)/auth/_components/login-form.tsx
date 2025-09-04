@@ -32,11 +32,25 @@ export function LoginForm() {
     <form action={formAction} className="space-y-4">
       <div className="space-y-2">
         <Label htmlFor="email">{t("email")}</Label>
-        <Input id="email" name="email" type="email" placeholder={t("emailPlaceholder")} required />
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          placeholder={t("emailPlaceholder")}
+          required
+          className="text-left rtl:text-right"
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">{t("password")}</Label>
-        <Input id="password" name="password" type="password" placeholder={t("passwordPlaceholder")} required />
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          placeholder={t("passwordPlaceholder")}
+          required
+          className="text-left rtl:text-right"
+        />
       </div>
 
       {state?.message && <p className="text-sm text-red-500">{state.message}</p>}

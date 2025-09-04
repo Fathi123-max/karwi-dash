@@ -91,7 +91,7 @@ export function RecentActivity() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recent Activity</CardTitle>
+        <CardTitle>{t("admin.activity.title")}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-8">
         {combinedActivity.slice(0, 5).map((activity, index) => (

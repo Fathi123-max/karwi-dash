@@ -22,7 +22,7 @@ export function BookingDetailsDialog({ booking, isOpen, onClose }: BookingDetail
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Booking Details</DialogTitle>
+          <DialogTitle>{t("admin.bookings.details.title")}</DialogTitle>
           <DialogDescription>Details for booking ID: {booking.id}</DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">

@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { useRouter } from "next/navigation";
 
 export function useLocale() {
@@ -20,7 +22,24 @@ export function useChangeLocale() {
     expires.setFullYear(expires.getFullYear() + 1);
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`;
 
+    // Update the document direction
+    if (typeof document !== "undefined") {
+      document.documentElement.dir = newLocale === "ar" ? "rtl" : "ltr";
+      document.documentElement.lang = newLocale;
+    }
+
     // Refresh the page to apply the new locale
     router.refresh();
   };
+}
+
+export function useRtl() {
+  const locale = useLocale();
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
+      document.documentElement.lang = locale;
+    }
+  }, [locale]);
 }

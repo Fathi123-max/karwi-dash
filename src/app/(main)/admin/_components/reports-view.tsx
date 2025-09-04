@@ -96,7 +96,7 @@ export function ReportsView() {
     <Card>
       <CardHeader>
         <CardTitle>Reports</CardTitle>
-        <CardDescription>View and download generated reports.</CardDescription>
+        <CardDescription>{t("admin.reports.description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <DataTable table={table} columns={columns} />

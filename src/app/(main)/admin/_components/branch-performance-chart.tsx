@@ -47,7 +47,7 @@ export function BranchPerformanceChart() {
     <Card>
       <CardHeader>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <CardTitle>Branch Performance</CardTitle>
+          <CardTitle>{t("admin.branchPerformance.title")}</CardTitle>
           <Select value={selectedFranchise} onValueChange={setSelectedFranchise}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Filter by franchise" />

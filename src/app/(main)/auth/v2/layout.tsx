@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 
 import { Command } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Separator } from "@/components/ui/separator";
 import { APP_CONFIG } from "@/config/app-config";
@@ -14,6 +15,7 @@ const videos = [
 ];
 
 export default function Layout({ children }: Readonly<{ children: ReactNode }>) {
+  const t = useTranslations("auth");
   const videoRef = useRef<HTMLVideoElement>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
@@ -55,18 +57,18 @@ export default function Layout({ children }: Readonly<{ children: ReactNode }>) 
             <div className="absolute top-10 space-y-1 px-10">
               <Command className="size-10" />
               <h1 className="text-2xl font-medium">{APP_CONFIG.name}</h1>
-              <p className="text-sm">Premium Car Care Solutions</p>
+              <p className="text-sm">{t("premiumCarCareSolutions")}</p>
             </div>
 
             <div className="absolute bottom-10 flex w-full justify-between px-10">
               <div className="text-primary-foreground flex-1 space-y-1">
-                <h2 className="font-medium">Professional Car Wash Services</h2>
-                <p className="text-sm">Experience the finest car care with our eco-friendly cleaning solutions.</p>
+                <h2 className="font-medium">{t("professionalCarWashServices")}</h2>
+                <p className="text-sm">{t("ecoFriendlySolutions")}</p>
               </div>
               <Separator orientation="vertical" className="mx-3 !h-auto" />
               <div className="text-primary-foreground flex-1 space-y-1">
-                <h2 className="font-medium">24/7 Support</h2>
-                <p className="text-sm">Our team is always ready to help you with any car care needs.</p>
+                <h2 className="font-medium">{t("supportTitle")}</h2>
+                <p className="text-sm">{t("supportDescription")}</p>
               </div>
             </div>
           </div>

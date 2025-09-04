@@ -179,7 +179,7 @@ export function RecentBookingsTable() {
     <Card>
       <CardHeader>
         <CardTitle>Recent Bookings</CardTitle>
-        <CardDescription>Track and manage your latest bookings.</CardDescription>
+        <CardDescription>{t("admin.bookings.recent.description")}</CardDescription>
       </CardHeader>
       <CardContent className="flex size-full flex-col gap-4">
         <DataTableToolbar

@@ -30,7 +30,7 @@ export function PaymentsChart() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Payments Overview</CardTitle>
+        <CardTitle>{t("admin.paymentsOverview.title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={350}>

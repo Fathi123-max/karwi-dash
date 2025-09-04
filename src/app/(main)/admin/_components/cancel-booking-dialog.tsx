@@ -25,17 +25,15 @@ export function CancelBookingDialog({ bookingId, isOpen, onClose, onConfirm }: C
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Cancel Booking</DialogTitle>
-          <DialogDescription>
-            Are you sure you want to cancel booking {bookingId}? This action cannot be undone.
-          </DialogDescription>
+          <DialogTitle>{t("admin.bookings.cancel.title")}</DialogTitle>
+          <DialogDescription>{t("admin.bookings.cancel.confirm", { bookingId })}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>
-            No, Keep Booking
+            {t("admin.bookings.cancel.no")}
           </Button>
           <Button variant="destructive" onClick={handleCancel}>
-            Yes, Cancel Booking
+            {t("admin.bookings.cancel.yes")}
           </Button>
         </DialogFooter>
       </DialogContent>

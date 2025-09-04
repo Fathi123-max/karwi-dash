@@ -1,11 +1,14 @@
 import Link from "next/link";
 
 import { Globe, Store } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { UnifiedLoginForm } from "@/app/(main)/auth/_components/unified-login-form";
 import { APP_CONFIG } from "@/config/app-config";
 
 export default function FranchiseLogin() {
+  const t = useTranslations("auth");
+
   return (
     <>
       <div className="mx-auto flex w-full flex-col justify-center space-y-8 sm:w-[350px]">
@@ -14,8 +17,8 @@ export default function FranchiseLogin() {
             <Store className="text-primary size-8" />
           </div>
           <div className="space-y-2">
-            <h1 className="text-3xl font-bold">Franchise Login</h1>
-            <p className="text-muted-foreground text-sm">Enter your credentials to access your franchise dashboard.</p>
+            <h1 className="text-3xl font-bold">{t("franchiseLogin")}</h1>
+            <p className="text-muted-foreground text-sm">{t("franchiseLoginDescription")}</p>
           </div>
         </div>
         <div className="space-y-4">
@@ -23,7 +26,7 @@ export default function FranchiseLogin() {
         </div>
         <div className="text-muted-foreground text-center text-sm">
           <Link href="/auth/v2/login" className="text-primary hover:underline">
-            Looking for admin login?
+            {t("lookingForAdminLogin")}
           </Link>
         </div>
       </div>

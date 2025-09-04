@@ -1,19 +1,22 @@
 "use client";
 
 import { useState } from "react";
+
 import { PlusCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useBannersOffersStore } from "@/stores/admin-dashboard/banners-offers-store";
 
 import { BannerForm } from "./_components/banner-form";
 import { BannerList } from "./_components/banner-list";
 import { OfferForm } from "./_components/offer-form";
 import { OfferList } from "./_components/offer-list";
-import { useBannersOffersStore } from "@/stores/admin-dashboard/banners-offers-store";
 
 export default function BannersOffersPage() {
+  const t = useTranslations("admin.bannersOffers");
   const { fetchBanners, fetchOffers } = useBannersOffersStore();
   const [activeTab, setActiveTab] = useState("banners");
   const [isBannerFormOpen, setIsBannerFormOpen] = useState(false);
@@ -48,16 +51,14 @@ export default function BannersOffersPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Banners & Offers</h1>
-        <p className="text-muted-foreground">
-          Manage site-wide banners and promotional offers
-        </p>
+        <h1 className="text-3xl font-bold">{t("title")}</h1>
+        <p className="text-muted-foreground">{t("description")}</p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
-          <TabsTrigger value="banners">Banners</TabsTrigger>
-          <TabsTrigger value="offers">Offers</TabsTrigger>
+          <TabsTrigger value="banners">{t("banners.title")}</TabsTrigger>
+          <TabsTrigger value="offers">{t("offers.title")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="banners" className="space-y-4">
@@ -65,10 +66,8 @@ export default function BannersOffersPage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle>Banners</CardTitle>
-                  <CardDescription>
-                    Manage site-wide banners displayed to users
-                  </CardDescription>
+                  <CardTitle>{t("banners.title")}</CardTitle>
+                  <CardDescription>{t("banners.description")}</CardDescription>
                 </div>
                 <Button onClick={() => setIsBannerFormOpen(true)}>
                   <PlusCircle className="mr-2 h-4 w-4" />
@@ -87,10 +86,8 @@ export default function BannersOffersPage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle>Offers</CardTitle>
-                  <CardDescription>
-                    Manage promotional offers for services and products
-                  </CardDescription>
+                  <CardTitle>{t("offers.title")}</CardTitle>
+                  <CardDescription>{t("offers.description")}</CardDescription>
                 </div>
                 <Button onClick={() => setIsOfferFormOpen(true)}>
                   <PlusCircle className="mr-2 h-4 w-4" />
@@ -105,19 +102,9 @@ export default function BannersOffersPage() {
         </TabsContent>
       </Tabs>
 
-      {isBannerFormOpen && (
-        <BannerForm
-          banner={selectedBanner}
-          onClose={handleCloseBannerForm}
-        />
-      )}
+      {isBannerFormOpen && <BannerForm banner={selectedBanner} onClose={handleCloseBannerForm} />}
 
-      {isOfferFormOpen && (
-        <OfferForm
-          offer={selectedOffer}
-          onClose={handleCloseOfferForm}
-        />
-      )}
+      {isOfferFormOpen && <OfferForm offer={selectedOffer} onClose={handleCloseOfferForm} />}
     </div>
   );
 }

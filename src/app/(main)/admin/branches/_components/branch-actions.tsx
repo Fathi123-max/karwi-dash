@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { MoreHorizontal } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   AlertDialog,
@@ -34,6 +35,7 @@ interface BranchActionsProps {
 }
 
 export function BranchActions({ branch }: BranchActionsProps) {
+  const t = useTranslations("admin.branches");
   const { deleteBranch } = useBranchStore();
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -47,27 +49,25 @@ export function BranchActions({ branch }: BranchActionsProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => navigator.clipboard.writeText(branch.id)}>Copy ID</DropdownMenuItem>
+          <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+          <DropdownMenuItem onClick={() => navigator.clipboard.writeText(branch.id)}>{t("copyId")}</DropdownMenuItem>
           <DropdownMenuSeparator />
           <BranchDialog branch={branch} onDialogClose={() => setMenuOpen(false)}>
-            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>Edit Branch</DropdownMenuItem>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>{t("edit")}</DropdownMenuItem>
           </BranchDialog>
           <AlertDialogTrigger asChild>
-            <DropdownMenuItem className="text-red-600">Delete Branch</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-600">{t("delete")}</DropdownMenuItem>
           </AlertDialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the branch and all its data.
-          </AlertDialogDescription>
+          <AlertDialogTitle>{t("deleteConfirm.title")}</AlertDialogTitle>
+          <AlertDialogDescription>{t("deleteConfirm.description")}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => deleteBranch(branch.id)}>Continue</AlertDialogAction>
+          <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
+          <AlertDialogAction onClick={() => deleteBranch(branch.id)}>{t("deleteConfirm.continue")}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
