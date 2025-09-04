@@ -37,14 +37,12 @@ const adminNavItems = [
   { href: "/admin/payments", label: "Payments", icon: FileText },
   { href: "/admin/schedule", label: "Schedule", icon: Calendar },
   { href: "/admin/reviews", label: "Reviews", icon: FileText },
-  { href: "/admin/promotions", label: "Promotions", icon: FileText },
+  // { href: "/admin/promotions", label: "Promotions", icon: FileText }, // Hidden as per requirement
   {
     href: "/admin/banners-offers",
     label: "Banners & Offers",
     icon: Image,
-    subItems: [
-      { href: "/admin/banners-offers", label: "Manage All" },
-    ],
+    subItems: [{ href: "/admin/banners-offers", label: "Manage All" }],
   },
 ];
 
