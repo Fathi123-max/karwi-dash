@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -92,9 +93,16 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
           name: data.name,
           status: data.status,
         });
+        toast.success("Franchise updated successfully");
       } else {
         // For new franchises, we need to create an admin user first
-        // This is a simplified approach - in a real app, you'd want to handle this more securely
+        // This process creates:
+        // 1. An auth user via Supabase Auth (with email verification)
+        // 2. An admin record in the admins table
+        // 3. A franchise record in the franchises table
+        // If any step fails, the entire process is cancelled
+        // Note: Supabase has rate limits for security. If you see a rate limit error,
+        // please wait for the specified time before trying again.
         await addFranchise({
           name: data.name,
           status: data.status,
@@ -103,11 +111,22 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
           adminEmail: data.adminEmail!,
           adminPassword: data.adminPassword!,
         });
+        toast.success(
+          "Franchise created successfully! The franchise admin will receive an email to confirm their account.",
+        );
       }
       onSuccess();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting form:", error);
-      // Handle error (e.g., show notification)
+      // Handle rate limiting error specifically
+      if (error.message && error.message.includes("For security purposes, you can only request this after")) {
+        toast.error("Rate limit exceeded. Please wait before creating another franchise.", {
+          duration: 5000,
+          description: "This is a security measure to prevent abuse. Please try again in a few seconds.",
+        });
+      } else {
+        toast.error(`Error: ${error.message || "Failed to submit form"}`);
+      }
     } finally {
       setIsLoading(false);
     }
