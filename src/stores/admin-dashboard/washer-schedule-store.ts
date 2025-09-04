@@ -16,8 +16,8 @@ type ScheduleState = {
   schedules: WasherSchedule[];
   fetchSchedulesForWasher: (washerId: string) => Promise<void>;
   getSchedulesForWasher: (washerId: string) => WasherSchedule[];
-  addSchedule: (schedule: Omit<WasherSchedule, "id">) => void;
-  deleteSchedule: (scheduleId: string) => void;
+  addSchedule: (schedule: Omit<WasherSchedule, "id">) => Promise<void>;
+  deleteSchedule: (scheduleId: string) => Promise<void>;
 };
 
 export const useWasherScheduleStore = create<ScheduleState>((set, get) => ({
@@ -34,14 +34,35 @@ export const useWasherScheduleStore = create<ScheduleState>((set, get) => ({
   getSchedulesForWasher: (washerId: string) => {
     return get().schedules.filter((schedule) => schedule.washer_id === washerId);
   },
-  // TODO: implement supabase mutation
-  addSchedule: (schedule) =>
+  addSchedule: async (schedule) => {
+    const { data, error } = await supabase
+      .from("washer_schedules")
+      .insert([schedule])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Error adding washer schedule:", error);
+      throw error;
+    }
+
     set((state) => ({
-      schedules: [...state.schedules, { ...schedule, id: `${state.schedules.length + 1}` }],
-    })),
-  // TODO: implement supabase mutation
-  deleteSchedule: (scheduleId) =>
+      schedules: [...state.schedules, data as WasherSchedule],
+    }));
+  },
+  deleteSchedule: async (scheduleId) => {
+    const { error } = await supabase
+      .from("washer_schedules")
+      .delete()
+      .eq("id", scheduleId);
+
+    if (error) {
+      console.error("Error deleting washer schedule:", error);
+      throw error;
+    }
+
     set((state) => ({
       schedules: state.schedules.filter((s) => s.id !== scheduleId),
-    })),
+    }));
+  },
 }));
