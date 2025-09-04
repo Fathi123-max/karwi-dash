@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { format, addDays, startOfWeek, isSameDay, isSameMonth, isToday } from "date-fns";
+import { useState } from "react";
+
+import { format, addDays, startOfWeek, isSameDay, isToday } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useWasherScheduleStore } from "@/stores/admin-dashboard/washer-schedule-store";
 import { useWasherStore } from "@/stores/admin-dashboard/washer-store";
@@ -33,7 +34,7 @@ export function ScheduleCalendar() {
       .map((schedule) => {
         const washer = washers.find((w) => w.id === schedule.washer_id);
         if (!washer) return null;
-        
+
         return {
           id: schedule.id,
           washer,
@@ -70,7 +71,7 @@ export function ScheduleCalendar() {
   return (
     <div className="space-y-6">
       {/* Calendar Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center space-x-2">
           <Button variant="outline" size="icon" onClick={goToPreviousWeek}>
             <ChevronLeft className="h-4 w-4" />
@@ -82,39 +83,33 @@ export function ScheduleCalendar() {
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
-        <h2 className="text-xl font-semibold">
-          {format(currentDate, "MMMM yyyy")}
-        </h2>
+        <h2 className="text-xl font-semibold">{format(currentDate, "MMMM yyyy")}</h2>
       </div>
 
       {/* Week View */}
       <Card>
         <CardHeader>
           <CardTitle>Weekly Overview</CardTitle>
-          <CardDescription>
-            Select a day to view washer schedules
-          </CardDescription>
+          <CardDescription>Select a day to view washer schedules</CardDescription>
         </CardHeader>
         <CardContent className="p-0">
           <div className="grid grid-cols-8 border-b">
-            <div className="p-2 border-r">
-              <div className="text-sm font-medium text-muted-foreground">Time</div>
+            <div className="border-r p-2">
+              <div className="text-muted-foreground text-sm font-medium">Time</div>
             </div>
             {weekDays.map((day) => (
               <div
                 key={day.toString()}
-                className={`p-2 text-center cursor-pointer border-l ${
+                className={`cursor-pointer border-l p-2 text-center ${
                   isSameDay(day, selectedDate)
                     ? "bg-primary text-primary-foreground"
                     : isToday(day)
-                    ? "bg-secondary"
-                    : ""
+                      ? "bg-secondary"
+                      : ""
                 }`}
                 onClick={() => selectDate(day)}
               >
-                <div className="text-sm font-medium">
-                  {format(day, "EEE")}
-                </div>
+                <div className="text-sm font-medium">{format(day, "EEE")}</div>
                 <div className="text-lg">{format(day, "d")}</div>
               </div>
             ))}
@@ -125,11 +120,9 @@ export function ScheduleCalendar() {
       {/* Schedule Details */}
       <Card>
         <CardHeader>
-          <CardTitle>
-            Schedule for {format(selectedDate, "EEEE, MMMM d, yyyy")}
-          </CardTitle>
+          <CardTitle>Schedule for {format(selectedDate, "EEEE, MMMM d, yyyy")}</CardTitle>
           <CardDescription>
-            {selectedDaySchedules.length} {selectedDaySchedules.length === 1 ? 'washer' : 'washers'} scheduled
+            {selectedDaySchedules.length} {selectedDaySchedules.length === 1 ? "washer" : "washers"} scheduled
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -137,30 +130,24 @@ export function ScheduleCalendar() {
             {selectedDaySchedules.length > 0 ? (
               <div className="space-y-4">
                 {selectedDaySchedules.map((detail) => (
-                  <div 
-                    key={detail.id} 
-                    className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted transition-colors"
+                  <div
+                    key={detail.id}
+                    className="hover:bg-muted flex items-center justify-between rounded-lg border p-4 transition-colors"
                   >
                     <div className="flex items-center space-x-4">
-                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                        <span className="font-semibold text-primary">
-                          {detail.washer.name.charAt(0)}
-                        </span>
+                      <div className="bg-primary/10 flex h-10 w-10 items-center justify-center rounded-full">
+                        <span className="text-primary font-semibold">{detail.washer.name.charAt(0)}</span>
                       </div>
                       <div>
                         <p className="font-semibold">{detail.washer.name}</p>
-                        <p className="text-muted-foreground text-sm">
-                          {detail.washer.branch}
-                        </p>
+                        <p className="text-muted-foreground text-sm">{detail.washer.branch}</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Badge variant="secondary">
                         {detail.startTime} - {detail.endTime}
                       </Badge>
-                      <Badge 
-                        variant={detail.washer.status === "active" ? "default" : "destructive"}
-                      >
+                      <Badge variant={detail.washer.status === "active" ? "default" : "destructive"}>
                         {detail.washer.status}
                       </Badge>
                     </div>
@@ -169,9 +156,7 @@ export function ScheduleCalendar() {
               </div>
             ) : (
               <div className="flex h-full items-center justify-center">
-                <p className="text-muted-foreground">
-                  No washers scheduled for this day.
-                </p>
+                <p className="text-muted-foreground">No washers scheduled for this day.</p>
               </div>
             )}
           </ScrollArea>

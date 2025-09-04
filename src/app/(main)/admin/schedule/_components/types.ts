@@ -1,4 +1,4 @@
-import { Washer } from "@/app/(main)/admin/washers/_components/types";
+import { Washer } from "../../washers/_components/types";
 
 export type ScheduleDetail = {
   id: string;
