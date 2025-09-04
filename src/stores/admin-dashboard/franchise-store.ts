@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { create } from "zustand";
 
 import { Franchise } from "@/app/(main)/admin/franchises/_components/types";
@@ -52,7 +53,9 @@ export const useFranchiseStore = create<FranchiseState>((set, get) => ({
   },
   addFranchise: async (franchise) => {
     try {
-      // First, create the admin user
+      let userId: string | null = null;
+
+      // First, try to create the admin user
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: franchise.adminEmail,
         password: franchise.adminPassword,
@@ -65,28 +68,67 @@ export const useFranchiseStore = create<FranchiseState>((set, get) => ({
 
       if (authError) {
         console.error("Error creating admin user:", authError);
-        throw authError;
-      }
+        // Handle rate limiting error specifically
+        if (authError.message.includes("For security purposes, you can only request this after")) {
+          toast.warning("Rate limit exceeded for auth user creation", {
+            duration: 5000,
+            description: "Using existing auth user if available",
+          });
+          // In this case, we assume the auth user was already created successfully
+          // and we try to proceed with the rest of the process
+          // We'll need to find the user ID from the admins table
+          const { data: adminData, error: adminError } = await supabase
+            .from("admins")
+            .select("id")
+            .eq("email", franchise.adminEmail)
+            .single();
 
-      if (!authData.user) {
-        throw new Error("Failed to create admin user");
+          if (adminError || !adminData) {
+            toast.error("Could not find existing admin record");
+            throw authError;
+          }
+
+          userId = adminData.id;
+        } else {
+          toast.error(`Error creating admin user: ${authError.message}`);
+          throw authError;
+        }
+      } else if (authData.user) {
+        // Successfully created auth user
+        userId = authData.user.id;
+        toast.success("Admin user created successfully");
       }
 
       // Then, create the admin record in the admins table
-      const { data: adminData, error: adminError } = await supabase
+      // First check if admin record already exists to avoid duplicates
+      const { data: existingAdmin, error: adminCheckError } = await supabase
         .from("admins")
-        .insert([
-          {
-            id: authData.user.id,
-            name: franchise.name,
-            email: franchise.adminEmail,
-          },
-        ])
-        .select();
+        .select("id")
+        .eq("email", franchise.adminEmail)
+        .single();
 
-      if (adminError) {
-        console.error("Error creating admin record:", adminError);
-        throw adminError;
+      if (adminCheckError || !existingAdmin) {
+        // Admin record doesn't exist, create it
+        const { data: adminData, error: adminError } = await supabase
+          .from("admins")
+          .insert([
+            {
+              id: userId,
+              name: franchise.name,
+              email: franchise.adminEmail,
+            },
+          ])
+          .select();
+
+        if (adminError) {
+          console.error("Error creating admin record:", adminError);
+          toast.error(`Error creating admin record: ${adminError.message}`);
+          throw adminError;
+        }
+      } else {
+        // Admin record already exists, use existing ID
+        userId = existingAdmin.id;
+        console.log("Admin record already exists, using existing ID");
       }
 
       // Finally, create the franchise record
@@ -98,16 +140,18 @@ export const useFranchiseStore = create<FranchiseState>((set, get) => ({
             status: franchise.status,
             branches: franchise.branches,
             washers: franchise.washers,
-            admin_id: authData.user.id,
+            admin_id: userId,
           },
         ])
         .select();
 
       if (franchiseError) {
         console.error("Error adding franchise:", franchiseError);
+        toast.error(`Error adding franchise: ${franchiseError.message}`);
         throw franchiseError;
       }
 
+      toast.success("Franchise created successfully");
       await get().fetchFranchises(); // Refetch to get the transformed data
     } catch (error) {
       console.error("Error in addFranchise:", error);
@@ -128,16 +172,20 @@ export const useFranchiseStore = create<FranchiseState>((set, get) => ({
 
     if (error) {
       console.error("Error updating franchise:", error);
+      toast.error(`Error updating franchise: ${error.message}`);
       return;
     }
+    toast.success("Franchise updated successfully");
     await get().fetchFranchises(); // Refetch to ensure consistency
   },
   deleteFranchise: async (id) => {
     const { error } = await supabase.from("franchises").delete().eq("id", id);
     if (error) {
       console.error("Error deleting franchise:", error);
+      toast.error(`Error deleting franchise: ${error.message}`);
       return;
     }
+    toast.success("Franchise deleted successfully");
     set((state) => ({
       franchises: state.franchises.filter((franchise) => franchise.id !== id),
     }));
