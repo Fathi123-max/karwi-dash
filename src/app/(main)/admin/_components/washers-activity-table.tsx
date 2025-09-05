@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
 
 import { Washer } from "@/app/(main)/admin/washers/_components/types";
 import { DataTable } from "@/components/data-table/data-table";
@@ -9,18 +10,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useDataTableInstance } from "@/hooks/use-data-table-instance";
 import { useWasherStore } from "@/stores/admin-dashboard/washer-store";
 
-const columns: ColumnDef<Washer>[] = [
+const getColumns = (t: ReturnType<typeof useTranslations>): ColumnDef<Washer>[] => [
   {
     accessorKey: "name",
-    header: "Name",
+    header: t("admin.washers.name"),
   },
   {
     accessorKey: "branch",
-    header: "Branch",
+    header: t("admin.washers.branch"),
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: t("admin.washers.status"),
     cell: ({ row }) => {
       const status = row.getValue("status");
       return <Badge variant={status === "active" ? "default" : "destructive"}>{status}</Badge>;
@@ -28,12 +29,14 @@ const columns: ColumnDef<Washer>[] = [
   },
   {
     accessorKey: "rating",
-    header: "Rating",
+    header: t("admin.washers.rating"),
   },
 ];
 
 export function WashersActivityTable() {
+  const t = useTranslations("admin");
   const { washers } = useWasherStore();
+  const columns = getColumns(t);
   const table = useDataTableInstance({
     data: washers,
     columns,
@@ -42,7 +45,7 @@ export function WashersActivityTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t("admin.washersActivity.title")}</CardTitle>
+        <CardTitle>{t("washersActivity.title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <DataTable table={table} columns={columns} />

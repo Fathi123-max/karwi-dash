@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 
+import { useTranslations } from "next-intl";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,6 +11,7 @@ import { useBranchStore } from "@/stores/admin-dashboard/branch-store";
 import { useFranchiseStore } from "@/stores/admin-dashboard/franchise-store";
 
 export function BranchPerformanceChart() {
+  const t = useTranslations();
   const { branches } = useBranchStore();
   const { franchises } = useFranchiseStore();
   const [selectedFranchise, setSelectedFranchise] = useState<string>("all");

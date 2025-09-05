@@ -2,6 +2,7 @@
 
 import { Settings } from "lucide-react";
 
+import { LanguageSwitcherButtons } from "@/components/i18n/language-switcher-buttons";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -59,6 +60,10 @@ export function LayoutControls(props: LayoutControlsProps) {
             <p className="text-muted-foreground text-xs">Customize your dashboard layout preferences.</p>
           </div>
           <div className="space-y-3">
+            <div className="space-y-1">
+              <Label className="text-xs font-medium">Language</Label>
+              <LanguageSwitcherButtons />
+            </div>
             <div className="space-y-1">
               <Label className="text-xs font-medium">Preset</Label>
               <Select value={themePreset} onValueChange={(value) => handleValueChange("theme_preset", value)}>

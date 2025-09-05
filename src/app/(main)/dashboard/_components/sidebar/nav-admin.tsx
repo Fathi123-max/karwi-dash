@@ -15,43 +15,47 @@ import {
   Image,
   Tag,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
-const adminNavItems = [
-  { href: "/admin", label: "Dashboard", icon: Home },
-  { href: "/admin/branches", label: "Branches", icon: Building2 },
-  { href: "/admin/franchises", label: "Franchises", icon: MapPin },
-  { href: "/admin/washers", label: "Washers", icon: UsersRound },
-  { href: "/admin/services", label: "Services", icon: Wrench },
+const adminNavItems = (t: (key: string) => string) => [
+  { href: "/admin", label: t("navigation.dashboard"), icon: Home },
+  { href: "/admin/branches", label: t("navigation.branches"), icon: Building2 },
+  { href: "/admin/franchises", label: t("navigation.franchises"), icon: MapPin },
+  { href: "/admin/washers", label: t("navigation.washers"), icon: UsersRound },
+  { href: "/admin/services", label: t("navigation.services"), icon: Wrench },
   {
     href: "/admin/products",
-    label: "Products",
+    label: t("navigation.products"),
     icon: Package,
     subItems: [
-      { href: "/admin/products", label: "Manage Products" },
-      { href: "/admin/products/orders", label: "Orders" },
+      { href: "/admin/products", label: t("navigation.manageProducts") },
+      { href: "/admin/products/orders", label: t("navigation.orders") },
     ],
   },
-  { href: "/admin/users", label: "Users", icon: UsersRound },
-  { href: "/admin/payments", label: "Payments", icon: FileText },
-  { href: "/admin/schedule", label: "Schedule", icon: Calendar },
-  { href: "/admin/reviews", label: "Reviews", icon: FileText },
-  // { href: "/admin/promotions", label: "Promotions", icon: FileText }, // Hidden as per requirement
+  { href: "/admin/users", label: t("navigation.users"), icon: UsersRound },
+  { href: "/admin/payments", label: t("navigation.payments"), icon: FileText },
+  { href: "/admin/schedule", label: t("navigation.schedule"), icon: Calendar },
+  { href: "/admin/reviews", label: t("navigation.reviews"), icon: FileText },
+  // { href: "/admin/promotions", label: t("navigation.promotions"), icon: FileText }, // Hidden as per requirement
   {
     href: "/admin/banners-offers",
-    label: "Banners & Offers",
+    label: t("navigation.bannersOffers"),
     icon: Image,
-    subItems: [{ href: "/admin/banners-offers", label: "Manage All" }],
+    subItems: [{ href: "/admin/banners-offers", label: t("navigation.manageAll") }],
   },
 ];
 
 export function NavAdmin() {
   const pathname = usePathname();
+  const t = useTranslations("admin");
+
+  const items = adminNavItems(t);
 
   return (
     <nav className="grid items-start gap-2">
-      {adminNavItems.map((item) => (
+      {items.map((item) => (
         <div key={item.href}>
           <Link href={item.href}>
             <span
@@ -63,12 +67,12 @@ export function NavAdmin() {
                   : "transparent",
               )}
             >
-              <item.icon className="mr-2 h-4 w-4" />
+              <item.icon className="mr-2 h-4 w-4 rtl:mr-0 rtl:ml-2" />
               <span className="group-data-[collapsible=icon]:!hidden">{item.label}</span>
             </span>
           </Link>
           {item.subItems && (
-            <div className="mt-1 ml-8 space-y-1">
+            <div className="mt-1 ml-8 space-y-1 rtl:mr-8 rtl:ml-0">
               {item.subItems.map((subItem) => (
                 <Link key={subItem.href} href={subItem.href}>
                   <span

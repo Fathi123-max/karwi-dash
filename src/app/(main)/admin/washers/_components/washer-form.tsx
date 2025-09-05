@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -13,18 +14,19 @@ import { useWasherStore } from "@/stores/admin-dashboard/washer-store";
 
 import { Washer } from "./types";
 
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Washer name must be at least 2 characters.",
-  }),
-  branch: z.string({
-    required_error: "Please select a branch.",
-  }),
-  status: z.enum(["active", "inactive"]),
-  rating: z.coerce.number().min(0).max(5),
-});
+const formSchema = (t: ReturnType<typeof useTranslations>) =>
+  z.object({
+    name: z.string().min(2, {
+      message: t("form.nameMinLength"),
+    }),
+    branch: z.string({
+      required_error: t("form.branchRequired"),
+    }),
+    status: z.enum(["active", "inactive"]),
+    rating: z.coerce.number().min(0).max(5),
+  });
 
-type WasherFormValues = z.infer<typeof formSchema>;
+type WasherFormValues = z.infer<ReturnType<typeof formSchema>>;
 
 interface WasherFormProps {
   washer?: Washer;
@@ -32,10 +34,11 @@ interface WasherFormProps {
 }
 
 export function WasherForm({ washer, onSuccess }: WasherFormProps) {
+  const t = useTranslations("admin.washers");
   const { addWasher, updateWasher } = useWasherStore();
   const { branches } = useBranchStore();
   const form = useForm<WasherFormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema(t)),
     defaultValues: washer ?? {
       name: "",
       status: "inactive",
@@ -60,9 +63,9 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Washer Name</FormLabel>
+              <FormLabel>{t("form.name")}</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., Mohammed Ahmed" {...field} />
+                <Input placeholder={t("form.namePlaceholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -73,11 +76,11 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
           name="branch"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Branch</FormLabel>
+              <FormLabel>{t("form.branch")}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a branch" />
+                    <SelectValue placeholder={t("form.selectBranch")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -97,16 +100,16 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
           name="status"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Status</FormLabel>
+              <FormLabel>{t("form.status")}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a status" />
+                    <SelectValue placeholder={t("form.selectStatus")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="active">Active</SelectItem>
-                  <SelectItem value="inactive">Inactive</SelectItem>
+                  <SelectItem value="active">{t("active")}</SelectItem>
+                  <SelectItem value="inactive">{t("inactive")}</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -118,7 +121,7 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
           name="rating"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Rating</FormLabel>
+              <FormLabel>{t("form.rating")}</FormLabel>
               <FormControl>
                 <Input type="number" step="0.1" {...field} />
               </FormControl>
@@ -126,7 +129,7 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">{washer ? "Update" : "Create"} Washer</Button>
+        <Button type="submit">{washer ? t("form.updateButton") : t("form.createButton")}</Button>
       </form>
     </Form>
   );

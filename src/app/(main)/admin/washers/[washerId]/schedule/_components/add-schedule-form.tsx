@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -11,34 +12,36 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useWasherScheduleStore } from "@/stores/admin-dashboard/washer-schedule-store";
 
-const formSchema = z.object({
-  day_of_week: z.coerce.number().min(0).max(6),
-  start_time: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format (HH:MM)"),
-  end_time: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format (HH:MM)"),
-});
+const formSchema = (t: ReturnType<typeof useTranslations>) =>
+  z.object({
+    day_of_week: z.coerce.number().min(0).max(6),
+    start_time: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, t("addShift.invalidTimeFormat")),
+    end_time: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, t("addShift.invalidTimeFormat")),
+  });
 
-type ScheduleFormValues = z.infer<typeof formSchema>;
-
-const daysOfWeek = [
-  { value: 1, label: "Monday" },
-  { value: 2, label: "Tuesday" },
-  { value: 3, label: "Wednesday" },
-  { value: 4, label: "Thursday" },
-  { value: 5, label: "Friday" },
-  { value: 6, label: "Saturday" },
-  { value: 0, label: "Sunday" },
-];
+type ScheduleFormValues = z.infer<ReturnType<typeof formSchema>>;
 
 export function AddScheduleForm({ washerId }: { washerId: string }) {
+  const t = useTranslations("admin.washers.schedule");
   const { addSchedule } = useWasherScheduleStore();
   const form = useForm<ScheduleFormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema(t)),
     defaultValues: {
       day_of_week: 1,
       start_time: "09:00",
       end_time: "17:00",
     },
   });
+
+  const daysOfWeek = [
+    { value: 1, label: t("days.monday") },
+    { value: 2, label: t("days.tuesday") },
+    { value: 3, label: t("days.wednesday") },
+    { value: 4, label: t("days.thursday") },
+    { value: 5, label: t("days.friday") },
+    { value: 6, label: t("days.saturday") },
+    { value: 0, label: t("days.sunday") },
+  ];
 
   const onSubmit = (data: ScheduleFormValues) => {
     addSchedule({ ...data, washer_id: washerId });
@@ -48,7 +51,7 @@ export function AddScheduleForm({ washerId }: { washerId: string }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Add New Shift</CardTitle>
+        <CardTitle>{t("addShift.title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -58,11 +61,11 @@ export function AddScheduleForm({ washerId }: { washerId: string }) {
               name="day_of_week"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Day of Week</FormLabel>
+                  <FormLabel>{t("addShift.dayOfWeek")}</FormLabel>
                   <Select onValueChange={(value) => field.onChange(parseInt(value))} defaultValue={String(field.value)}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a day" />
+                        <SelectValue placeholder={t("addShift.selectDay")} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -82,7 +85,7 @@ export function AddScheduleForm({ washerId }: { washerId: string }) {
               name="start_time"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Start Time</FormLabel>
+                  <FormLabel>{t("addShift.startTime")}</FormLabel>
                   <FormControl>
                     <Input type="time" {...field} />
                   </FormControl>
@@ -95,7 +98,7 @@ export function AddScheduleForm({ washerId }: { washerId: string }) {
               name="end_time"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>End Time</FormLabel>
+                  <FormLabel>{t("addShift.endTime")}</FormLabel>
                   <FormControl>
                     <Input type="time" {...field} />
                   </FormControl>
@@ -103,7 +106,7 @@ export function AddScheduleForm({ washerId }: { washerId: string }) {
                 </FormItem>
               )}
             />
-            <Button type="submit">Add Shift</Button>
+            <Button type="submit">{t("addShift.button")}</Button>
           </form>
         </Form>
       </CardContent>

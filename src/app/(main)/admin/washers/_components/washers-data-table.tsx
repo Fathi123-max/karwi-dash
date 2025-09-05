@@ -13,6 +13,7 @@ import {
   ColumnFiltersState,
   getFilteredRowModel,
 } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +25,7 @@ interface WashersDataTableProps<TData, TValue> {
 }
 
 export function WashersDataTable<TData, TValue>({ columns, data }: WashersDataTableProps<TData, TValue>) {
+  const t = useTranslations("admin.washers");
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -46,7 +48,7 @@ export function WashersDataTable<TData, TValue>({ columns, data }: WashersDataTa
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter by name..."
+          placeholder={t("table.filterPlaceholder")}
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
           className="max-w-sm"
@@ -79,7 +81,7 @@ export function WashersDataTable<TData, TValue>({ columns, data }: WashersDataTa
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  {t("table.noResults")}
                 </TableCell>
               </TableRow>
             )}
@@ -88,10 +90,10 @@ export function WashersDataTable<TData, TValue>({ columns, data }: WashersDataTa
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-          Previous
+          {t("table.previous")}
         </Button>
         <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-          Next
+          {t("table.next")}
         </Button>
       </div>
     </div>

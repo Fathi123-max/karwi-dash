@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -19,6 +20,7 @@ import { Booking } from "./columns";
 import { UpdateStatusDialog } from "./update-status-dialog";
 
 export function RecentActivity() {
+  const t = useTranslations();
   const { payments } = usePaymentStore();
   const { reviews } = useReviewStore();
   const { users } = useUserStore();

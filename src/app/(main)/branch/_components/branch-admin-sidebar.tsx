@@ -82,7 +82,7 @@ export function BranchAdminSidebar() {
                         pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground",
                       )}
                     >
-                      <item.icon className="h-4 w-4" />
+                      <item.icon className="rtl:sidebar-icon h-4 w-4" />
                       {item.title}
                     </Link>
                   </li>
@@ -91,7 +91,7 @@ export function BranchAdminSidebar() {
             </nav>
             <div className="border-t p-2">
               <Button variant="ghost" className="w-full justify-start gap-3 px-3" onClick={handleLogout}>
-                <LogOut className="h-4 w-4" />
+                <LogOut className="rtl:sidebar-icon h-4 w-4" />
                 Logout
               </Button>
             </div>
@@ -116,7 +116,7 @@ export function BranchAdminSidebar() {
                       pathname === item.href ? "bg-accent text-accent-foreground" : "text-muted-foreground",
                     )}
                   >
-                    <item.icon className="h-4 w-4" />
+                    <item.icon className="rtl:sidebar-icon h-4 w-4" />
                     {item.title}
                   </Link>
                 </li>
@@ -125,7 +125,7 @@ export function BranchAdminSidebar() {
           </nav>
           <div className="border-t p-2">
             <Button variant="ghost" className="w-full justify-start gap-3 px-3" onClick={handleLogout}>
-              <LogOut className="h-4 w-4" />
+              <LogOut className="rtl:sidebar-icon h-4 w-4" />
               Logout
             </Button>
           </div>

@@ -1,11 +1,14 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useReviewStore } from "@/stores/admin-dashboard/review-store";
 import { useUserStore } from "@/stores/admin-dashboard/user-store";
 
 export function RecentReviews() {
+  const t = useTranslations("admin");
   const { reviews } = useReviewStore();
   const { users } = useUserStore();
 
@@ -17,7 +20,7 @@ export function RecentReviews() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t("admin.reviews.title")}</CardTitle>
+        <CardTitle>{t("reviews.title")}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {reviewsWithUsers.map((review) => (

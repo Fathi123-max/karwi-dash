@@ -1,6 +1,7 @@
 "use client";
 
 import { LogOut } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { logout } from "@/app/(main)/auth/_actions/logout";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -24,6 +25,8 @@ export function AdminAccountSwitcher({
     readonly role: string;
   };
 }) {
+  const t = useTranslations("auth");
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -48,7 +51,7 @@ export function AdminAccountSwitcher({
           <DropdownMenuItem asChild>
             <button type="submit" className="flex w-full items-center gap-2">
               <LogOut className="size-4" />
-              <span>Log out</span>
+              <span>{t("logout")}</span>
             </button>
           </DropdownMenuItem>
         </form>

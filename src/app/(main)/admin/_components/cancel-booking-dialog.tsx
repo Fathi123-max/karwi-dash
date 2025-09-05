@@ -1,3 +1,6 @@
+"use client";
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,6 +19,7 @@ interface CancelBookingDialogProps {
 }
 
 export function CancelBookingDialog({ bookingId, isOpen, onClose, onConfirm }: CancelBookingDialogProps) {
+  const t = useTranslations();
   const handleCancel = () => {
     onConfirm(bookingId);
     onClose();

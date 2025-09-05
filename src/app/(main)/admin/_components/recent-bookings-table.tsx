@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { MoreHorizontal } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { DataTable } from "@/components/data-table/data-table";
@@ -35,26 +36,27 @@ const getColumns = (
   onViewDetails: (booking: BookingType) => void,
   onUpdateStatus: (booking: BookingType) => void,
   onCancelBooking: (booking: BookingType) => void,
+  t: ReturnType<typeof useTranslations>,
 ): ColumnDef<BookingType>[] => [
   {
     accessorKey: "id",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Booking ID" />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.bookingId")} />,
   },
   {
     accessorKey: "user",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="User" />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.user")} />,
   },
   {
     accessorKey: "branch",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Branch" />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.branch")} />,
   },
   {
     accessorKey: "service",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Service" />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.service")} />,
   },
   {
     accessorKey: "status",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.status")} />,
     cell: ({ row }) => {
       const status = row.getValue("status");
       return (
@@ -89,7 +91,7 @@ const getColumns = (
   },
   {
     accessorKey: "date",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Date" />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.date")} />,
     cell: ({ row }) => format(row.getValue("date"), "MMM d, yyyy"),
   },
   {
@@ -106,17 +108,23 @@ const getColumns = (
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(booking.id)}>Copy ID</DropdownMenuItem>
+            <DropdownMenuLabel>{t("common.actions")}</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(booking.id)}>
+              {t("admin.bookings.copyId")}
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => onViewDetails(booking)}>View Details</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => onUpdateStatus(booking)}>Update Status</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onViewDetails(booking)}>
+              {t("admin.bookings.viewDetails")}
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onUpdateStatus(booking)}>
+              {t("admin.bookings.updateStatus")}
+            </DropdownMenuItem>
             <DropdownMenuItem
               className="text-red-600"
               onClick={() => onCancelBooking(booking)}
               disabled={booking.status === "cancelled"}
             >
-              Cancel Booking
+              {t("admin.bookings.cancelBooking")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -126,6 +134,7 @@ const getColumns = (
 ];
 
 export function RecentBookingsTable() {
+  const t = useTranslations("admin");
   const { bookings, updateBookingStatus, cancelBooking } = useBookingStore();
   const [selectedBooking, setSelectedBooking] = useState<BookingType | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -150,9 +159,9 @@ export function RecentBookingsTable() {
   const handleStatusUpdate = async (bookingId: string, newStatus: string) => {
     try {
       await updateBookingStatus(bookingId, newStatus as BookingType["status"]);
-      toast.success("Booking status updated successfully");
+      toast.success(t("bookings.updateSuccess"));
     } catch (error) {
-      toast.error("Failed to update booking status");
+      toast.error(t("bookings.updateError"));
       console.error("Error updating booking status:", error);
     }
   };
@@ -160,14 +169,14 @@ export function RecentBookingsTable() {
   const handleBookingCancellation = async (bookingId: string) => {
     try {
       await cancelBooking(bookingId);
-      toast.success("Booking cancelled successfully");
+      toast.success(t("bookings.cancelSuccess"));
     } catch (error) {
-      toast.error("Failed to cancel booking");
+      toast.error(t("bookings.cancelError"));
       console.error("Error cancelling booking:", error);
     }
   };
 
-  const columns = getColumns(handleViewDetails, handleUpdateStatus, handleCancelBooking);
+  const columns = getColumns(handleViewDetails, handleUpdateStatus, handleCancelBooking, t);
 
   const table = useDataTableInstance({
     data: bookings,
@@ -178,8 +187,8 @@ export function RecentBookingsTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recent Bookings</CardTitle>
-        <CardDescription>{t("admin.bookings.recent.description")}</CardDescription>
+        <CardTitle>{t("bookings.recent.title")}</CardTitle>
+        <CardDescription>{t("bookings.recent.description")}</CardDescription>
       </CardHeader>
       <CardContent className="flex size-full flex-col gap-4">
         <DataTableToolbar
@@ -188,13 +197,13 @@ export function RecentBookingsTable() {
           facetedFilters={[
             {
               columnId: "status",
-              title: "Status",
+              title: t("bookings.status.title"),
               options: [
-                { label: "Pending", value: "pending" },
-                { label: "In Progress", value: "in-progress" },
-                { label: "Completed", value: "completed" },
-                { label: "Scheduled", value: "scheduled" },
-                { label: "Cancelled", value: "cancelled" },
+                { label: t("bookings.status.pending"), value: "pending" },
+                { label: t("bookings.status.inProgress"), value: "in-progress" },
+                { label: t("bookings.status.completed"), value: "completed" },
+                { label: t("bookings.status.scheduled"), value: "scheduled" },
+                { label: t("bookings.status.cancelled"), value: "cancelled" },
               ],
             },
           ]}

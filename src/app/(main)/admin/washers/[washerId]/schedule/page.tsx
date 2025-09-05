@@ -4,6 +4,8 @@ import React from "react";
 
 import { notFound } from "next/navigation";
 
+import { useTranslations } from "next-intl";
+
 import { useWasherScheduleStore } from "@/stores/admin-dashboard/washer-schedule-store";
 import { useWasherStore } from "@/stores/admin-dashboard/washer-store";
 
@@ -11,6 +13,7 @@ import { AddScheduleForm } from "./_components/add-schedule-form";
 import { ScheduleList } from "./_components/schedule-list";
 
 export default function WasherSchedulePage({ params }: { params: Promise<{ washerId: string }> }) {
+  const t = useTranslations("admin.washers.schedule");
   const resolvedParams = React.use(params);
   const { washerId } = resolvedParams;
   const { getSchedulesForWasher } = useWasherScheduleStore();
@@ -27,8 +30,8 @@ export default function WasherSchedulePage({ params }: { params: Promise<{ washe
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
       <div className="flex items-center justify-between space-y-2">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Manage Schedule for {washer.name}</h2>
-          <p className="text-muted-foreground">Add or remove weekly work shifts.</p>
+          <h2 className="text-3xl font-bold tracking-tight">{t("title", { name: washer.name })}</h2>
+          <p className="text-muted-foreground">{t("description")}</p>
         </div>
       </div>
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">

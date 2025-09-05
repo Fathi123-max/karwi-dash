@@ -28,7 +28,7 @@ export function NavFranchise() {
               pathname === item.href ? "bg-accent" : "transparent",
             )}
           >
-            <item.icon className="mr-2 h-4 w-4" />
+            <item.icon className="rtl:sidebar-icon mr-2 h-4 w-4" />
             <span className="group-data-[collapsible=icon]:!hidden">{item.label}</span>
           </span>
         </Link>

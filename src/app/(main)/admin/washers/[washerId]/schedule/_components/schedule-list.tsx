@@ -1,24 +1,34 @@
 "use client";
 
 import { Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useWasherScheduleStore, WasherSchedule } from "@/stores/admin-dashboard/washer-schedule-store";
 
-const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
 export function ScheduleList({ schedules }: { schedules: WasherSchedule[] }) {
+  const t = useTranslations("admin.washers.schedule");
   const { deleteSchedule } = useWasherScheduleStore();
+
+  const daysOfWeek = [
+    t("days.sunday"),
+    t("days.monday"),
+    t("days.tuesday"),
+    t("days.wednesday"),
+    t("days.thursday"),
+    t("days.friday"),
+    t("days.saturday"),
+  ];
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Current Schedule</CardTitle>
+        <CardTitle>{t("currentSchedule.title")}</CardTitle>
       </CardHeader>
       <CardContent>
         {schedules.length === 0 ? (
-          <p className="text-muted-foreground">No shifts scheduled for this washer.</p>
+          <p className="text-muted-foreground">{t("currentSchedule.noShifts")}</p>
         ) : (
           <ul className="space-y-4">
             {schedules

@@ -566,6 +566,10 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                         <FormControl>
                           <Input placeholder="e.g., admin@karwi-branch.com" {...field} />
                         </FormControl>
+                        <p className="text-muted-foreground text-sm">
+                          A confirmation email will be sent to this address. The admin must confirm their email before
+                          they can sign in.
+                        </p>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -583,28 +587,8 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={form.control}
-                    name="adminRole"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Admin Role</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select admin role" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="general">General Admin</SelectItem>
-                            <SelectItem value="franchise">Franchise Admin</SelectItem>
-                            <SelectItem value="branch">Branch Admin</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  {/* Hidden field for admin role - always set to "branch" for new branches */}
+                  <input type="hidden" {...form.register("adminRole")} value="branch" />
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <FormField
                       control={form.control}

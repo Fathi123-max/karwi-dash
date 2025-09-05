@@ -1,11 +1,13 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { usePaymentStore } from "@/stores/admin-dashboard/payment-store";
 
 export function PaymentsChart() {
+  const t = useTranslations("admin");
   const { payments } = usePaymentStore();
 
   // Filter for successful payments only
@@ -30,7 +32,7 @@ export function PaymentsChart() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t("admin.paymentsOverview.title")}</CardTitle>
+        <CardTitle>{t("paymentsOverview.title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={350}>

@@ -19,7 +19,8 @@
     "error": "An error occurred",
     "success": "Success",
     "notifications": "Notifications",
-    "profile": "Profile"
+    "profile": "Profile",
+    "close": "Close"
   },
   "auth": {
     "login": "Login",
@@ -79,6 +80,28 @@
     "dashboard": {
       "title": "Karwi Admin Dashboard",
       "description": "Oversee the entire Karwi car wash network"
+    },
+    "menu": {
+      "admin": "Admin Menu",
+      "marketing": "Marketing",
+      "emailMarketing": "Email Marketing"
+    },
+    "navigation": {
+      "dashboard": "Dashboard",
+      "branches": "Branches",
+      "franchises": "Franchises",
+      "washers": "Washers",
+      "services": "Services",
+      "products": "Products",
+      "manageProducts": "Manage Products",
+      "orders": "Orders",
+      "users": "Users",
+      "payments": "Payments",
+      "schedule": "Schedule",
+      "reviews": "Reviews",
+      "promotions": "Promotions",
+      "bannersOffers": "Banners & Offers",
+      "manageAll": "Manage All"
     },
     "branches": {
       "title": "Branches",
@@ -157,6 +180,19 @@
         "title": "Are you absolutely sure?",
         "description": "This action cannot be undone. This will permanently delete the washer and all their data.",
         "continue": "Continue"
+      },
+      "schedule": {
+        "title": "Manage Schedule for {name}",
+        "description": "Add or remove weekly work shifts.",
+        "addShift": "Add New Shift",
+        "currentSchedule": "Current Schedule",
+        "noShifts": "No shifts scheduled for this washer.",
+        "dayOfWeek": "Day of Week",
+        "selectDay": "Select a day",
+        "startTime": "Start Time",
+        "endTime": "End Time",
+        "invalidTime": "Invalid time format (HH:MM)",
+        "deleteShift": "Delete Shift"
       }
     },
     "schedule": {
@@ -197,7 +233,13 @@
         "description": "Track and manage your latest bookings"
       },
       "details": {
-        "title": "Booking Details"
+        "title": "Booking Details",
+        "description": "Details for booking ID: {id}",
+        "user": "User",
+        "branch": "Branch",
+        "service": "Service",
+        "status": "Status",
+        "date": "Date"
       },
       "cancel": {
         "title": "Cancel Booking",
@@ -208,11 +250,41 @@
       "update": {
         "title": "Update Booking Status",
         "button": "Update Status"
+      },
+      "bookingId": "Booking ID",
+      "user": "User",
+      "branch": "Branch",
+      "service": "Service",
+      "status": "Status",
+      "date": "Date",
+      "copyId": "Copy ID",
+      "viewDetails": "View Details",
+      "updateStatus": "Update Status",
+      "cancelBooking": "Cancel Booking",
+      "updateSuccess": "Booking status updated successfully",
+      "updateError": "Failed to update booking status",
+      "cancelSuccess": "Booking cancelled successfully",
+      "cancelError": "Failed to cancel booking",
+      "status": {
+        "title": "Status",
+        "pending": "Pending",
+        "inProgress": "In Progress",
+        "completed": "Completed",
+        "scheduled": "Scheduled",
+        "cancelled": "Cancelled"
       }
     },
     "reports": {
       "title": "Reports",
-      "description": "View and download generated reports"
+      "description": "View and download generated reports",
+      "reportName": "Report Name",
+      "dateRange": "Date Range",
+      "generatedOn": "Generated On",
+      "download": "Download",
+      "monthlyRevenue": "Monthly Revenue",
+      "userGrowth": "User Growth",
+      "washerPerformance": "Washer Performance",
+      "bookingTrends": "Booking Trends"
     },
     "activity": {
       "title": "Recent Activity"
@@ -222,6 +294,12 @@
     },
     "washersActivity": {
       "title": "Washers Activity"
+    },
+    "washers": {
+      "name": "Name",
+      "branch": "Branch",
+      "status": "Status",
+      "rating": "Rating"
     },
     "branchPerformance": {
       "title": "Branch Performance"
@@ -234,6 +312,20 @@
     "dashboard": {
       "title": "Karwi Franchise Dashboard",
       "description": "Manage your Karwi franchise operations"
+    },
+    "analytics": {
+      "title": "Analytics Dashboard",
+      "description": "View insights and performance metrics for your franchise",
+      "branchAnalytics": {
+        "title": "Branch Analytics",
+        "description": "View performance metrics for specific branches"
+      },
+      "metrics": {
+        "totalBranches": "Total Branches",
+        "totalServices": "Total Services",
+        "activeWashers": "Active Washers",
+        "totalBookings": "Total Bookings"
+      }
     },
     "analytics": {
       "title": "Analytics Dashboard",
