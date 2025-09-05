@@ -184,15 +184,54 @@
       "schedule": {
         "title": "Manage Schedule for {name}",
         "description": "Add or remove weekly work shifts.",
-        "addShift": "Add New Shift",
-        "currentSchedule": "Current Schedule",
-        "noShifts": "No shifts scheduled for this washer.",
-        "dayOfWeek": "Day of Week",
-        "selectDay": "Select a day",
-        "startTime": "Start Time",
-        "endTime": "End Time",
-        "invalidTime": "Invalid time format (HH:MM)",
-        "deleteShift": "Delete Shift"
+        "addShift": {
+          "title": "Add New Shift",
+          "dayOfWeek": "Day of Week",
+          "selectDay": "Select a day",
+          "startTime": "Start Time",
+          "endTime": "End Time",
+          "button": "Add Shift",
+          "invalidTimeFormat": "Invalid time format (HH:MM)"
+        },
+        "currentSchedule": {
+          "title": "Current Schedule",
+          "noShifts": "No shifts scheduled for this washer."
+        },
+        "days": {
+          "monday": "Monday",
+          "tuesday": "Tuesday",
+          "wednesday": "Wednesday",
+          "thursday": "Thursday",
+          "friday": "Friday",
+          "saturday": "Saturday",
+          "sunday": "Sunday"
+        }
+      },
+      "form": {
+        "name": "Washer Name",
+        "namePlaceholder": "e.g., Mohammed Ahmed",
+        "nameMinLength": "Washer name must be at least 2 characters.",
+        "branch": "Branch",
+        "branchRequired": "Please select a branch.",
+        "selectBranch": "Select a branch",
+        "status": "Status",
+        "selectStatus": "Select a status",
+        "rating": "Rating",
+        "updateButton": "Update Washer",
+        "createButton": "Create Washer"
+      },
+      "table": {
+        "name": "Name",
+        "branch": "Branch",
+        "status": "Status",
+        "rating": "Rating",
+        "filterPlaceholder": "Filter by name...",
+        "filterBranchPlaceholder": "Filter by Branch",
+        "allBranches": "All Branches",
+        "export": "Export",
+        "noResults": "No results.",
+        "previous": "Previous",
+        "next": "Next"
       }
     },
     "schedule": {

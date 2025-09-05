@@ -299,7 +299,57 @@
       "name": "الاسم",
       "branch": "الفرع",
       "status": "الحالة",
-      "rating": "التقييم"
+      "rating": "التقييم",
+      "schedule": {
+        "addShift": {
+          "title": "إضافة وردية جديدة",
+          "dayOfWeek": "يوم الأسبوع",
+          "selectDay": "اختر يومًا",
+          "startTime": "وقت البدء",
+          "endTime": "وقت الانتهاء",
+          "button": "إضافة وردية",
+          "invalidTimeFormat": "تنسيق الوقت غير صحيح (HH:MM)"
+        },
+        "currentSchedule": {
+          "title": "الجدول الحالي",
+          "noShifts": "لا توجد ورديات مجدولة لهذا الغسال."
+        },
+        "days": {
+          "monday": "الاثنين",
+          "tuesday": "الثلاثاء",
+          "wednesday": "الأربعاء",
+          "thursday": "الخميس",
+          "friday": "الجمعة",
+          "saturday": "السبت",
+          "sunday": "الأحد"
+        }
+      },
+      "form": {
+        "name": "اسم الغسال",
+        "namePlaceholder": "مثال: محمد أحمد",
+        "nameMinLength": "يجب أن يكون اسم الغسال مكونًا من حرفين على الأقل.",
+        "branch": "الفرع",
+        "branchRequired": "الرجاء اختيار فرع.",
+        "selectBranch": "اختر فرعًا",
+        "status": "الحالة",
+        "selectStatus": "اختر الحالة",
+        "rating": "التقييم",
+        "updateButton": "تحديث الغسال",
+        "createButton": "إنشاء غسال"
+      },
+      "table": {
+        "name": "الاسم",
+        "branch": "الفرع",
+        "status": "الحالة",
+        "rating": "التقييم",
+        "filterPlaceholder": "تصفية حسب الاسم...",
+        "filterBranchPlaceholder": "تصفية حسب الفرع",
+        "allBranches": "جميع الفروع",
+        "export": "تصدير",
+        "noResults": "لا توجد نتائج.",
+        "previous": "السابق",
+        "next": "التالي"
+      }
     },
     "branchPerformance": {
       "title": "أداء الفرع"
