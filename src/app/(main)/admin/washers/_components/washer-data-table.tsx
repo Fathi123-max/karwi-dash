@@ -42,14 +42,14 @@ export function WasherDataTable({ data }: WasherDataTableProps) {
           />
           <Select
             onValueChange={(value) => {
-              table.getColumn("branch")?.setFilterValue(value === "all" ? "" : value);
+              table.getColumn("branch")?.setFilterValue(value === t("table.allBranchesValue") ? "" : value);
             }}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder={t("table.filterBranchPlaceholder")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">{t("table.allBranches")}</SelectItem>
+              <SelectItem value={t("table.allBranchesValue") || "all"}>{t("table.allBranches")}</SelectItem>
               {branches.map((branch) => (
                 <SelectItem key={branch.id} value={branch.name}>
                   {branch.name}

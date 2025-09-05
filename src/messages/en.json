@@ -79,7 +79,12 @@
   "admin": {
     "dashboard": {
       "title": "Karwi Admin Dashboard",
-      "description": "Oversee the entire Karwi car wash network"
+      "description": "Oversee the entire Karwi car wash network",
+      "tabs": {
+        "overview": "Overview",
+        "analytics": "Analytics",
+        "activity": "Recent Activity"
+      }
     },
     "menu": {
       "admin": "Admin Menu",
@@ -176,6 +181,7 @@
       "actions": "Actions",
       "active": "Active",
       "inactive": "Inactive",
+      "activeStatusValue": "active",
       "deleteConfirm": {
         "title": "Are you absolutely sure?",
         "description": "This action cannot be undone. This will permanently delete the washer and all their data.",
@@ -191,7 +197,10 @@
           "startTime": "Start Time",
           "endTime": "End Time",
           "button": "Add Shift",
-          "invalidTimeFormat": "Invalid time format (HH:MM)"
+          "invalidTimeFormat": "Invalid time format (HH:MM)",
+          "defaultDay": "1",
+          "defaultStartTime": "09:00",
+          "defaultEndTime": "17:00"
         },
         "currentSchedule": {
           "title": "Current Schedule",
@@ -204,302 +213,176 @@
           "thursday": "Thursday",
           "friday": "Friday",
           "saturday": "Saturday",
-          "sunday": "Sunday"
+          "sunday": "Sunday",
+          "mondayValue": "1",
+          "tuesdayValue": "2",
+          "wednesdayValue": "3",
+          "thursdayValue": "4",
+          "fridayValue": "5",
+          "saturdayValue": "6",
+          "sundayValue": "0",
+          "unknown": "Unknown"
         }
       },
-      "form": {
-        "name": "Washer Name",
-        "namePlaceholder": "e.g., Mohammed Ahmed",
-        "nameMinLength": "Washer name must be at least 2 characters.",
-        "branch": "Branch",
-        "branchRequired": "Please select a branch.",
-        "selectBranch": "Select a branch",
-        "status": "Status",
-        "selectStatus": "Select a status",
-        "rating": "Rating",
-        "updateButton": "Update Washer",
-        "createButton": "Create Washer"
-      },
-      "table": {
-        "name": "Name",
-        "branch": "Branch",
-        "status": "Status",
-        "rating": "Rating",
-        "filterPlaceholder": "Filter by name...",
-        "filterBranchPlaceholder": "Filter by Branch",
-        "allBranches": "All Branches",
-        "export": "Export",
-        "noResults": "No results.",
-        "previous": "Previous",
-        "next": "Next"
+      "days": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday",
+        "mondayValue": "1",
+        "tuesdayValue": "2",
+        "wednesdayValue": "3",
+        "thursdayValue": "4",
+        "fridayValue": "5",
+        "saturdayValue": "6",
+        "sundayValue": "0",
+        "unknown": "Unknown"
       }
     },
-    "schedule": {
-      "title": "Washer Schedule",
-      "description": "Manage and view washer schedules across all branches"
-    },
-    "services": {
-      "title": "Services"
-    },
-    "bannersOffers": {
-      "title": "Banners & Offers",
-      "description": "Manage site-wide banners and promotional offers",
-      "banners": {
-        "title": "Banners",
-        "description": "Manage site-wide banners displayed to users"
-      },
-      "offers": {
-        "title": "Offers",
-        "description": "Manage promotional offers for services and products"
-      }
-    },
-    "products": {
-      "orders": {
-        "title": "Product Orders",
-        "description": "Manage franchise product orders"
-      }
-    },
-    "metrics": {
-      "totalRevenue": "Total Revenue",
-      "totalBookings": "Total Bookings",
-      "totalUsers": "Total Users",
-      "activeWashers": "Active Washers"
-    },
-    "bookings": {
-      "title": "Bookings",
-      "recent": {
-        "title": "Recent Bookings",
-        "description": "Track and manage your latest bookings"
-      },
-      "details": {
-        "title": "Booking Details",
-        "description": "Details for booking ID: {id}",
-        "user": "User",
-        "branch": "Branch",
-        "service": "Service",
-        "status": "Status",
-        "date": "Date"
-      },
-      "cancel": {
-        "title": "Cancel Booking",
-        "confirm": "Are you sure you want to cancel booking {bookingId}? This action cannot be undone.",
-        "yes": "Yes, Cancel Booking",
-        "no": "No, Keep Booking"
-      },
-      "update": {
-        "title": "Update Booking Status",
-        "button": "Update Status"
-      },
-      "bookingId": "Booking ID",
-      "user": "User",
+    "form": {
+      "name": "Washer Name",
+      "namePlaceholder": "e.g., Mohammed Ahmed",
+      "nameMinLength": "Washer name must be at least 2 characters.",
       "branch": "Branch",
-      "service": "Service",
+      "branchRequired": "Please select a branch.",
+      "selectBranch": "Select a branch",
       "status": "Status",
-      "date": "Date",
-      "copyId": "Copy ID",
-      "viewDetails": "View Details",
-      "updateStatus": "Update Status",
-      "cancelBooking": "Cancel Booking",
-      "updateSuccess": "Booking status updated successfully",
-      "updateError": "Failed to update booking status",
-      "cancelSuccess": "Booking cancelled successfully",
-      "cancelError": "Failed to cancel booking",
-      "status": {
-        "title": "Status",
-        "pending": "Pending",
-        "inProgress": "In Progress",
-        "completed": "Completed",
-        "scheduled": "Scheduled",
-        "cancelled": "Cancelled"
-      }
+      "selectStatus": "Select a status",
+      "rating": "Rating",
+      "updateButton": "Update Washer",
+      "createButton": "Create Washer",
+      "defaultStatus": "inactive",
+      "defaultRating": "0",
+      "activeStatusValue": "active",
+      "inactiveStatusValue": "inactive"
     },
-    "reports": {
-      "title": "Reports",
-      "description": "View and download generated reports",
-      "reportName": "Report Name",
-      "dateRange": "Date Range",
-      "generatedOn": "Generated On",
-      "download": "Download",
-      "monthlyRevenue": "Monthly Revenue",
-      "userGrowth": "User Growth",
-      "washerPerformance": "Washer Performance",
-      "bookingTrends": "Booking Trends"
-    },
-    "activity": {
-      "title": "Recent Activity"
-    },
-    "reviews": {
-      "title": "Recent Reviews"
-    },
-    "washersActivity": {
-      "title": "Washers Activity"
-    },
-    "washers": {
-      "name": "Name",
-      "branch": "Branch",
-      "status": "Status",
-      "rating": "Rating"
-    },
-    "branchPerformance": {
-      "title": "Branch Performance"
-    },
-    "paymentsOverview": {
-      "title": "Payments Overview"
-    }
-  },
-  "franchise": {
-    "dashboard": {
-      "title": "Karwi Franchise Dashboard",
-      "description": "Manage your Karwi franchise operations"
-    },
-    "analytics": {
-      "title": "Analytics Dashboard",
-      "description": "View insights and performance metrics for your franchise",
-      "branchAnalytics": {
-        "title": "Branch Analytics",
-        "description": "View performance metrics for specific branches"
-      },
-      "metrics": {
-        "totalBranches": "Total Branches",
-        "totalServices": "Total Services",
-        "activeWashers": "Active Washers",
-        "totalBookings": "Total Bookings"
-      }
-    },
-    "analytics": {
-      "title": "Analytics Dashboard",
-      "description": "View insights and performance metrics for your franchise",
-      "branchAnalytics": {
-        "title": "Branch Analytics",
-        "description": "View performance metrics for specific branches"
-      },
-      "metrics": {
-        "totalBranches": "Total Branches",
-        "totalServices": "Total Services",
-        "activeWashers": "Active Washers",
-        "totalBookings": "Total Bookings"
-      }
-    },
-    "branches": {
-      "title": "Branch Management",
-      "description": "Manage your Karwi branches",
-      "viewAnalytics": "View Analytics",
-      "location": "Location",
-      "viewOnMap": "View on Map",
-      "noServices": "No services",
-      "copyId": "Copy ID",
-      "editBranch": "Edit Branch",
-      "noLocation": "Not set"
-    },
-    "services": {
-      "title": "Service Management",
-      "description": "Manage services across all branches in your franchise",
-      "manage": "Manage",
-      "global": "Global",
-      "availableAllBranches": "Available at all branches",
-      "branchSpecific": "Branch-specific",
-      "noDescription": "No description provided",
-      "duration": "Duration",
-      "mins": "mins",
-      "price": "Price",
-      "todos": "To-Dos",
-      "includes": "Includes",
-      "manageAvailability": "Manage Availability",
-      "managePromotions": "Manage Promotions",
-      "noServicesFound": "No services found",
-      "noServicesBranch": "No services available for the selected branch"
-    },
-    "bookings": {
-      "title": "Booking History",
-      "description": "View and manage booking history for your franchise",
-      "bookingId": "Booking ID",
-      "user": "User",
-      "branch": "Branch",
-      "service": "Service",
-      "date": "Date",
-      "status": {
-        "pending": "Pending",
-        "inProgress": "In Progress",
-        "completed": "Completed",
-        "cancelled": "Cancelled"
-      },
-      "updateStatus": "Update Status",
-      "viewDetails": "View Details",
-      "copyId": "Copy ID",
-      "pendingBookings": "Pending Bookings",
-      "noPendingBookings": "No pending bookings"
-    },
-    "products": {
-      "title": "Product Store",
-      "description": "Browse and order products for your franchise",
-      "catalog": {
-        "title": "Available Products",
-        "description": "Browse our catalog of products for your franchise",
-        "orderProduct": "Order Product",
-        "noImage": "No image",
-        "inStock": "In stock",
-        "allCategories": "All Categories",
-        "noProducts": "No products found",
-        "noProductsCategory": "No products available in the selected category"
-      },
-      "orders": {
-        "title": "Order History",
-        "description": "View your previous product orders",
-        "order": "Order",
-        "export": "Export",
-        "total": "Total",
-        "orderItems": "Order Items",
-        "quantity": "Quantity",
-        "each": "each",
-        "currentStock": "Current stock",
-        "noOrders": "No orders found"
-      },
-      "orderForm": {
-        "title": "Order Product",
-        "perUnit": "per unit",
-        "placeOrder": "Place Order",
-        "insufficientStock": "Insufficient stock for this product"
-      }
-    },
-    "promotions": {
-      "title": "Promotion Management",
-      "description": "Create and manage promotions that can be applied to services",
-      "addPromotion": "Add Promotion",
-      "code": "Code",
-      "discount": "Discount",
-      "validityPeriod": "Validity Period",
-      "status": {
-        "active": "Active",
-        "inactive": "Inactive"
-      },
-      "noPromotions": "No promotions found",
-      "createFirstPromotion": "Create your first promotion to offer discounts on services",
-      "editPromotion": "Edit Promotion",
-      "createPromotion": "Create Promotion",
-      "updateDetails": "Update the details of this promotion",
-      "createNewPromotion": "Create a new promotion that can be applied to services"
-    },
-    "reports": {
-      "title": "Reports",
-      "description": "View and download reports for your Karwi franchise",
-      "monthlyBookings": "Monthly Bookings Report",
-      "washerPerformance": "Washer Performance Report",
-      "servicePopularity": "Service Popularity Report",
-      "branchRevenue": "Branch Revenue Report",
-      "dateRange": "Date Range",
-      "generatedOn": "Generated On",
-      "type": "Type",
-      "download": "Download"
-    },
-    "washers": {
-      "title": "Washer Management",
-      "description": "Manage washers across all branches in your franchise",
+    "table": {
       "name": "Name",
       "branch": "Branch",
       "status": "Status",
       "rating": "Rating",
-      "unassigned": "Unassigned",
-      "copyId": "Copy ID"
+      "filterPlaceholder": "Filter by name...",
+      "filterBranchPlaceholder": "Filter by Branch",
+      "allBranches": "All Branches",
+      "allBranchesValue": "all",
+      "export": "Export",
+      "noResults": "No results.",
+      "previous": "Previous",
+      "next": "Next"
     }
+  },
+  "schedule": {
+    "title": "Washer Schedule",
+    "description": "Manage and view washer schedules across all branches"
+  },
+  "services": {
+    "title": "Services"
+  },
+  "bannersOffers": {
+    "title": "Banners & Offers",
+    "description": "Manage site-wide banners and promotional offers",
+    "banners": {
+      "title": "Banners",
+      "description": "Manage site-wide banners displayed to users"
+    },
+    "offers": {
+      "title": "Offers",
+      "description": "Manage promotional offers for services and products"
+    }
+  },
+  "products": {
+    "orders": {
+      "title": "Product Orders",
+      "description": "Manage franchise product orders"
+    }
+  },
+  "metrics": {
+    "totalRevenue": "Total Revenue",
+    "totalBookings": "Total Bookings",
+    "totalUsers": "Total Users",
+    "activeWashers": "Active Washers"
+  },
+  "bookings": {
+    "title": "Bookings",
+    "recent": {
+      "title": "Recent Bookings",
+      "description": "Track and manage your latest bookings"
+    },
+    "details": {
+      "title": "Booking Details",
+      "description": "Details for booking ID: {id}",
+      "user": "User",
+      "branch": "Branch",
+      "service": "Service",
+      "status": "Status",
+      "date": "Date"
+    },
+    "cancel": {
+      "title": "Cancel Booking",
+      "confirm": "Are you sure you want to cancel booking {bookingId}? This action cannot be undone.",
+      "yes": "Yes, Cancel Booking",
+      "no": "No, Keep Booking"
+    },
+    "update": {
+      "title": "Update Booking Status",
+      "button": "Update Status"
+    },
+    "bookingId": "Booking ID",
+    "user": "User",
+    "branch": "Branch",
+    "service": "Service",
+    "status": {
+      "title": "Status",
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "scheduled": "Scheduled",
+      "cancelled": "Cancelled"
+    },
+    "date": "Date",
+    "copyId": "Copy ID",
+    "viewDetails": "View Details",
+    "updateStatus": "Update Status",
+    "cancelBooking": "Cancel Booking",
+    "updateSuccess": "Booking status updated successfully",
+    "updateError": "Failed to update booking status",
+    "cancelSuccess": "Booking cancelled successfully",
+    "cancelError": "Failed to cancel booking"
+  },
+  "reports": {
+    "title": "Reports",
+    "description": "View and download generated reports",
+    "reportName": "Report Name",
+    "dateRange": "Date Range",
+    "generatedOn": "Generated On",
+    "download": "Download",
+    "monthlyRevenue": "Monthly Revenue",
+    "userGrowth": "User Growth",
+    "washerPerformance": "Washer Performance",
+    "bookingTrends": "Booking Trends"
+  },
+  "activity": {
+    "title": "Recent Activity"
+  },
+  "reviews": {
+    "title": "Recent Reviews"
+  },
+  "washersActivity": {
+    "title": "Washers Activity"
+  },
+  "washers": {
+    "name": "Name",
+    "branch": "Branch",
+    "status": "Status",
+    "rating": "Rating"
+  },
+  "branchPerformance": {
+    "title": "Branch Performance"
+  },
+  "paymentsOverview": {
+    "title": "Payments Overview"
   }
 }

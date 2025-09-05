@@ -33,9 +33,10 @@ import { WasherDialog } from "./washer-dialog";
 
 export function WasherBadge({ washer }: { washer: Washer }) {
   const t = useTranslations("admin.washers");
+  const activeStatus = t("activeStatusValue") || "active";
   return (
-    <Badge variant={washer.status === "active" ? "default" : "destructive"}>
-      {washer.status === "active" ? t("active") : t("inactive")}
+    <Badge variant={washer.status === activeStatus ? "default" : "destructive"}>
+      {washer.status === activeStatus ? t("active") : t("inactive")}
     </Badge>
   );
 }

@@ -26,7 +26,8 @@ export const useWasherColumns = () => {
       header: t("table.status"),
       cell: ({ row }) => {
         const status = row.getValue("status");
-        return <Badge variant={status === "active" ? "default" : "destructive"}>{t(status)}</Badge>;
+        const activeStatus = t("activeStatusValue") || "active";
+        return <Badge variant={status === activeStatus ? "default" : "destructive"}>{t(status)}</Badge>;
       },
     },
     {

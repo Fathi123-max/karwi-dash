@@ -2,6 +2,8 @@
 
 import { Suspense, useEffect } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAdminStore } from "@/stores/admin-dashboard/admin-store";
 import { useBookingStore } from "@/stores/admin-dashboard/booking-store";
@@ -24,6 +26,7 @@ import { RecentBookingsTable } from "./_components/recent-bookings-table";
 import { WashersActivityTable } from "./_components/washers-activity-table";
 
 export default function AdminHomePage() {
+  const t = useTranslations("admin.dashboard.tabs");
   const { fetchBranches } = useBranchStore();
   const { fetchFranchises } = useFranchiseStore();
   const { fetchPayments } = usePaymentStore();
@@ -68,9 +71,9 @@ export default function AdminHomePage() {
       <AdminHeader />
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="analytics">Analytics</TabsTrigger>
-          <TabsTrigger value="activity">Recent Activity</TabsTrigger>
+          <TabsTrigger value="overview">{t("overview")}</TabsTrigger>
+          <TabsTrigger value="analytics">{t("analytics")}</TabsTrigger>
+          <TabsTrigger value="activity">{t("activity")}</TabsTrigger>
         </TabsList>
         <TabsContent value="overview" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

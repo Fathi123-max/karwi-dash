@@ -27,20 +27,20 @@ export function AddScheduleForm({ washerId }: { washerId: string }) {
   const form = useForm<ScheduleFormValues>({
     resolver: zodResolver(formSchema(t)),
     defaultValues: {
-      day_of_week: 1,
-      start_time: "09:00",
-      end_time: "17:00",
+      day_of_week: parseInt(t("addShift.defaultDay")) || 1,
+      start_time: t("addShift.defaultStartTime") || "09:00",
+      end_time: t("addShift.defaultEndTime") || "17:00",
     },
   });
 
   const daysOfWeek = [
-    { value: 1, label: t("days.monday") },
-    { value: 2, label: t("days.tuesday") },
-    { value: 3, label: t("days.wednesday") },
-    { value: 4, label: t("days.thursday") },
-    { value: 5, label: t("days.friday") },
-    { value: 6, label: t("days.saturday") },
-    { value: 0, label: t("days.sunday") },
+    { value: parseInt(t("days.mondayValue")) || 1, label: t("days.monday") },
+    { value: parseInt(t("days.tuesdayValue")) || 2, label: t("days.tuesday") },
+    { value: parseInt(t("days.wednesdayValue")) || 3, label: t("days.wednesday") },
+    { value: parseInt(t("days.thursdayValue")) || 4, label: t("days.thursday") },
+    { value: parseInt(t("days.fridayValue")) || 5, label: t("days.friday") },
+    { value: parseInt(t("days.saturdayValue")) || 6, label: t("days.saturday") },
+    { value: parseInt(t("days.sundayValue")) || 0, label: t("days.sunday") },
   ];
 
   const onSubmit = (data: ScheduleFormValues) => {

@@ -36,7 +36,7 @@ export function ScheduleList({ schedules }: { schedules: WasherSchedule[] }) {
               .map((schedule) => (
                 <li key={schedule.id} className="flex items-center justify-between rounded-md border p-4">
                   <div>
-                    <p className="font-semibold">{daysOfWeek[schedule.day_of_week]}</p>
+                    <p className="font-semibold">{daysOfWeek[schedule.day_of_week] || t("days.unknown")}</p>
                     <p className="text-muted-foreground">
                       {schedule.start_time} - {schedule.end_time}
                     </p>

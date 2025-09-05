@@ -79,7 +79,12 @@
   "admin": {
     "dashboard": {
       "title": "لوحة تحكم مسؤول كاروي",
-      "description": "إشراف على شبكة غسيل السيارات كاروي بأكملها"
+      "description": "إشراف على شبكة غسيل السيارات كاروي بأكملها",
+      "tabs": {
+        "overview": "نظرة عامة",
+        "analytics": "تحليلات",
+        "activity": "النشاط الأخير"
+      }
     },
     "menu": {
       "admin": "قائمة الإدارة",
@@ -176,6 +181,7 @@
       "actions": "الإجراءات",
       "active": "نشط",
       "inactive": "غير نشط",
+      "activeStatusValue": "active",
       "deleteConfirm": {
         "title": "هل أنت متأكد تماماً؟",
         "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف الغسال وجميع بياناته نهائياً.",
@@ -184,131 +190,17 @@
       "schedule": {
         "title": "إدارة جدول {name}",
         "description": "إضافة أو إزالة ورديات العمل الأسبوعية.",
-        "addShift": "إضافة وردية جديدة",
-        "currentSchedule": "الجدول الحالي",
-        "noShifts": "لا توجد ورديات مجدولة لهذا الغسال.",
-        "dayOfWeek": "يوم الأسبوع",
-        "selectDay": "اختر يوماً",
-        "startTime": "وقت البدء",
-        "endTime": "وقت الانتهاء",
-        "invalidTime": "تنسيق الوقت غير صحيح (HH:MM)",
-        "deleteShift": "حذف الوردية"
-      }
-    },
-    "schedule": {
-      "title": "جدول الغسال",
-      "description": "إدارة وعرض جداول الغسال في جميع الفروع"
-    },
-    "services": {
-      "title": "الخدمات"
-    },
-    "bannersOffers": {
-      "title": "البانرات والعروض",
-      "description": "إدارة البنرات والعروض الترويجية على مستوى الموقع",
-      "banners": {
-        "title": "البانرات",
-        "description": "إدارة البنرات المعروضة للمستخدمين على مستوى الموقع"
-      },
-      "offers": {
-        "title": "العروض",
-        "description": "إدارة العروض الترويجية للخدمات والمنتجات"
-      }
-    },
-    "products": {
-      "orders": {
-        "title": "طلبات المنتجات",
-        "description": "إدارة طلبات منتجات الفروع"
-      }
-    },
-    "metrics": {
-      "totalRevenue": "إجمالي الإيرادات",
-      "totalBookings": "إجمالي الحجزات",
-      "totalUsers": "إجمالي المستخدمين",
-      "activeWashers": "الغسالون النشطون"
-    },
-    "bookings": {
-      "title": "الحجوزات",
-      "recent": {
-        "title": "الحجوزات الأخيرة",
-        "description": "تتبع وإدارة أحدث الحجوزات"
-      },
-      "details": {
-        "title": "تفاصيل الحجز",
-        "description": "تفاصيل الحجز بالمعرف: {id}",
-        "user": "المستخدم",
-        "branch": "الفرع",
-        "service": "الخدمة",
-        "status": "الحالة",
-        "date": "التاريخ"
-      },
-      "cancel": {
-        "title": "إلغاء الحجز",
-        "confirm": "هل أنت متأكد من إلغاء الحجز {bookingId}؟ لا يمكن التراجع عن هذا الإجراء.",
-        "yes": "نعم، إلغاء الحجز",
-        "no": "لا، الاحتفاظ بالحجز"
-      },
-      "update": {
-        "title": "تحديث حالة الحجز",
-        "button": "تحديث الحالة"
-      },
-      "bookingId": "معرف الحجز",
-      "user": "المستخدم",
-      "branch": "الفرع",
-      "service": "الخدمة",
-      "status": "الحالة",
-      "date": "التاريخ",
-      "copyId": "نسخ المعرف",
-      "viewDetails": "عرض التفاصيل",
-      "updateStatus": "تحديث الحالة",
-      "cancelBooking": "إلغاء الحجز",
-      "updateSuccess": "تم تحديث حالة الحجز بنجاح",
-      "updateError": "فشل في تحديث حالة الحجز",
-      "cancelSuccess": "تم إلغاء الحجز بنجاح",
-      "cancelError": "فشل في إلغاء الحجز",
-      "status": {
-        "title": "الحالة",
-        "pending": "معلق",
-        "inProgress": "قيد التنفيذ",
-        "completed": "مكتمل",
-        "scheduled": "مجدول",
-        "cancelled": "ملغى"
-      }
-    },
-    "reports": {
-      "title": "التقارير",
-      "description": "عرض وتحميل التقارير المُولدة",
-      "reportName": "اسم التقرير",
-      "dateRange": "نطاق التاريخ",
-      "generatedOn": "تم الإنشاء في",
-      "download": "تحميل",
-      "monthlyRevenue": "الإيرادات الشهرية",
-      "userGrowth": "نمو المستخدمين",
-      "washerPerformance": "أداء الغسالين",
-      "bookingTrends": "اتجاهات الحجز"
-    },
-    "activity": {
-      "title": "النشاط الأخير"
-    },
-    "reviews": {
-      "title": "آخر التقييمات"
-    },
-    "washersActivity": {
-      "title": "نشاط الغسالين"
-    },
-    "washers": {
-      "name": "الاسم",
-      "branch": "الفرع",
-      "status": "الحالة",
-      "rating": "التقييم",
-      "schedule": {
         "addShift": {
           "title": "إضافة وردية جديدة",
           "dayOfWeek": "يوم الأسبوع",
-          "selectDay": "اختر يومًا",
+          "selectDay": "اختر يوماً",
           "startTime": "وقت البدء",
           "endTime": "وقت الانتهاء",
           "button": "إضافة وردية",
-          "invalidTimeFormat": "تنسيق الوقت غير صحيح (HH:MM)"
+          "invalidTimeFormat": "تنسيق الوقت غير صحيح (HH:MM)",
+          "defaultDay": "1",
+          "defaultStartTime": "09:00",
+          "defaultEndTime": "17:00"
         },
         "currentSchedule": {
           "title": "الجدول الحالي",
@@ -321,8 +213,33 @@
           "thursday": "الخميس",
           "friday": "الجمعة",
           "saturday": "السبت",
-          "sunday": "الأحد"
+          "sunday": "الأحد",
+          "mondayValue": "1",
+          "tuesdayValue": "2",
+          "wednesdayValue": "3",
+          "thursdayValue": "4",
+          "fridayValue": "5",
+          "saturdayValue": "6",
+          "sundayValue": "0",
+          "unknown": "غير معروف"
         }
+      },
+      "days": {
+        "monday": "الاثنين",
+        "tuesday": "الثلاثاء",
+        "wednesday": "الأربعاء",
+        "thursday": "الخميس",
+        "friday": "الجمعة",
+        "saturday": "السبت",
+        "sunday": "الأحد",
+        "mondayValue": "1",
+        "tuesdayValue": "2",
+        "wednesdayValue": "3",
+        "thursdayValue": "4",
+        "fridayValue": "5",
+        "saturdayValue": "6",
+        "sundayValue": "0",
+        "unknown": "غير معروف"
       },
       "form": {
         "name": "اسم الغسال",
@@ -335,7 +252,11 @@
         "selectStatus": "اختر الحالة",
         "rating": "التقييم",
         "updateButton": "تحديث الغسال",
-        "createButton": "إنشاء غسال"
+        "createButton": "إنشاء غسال",
+        "defaultStatus": "inactive",
+        "defaultRating": "0",
+        "activeStatusValue": "active",
+        "inactiveStatusValue": "inactive"
       },
       "table": {
         "name": "الاسم",
@@ -345,17 +266,123 @@
         "filterPlaceholder": "تصفية حسب الاسم...",
         "filterBranchPlaceholder": "تصفية حسب الفرع",
         "allBranches": "جميع الفروع",
+        "allBranchesValue": "all",
         "export": "تصدير",
         "noResults": "لا توجد نتائج.",
         "previous": "السابق",
         "next": "التالي"
       }
-    },
-    "branchPerformance": {
-      "title": "أداء الفرع"
-    },
-    "paymentsOverview": {
-      "title": "نظرة عامة على المدفوعات"
     }
+  },
+  "schedule": {
+    "title": "جدول الغسالين",
+    "description": "إدارة وعرض جداول الغسالين عبر جميع الفروع"
+  },
+  "services": {
+    "title": "الخدمات"
+  },
+  "bannersOffers": {
+    "title": "البانرات والعروض",
+    "description": "إدارة البنرات والعروض الترويجية على مستوى الموقع",
+    "banners": {
+      "title": "البانرات",
+      "description": "إدارة البنرات المعروضة للمستخدمين على مستوى الموقع"
+    },
+    "offers": {
+      "title": "العروض",
+      "description": "إدارة العروض الترويجية للخدمات والمنتجات"
+    }
+  },
+  "products": {
+    "orders": {
+      "title": "طلبات المنتجات",
+      "description": "إدارة طلبات منتجات الفروع"
+    }
+  },
+  "metrics": {
+    "totalRevenue": "إجمالي الإيرادات",
+    "totalBookings": "إجمالي الحجزات",
+    "totalUsers": "إجمالي المستخدمين",
+    "activeWashers": "الغسالون النشطون"
+  },
+  "bookings": {
+    "title": "الحجوزات",
+    "recent": {
+      "title": "الحجوزات الأخيرة",
+      "description": "تتبع وإدارة أحدث الحجوزات"
+    },
+    "details": {
+      "title": "تفاصيل الحجز",
+      "description": "تفاصيل الحجز بالمعرف: {id}",
+      "user": "المستخدم",
+      "branch": "الفرع",
+      "service": "الخدمة",
+      "status": "الحالة",
+      "date": "التاريخ"
+    },
+    "cancel": {
+      "title": "إلغاء الحجز",
+      "confirm": "هل أنت متأكد من إلغاء الحجز {bookingId}؟ لا يمكن التراجع عن هذا الإجراء.",
+      "yes": "نعم، إلغاء الحجز",
+      "no": "لا، الاحتفاظ بالحجز"
+    },
+    "update": {
+      "title": "تحديث حالة الحجز",
+      "button": "تحديث الحالة"
+    },
+    "bookingId": "معرف الحجز",
+    "user": "المستخدم",
+    "branch": "الفرع",
+    "service": "الخدمة",
+    "status": {
+      "title": "الحالة",
+      "pending": "معلق",
+      "inProgress": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "scheduled": "مجدول",
+      "cancelled": "ملغى"
+    },
+    "date": "التاريخ",
+    "copyId": "نسخ المعرف",
+    "viewDetails": "عرض التفاصيل",
+    "updateStatus": "تحديث الحالة",
+    "cancelBooking": "إلغاء الحجز",
+    "updateSuccess": "تم تحديث حالة الحجز بنجاح",
+    "updateError": "فشل في تحديث حالة الحجز",
+    "cancelSuccess": "تم إلغاء الحجز بنجاح",
+    "cancelError": "فشل في إلغاء الحجز"
+  },
+  "reports": {
+    "title": "التقارير",
+    "description": "عرض وتحميل التقارير المُولدة",
+    "reportName": "اسم التقرير",
+    "dateRange": "نطاق التاريخ",
+    "generatedOn": "تم الإنشاء في",
+    "download": "تحميل",
+    "monthlyRevenue": "الإيرادات الشهرية",
+    "userGrowth": "نمو المستخدمين",
+    "washerPerformance": "أداء الغسالين",
+    "bookingTrends": "اتجاهات الحجز"
+  },
+  "activity": {
+    "title": "النشاط الأخير"
+  },
+  "reviews": {
+    "title": "آخر التقييمات"
+  },
+  "washersActivity": {
+    "title": "نشاط الغسالين"
+  },
+  "washers": {
+    "name": "الاسم",
+    "branch": "الفرع",
+    "status": "الحالة",
+    "rating": "التقييم"
+  },
+  "branchPerformance": {
+    "title": "أداء الفرع"
+  },
+  "paymentsOverview": {
+    "title": "نظرة عامة على المدفوعات"
   }
 }

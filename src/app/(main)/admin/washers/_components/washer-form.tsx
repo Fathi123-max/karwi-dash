@@ -22,7 +22,7 @@ const formSchema = (t: ReturnType<typeof useTranslations>) =>
     branch: z.string({
       required_error: t("form.branchRequired"),
     }),
-    status: z.enum(["active", "inactive"]),
+    status: z.enum([t("form.activeStatusValue") || "active", t("form.inactiveStatusValue") || "inactive"]),
     rating: z.coerce.number().min(0).max(5),
   });
 
@@ -41,8 +41,8 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
     resolver: zodResolver(formSchema(t)),
     defaultValues: washer ?? {
       name: "",
-      status: "inactive",
-      rating: 0,
+      status: t("form.defaultStatus") || "inactive",
+      rating: parseFloat(t("form.defaultRating")) || 0,
     },
   });
 
@@ -108,8 +108,8 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="active">{t("active")}</SelectItem>
-                  <SelectItem value="inactive">{t("inactive")}</SelectItem>
+                  <SelectItem value={t("form.activeStatusValue") || "active"}>{t("active")}</SelectItem>
+                  <SelectItem value={t("form.inactiveStatusValue") || "inactive"}>{t("inactive")}</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
