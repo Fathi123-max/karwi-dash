@@ -6,13 +6,14 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { useWasherStore } from "@/stores/admin-dashboard/washer-store";
 
-import { columns } from "./_components/columns";
+import { useWasherColumns } from "./_components/columns";
 import { WasherDataTable } from "./_components/washer-data-table";
 import { WasherDialog } from "./_components/washer-dialog";
 
 export default function WashersPage() {
   const t = useTranslations("admin.washers");
   const { washers } = useWasherStore();
+  const columns = useWasherColumns();
 
   return (
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
