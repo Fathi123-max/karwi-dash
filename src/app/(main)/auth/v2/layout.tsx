@@ -53,21 +53,21 @@ export default function Layout({ children }: Readonly<{ children: ReactNode }>) 
           </div>
 
           <div className="text-primary-foreground relative z-10 flex h-full flex-col justify-between">
-            <div className="absolute top-10 space-y-1 px-10">
-              
+            <div className="absolute top-10 space-y-1 px-10 text-start">
               <h1 className="text-2xl font-medium">{APP_CONFIG.name}</h1>
               <p className="text-sm">{t("premiumCarCareSolutions")}</p>
             </div>
 
-            <div className="absolute bottom-10 flex w-full justify-between px-10">
-              <div className="text-primary-foreground flex-1 space-y-1">
-                <h2 className="font-medium">{t("professionalCarWashServices")}</h2>
-                <p className="text-sm">{t("ecoFriendlySolutions")}</p>
-              </div>
-              <Separator orientation="vertical" className="mx-3 !h-auto" />
-              <div className="text-primary-foreground flex-1 space-y-1">
-                <h2 className="font-medium">{t("supportTitle")}</h2>
-                <p className="text-sm">{t("supportDescription")}</p>
+            <div className="absolute bottom-10 w-full px-10">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div className="text-primary-foreground space-y-1 text-start">
+                  <h2 className="font-medium">{t("professionalCarWashServices")}</h2>
+                  <p className="text-sm">{t("ecoFriendlySolutions")}</p>
+                </div>
+                <div className="text-primary-foreground space-y-1 text-start">
+                  <h2 className="font-medium">{t("supportTitle")}</h2>
+                  <p className="text-sm">{t("supportDescription")}</p>
+                </div>
               </div>
             </div>
           </div>
