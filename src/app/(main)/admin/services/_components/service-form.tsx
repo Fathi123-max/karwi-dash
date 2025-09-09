@@ -7,6 +7,7 @@ import { useEffect } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Globe, Tag, DollarSign, Clock, Image, Hash, FileText, List } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -45,6 +46,7 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
   const { branches, fetchBranches } = useBranchStore();
   const addService = useServiceStore((state) => state.addService);
   const updateService = useServiceStore((state) => state.updateService);
+  const t = useTranslations("admin.services.form");
 
   useEffect(() => {
     fetchBranches();
@@ -126,15 +128,15 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="basic" className="flex items-center gap-2">
                   <Tag className="h-4 w-4" />
-                  Basic Info
+                  {t("basicInfo")}
                 </TabsTrigger>
                 <TabsTrigger value="details" className="flex items-center gap-2">
                   <FileText className="h-4 w-4" />
-                  Details
+                  {t("details")}
                 </TabsTrigger>
                 <TabsTrigger value="availability" className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  Availability
+                  {t("availability")}
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="basic" className="mt-4 space-y-4">
@@ -144,11 +146,11 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Service Name</FormLabel>
+                        <FormLabel>{t("serviceName")}</FormLabel>
                         <FormControl>
                           <div className="relative">
                             <Tag className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                            <Input placeholder="e.g., Standard Wash" {...field} className="pl-10" />
+                            <Input placeholder={t("serviceName")} {...field} className="pl-10" />
                           </div>
                         </FormControl>
                         <FormMessage />
@@ -160,7 +162,7 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                     name="duration_min"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Duration (minutes)</FormLabel>
+                        <FormLabel>{t("duration")}</FormLabel>
                         <FormControl>
                           <div className="relative">
                             <Clock className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
@@ -177,9 +179,9 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel>{t("serviceDescription")}</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="Service description" {...field} />
+                        <Textarea placeholder={t("serviceDescription")} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -191,7 +193,7 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                     name="price"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Price</FormLabel>
+                        <FormLabel>{t("price")}</FormLabel>
                         <FormControl>
                           <div className="relative">
                             <DollarSign className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
@@ -211,8 +213,8 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                       <PicturesField
                         form={form}
                         name="pictures"
-                        label="Pictures"
-                        placeholder="Comma-separated URLs of service pictures"
+                        label={t("pictures")}
+                        placeholder={t("commaSeparatedUrls")}
                       />
                       <FormMessage />
                     </FormItem>
@@ -228,10 +230,10 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                       <FormItem>
                         <FormLabel className="flex items-center gap-2">
                           <List className="h-4 w-4" />
-                          To-Dos
+                          {t("todos")}
                         </FormLabel>
                         <FormControl>
-                          <Textarea placeholder="Comma-separated list of to-dos" {...field} />
+                          <Textarea placeholder={t("commaSeparatedTodos")} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -244,10 +246,10 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                       <FormItem>
                         <FormLabel className="flex items-center gap-2">
                           <FileText className="h-4 w-4" />
-                          Include
+                          {t("include")}
                         </FormLabel>
                         <FormControl>
-                          <Textarea placeholder="Comma-separated list of included items" {...field} />
+                          <Textarea placeholder={t("commaSeparatedInclude")} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -261,9 +263,9 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
             </Tabs>
             <div className="flex justify-end space-x-2 pt-4">
               <Button type="button" variant="ghost" onClick={onClose}>
-                Cancel
+                {t("cancel")}
               </Button>
-              <Button type="submit">{service ? "Update" : "Create"}</Button>
+              <Button type="submit">{service ? t("update") : t("create")}</Button>
             </div>
           </>
         ) : (
@@ -272,15 +274,15 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="basic" className="flex items-center gap-2">
                   <Tag className="h-4 w-4" />
-                  Basic Info
+                  {t("basicInfo")}
                 </TabsTrigger>
                 <TabsTrigger value="details" className="flex items-center gap-2">
                   <FileText className="h-4 w-4" />
-                  Details
+                  {t("details")}
                 </TabsTrigger>
                 <TabsTrigger value="settings" className="flex items-center gap-2">
                   <Globe className="h-4 w-4" />
-                  Settings
+                  {t("settings")}
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="basic" className="mt-4 space-y-4">
@@ -410,12 +412,10 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                       <div className="space-y-0.5">
                         <FormLabel className="flex items-center text-base">
                           <Globe className="mr-2 h-4 w-4" />
-                          Global Service
+                          {t("globalService")}
                         </FormLabel>
                         <p className="text-muted-foreground text-sm">
-                          {field.value
-                            ? "This service will be available at all branches"
-                            : "This service will only be available at selected branch"}
+                          {field.value ? t("globalServiceDescription") : t("branchServiceDescription")}
                         </p>
                       </div>
                       <FormControl>
@@ -429,7 +429,7 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                   name="branchId"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Branch</FormLabel>
+                      <FormLabel>{t("branch")}</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -437,7 +437,7 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select a branch" />
+                            <SelectValue placeholder={t("selectBranch")} />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -456,10 +456,10 @@ export function ServiceForm({ service, onClose }: ServiceFormProps) {
             </Tabs>
             <div className="flex justify-end space-x-2 pt-4">
               <Button type="button" variant="ghost" onClick={onClose}>
-                Cancel
+                {t("cancel")}
               </Button>
               <Button type="submit" disabled={!form.watch("is_global") && !form.watch("branchId")}>
-                Create
+                {t("create")}
               </Button>
             </div>
           </>

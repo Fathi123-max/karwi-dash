@@ -147,7 +147,9 @@
     "table": {
       "noResults": "No results found.",
       "clearFilters": "Clear filters",
-      "export": "Export"
+      "export": "Export",
+      "previous": "Previous",
+      "next": "Next"
     },
     "branches": {
       "title": "Branches",
@@ -350,7 +352,36 @@
         "continue": "Continue"
       },
       "branch": "Branch",
-      "services": "Services"
+      "services": "Services",
+      "columns": {
+        "name": "Name",
+        "phone": "Phone",
+        "cars": "Cars",
+        "bookings": "Bookings",
+        "totalWashes": "Total Washes"
+      },
+      "filters": {
+        "name": {
+          "placeholder": "Filter by name..."
+        },
+        "phone": {
+          "placeholder": "Filter by phone..."
+        }
+      },
+      "export": "Export",
+      "form": {
+        "name": "Full Name",
+        "phone": "Phone Number",
+        "nameMinLength": "User name must be at least 2 characters.",
+        "phoneMinLength": "Phone number must be at least 10 characters.",
+        "namePlaceholder": "e.g., Mohammed Ahmed",
+        "phonePlaceholder": "123-456-7890",
+        "updateButton": "Update User"
+      },
+      "detail": {
+        "userNotFound": "User not found",
+        "totalBookings": "Total Bookings"
+      }
     },
     "washers": {
       "title": "Washers",
@@ -374,6 +405,26 @@
         "previous": "Previous",
         "next": "Next",
         "branch": "Branch"
+      },
+      "schedule": {
+        "title": "Schedule for {name}",
+        "description": "Manage the working schedule for this washer",
+        "addShift": {
+          "title": "Add New Shift",
+          "dayOfWeek": "Day of Week",
+          "selectDay": "Select a day",
+          "startTime": "Start Time",
+          "endTime": "End Time",
+          "button": "Add Shift",
+          "invalidTimeFormat": "Invalid time format (HH:MM)",
+          "defaultDay": "1",
+          "defaultStartTime": "09:00",
+          "defaultEndTime": "17:00"
+        },
+        "currentSchedule": {
+          "title": "Current Schedule",
+          "noShifts": "No shifts scheduled"
+        }
       }
     },
     "form": {
@@ -417,6 +468,7 @@
         "description": "Manage site-wide banners displayed to users"
       },
       "offers": {
+        "addoffer": "Add Offer",
         "title": "Offers",
         "description": "Manage promotional offers for services and products"
       },
@@ -495,6 +547,47 @@
         "title": "Product Orders",
         "description": "Manage franchise product orders"
       },
+      "title": "Products",
+      "description": "Manage products and inventory",
+      "columns": {
+        "name": "Name",
+        "category": "Category",
+        "price": "Price",
+        "stock": "Stock",
+        "actions": "Actions",
+        "orderId": "Order ID",
+        "franchise": "Franchise",
+        "total": "Total",
+        "status": "Status",
+        "date": "Date"
+      },
+      "filters": {
+        "category": "Category",
+        "franchise": "Franchise",
+        "uncategorized": "Uncategorized"
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "viewDetails": "View Details",
+        "updateStatus": "Update Status"
+      },
+      "statuses": {
+        "pending": "Pending",
+        "processing": "Processing",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      },
+      "manageCategories": "Manage Categories",
+      "createProduct": "Create Product",
+      "editProduct": "Edit Product",
+      "export": "Export",
+      "loading": "Loading orders...",
+      "error": "Error loading orders",
+      "retry": "Retry",
+      "noOrdersFound": "No orders found.",
+      "toggleColumns": "Toggle columns",
       "branch": "Branch",
       "services": "Services"
     },
@@ -508,7 +601,80 @@
     "services": {
       "title": "Services",
       "branch": "Branch",
-      "services": "Services"
+      "services": "Services",
+      "columns": {
+        "name": "Name",
+        "description": "Description",
+        "branch": "Branch",
+        "price": "Price",
+        "duration": "Duration (min)",
+        "noDescription": "No description"
+      },
+      "filters": {
+        "branch": "Branch"
+      },
+      "deleteConfirm": {
+        "globalService": "This is a global service that applies to all branches. Deleting it will remove it from all branches."
+      },
+      "form": {
+        "basicInfo": "Basic Info",
+        "details": "Details",
+        "settings": "Settings",
+        "availability": {
+          "dayOfWeek": "Day of Week",
+          "selectDay": "Select a day",
+          "startTime": "Start Time",
+          "endTime": "End Time",
+          "active": "Active",
+          "activeDescription": "Set whether this availability slot is active",
+          "cancel": "Cancel",
+          "saving": "Saving...",
+          "update": "Update",
+          "add": "Add",
+          "list": {
+            "title": "Service Availability",
+            "description": "Manage when this service is available",
+            "addButton": "Add Availability",
+            "editTitle": "Edit Availability",
+            "addTitle": "Add Availability",
+            "noAvailability": "No availability set. Add time slots when this service is available.",
+            "inactive": "Inactive",
+            "actions": "Actions",
+            "edit": "Edit",
+            "delete": "Delete"
+          }
+        },
+        "serviceName": "Service Name",
+        "serviceDescription": "Service description",
+        "duration": "Duration (minutes)",
+        "price": "Price",
+        "pictures": {
+          "upload": "Upload",
+          "addUrl": "Add URL",
+          "dragDrop": "Drag and drop your images here, or click to browse",
+          "chooseFiles": "Choose Files",
+          "uploading": "Uploading...",
+          "storageInfo": "Images will be stored in cloud storage",
+          "urlPlaceholder": "https://example.com/image.jpg",
+          "add": "Add",
+          "urlDescription": "Enter the URL of an image hosted online",
+          "currentImages": "Current Images",
+          "imageLabel": "Image {index}"
+        },
+        "todos": "To-Dos",
+        "include": "Include",
+        "globalService": "Global Service",
+        "branch": "Branch",
+        "selectBranch": "Select a branch",
+        "globalServiceDescription": "This service will be available at all branches",
+        "branchServiceDescription": "This service will only be available at selected branch",
+        "update": "Update",
+        "create": "Create",
+        "cancel": "Cancel",
+        "commaSeparatedUrls": "Comma-separated URLs of service pictures",
+        "commaSeparatedTodos": "Comma-separated list of to-dos",
+        "commaSeparatedInclude": "Comma-separated list of included items"
+      }
     },
     "reports": {
       "title": "Reports",

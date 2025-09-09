@@ -13,6 +13,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Download } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { DataTableToolbar } from "@/app/(main)/admin/_components/data-table-toolbar";
 import { DataTable } from "@/components/data-table/data-table";
@@ -42,6 +43,7 @@ export function ServiceList() {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [isCreateModalOpen, setCreateModalOpen] = React.useState(false);
   const columns = useServiceColumns();
+  const t = useTranslations("admin.services");
 
   // Memoize servicesWithBranchNames to prevent infinite re-renders
   const servicesWithBranchNames = useMemo(() => {
@@ -96,11 +98,11 @@ export function ServiceList() {
     () => [
       {
         columnId: "branchName",
-        title: "Branch",
+        title: t("filters.branch"),
         options: branchNames.map((name) => ({ label: name, value: name })),
       },
     ],
-    [branchNames],
+    [branchNames, t],
   );
 
   return (
@@ -110,11 +112,11 @@ export function ServiceList() {
         <div className="flex items-center gap-2">
           <Dialog open={isCreateModalOpen} onOpenChange={setCreateModalOpen}>
             <DialogTrigger asChild>
-              <Button>Create Service</Button>
+              <Button>{t("title")}</Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Create Service</DialogTitle>
+                <DialogTitle>{t("title")}</DialogTitle>
               </DialogHeader>
               <ServiceForm onClose={() => setCreateModalOpen(false)} />
             </DialogContent>
@@ -122,7 +124,7 @@ export function ServiceList() {
           <DataTableViewOptions table={table} />
           <Button variant="outline" size="sm" onClick={() => exportToCSV(table, "services.csv")}>
             <Download className="mr-2 h-4 w-4" />
-            <span className="hidden lg:inline">Export</span>
+            <span className="hidden lg:inline">{t("table.export")}</span>
           </Button>
         </div>
       </div>

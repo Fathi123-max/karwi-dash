@@ -2,11 +2,14 @@
 
 import React from "react";
 
+import { useTranslations } from "next-intl";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUserStore } from "@/stores/admin-dashboard/user-store";
 
 export default function UserDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations("admin.users");
   const { users, fetchUsers } = useUserStore();
   // Resolve the params promise to get the actual id value
   const resolvedParams = React.use(params);
@@ -20,7 +23,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
   const user = users.find((u) => u.id === resolvedParams.id);
 
   if (!user) {
-    return <div>User not found</div>;
+    return <div>{t("detail.userNotFound")}</div>;
   }
 
   return (
@@ -38,15 +41,15 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
         </CardHeader>
         <CardContent className="grid gap-4 md:grid-cols-2">
           <div className="space-y-1">
-            <p className="text-muted-foreground text-sm font-medium">Cars</p>
+            <p className="text-muted-foreground text-sm font-medium">{t("columns.cars")}</p>
             <p className="text-lg font-semibold">{user.cars}</p>
           </div>
           <div className="space-y-1">
-            <p className="text-muted-foreground text-sm font-medium">Total Bookings</p>
+            <p className="text-muted-foreground text-sm font-medium">{t("detail.totalBookings")}</p>
             <p className="text-lg font-semibold">{user.bookings}</p>
           </div>
           <div className="space-y-1">
-            <p className="text-muted-foreground text-sm font-medium">Total Washes</p>
+            <p className="text-muted-foreground text-sm font-medium">{t("columns.totalWashes")}</p>
             <p className="text-lg font-semibold">{user.totalWashes}</p>
           </div>
         </CardContent>
