@@ -16,7 +16,7 @@ export function NavFranchise() {
     { href: "/franchise/analytics", label: t("franchiseAnalytics"), icon: BarChart3 },
     { href: "/franchise/branch-analytics", label: t("branchAnalytics"), icon: BarChart3 },
     { href: "/franchise/promotions", label: t("promotions"), icon: Tag },
-    { href: "/franchise/reports", label: t("reports"), icon: FileText },
+    // { href: "/franchise/reports", label: t("reports"), icon: FileText }, // Hidden as per requirements
     { href: "/franchise/branch-management", label: t("branchManagement"), icon: MapPin },
     { href: "/franchise/washer-management", label: t("washerManagement"), icon: UsersRound },
     { href: "/franchise/booking-history", label: t("bookingHistory"), icon: History },
