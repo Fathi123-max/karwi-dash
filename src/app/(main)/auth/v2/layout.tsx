@@ -2,7 +2,6 @@
 
 import { ReactNode, useEffect, useRef, useState } from "react";
 
-import { Command } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Separator } from "@/components/ui/separator";
@@ -55,7 +54,7 @@ export default function Layout({ children }: Readonly<{ children: ReactNode }>) 
 
           <div className="text-primary-foreground relative z-10 flex h-full flex-col justify-between">
             <div className="absolute top-10 space-y-1 px-10">
-              <Command className="size-10" />
+              
               <h1 className="text-2xl font-medium">{APP_CONFIG.name}</h1>
               <p className="text-sm">{t("premiumCarCareSolutions")}</p>
             </div>
