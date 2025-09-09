@@ -14,6 +14,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Download, Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { DataTableToolbar } from "@/app/(main)/admin/_components/data-table-toolbar";
 import { DataTable } from "@/components/data-table/data-table";
@@ -31,6 +32,7 @@ import { ProductWithCategoryName } from "./columns";
 import { ProductForm } from "./product-form";
 
 export function ProductList() {
+  const t = useTranslations("admin.products");
   const products = useProductStore((state) => state.products);
   const { categories } = useProductCategoryStore();
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -65,10 +67,10 @@ export function ProductList() {
       const category = categories.find((c) => c.id === product.category_id);
       return {
         ...product,
-        categoryName: category ? category.name : "Uncategorized",
+        categoryName: category ? category.name : t("filters.uncategorized"),
       };
     });
-  }, [products, categories]);
+  }, [products, categories, t]);
 
   const table = useReactTable({
     data: productsWithCategoryNames,
@@ -88,19 +90,19 @@ export function ProductList() {
   // Memoize category names for faceted filter
   const categoryNames = useMemo(() => {
     const names = categories.map((category) => category.name);
-    names.push("Uncategorized");
+    names.push(t("filters.uncategorized"));
     return Array.from(new Set(names));
-  }, [categories]);
+  }, [categories, t]);
 
   const facetedFilters = useMemo(
     () => [
       {
         columnId: "categoryName",
-        title: "Category",
+        title: t("filters.category"),
         options: categoryNames.map((name) => ({ label: name, value: name })),
       },
     ],
-    [categoryNames],
+    [categoryNames, t],
   );
 
   return (
@@ -109,18 +111,18 @@ export function ProductList() {
         <DataTableToolbar table={table} filterColumn="name" facetedFilters={facetedFilters} />
         <div className="flex items-center gap-2">
           <Button variant="outline" onClick={() => setIsCategoryManagerOpen(true)}>
-            Manage Categories
+            {t("manageCategories")}
           </Button>
           <Dialog open={isCreateModalOpen} onOpenChange={setCreateModalOpen}>
             <DialogTrigger asChild>
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
-                Create Product
+                {t("createProduct")}
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl">
               <DialogHeader>
-                <DialogTitle>Create Product</DialogTitle>
+                <DialogTitle>{t("createProduct")}</DialogTitle>
               </DialogHeader>
               <ProductForm onClose={() => setCreateModalOpen(false)} />
             </DialogContent>
@@ -128,7 +130,7 @@ export function ProductList() {
           <DataTableViewOptions table={table} />
           <Button variant="outline" size="sm" onClick={() => exportToCSV(table, "products.csv")}>
             <Download className="mr-2 h-4 w-4" />
-            <span className="hidden lg:inline">Export</span>
+            <span className="hidden lg:inline">{t("export")}</span>
           </Button>
         </div>
       </div>
@@ -147,7 +149,7 @@ export function ProductList() {
       >
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Edit Product</DialogTitle>
+            <DialogTitle>{t("editProduct")}</DialogTitle>
           </DialogHeader>
           {productToEdit && (
             <ProductForm

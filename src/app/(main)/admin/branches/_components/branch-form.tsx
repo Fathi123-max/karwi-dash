@@ -6,10 +6,10 @@
 import { useMemo, useRef } from "react";
 
 import dynamic from "next/dynamic";
-import { useTranslations } from "next-intl";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Building2, Loader2, MapPin, Phone, Star, Hash, FileText, Clock, Calendar } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -568,9 +568,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                         <FormControl>
                           <Input placeholder={t("placeholders.adminEmail")} {...field} />
                         </FormControl>
-                        <p className="text-muted-foreground text-sm">
-                          {t("adminEmailDescription")}
-                        </p>
+                        <p className="text-muted-foreground text-sm">{t("adminEmailDescription")}</p>
                         <FormMessage />
                       </FormItem>
                     )}
