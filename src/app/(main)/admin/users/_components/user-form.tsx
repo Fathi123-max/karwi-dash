@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -11,19 +12,20 @@ import { useUserStore } from "@/stores/admin-dashboard/user-store";
 
 import { User } from "./types";
 
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "User name must be at least 2 characters.",
-  }),
-  phone: z.string().min(10, {
-    message: "Phone number must be at least 10 characters.",
-  }),
-  cars: z.coerce.number().min(0),
-  bookings: z.coerce.number().min(0),
-  totalWashes: z.coerce.number().min(0),
-});
+const formSchema = (t: ReturnType<typeof useTranslations>) =>
+  z.object({
+    name: z.string().min(2, {
+      message: t("form.nameMinLength"),
+    }),
+    phone: z.string().min(10, {
+      message: t("form.phoneMinLength"),
+    }),
+    cars: z.coerce.number().min(0),
+    bookings: z.coerce.number().min(0),
+    totalWashes: z.coerce.number().min(0),
+  });
 
-type UserFormValues = z.infer<typeof formSchema>;
+type UserFormValues = z.infer<ReturnType<typeof formSchema>>;
 
 interface UserFormProps {
   user: User;
@@ -31,9 +33,10 @@ interface UserFormProps {
 }
 
 export function UserForm({ user, onSuccess }: UserFormProps) {
+  const t = useTranslations("admin.users");
   const { updateUser } = useUserStore();
   const form = useForm<UserFormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema(t)),
     defaultValues: user,
   });
 
@@ -50,9 +53,9 @@ export function UserForm({ user, onSuccess }: UserFormProps) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Full Name</FormLabel>
+              <FormLabel>{t("form.name")}</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., Mohammed Ahmed" {...field} />
+                <Input placeholder={t("form.namePlaceholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -63,9 +66,9 @@ export function UserForm({ user, onSuccess }: UserFormProps) {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone Number</FormLabel>
+              <FormLabel>{t("form.phone")}</FormLabel>
               <FormControl>
-                <Input placeholder="123-456-7890" {...field} />
+                <Input placeholder={t("form.phonePlaceholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -76,7 +79,7 @@ export function UserForm({ user, onSuccess }: UserFormProps) {
           name="cars"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Cars</FormLabel>
+              <FormLabel>{t("columns.cars")}</FormLabel>
               <FormControl>
                 <Input type="number" {...field} />
               </FormControl>
@@ -89,7 +92,7 @@ export function UserForm({ user, onSuccess }: UserFormProps) {
           name="bookings"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bookings</FormLabel>
+              <FormLabel>{t("columns.bookings")}</FormLabel>
               <FormControl>
                 <Input type="number" {...field} />
               </FormControl>
@@ -102,7 +105,7 @@ export function UserForm({ user, onSuccess }: UserFormProps) {
           name="totalWashes"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Total Washes</FormLabel>
+              <FormLabel>{t("columns.totalWashes")}</FormLabel>
               <FormControl>
                 <Input type="number" {...field} />
               </FormControl>
@@ -110,7 +113,7 @@ export function UserForm({ user, onSuccess }: UserFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Update User</Button>
+        <Button type="submit">{t("form.updateButton")}</Button>
       </form>
     </Form>
   );

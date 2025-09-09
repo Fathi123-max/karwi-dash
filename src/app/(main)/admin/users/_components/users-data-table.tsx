@@ -13,6 +13,7 @@ import {
   ColumnFiltersState,
   getFilteredRowModel,
 } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +25,7 @@ interface UsersDataTableProps<TData, TValue> {
 }
 
 export function UsersDataTable<TData, TValue>({ columns, data }: UsersDataTableProps<TData, TValue>) {
+  const t = useTranslations("admin.users");
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -46,13 +48,13 @@ export function UsersDataTable<TData, TValue>({ columns, data }: UsersDataTableP
     <div>
       <div className="flex items-center space-x-4 py-4">
         <Input
-          placeholder="Filter by name..."
+          placeholder={t("filters.name.placeholder")}
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
           className="max-w-sm"
         />
         <Input
-          placeholder="Filter by phone..."
+          placeholder={t("filters.phone.placeholder")}
           value={(table.getColumn("phone")?.getFilterValue() as string) ?? ""}
           onChange={(event) => table.getColumn("phone")?.setFilterValue(event.target.value)}
           className="max-w-sm"
@@ -85,7 +87,7 @@ export function UsersDataTable<TData, TValue>({ columns, data }: UsersDataTableP
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  {t("table.noResults")}
                 </TableCell>
               </TableRow>
             )}
@@ -94,10 +96,10 @@ export function UsersDataTable<TData, TValue>({ columns, data }: UsersDataTableP
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-          Previous
+          {t("table.previous")}
         </Button>
         <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-          Next
+          {t("table.next")}
         </Button>
       </div>
     </div>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -30,19 +31,21 @@ interface AvailabilityFormProps {
   onClose: () => void;
 }
 
-const daysOfWeek = [
-  { value: 0, label: "Sunday" },
-  { value: 1, label: "Monday" },
-  { value: 2, label: "Tuesday" },
-  { value: 3, label: "Wednesday" },
-  { value: 4, label: "Thursday" },
-  { value: 5, label: "Friday" },
-  { value: 6, label: "Saturday" },
-];
-
 export function AvailabilityForm({ serviceId, availability, onClose }: AvailabilityFormProps) {
   const { addAvailability, updateAvailability } = useServiceAvailabilityStore();
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslations("admin.services.form.availability");
+  const tDays = useTranslations("days");
+
+  const daysOfWeek = [
+    { value: 0, label: tDays("sunday") },
+    { value: 1, label: tDays("monday") },
+    { value: 2, label: tDays("tuesday") },
+    { value: 3, label: tDays("wednesday") },
+    { value: 4, label: tDays("thursday") },
+    { value: 5, label: tDays("friday") },
+    { value: 6, label: tDays("saturday") },
+  ];
 
   const form = useForm<AvailabilityFormValues>({
     resolver: zodResolver(availabilitySchema),
@@ -97,11 +100,11 @@ export function AvailabilityForm({ serviceId, availability, onClose }: Availabil
           name="dayOfWeek"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Day of Week</FormLabel>
+              <FormLabel>{t("dayOfWeek")}</FormLabel>
               <Select onValueChange={(value) => field.onChange(Number(value))} defaultValue={field.value.toString()}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a day" />
+                    <SelectValue placeholder={t("selectDay")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -122,7 +125,7 @@ export function AvailabilityForm({ serviceId, availability, onClose }: Availabil
             name="startTime"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Start Time</FormLabel>
+                <FormLabel>{t("startTime")}</FormLabel>
                 <FormControl>
                   <Input type="time" {...field} />
                 </FormControl>
@@ -135,7 +138,7 @@ export function AvailabilityForm({ serviceId, availability, onClose }: Availabil
             name="endTime"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>End Time</FormLabel>
+                <FormLabel>{t("endTime")}</FormLabel>
                 <FormControl>
                   <Input type="time" {...field} />
                 </FormControl>
@@ -150,8 +153,8 @@ export function AvailabilityForm({ serviceId, availability, onClose }: Availabil
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
               <div className="space-y-0.5">
-                <FormLabel className="text-base">Active</FormLabel>
-                <p className="text-muted-foreground text-sm">Set whether this availability slot is active</p>
+                <FormLabel className="text-base">{t("active")}</FormLabel>
+                <p className="text-muted-foreground text-sm">{t("activeDescription")}</p>
               </div>
               <FormControl>
                 <Switch checked={field.value} onCheckedChange={field.onChange} />
@@ -161,10 +164,10 @@ export function AvailabilityForm({ serviceId, availability, onClose }: Availabil
         />
         <div className="flex justify-end space-x-2">
           <Button type="button" variant="ghost" onClick={onClose} disabled={isLoading}>
-            Cancel
+            {t("cancel")}
           </Button>
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Saving..." : availability ? "Update" : "Add"}
+            {isLoading ? t("saving") : availability ? t("update") : t("add")}
           </Button>
         </div>
       </form>
