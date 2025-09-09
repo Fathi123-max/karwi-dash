@@ -1,8 +1,8 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-
 import { useTranslations } from "next-intl";
+
 import { Badge } from "@/components/ui/badge";
 import { WasherWithBranch } from "@/stores/franchise-dashboard/user-store";
 import { Washer } from "@/types/franchise";

@@ -2,10 +2,10 @@
 
 import { useEffect } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useBranchAdminStore } from "@/stores/branch-admin-store";
-
-import { useTranslations } from "next-intl";
 
 export default function BranchDashboardPage() {
   const { services, washers, bookings, fetchAllData, isLoading, error } = useBranchAdminStore();

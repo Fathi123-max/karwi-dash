@@ -4,8 +4,8 @@ import { create } from "zustand";
 
 import { createAdminUserWithRole } from "@/app/(main)/admin/branches/_actions/create-admin-with-role";
 import { Branch } from "@/app/(main)/admin/branches/_components/types";
-import { createClient } from "@/lib/supabase/client";
 import { calculateBranchRating } from "@/lib/rating-utils";
+import { createClient } from "@/lib/supabase/client";
 
 import { useFranchiseStore } from "./franchise-store";
 import { useServiceStore } from "./service-store";

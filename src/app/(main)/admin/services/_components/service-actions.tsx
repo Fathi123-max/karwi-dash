@@ -58,8 +58,9 @@ export function ServiceActions({ service }: { service: Service }) {
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
               <span>
-                This is a global service that applies to all branches. Deleting it will remove it from all branches.
-                This action cannot be undone.
+                {service.is_global
+                  ? "This is a global service that applies to all branches. Deleting it will remove it from all branches."
+                  : "This action cannot be undone. This will permanently delete the service."}
               </span>
             </AlertDialogDescription>
           </AlertDialogHeader>

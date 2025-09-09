@@ -1,8 +1,8 @@
 "use client";
 
 import { Edit, PlusCircle, Trash2, Globe } from "lucide-react";
-import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 import {
   AlertDialog,

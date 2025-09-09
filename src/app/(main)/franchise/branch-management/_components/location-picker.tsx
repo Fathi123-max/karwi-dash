@@ -4,13 +4,13 @@ import "leaflet/dist/leaflet.css";
 
 import { useEffect, useState } from "react";
 
-import { useTranslations } from "next-intl";
 // Fix for default icon issue with webpack
 import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 import { Info } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useMap, MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 
 import { cn } from "@/lib/utils";

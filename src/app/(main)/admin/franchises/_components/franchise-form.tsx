@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -16,50 +17,47 @@ import { useFranchiseStore } from "@/stores/admin-dashboard/franchise-store";
 
 import { Franchise } from "./types";
 
-const formSchema = z
-  .object({
-    name: z.string().min(2, {
-      message: "Franchise name must be at least 2 characters.",
-    }),
-    status: z.enum(["active", "inactive"]),
-    adminEmail: z
-      .string()
-      .email({
-        message: "Please enter a valid email address.",
-      })
-      .optional(),
-    adminPassword: z
-      .string()
-      .min(6, {
-        message: "Password must be at least 6 characters.",
-      })
-      .optional(),
-  })
-  .refine(
-    (data) => {
-      // If creating a new franchise, both adminEmail and adminPassword are required
-      if (!data.adminEmail && !data.adminPassword) {
-        return true; // Allow empty for existing franchises
-      }
-      return data.adminEmail && data.adminPassword;
-    },
-    {
-      message: "Both admin email and password are required for new franchises.",
-      path: ["adminEmail"], // This will attach the error to the adminEmail field
-    },
-  );
-
-type FranchiseFormValues = z.infer<typeof formSchema>;
-
-interface FranchiseFormProps {
-  franchise?: Franchise;
-  onSuccess: () => void;
-}
-
-export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
+export function FranchiseForm({ franchise, onSuccess }: { franchise?: Franchise; onSuccess: () => void }) {
+  const t = useTranslations("admin.franchises.form");
+  const tCommon = useTranslations("common");
   const { addFranchise, updateFranchise } = useFranchiseStore();
   const { admins, fetchAdmins } = useAdminStore();
   const [isLoading, setIsLoading] = useState(false);
+
+  const formSchema = z
+    .object({
+      name: z.string().min(2, {
+        message: t("franchiseNameMinLength"),
+      }),
+      status: z.enum(["active", "inactive"]),
+      adminEmail: z
+        .string()
+        .email({
+          message: t("validEmail"),
+        })
+        .optional(),
+      adminPassword: z
+        .string()
+        .min(6, {
+          message: t("passwordMinLength"),
+        })
+        .optional(),
+    })
+    .refine(
+      (data) => {
+        // If creating a new franchise, both adminEmail and adminPassword are required
+        if (!data.adminEmail && !data.adminPassword) {
+          return true; // Allow empty for existing franchises
+        }
+        return data.adminEmail && data.adminPassword;
+      },
+      {
+        message: t("adminCredentialsRequired"),
+        path: ["adminEmail"], // This will attach the error to the adminEmail field
+      },
+    );
+
+  type FranchiseFormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FranchiseFormValues>({
     resolver: zodResolver(formSchema),
@@ -93,7 +91,7 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
           name: data.name,
           status: data.status,
         });
-        toast.success("Franchise updated successfully");
+        toast.success(tCommon("updateSuccess"));
       } else {
         // For new franchises, we need to create an admin user first
         // This process creates:
@@ -140,9 +138,9 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Franchise Name</FormLabel>
+              <FormLabel>{t("franchiseName")}</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., Karwi Erbil" {...field} />
+                <Input placeholder={t("franchiseNamePlaceholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -153,16 +151,16 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
           name="status"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Status</FormLabel>
+              <FormLabel>{t("status")}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a status" />
+                    <SelectValue placeholder={t("selectStatus")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="active">Active</SelectItem>
-                  <SelectItem value="inactive">Inactive</SelectItem>
+                  <SelectItem value="active">{t("active")}</SelectItem>
+                  <SelectItem value="inactive">{t("inactive")}</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -177,9 +175,9 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
               name="adminEmail"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Admin Email</FormLabel>
+                  <FormLabel>{t("adminEmail")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., admin@karwi-erbil.com" {...field} />
+                    <Input placeholder={t("adminEmailPlaceholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -190,9 +188,9 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
               name="adminPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Admin Password</FormLabel>
+                  <FormLabel>{t("adminPassword")}</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="Enter password" {...field} />
+                    <Input type="password" placeholder={t("adminPasswordPlaceholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -202,7 +200,7 @@ export function FranchiseForm({ franchise, onSuccess }: FranchiseFormProps) {
         )}
 
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Saving..." : franchise ? "Update" : "Create"} Franchise
+          {isLoading ? t("saving") : franchise ? t("updateFranchise") : t("createFranchise")}
         </Button>
       </form>
     </Form>

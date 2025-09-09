@@ -3,6 +3,7 @@
 import { useState, useRef, ChangeEvent, useEffect } from "react";
 
 import { X, Upload, Link, Image as ImageIcon, Loader2, AlertCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -20,6 +21,7 @@ interface BranchPicturesFieldProps {
 }
 
 export function BranchPicturesField({ form, name, label, placeholder }: BranchPicturesFieldProps) {
+  const t = useTranslations("admin.branches.form.pictures");
   const [externalUrl, setExternalUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -108,18 +110,18 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="upload" className="flex items-center gap-2">
             <Upload className="h-4 w-4" />
-            Upload
+            {t("tabs.upload")}
           </TabsTrigger>
           <TabsTrigger value="url" className="flex items-center gap-2">
             <Link className="h-4 w-4" />
-            Add URL
+            {t("tabs.addUrl")}
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="upload" className="mt-4 space-y-4">
           <div className="rounded-lg border-2 border-dashed p-6 text-center">
             <ImageIcon className="text-muted-foreground mx-auto h-12 w-12" />
-            <p className="text-muted-foreground mt-2 text-sm">Drag and drop your images here, or click to browse</p>
+            <p className="text-muted-foreground mt-2 text-sm">{t("upload.description")}</p>
             <Button
               type="button"
               variant="secondary"
@@ -130,12 +132,12 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
               {isUploading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Uploading...
+                  {t("upload.uploading")}
                 </>
               ) : (
                 <>
                   <Upload className="mr-2 h-4 w-4" />
-                  Choose Files
+                  {t("upload.chooseFiles")}
                 </>
               )}
             </Button>
@@ -150,7 +152,7 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
             />
             <div className="text-muted-foreground mt-2 flex items-center justify-center gap-1 text-xs">
               <AlertCircle className="h-3 w-3" />
-              <span>Images will be stored in cloud storage</span>
+              <span>{t("upload.storageInfo")}</span>
             </div>
           </div>
         </TabsContent>
@@ -158,18 +160,18 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
         <TabsContent value="url" className="mt-4 space-y-4">
           <div className="flex gap-2">
             <Input
-              placeholder="https://example.com/image.jpg"
+              placeholder={t("url.placeholder")}
               value={externalUrl}
               onChange={(e) => setExternalUrl(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAddExternalUrl()}
             />
             <Button type="button" onClick={handleAddExternalUrl}>
-              Add
+              {t("url.addButton")}
             </Button>
           </div>
 
           <div className="text-muted-foreground text-sm">
-            <p>Enter the URL of an image hosted online</p>
+            <p>{t("url.description")}</p>
           </div>
         </TabsContent>
       </Tabs>
@@ -177,7 +179,7 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
       {/* Display current images */}
       {imageUrls.length > 0 && (
         <div className="space-y-2">
-          <Label>Current Images</Label>
+          <Label>{t("currentImages")}</Label>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
             {imageUrls.map((url: string, index: number) => (
               <div key={index} className="group relative">
@@ -203,7 +205,7 @@ export function BranchPicturesField({ form, name, label, placeholder }: BranchPi
                 >
                   <X className="h-3 w-3" />
                 </Button>
-                <div className="mt-1 truncate text-center text-xs">Image {index + 1}</div>
+                <div className="mt-1 truncate text-center text-xs">{t("imageLabel", { index: index + 1 })}</div>
               </div>
             ))}
           </div>

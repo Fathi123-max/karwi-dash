@@ -1,6 +1,7 @@
 "use client";
 
 import { Download } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
@@ -20,6 +21,8 @@ interface FranchiseDataTableProps {
 }
 
 export function FranchiseDataTable({ data }: FranchiseDataTableProps) {
+  const t = useTranslations("admin.franchises.table");
+  const tAdmin = useTranslations("admin.table");
   const table = useDataTableInstance({
     data,
     columns,
@@ -31,17 +34,17 @@ export function FranchiseDataTable({ data }: FranchiseDataTableProps) {
       <div className="flex items-center justify-between">
         <div className="flex flex-1 items-center space-x-2">
           <Input
-            placeholder="Filter by name..."
+            placeholder={t("filterByName")}
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
             onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
             className="h-8 w-[150px] lg:w-[250px]"
           />
           <DataTableFacetedFilter
             column={table.getColumn("status")}
-            title="Status"
+            title={t("statusFilter")}
             options={[
-              { label: "Active", value: "active" },
-              { label: "Inactive", value: "inactive" },
+              { label: t("active"), value: "active" },
+              { label: t("inactive"), value: "inactive" },
             ]}
           />
         </div>
@@ -49,7 +52,7 @@ export function FranchiseDataTable({ data }: FranchiseDataTableProps) {
           <DataTableViewOptions table={table} />
           <Button variant="outline" size="sm" onClick={() => exportToCSV(table, "franchises.csv")}>
             <Download className="mr-2 h-4 w-4" />
-            <span className="hidden lg:inline">Export</span>
+            <span className="hidden lg:inline">{tAdmin("export")}</span>
           </Button>
         </div>
       </div>

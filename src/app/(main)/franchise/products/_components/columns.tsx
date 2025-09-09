@@ -69,7 +69,7 @@ export function useOrderColumns({ onViewDetails }: OrderColumnsProps): ColumnDef
       accessorKey: "status",
       header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
       cell: ({ row }) => {
-        const status = row.getValue("status") as string;
+        const status = row.getValue("status");
 
         const statusColors: Record<string, string> = {
           pending: "bg-yellow-100 text-yellow-800",

@@ -6,6 +6,7 @@
 import { useMemo, useRef } from "react";
 
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Building2, Loader2, MapPin, Phone, Star, Hash, FileText, Clock, Calendar } from "lucide-react";
@@ -106,6 +107,7 @@ const parseLocation = (locationStr: string | null | undefined): { lat: number; l
 };
 
 export function BranchForm({ branch, onSuccess }: BranchFormProps) {
+  const t = useTranslations("admin.branches.form");
   const { addBranch, updateBranch, fetchBranches } = useBranchStore();
   const { franchises } = useFranchiseStore();
 
@@ -113,7 +115,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
     () =>
       dynamic(() => import("./location-picker").then((mod) => mod.LocationPicker), {
         ssr: false,
-        loading: () => <p className="text-muted-foreground text-sm">Loading map...</p>,
+        loading: () => <p className="text-muted-foreground text-sm">{t("loadingMap")}</p>,
       }),
     [],
   );
@@ -231,28 +233,28 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                     className="data-[state=active]:bg-background flex items-center gap-2 data-[state=active]:shadow-sm"
                   >
                     <Building2 className="h-4 w-4" />
-                    <span className="hidden sm:inline">Basic Info</span>
+                    <span className="hidden sm:inline">{t("tabs.basicInfo")}</span>
                   </TabsTrigger>
                   <TabsTrigger
                     value="location"
                     className="data-[state=active]:bg-background flex items-center gap-2 data-[state=active]:shadow-sm"
                   >
                     <MapPin className="h-4 w-4" />
-                    <span className="hidden sm:inline">Location</span>
+                    <span className="hidden sm:inline">{t("tabs.location")}</span>
                   </TabsTrigger>
                   <TabsTrigger
                     value="hours"
                     className="data-[state=active]:bg-background flex items-center gap-2 data-[state=active]:shadow-sm"
                   >
                     <Clock className="h-4 w-4" />
-                    <span className="hidden sm:inline">Regular Hours</span>
+                    <span className="hidden sm:inline">{t("tabs.regularHours")}</span>
                   </TabsTrigger>
                   <TabsTrigger
                     value="hours-2weeks"
                     className="data-[state=active]:bg-background flex items-center gap-2 data-[state=active]:shadow-sm"
                   >
                     <Calendar className="h-4 w-4" />
-                    <span className="hidden sm:inline">Next 2 Weeks</span>
+                    <span className="hidden sm:inline">{t("tabs.nextTwoWeeks")}</span>
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="basic" className="mt-4 space-y-4">
@@ -261,11 +263,11 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Branch Name</FormLabel>
+                        <FormLabel>{t("labels.branchName")}</FormLabel>
                         <FormControl>
                           <div className="relative">
                             <Building2 className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                            <Input placeholder="e.g., Karwi Downtown Branch" {...field} className="h-12 pl-10" />
+                            <Input placeholder={t("placeholders.branchName")} {...field} className="h-12 pl-10" />
                           </div>
                         </FormControl>
                         <FormMessage />
@@ -277,11 +279,11 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                     name="franchise_id"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Franchise</FormLabel>
+                        <FormLabel>{t("labels.franchise")}</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="h-12">
-                              <SelectValue placeholder="Select a franchise" />
+                              <SelectValue placeholder={t("placeholders.selectFranchise")} />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
@@ -302,11 +304,11 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                       name="phone_number"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Phone Number</FormLabel>
+                          <FormLabel>{t("labels.phoneNumber")}</FormLabel>
                           <FormControl>
                             <div className="relative">
                               <Phone className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                              <Input placeholder="Contact phone number" {...field} className="pl-10" />
+                              <Input placeholder={t("placeholders.phoneNumber")} {...field} className="pl-10" />
                             </div>
                           </FormControl>
                           <FormMessage />
@@ -318,7 +320,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                       name="ratings"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Ratings</FormLabel>
+                          <FormLabel>{t("labels.ratings")}</FormLabel>
                           <FormControl>
                             <div className="relative">
                               <Star className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
@@ -327,7 +329,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                                 step="0.1"
                                 min="0"
                                 max="5"
-                                placeholder="Branch rating (0-5)"
+                                placeholder={t("placeholders.ratings")}
                                 {...field}
                                 className="pl-10"
                               />
@@ -522,11 +524,11 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Branch Name</FormLabel>
+                        <FormLabel>{t("labels.branchName")}</FormLabel>
                         <FormControl>
                           <div className="relative">
                             <Building2 className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                            <Input placeholder="e.g., Karwi Downtown Branch" {...field} className="h-12 pl-10" />
+                            <Input placeholder={t("placeholders.branchName")} {...field} className="h-12 pl-10" />
                           </div>
                         </FormControl>
                         <FormMessage />
@@ -538,11 +540,11 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                     name="franchise_id"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Franchise</FormLabel>
+                        <FormLabel>{t("labels.franchise")}</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="h-12">
-                              <SelectValue placeholder="Select a franchise" />
+                              <SelectValue placeholder={t("placeholders.selectFranchise")} />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
@@ -562,13 +564,12 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                     name="adminEmail"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Admin Email</FormLabel>
+                        <FormLabel>{t("labels.adminEmail")}</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g., admin@karwi-branch.com" {...field} />
+                          <Input placeholder={t("placeholders.adminEmail")} {...field} />
                         </FormControl>
                         <p className="text-muted-foreground text-sm">
-                          A confirmation email will be sent to this address. The admin must confirm their email before
-                          they can sign in.
+                          {t("adminEmailDescription")}
                         </p>
                         <FormMessage />
                       </FormItem>
@@ -579,9 +580,9 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                     name="adminPassword"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Admin Password</FormLabel>
+                        <FormLabel>{t("labels.adminPassword")}</FormLabel>
                         <FormControl>
-                          <Input type="password" placeholder="Enter password" {...field} />
+                          <Input type="password" placeholder={t("placeholders.adminPassword")} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -595,11 +596,11 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                       name="phone_number"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Phone Number</FormLabel>
+                          <FormLabel>{t("labels.phoneNumber")}</FormLabel>
                           <FormControl>
                             <div className="relative">
                               <Phone className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                              <Input placeholder="Contact phone number" {...field} className="pl-10" />
+                              <Input placeholder={t("placeholders.phoneNumber")} {...field} className="pl-10" />
                             </div>
                           </FormControl>
                           <FormMessage />
@@ -611,7 +612,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                       name="ratings"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Ratings</FormLabel>
+                          <FormLabel>{t("labels.ratings")}</FormLabel>
                           <FormControl>
                             <div className="relative">
                               <Star className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
@@ -620,7 +621,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                                 step="0.1"
                                 min="0"
                                 max="5"
-                                placeholder="Branch rating (0-5)"
+                                placeholder={t("placeholders.ratings")}
                                 {...field}
                                 className="pl-10"
                               />
@@ -769,7 +770,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
               <div className="flex justify-end">
                 <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
                   {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Create Branch
+                  {isEditMode ? t("buttons.updateBranch") : t("buttons.createBranch")}
                 </Button>
               </div>
             </>

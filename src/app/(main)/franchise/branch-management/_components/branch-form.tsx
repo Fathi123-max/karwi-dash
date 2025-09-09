@@ -1,12 +1,11 @@
-/* eslint-disable complexity */
 "use client";
 import { useMemo } from "react";
 
 import dynamic from "next/dynamic";
-import { useTranslations } from "next-intl";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Building2, Loader2, PlusCircle, Trash2, Edit } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";

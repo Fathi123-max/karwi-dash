@@ -1,6 +1,6 @@
 import { Column } from "@tanstack/react-table";
-import { useTranslations } from "next-intl";
 import { ArrowDown, ArrowUp, ChevronsUpDown, EyeOff } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {

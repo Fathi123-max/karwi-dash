@@ -5,13 +5,8 @@
     "definedKeysAr": 898
   },
   "missingKeys": {
-    "english": [
-      "branch",
-      "services"
-    ],
-    "arabic": [
-      "services"
-    ]
+    "english": ["branch", "services"],
+    "arabic": ["services"]
   },
   "unusedKeys": {
     "english": [

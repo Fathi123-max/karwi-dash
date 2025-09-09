@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
+
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
 import { getActiveBanners, getActiveOffers } from "@/server/banners-offers-actions";
-import { Banner, Offer } from "@/types/banners-offers";
 import { useBannersOffersStore } from "@/stores/admin-dashboard/banners-offers-store";
+import { Banner, Offer } from "@/types/banners-offers";
 
 export default function TestBannersOffersPage() {
   const { banners, offers, loading, fetchBanners, fetchOffers } = useBannersOffersStore();

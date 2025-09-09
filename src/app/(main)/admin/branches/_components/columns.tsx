@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { MapPin, Phone, Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -47,26 +48,27 @@ const parseLocation = (locationStr: string | null | undefined): { lat: number; l
   return undefined;
 };
 
-export const columns: ColumnDef<Branch>[] = [
+// Define columns with localization
+export const getColumns = (t: (key: string) => string): ColumnDef<Branch>[] => [
   {
     accessorKey: "name",
-    header: "Name",
+    header: t("columns.name"),
   },
   {
     accessorKey: "franchise",
-    header: "Franchise",
+    header: t("columns.franchise"),
   },
   {
     accessorKey: "city",
-    header: "City",
+    header: t("columns.city"),
     cell: ({ row }) => {
       const branch = row.original;
-      return branch.city ?? <span className="text-muted-foreground">Not set</span>;
+      return branch.city ?? <span className="text-muted-foreground">{t("columns.notSet")}</span>;
     },
   },
   {
     accessorKey: "phone_number",
-    header: "Phone",
+    header: t("columns.phone"),
     cell: ({ row }) => {
       const branch = row.original;
       return branch.phone_number ? (
@@ -75,13 +77,13 @@ export const columns: ColumnDef<Branch>[] = [
           <span>{branch.phone_number}</span>
         </div>
       ) : (
-        <span className="text-muted-foreground">Not set</span>
+        <span className="text-muted-foreground">{t("columns.notSet")}</span>
       );
     },
   },
   {
     accessorKey: "ratings",
-    header: "Rating",
+    header: t("columns.rating"),
     cell: ({ row }) => {
       const branch = row.original;
       return branch.ratings ? (
@@ -90,7 +92,7 @@ export const columns: ColumnDef<Branch>[] = [
           <span>{branch.ratings.toFixed(1)}</span>
         </div>
       ) : (
-        <span className="text-muted-foreground">Not rated</span>
+        <span className="text-muted-foreground">{t("columns.notRated")}</span>
       );
     },
     filterFn: (row, columnId, filterValue: string[]) => {
@@ -114,18 +116,18 @@ export const columns: ColumnDef<Branch>[] = [
   },
   {
     accessorKey: "services",
-    header: "Services",
+    header: t("columns.services"),
     cell: ({ row }) => {
       const branch = row.original;
 
       // Show loading state if services haven't loaded yet
       if (branch.services === undefined) {
-        return <span className="text-muted-foreground">Loading...</span>;
+        return <span className="text-muted-foreground">{t("common.loading")}</span>;
       }
 
       const services = branch.services ?? [];
       if (services.length === 0) {
-        return <span className="text-muted-foreground">No services</span>;
+        return <span className="text-muted-foreground">{t("columns.noServices")}</span>;
       }
       return (
         <div className="flex max-w-xs flex-wrap gap-1">
@@ -140,13 +142,13 @@ export const columns: ColumnDef<Branch>[] = [
   },
   {
     accessorKey: "serviceCount",
-    header: "Service Count",
+    header: t("columns.serviceCount"),
     cell: ({ row }) => {
       const branch = row.original;
 
       // Show loading state if services haven't loaded yet
       if (branch.services === undefined) {
-        return <span className="text-muted-foreground">Loading...</span>;
+        return <span className="text-muted-foreground">{t("common.loading")}</span>;
       }
 
       const serviceCount = branch.services?.length ?? 0;
@@ -184,3 +186,22 @@ export const columns: ColumnDef<Branch>[] = [
     },
   },
 ];
+
+// Export default columns for backward compatibility
+export const columns: ColumnDef<Branch>[] = getColumns((key) => {
+  // Simple mapping for backward compatibility
+  const map: Record<string, string> = {
+    "columns.name": "Name",
+    "columns.franchise": "Franchise",
+    "columns.city": "City",
+    "columns.phone": "Phone",
+    "columns.rating": "Rating",
+    "columns.services": "Services",
+    "columns.serviceCount": "Service Count",
+    "columns.notSet": "Not set",
+    "columns.notRated": "Not rated",
+    "columns.noServices": "No services",
+    "common.loading": "Loading...",
+  };
+  return map[key] || key;
+});

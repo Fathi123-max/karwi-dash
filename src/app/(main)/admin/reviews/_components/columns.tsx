@@ -1,12 +1,12 @@
 "use client";
 
 import { type ColumnDef } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
 
 import { ReviewActions } from "@/app/(main)/admin/reviews/_components/review-actions";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { type Review } from "@/types/database";
-import { useTranslations } from "next-intl";
 
 export const useReviewColumns = (): ColumnDef<Review>[] => {
   const isMobile = useIsMobile();

@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import { getActiveBanners } from "@/server/banners-offers-actions";
 import { Banner } from "@/types/banners-offers";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export function BannerCarousel() {
   const [banners, setBanners] = useState<Banner[]>([]);

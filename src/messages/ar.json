@@ -48,7 +48,9 @@
     "settings": "الإعدادات",
     "staff": "الموظفون",
     "welcome": "مرحبًا",
-    "welcomeTo": "مرحبًا بك في"
+    "welcomeTo": "مرحبًا بك في",
+    "updateSuccess": "تم التحديث بنجاح",
+    "createSuccess": "تم الإنشاء بنجاح"
   },
   "auth": {
     "login": "تسجيل الدخول",
@@ -142,6 +144,11 @@
       "manageAll": "إدارة الكل",
       "services": "الخدمات"
     },
+    "table": {
+      "noResults": "لا توجد نتائج.",
+      "clearFilters": "مسح الفلاتر",
+      "export": "تصدير"
+    },
     "branches": {
       "title": "الفروع",
       "description": "إدارة جميع فروع كاروي وخدماتها",
@@ -158,7 +165,110 @@
         "continue": "متابعة"
       },
       "branch": "الفرع",
-      "services": "الخدمات"
+      "services": "الخدمات",
+      "columns": {
+        "name": "الاسم",
+        "franchise": "الامتياز",
+        "city": "المدينة",
+        "phone": "الهاتف",
+        "rating": "التقييم",
+        "services": "الخدمات",
+        "serviceCount": "عدد الخدمات",
+        "notSet": "غير محدد",
+        "notRated": "غير مقيم",
+        "noServices": "لا توجد خدمات"
+      },
+      "filters": {
+        "name": {
+          "placeholder": "التصفية حسب الاسم..."
+        },
+        "franchise": {
+          "title": "الامتياز"
+        },
+        "city": {
+          "title": "المدينة"
+        },
+        "rating": {
+          "title": "التقييم"
+        },
+        "ratings": {
+          "fiveStars": "5 نجوم",
+          "fourPlusStars": "4+ نجوم",
+          "threePlusStars": "3+ نجوم",
+          "belowThreeStars": "أقل من 3 نجوم",
+          "notRated": "غير مقيم"
+        },
+        "services": {
+          "title": "الخدمات",
+          "noServices": "لا توجد خدمات",
+          "serviceWithCount": "{count} خدمة{count, plural, one {} other {s}}",
+          "range1to2": "1-2 خدمات",
+          "range3to5": "3-5 خدمات",
+          "range6to10": "6-10 خدمات",
+          "range10plus": "10+ خدمات"
+        }
+      },
+      "export": "تصدير",
+      "form": {
+        "loadingMap": "جارٍ تحميل الخريطة...",
+        "tabs": {
+          "basicInfo": "المعلومات الأساسية",
+          "location": "الموقع",
+          "regularHours": "الساعات العادية",
+          "nextTwoWeeks": "الأسبوعين القادمين"
+        },
+        "labels": {
+          "branchName": "اسم الفرع",
+          "franchise": "الامتياز",
+          "phoneNumber": "رقم الهاتف",
+          "ratings": "التقييمات",
+          "pictures": "الصور",
+          "address": "العنوان",
+          "city": "المدينة",
+          "latitude": "خط العرض",
+          "longitude": "خط الطول",
+          "mapLocation": "موقع الخريطة",
+          "adminEmail": "البريد الإلكتروني للمشرف",
+          "adminPassword": "كلمة مرور المشرف"
+        },
+        "placeholders": {
+          "branchName": "مثال: فرع كاروي وسط المدينة",
+          "selectFranchise": "اختر امتيازًا",
+          "phoneNumber": "رقم هاتف الاتصال",
+          "ratings": "تقييم الفرع (0-5)",
+          "pictures": "عناوين URL للصور مفصولة بفواصل",
+          "address": "عنوان الفرع",
+          "city": "مدينة الفرع",
+          "latitude": "خط العرض الجغرافي",
+          "longitude": "خط الطول الجغرافي",
+          "adminEmail": "مثال: admin@karwi-branch.com",
+          "adminPassword": "أدخل كلمة المرور"
+        },
+        "adminEmailDescription": "سيتم إرسال بريد إلكتروني للتأكيد إلى هذا العنوان. يجب على المشرف تأكيد بريده الإلكتروني قبل أن يتمكن من تسجيل الدخول.",
+        "buttons": {
+          "updateBranch": "تحديث الفرع",
+          "createBranch": "إنشاء فرع"
+        },
+        "pictures": {
+          "tabs": {
+            "upload": "رفع",
+            "addUrl": "إضافة رابط"
+          },
+          "upload": {
+            "description": "اسحب وأفلت صورك هنا، أو انقر للتصفح",
+            "uploading": "جارٍ الرفع...",
+            "chooseFiles": "اختر الملفات",
+            "storageInfo": "سيتم تخزين الصور في التخزين السحابي"
+          },
+          "url": {
+            "placeholder": "https://example.com/image.jpg",
+            "addButton": "إضافة",
+            "description": "أدخل عنوان URL لصورة مستضافة على الإنترنت"
+          },
+          "currentImages": "الصور الحالية",
+          "imageLabel": "الصورة {index}"
+        }
+      }
     },
     "franchises": {
       "title": "الامتيازات",
@@ -177,7 +287,34 @@
         "continue": "متابعة"
       },
       "branch": "الفرع",
-      "services": "الخدمات"
+      "services": "الخدمات",
+      "table": {
+        "name": "الاسم",
+        "status": "الحالة",
+        "branches": "الفروع",
+        "washers": "العاملون في الغسيل",
+        "filterByName": "تصفية حسب الاسم...",
+        "statusFilter": "الحالة",
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "form": {
+        "franchiseName": "اسم الامتياز",
+        "franchiseNamePlaceholder": "مثال: كاروي أربيل",
+        "status": "الحالة",
+        "selectStatus": "اختر حالة",
+        "adminEmail": "بريد المشرف",
+        "adminEmailPlaceholder": "مثال: admin@karwi-erbil.com",
+        "adminPassword": "كلمة مرور المشرف",
+        "adminPasswordPlaceholder": "أدخل كلمة المرور",
+        "createFranchise": "إنشاء امتياز",
+        "updateFranchise": "تحديث الامتياز",
+        "saving": "جارٍ الحفظ...",
+        "franchiseNameMinLength": "يجب أن يكون اسم الامتياز حرفين على الأقل.",
+        "validEmail": "يرجى إدخال بريد إلكتروني صالح.",
+        "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
+        "adminCredentialsRequired": "كل من بريد المشرف وكلمة المرور مطلوبة للاستحقاقات الجديدة."
+      }
     },
     "payments": {
       "title": "المدفوعات",

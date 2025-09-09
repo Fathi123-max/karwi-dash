@@ -1,10 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { useTranslations } from "next-intl";
 import { EnrichedBooking } from "@/app/(main)/franchise/utils/bookings";
 import { Button } from "@/components/ui/button";
 import {

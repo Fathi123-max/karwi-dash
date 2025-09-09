@@ -10,7 +10,6 @@ import { useBranchStore } from "@/stores/admin-dashboard/branch-store";
 
 import { BranchDataTable } from "./_components/branch-data-table";
 import { BranchDialog } from "./_components/branch-dialog";
-import { columns } from "./_components/columns";
 
 export default function BranchesPage() {
   const t = useTranslations("admin.branches");
@@ -43,7 +42,7 @@ export default function BranchesPage() {
           </BranchDialog>
         </div>
       </div>
-      {isLoading ? <div>Loading branches...</div> : <BranchDataTable data={branches} />}
+      {isLoading ? <div>{t("common.loading")}</div> : <BranchDataTable data={branches} />}
     </div>
   );
 }

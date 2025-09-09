@@ -1,8 +1,8 @@
 "use client";
 
 import { Download } from "lucide-react";
-
 import { useTranslations } from "next-intl";
+
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";

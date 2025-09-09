@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
+
 import { AppLogo } from "@/components/app-logo";
 import {
   Sidebar,

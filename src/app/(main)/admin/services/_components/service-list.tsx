@@ -73,8 +73,12 @@ export function ServiceList() {
     // Get unique branch names from services and branches
     const names = new Set<string>();
     services.forEach((service) => {
-      if (service.branchName) {
+      if (service.is_global) {
+        names.add("Global");
+      } else if (service.branchName) {
         names.add(service.branchName);
+      } else {
+        names.add("N/A");
       }
     });
     // Also add all branch names from the branches store

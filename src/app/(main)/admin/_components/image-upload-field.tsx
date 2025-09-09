@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useRef, ChangeEvent } from "react";
+
 import { Upload, X, Image as ImageIcon, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+
 import { Button } from "@/components/ui/button";
 import { uploadImage } from "@/lib/supabase/storage";
-import { toast } from "sonner";
 
 interface ImageUploadFieldProps {
   value: string;

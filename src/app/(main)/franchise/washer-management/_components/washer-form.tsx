@@ -2,9 +2,9 @@
 
 import { useEffect } from "react";
 
-import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User, Building, Star, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -56,7 +56,6 @@ async function handleSubmission(
   }
 }
 
-// eslint-disable-next-line complexity
 export function WasherForm({ washer, onSuccess }: WasherFormProps) {
   const t = useTranslations("franchise.washers.form");
   const { addWasher, updateWasher } = useFranchiseUserStore();

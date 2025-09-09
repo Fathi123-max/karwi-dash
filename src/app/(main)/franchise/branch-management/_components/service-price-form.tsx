@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { useTranslations } from "next-intl";
 import { Globe, DollarSign } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { Badge } from "@/components/ui/badge";

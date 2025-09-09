@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
-import { MoreHorizontal, Edit, Trash } from "lucide-react";
 
+import { MoreHorizontal, Edit, Trash } from "lucide-react";
+import { toast } from "sonner";
+
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,10 +13,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
-import { toast } from "sonner";
-import { Banner } from "@/types/banners-offers";
 import { useBannersOffersStore } from "@/stores/admin-dashboard/banners-offers-store";
+import { Banner } from "@/types/banners-offers";
 
 export function BannerList({ onEdit }: { onEdit: (banner: Banner) => void }) {
   const { banners, loading, fetchBanners, deleteBanner } = useBannersOffersStore();

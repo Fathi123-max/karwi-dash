@@ -2,6 +2,7 @@
 import React from "react";
 
 import { useTranslations } from "next-intl";
+
 import { EnrichedBooking } from "@/app/(main)/franchise/utils/bookings";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";

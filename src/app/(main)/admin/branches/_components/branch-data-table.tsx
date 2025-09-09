@@ -1,7 +1,7 @@
-/* eslint-disable complexity */
 "use client";
 
 import { Download } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
@@ -13,7 +13,7 @@ import { exportToCSV } from "@/lib/export-utils";
 
 import { DataTableFacetedFilter } from "../../_components/data-table-faceted-filter";
 
-import { columns } from "./columns";
+import { getColumns } from "./columns";
 import { Branch } from "./types";
 
 interface BranchDataTableProps {
@@ -21,6 +21,9 @@ interface BranchDataTableProps {
 }
 
 export function BranchDataTable({ data }: BranchDataTableProps) {
+  const t = useTranslations("admin.branches");
+  const columns = getColumns(t);
+
   const table = useDataTableInstance({
     data,
     columns,
@@ -55,30 +58,30 @@ export function BranchDataTable({ data }: BranchDataTableProps) {
   // Only create service ranges if we have loaded data
   if (loadedBranches.length > 0 && maxServices >= 0) {
     // Always include "No services" option
-    serviceRanges.push({ label: "No services", value: "0" });
+    serviceRanges.push({ label: t("filters.services.noServices"), value: "0" });
 
     if (maxServices > 0) {
       if (maxServices <= 5) {
         // If max is small, show individual counts (1-maxServices)
         for (let i = 1; i <= maxServices; i++) {
           serviceRanges.push({
-            label: `${i} service${i !== 1 ? "s" : ""}`,
+            label: t("filters.services.serviceWithCount", { count: i }),
             value: i.toString(),
           });
         }
       } else {
         // Otherwise create ranges
         if (maxServices >= 1) {
-          serviceRanges.push({ label: "1-2 services", value: "1-2" });
+          serviceRanges.push({ label: t("filters.services.range1to2"), value: "1-2" });
         }
         if (maxServices >= 3) {
-          serviceRanges.push({ label: "3-5 services", value: "3-5" });
+          serviceRanges.push({ label: t("filters.services.range3to5"), value: "3-5" });
         }
         if (maxServices >= 6) {
-          serviceRanges.push({ label: "6-10 services", value: "6-10" });
+          serviceRanges.push({ label: t("filters.services.range6to10"), value: "6-10" });
         }
         if (maxServices > 10) {
-          serviceRanges.push({ label: "10+ services", value: "10+" });
+          serviceRanges.push({ label: t("filters.services.range10plus"), value: "10+" });
         }
       }
     }
@@ -86,11 +89,11 @@ export function BranchDataTable({ data }: BranchDataTableProps) {
 
   // Get rating ranges for faceted filter
   const ratings = [
-    { label: "5 stars", value: "5" },
-    { label: "4+ stars", value: "4+" },
-    { label: "3+ stars", value: "3+" },
-    { label: "Below 3 stars", value: "<3" },
-    { label: "Not rated", value: "0" },
+    { label: t("filters.ratings.fiveStars"), value: "5" },
+    { label: t("filters.ratings.fourPlusStars"), value: "4+" },
+    { label: t("filters.ratings.threePlusStars"), value: "3+" },
+    { label: t("filters.ratings.belowThreeStars"), value: "<3" },
+    { label: t("filters.ratings.notRated"), value: "0" },
   ];
 
   return (
@@ -98,25 +101,37 @@ export function BranchDataTable({ data }: BranchDataTableProps) {
       <div className="flex items-center justify-between">
         <div className="flex flex-1 items-center space-x-2">
           <Input
-            placeholder="Filter by name..."
+            placeholder={t("filters.name.placeholder")}
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
             onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
             className="h-8 w-[150px] lg:w-[250px]"
           />
-          <DataTableFacetedFilter column={table.getColumn("franchise")} title="Franchise" options={franchises} />
+          <DataTableFacetedFilter
+            column={table.getColumn("franchise")}
+            title={t("filters.franchise.title")}
+            options={franchises}
+          />
           {cities.length > 0 && (
-            <DataTableFacetedFilter column={table.getColumn("city")} title="City" options={cities} />
+            <DataTableFacetedFilter column={table.getColumn("city")} title={t("filters.city.title")} options={cities} />
           )}
-          <DataTableFacetedFilter column={table.getColumn("ratings")} title="Rating" options={ratings} />
+          <DataTableFacetedFilter
+            column={table.getColumn("ratings")}
+            title={t("filters.rating.title")}
+            options={ratings}
+          />
           {serviceRanges.length > 0 && (
-            <DataTableFacetedFilter column={table.getColumn("serviceCount")} title="Services" options={serviceRanges} />
+            <DataTableFacetedFilter
+              column={table.getColumn("serviceCount")}
+              title={t("filters.services.title")}
+              options={serviceRanges}
+            />
           )}
         </div>
         <div className="flex items-center gap-2">
           <DataTableViewOptions table={table} />
           <Button variant="outline" size="sm" onClick={() => exportToCSV(table, "branches.csv")}>
             <Download className="mr-2 h-4 w-4" />
-            <span className="hidden lg:inline">Export</span>
+            <span className="hidden lg:inline">{t("export")}</span>
           </Button>
         </div>
       </div>

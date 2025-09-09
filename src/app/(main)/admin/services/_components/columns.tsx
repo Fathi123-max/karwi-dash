@@ -41,9 +41,13 @@ export const useServiceColumns = (): ColumnDef<ServiceWithBranchName>[] => {
         header: ({ column }) => <DataTableColumnHeader column={column} title="Branch" />,
         cell: ({ row }) => {
           const service = row.original;
+          const branchName = service.is_global ? "Global" : service.branchName || "N/A";
           return (
             <div className="flex items-center gap-2">
-              <span>{service.branchName}</span>
+              <span>{branchName}</span>
+              {service.is_global && (
+                <span className="bg-primary text-primary-foreground rounded px-2 py-1 text-xs">Global</span>
+              )}
             </div>
           );
         },

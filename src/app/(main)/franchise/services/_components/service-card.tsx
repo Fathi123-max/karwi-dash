@@ -1,10 +1,9 @@
-/* eslint-disable complexity */
 "use client";
 
 import { useState } from "react";
 
-import { useTranslations } from "next-intl";
 import { Globe, Edit, Tag, Clock, DollarSign } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import { Download, FileText } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { DataTable } from "@/components/data-table/data-table";
 import { Button } from "@/components/ui/button";

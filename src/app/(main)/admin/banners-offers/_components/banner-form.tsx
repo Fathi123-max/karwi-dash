@@ -2,17 +2,17 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
+import { ImageUploadField } from "@/app/(main)/admin/_components/image-upload-field";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Banner } from "@/types/banners-offers";
-import { toast } from "sonner";
-import { ImageUploadField } from "@/app/(main)/admin/_components/image-upload-field";
+import { Textarea } from "@/components/ui/textarea";
 import { useBannersOffersStore } from "@/stores/admin-dashboard/banners-offers-store";
+import { Banner } from "@/types/banners-offers";
 
 const bannerSchema = z.object({
   title: z.string().min(1, "Title is required"),

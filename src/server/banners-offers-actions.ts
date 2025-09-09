@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+
 import { createServerClient } from "@supabase/ssr";
 
 import { Banner, Offer } from "@/types/banners-offers";

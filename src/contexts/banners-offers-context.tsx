@@ -1,7 +1,9 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
 import { Banner, Offer } from "@/types/banners-offers";
 
 type BannersOffersContextType = {

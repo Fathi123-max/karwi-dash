@@ -48,7 +48,9 @@
     "settings": "Settings",
     "staff": "Staff",
     "welcome": "Welcome",
-    "welcomeTo": "Welcome to"
+    "welcomeTo": "Welcome to",
+    "updateSuccess": "Updated successfully",
+    "createSuccess": "Created successfully"
   },
   "auth": {
     "login": "Login",
@@ -142,6 +144,11 @@
       "manageAll": "Manage All",
       "services": "Services"
     },
+    "table": {
+      "noResults": "No results found.",
+      "clearFilters": "Clear filters",
+      "export": "Export"
+    },
     "branches": {
       "title": "Branches",
       "description": "Manage all Karwi branches and their services",
@@ -158,7 +165,110 @@
         "continue": "Continue"
       },
       "branch": "Branch",
-      "services": "Services"
+      "services": "Services",
+      "columns": {
+        "name": "Name",
+        "franchise": "Franchise",
+        "city": "City",
+        "phone": "Phone",
+        "rating": "Rating",
+        "services": "Services",
+        "serviceCount": "Service Count",
+        "notSet": "Not set",
+        "notRated": "Not rated",
+        "noServices": "No services"
+      },
+      "filters": {
+        "name": {
+          "placeholder": "Filter by name..."
+        },
+        "franchise": {
+          "title": "Franchise"
+        },
+        "city": {
+          "title": "City"
+        },
+        "rating": {
+          "title": "Rating"
+        },
+        "ratings": {
+          "fiveStars": "5 stars",
+          "fourPlusStars": "4+ stars",
+          "threePlusStars": "3+ stars",
+          "belowThreeStars": "Below 3 stars",
+          "notRated": "Not rated"
+        },
+        "services": {
+          "title": "Services",
+          "noServices": "No services",
+          "serviceWithCount": "{count} service{count, plural, one {} other {s}}",
+          "range1to2": "1-2 services",
+          "range3to5": "3-5 services",
+          "range6to10": "6-10 services",
+          "range10plus": "10+ services"
+        }
+      },
+      "export": "Export",
+      "form": {
+        "loadingMap": "Loading map...",
+        "tabs": {
+          "basicInfo": "Basic Info",
+          "location": "Location",
+          "regularHours": "Regular Hours",
+          "nextTwoWeeks": "Next 2 Weeks"
+        },
+        "labels": {
+          "branchName": "Branch Name",
+          "franchise": "Franchise",
+          "phoneNumber": "Phone Number",
+          "ratings": "Ratings",
+          "pictures": "Pictures",
+          "address": "Address",
+          "city": "City",
+          "latitude": "Latitude",
+          "longitude": "Longitude",
+          "mapLocation": "Map Location",
+          "adminEmail": "Admin Email",
+          "adminPassword": "Admin Password"
+        },
+        "placeholders": {
+          "branchName": "e.g., Karwi Downtown Branch",
+          "selectFranchise": "Select a franchise",
+          "phoneNumber": "Contact phone number",
+          "ratings": "Branch rating (0-5)",
+          "pictures": "Comma-separated URLs of branch pictures",
+          "address": "Branch address",
+          "city": "Branch city",
+          "latitude": "Geographic latitude",
+          "longitude": "Geographic longitude",
+          "adminEmail": "e.g., admin@karwi-branch.com",
+          "adminPassword": "Enter password"
+        },
+        "adminEmailDescription": "A confirmation email will be sent to this address. The admin must confirm their email before they can sign in.",
+        "buttons": {
+          "updateBranch": "Update Branch",
+          "createBranch": "Create Branch"
+        },
+        "pictures": {
+          "tabs": {
+            "upload": "Upload",
+            "addUrl": "Add URL"
+          },
+          "upload": {
+            "description": "Drag and drop your images here, or click to browse",
+            "uploading": "Uploading...",
+            "chooseFiles": "Choose Files",
+            "storageInfo": "Images will be stored in cloud storage"
+          },
+          "url": {
+            "placeholder": "https://example.com/image.jpg",
+            "addButton": "Add",
+            "description": "Enter the URL of an image hosted online"
+          },
+          "currentImages": "Current Images",
+          "imageLabel": "Image {index}"
+        }
+      }
     },
     "franchises": {
       "title": "Franchises",
@@ -177,7 +287,34 @@
         "continue": "Continue"
       },
       "branch": "Branch",
-      "services": "Services"
+      "services": "Services",
+      "table": {
+        "name": "Name",
+        "status": "Status",
+        "branches": "Branches",
+        "washers": "Washers",
+        "filterByName": "Filter by name...",
+        "statusFilter": "Status",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "form": {
+        "franchiseName": "Franchise Name",
+        "franchiseNamePlaceholder": "e.g., Karwi Erbil",
+        "status": "Status",
+        "selectStatus": "Select a status",
+        "adminEmail": "Admin Email",
+        "adminEmailPlaceholder": "e.g., admin@karwi-erbil.com",
+        "adminPassword": "Admin Password",
+        "adminPasswordPlaceholder": "Enter password",
+        "createFranchise": "Create Franchise",
+        "updateFranchise": "Update Franchise",
+        "saving": "Saving...",
+        "franchiseNameMinLength": "Franchise name must be at least 2 characters.",
+        "validEmail": "Please enter a valid email address.",
+        "passwordMinLength": "Password must be at least 6 characters.",
+        "adminCredentialsRequired": "Both admin email and password are required for new franchises."
+      }
     },
     "payments": {
       "title": "Payments",

@@ -1,7 +1,8 @@
 "use client";
 
-import { ReviewList } from "./_components/review-list";
 import { useTranslations } from "next-intl";
+
+import { ReviewList } from "./_components/review-list";
 
 export default function ReviewsPage() {
   const t = useTranslations("admin.reviews");

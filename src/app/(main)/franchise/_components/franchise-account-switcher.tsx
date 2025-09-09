@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { useTranslations } from "next-intl";
 import { LogOut } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { logout } from "@/app/(main)/auth/_actions/logout";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

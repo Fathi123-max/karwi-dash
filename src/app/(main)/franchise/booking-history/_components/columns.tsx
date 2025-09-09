@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { EnrichedBooking } from "@/app/(main)/franchise/utils/bookings";
 import { Badge } from "@/components/ui/badge";

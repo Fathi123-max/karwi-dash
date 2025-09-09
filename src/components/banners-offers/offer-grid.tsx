@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { getActiveOffers } from "@/server/banners-offers-actions";
-import { Offer } from "@/types/banners-offers";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getActiveOffers } from "@/server/banners-offers-actions";
+import { Offer } from "@/types/banners-offers";
 
 export function OfferGrid() {
   const [offers, setOffers] = useState<Offer[]>([]);

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getCurrentUserFranchiseId } from "@/server/server-actions";
 import { useFranchiseDashboardStore } from "@/stores/franchise-dashboard/franchise-store";

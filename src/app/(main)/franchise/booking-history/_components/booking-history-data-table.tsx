@@ -1,8 +1,8 @@
 "use client";
 
 import { Download } from "lucide-react";
-
 import { useTranslations } from "next-intl";
+
 import { EnrichedBooking } from "@/app/(main)/franchise/utils/bookings";
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
