@@ -147,7 +147,9 @@
     "table": {
       "noResults": "لا توجد نتائج.",
       "clearFilters": "مسح الفلاتر",
-      "export": "تصدير"
+      "export": "تصدير",
+      "previous": "السابق",
+      "next": "التالي"
     },
     "branches": {
       "title": "الفروع",
@@ -350,7 +352,36 @@
         "continue": "متابعة"
       },
       "branch": "الفرع",
-      "services": "الخدمات"
+      "services": "الخدمات",
+      "columns": {
+        "name": "الاسم",
+        "phone": "الهاتف",
+        "cars": "السيارات",
+        "bookings": "الحجوزات",
+        "totalWashes": "إجمالي الغسيل"
+      },
+      "filters": {
+        "name": {
+          "placeholder": "التصفية حسب الاسم..."
+        },
+        "phone": {
+          "placeholder": "التصفية حسب الهاتف..."
+        }
+      },
+      "export": "تصدير",
+      "form": {
+        "name": "الاسم الكامل",
+        "phone": "رقم الهاتف",
+        "nameMinLength": "يجب أن يكون اسم المستخدم حرفين على الأقل.",
+        "phoneMinLength": "يجب أن يكون رقم الهاتف 10 أحرف على الأقل.",
+        "namePlaceholder": "مثال: محمد أحمد",
+        "phonePlaceholder": "123-456-7890",
+        "updateButton": "تحديث المستخدم"
+      },
+      "detail": {
+        "userNotFound": "المستخدم غير موجود",
+        "totalBookings": "إجمالي الحجوزات"
+      }
     },
     "washers": {
       "title": "العاملون في الغسيل",
@@ -374,6 +405,26 @@
         "previous": "السابق",
         "next": "التالي",
         "branch": "الفرع"
+      },
+      "schedule": {
+        "title": "جدول {name}",
+        "description": "إدارة جدول العمل لهذا العامل",
+        "addShift": {
+          "title": "إضافة وردية جديدة",
+          "dayOfWeek": "يوم الأسبوع",
+          "selectDay": "اختر يومًا",
+          "startTime": "وقت البدء",
+          "endTime": "وقت الانتهاء",
+          "button": "إضافة وردية",
+          "invalidTimeFormat": "تنسيق الوقت غير صالح (HH:MM)",
+          "defaultDay": "1",
+          "defaultStartTime": "09:00",
+          "defaultEndTime": "17:00"
+        },
+        "currentSchedule": {
+          "title": "الجدول الحالي",
+          "noShifts": "لا توجد ورديات مجدولة"
+        }
       }
     },
     "form": {
@@ -417,6 +468,7 @@
         "description": "إدارة اللافتات المعروضة للمستخدمين على مستوى الموقع"
       },
       "offers": {
+        "addoffer": "إضافة عرض",
         "title": "العروض",
         "description": "إدارة العروض الترويجية للخدمات والمنتجات"
       },
@@ -494,6 +546,47 @@
         "title": "طلبات المنتجات",
         "description": "إدارة طلبات منتجات الامتياز"
       },
+      "title": "المنتجات",
+      "description": "إدارة المنتجات والمخزون",
+      "columns": {
+        "name": "الاسم",
+        "category": "الفئة",
+        "price": "السعر",
+        "stock": "المخزون",
+        "actions": "الإجراءات",
+        "orderId": "معرف الطلب",
+        "franchise": "الامتياز",
+        "total": "الإجمالي",
+        "status": "الحالة",
+        "date": "التاريخ"
+      },
+      "filters": {
+        "category": "الفئة",
+        "franchise": "الامتياز",
+        "uncategorized": "غير مصنف"
+      },
+      "actions": {
+        "edit": "تعديل",
+        "delete": "حذف",
+        "viewDetails": "عرض التفاصيل",
+        "updateStatus": "تحديث الحالة"
+      },
+      "statuses": {
+        "pending": "قيد الانتظار",
+        "processing": "قيد المعالجة",
+        "shipped": "تم الشحن",
+        "delivered": "تم التوصيل",
+        "cancelled": "ملغى"
+      },
+      "manageCategories": "إدارة الفئات",
+      "createProduct": "إنشاء منتج",
+      "editProduct": "تعديل المنتج",
+      "export": "تصدير",
+      "loading": "جارٍ تحميل الطلبات...",
+      "error": "خطأ في تحميل الطلبات",
+      "retry": "إعادة المحاولة",
+      "noOrdersFound": "لم يتم العثور على طلبات.",
+      "toggleColumns": "تبديل الأعمدة",
       "branch": "الفرع",
       "services": "الخدمات"
     },
@@ -507,7 +600,80 @@
     "services": {
       "title": "الخدمات",
       "branch": "الفرع",
-      "services": "الخدمات"
+      "services": "الخدمات",
+      "columns": {
+        "name": "الاسم",
+        "description": "الوصف",
+        "branch": "الفرع",
+        "price": "السعر",
+        "duration": "المدة (بالدقائق)",
+        "noDescription": "لا يوجد وصف"
+      },
+      "filters": {
+        "branch": "الفرع"
+      },
+      "deleteConfirm": {
+        "globalService": "هذه خدمة عامة تنطبق على جميع الفروع. حذفها سيؤدي إلى إزالتها من جميع الفروع."
+      },
+      "form": {
+        "basicInfo": "المعلومات الأساسية",
+        "details": "التفاصيل",
+        "settings": "الإعدادات",
+        "availability": {
+          "dayOfWeek": "يوم الأسبوع",
+          "selectDay": "اختر يومًا",
+          "startTime": "وقت البدء",
+          "endTime": "وقت الانتهاء",
+          "active": "نشط",
+          "activeDescription": "حدد ما إذا كان فترة التوفر هذه نشطة",
+          "cancel": "إلغاء",
+          "saving": "جارٍ الحفظ...",
+          "update": "تحديث",
+          "add": "إضافة",
+          "list": {
+            "title": "توفر الخدمة",
+            "description": "إدارة وقت توفر هذه الخدمة",
+            "addButton": "إضافة توفر",
+            "editTitle": "تعديل التوفر",
+            "addTitle": "إضافة توفر",
+            "noAvailability": "لم يتم تحديد توفر لهذه الخدمة. أضف فترات زمنية عندما تكون هذه الخدمة متاحة.",
+            "inactive": "غير نشط",
+            "actions": "الإجراءات",
+            "edit": "تعديل",
+            "delete": "حذف"
+          }
+        },
+        "serviceName": "اسم الخدمة",
+        "serviceDescription": "وصف الخدمة",
+        "duration": "المدة (بالدقائق)",
+        "price": "السعر",
+        "pictures": {
+          "upload": "رفع",
+          "addUrl": "إضافة رابط",
+          "dragDrop": "اسحب وأفلت صورك هنا، أو انقر للتصفح",
+          "chooseFiles": "اختر الملفات",
+          "uploading": "جارٍ الرفع...",
+          "storageInfo": "سيتم تخزين الصور في التخزين السحابي",
+          "urlPlaceholder": "https://example.com/image.jpg",
+          "add": "إضافة",
+          "urlDescription": "أدخل عنوان URL لصورة مستضافة على الإنترنت",
+          "currentImages": "الصور الحالية",
+          "imageLabel": "الصورة {index}"
+        },
+        "todos": "المهام",
+        "include": "يشمل",
+        "globalService": "خدمة عامة",
+        "branch": "الفرع",
+        "selectBranch": "اختر فرعًا",
+        "globalServiceDescription": "ستكون هذه الخدمة متاحة في جميع الفروع",
+        "branchServiceDescription": "ستكون هذه الخدمة متاحة فقط في الفرع المحدد",
+        "update": "تحديث",
+        "create": "إنشاء",
+        "cancel": "إلغاء",
+        "commaSeparatedUrls": "عناوين URL للصور مفصولة بفواصل",
+        "commaSeparatedTodos": "قائمة المهام مفصولة بفواصل",
+        "commaSeparatedInclude": "عناصر مفصولة بفواصل"
+      }
     },
     "reports": {
       "title": "التقارير",

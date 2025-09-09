@@ -11,6 +11,7 @@ import { OrderList } from "./_components/order-list";
 
 export default function AdminProductOrdersPage() {
   const t = useTranslations("admin.products.orders");
+  const tProducts = useTranslations("admin.products");
   const { fetchOrders, loading } = useAdminProductOrderStore();
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function AdminProductOrdersPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Order Management</CardTitle>
+          <CardTitle>{tProducts("orders.title")}</CardTitle>
           <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
         <CardContent>

@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { MoreHorizontal } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,9 @@ interface OrderColumnsProps {
 }
 
 export function useOrderColumns({ onViewDetails }: OrderColumnsProps): ColumnDef<ProductOrderWithItems>[] {
+  const t = useTranslations("admin.products");
+  const statusT = useTranslations("admin.products.statuses");
+
   // Format date safely
   const formatDate = (dateString: string) => {
     try {
@@ -33,21 +37,21 @@ export function useOrderColumns({ onViewDetails }: OrderColumnsProps): ColumnDef
   return [
     {
       accessorKey: "id",
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Order ID" />,
+      header: ({ column }) => <DataTableColumnHeader column={column} title={t("columns.orderId")} />,
       cell: ({ row }) => <div className="font-medium">{row.original.id.slice(0, 8)}</div>,
       enableSorting: false,
       enableHiding: false,
     },
     {
       accessorKey: "franchise",
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Franchise" />,
+      header: ({ column }) => <DataTableColumnHeader column={column} title={t("columns.franchise")} />,
       cell: ({ row }) => <div className="font-medium">{row.original.franchise?.name || "Unknown"}</div>,
       enableSorting: true,
       enableHiding: true,
     },
     {
       accessorKey: "total_amount",
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Total" />,
+      header: ({ column }) => <DataTableColumnHeader column={column} title={t("columns.total")} />,
       cell: ({ row }) => {
         const amount = parseFloat(row.getValue("total_amount"));
         const formatted = new Intl.NumberFormat("en-US", {
@@ -62,7 +66,7 @@ export function useOrderColumns({ onViewDetails }: OrderColumnsProps): ColumnDef
     },
     {
       accessorKey: "status",
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
+      header: ({ column }) => <DataTableColumnHeader column={column} title={t("columns.status")} />,
       cell: ({ row }) => {
         const status = row.getValue("status");
 
@@ -78,7 +82,7 @@ export function useOrderColumns({ onViewDetails }: OrderColumnsProps): ColumnDef
           <span
             className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${statusColors[status] || "bg-gray-100 text-gray-800"}`}
           >
-            {status.charAt(0).toUpperCase() + status.slice(1)}
+            {statusT(status) || status.charAt(0).toUpperCase() + status.slice(1)}
           </span>
         );
       },
@@ -87,7 +91,7 @@ export function useOrderColumns({ onViewDetails }: OrderColumnsProps): ColumnDef
     },
     {
       accessorKey: "created_at",
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Date" />,
+      header: ({ column }) => <DataTableColumnHeader column={column} title={t("columns.date")} />,
       cell: ({ row }) => <div>{formatDate(row.getValue("created_at"))}</div>,
       enableSorting: true,
       enableHiding: true,
@@ -102,15 +106,15 @@ export function useOrderColumns({ onViewDetails }: OrderColumnsProps): ColumnDef
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-8 w-8 p-0">
-                  <span className="sr-only">Open menu</span>
+                  <span className="sr-only">{t("columns.actions")}</span>
                   <MoreHorizontal className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => onViewDetails(order.id)}>View Details</DropdownMenuItem>
+                <DropdownMenuLabel>{t("columns.actions")}</DropdownMenuLabel>
+                <DropdownMenuItem onClick={() => onViewDetails(order.id)}>{t("actions.viewDetails")}</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Update Status</DropdownMenuItem>
+                <DropdownMenuItem>{t("actions.updateStatus")}</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
