@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
 
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -15,16 +16,17 @@ type ServiceWithBranchName = Service & { branchName?: string; description?: stri
 
 export const useServiceColumns = (): ColumnDef<ServiceWithBranchName>[] => {
   const isMobile = useIsMobile();
+  const t = useTranslations("admin.services.columns");
 
   const columns = useMemo(() => {
     const baseColumns: ColumnDef<ServiceWithBranchName>[] = [
       {
         accessorKey: "name",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
+        header: ({ column }) => <DataTableColumnHeader column={column} title={t("name")} />,
       },
       {
         accessorKey: "description",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Description" />,
+        header: ({ column }) => <DataTableColumnHeader column={column} title={t("description")} />,
         cell: ({ row }) => {
           const description = row.original.description;
           return description ? (
@@ -32,13 +34,13 @@ export const useServiceColumns = (): ColumnDef<ServiceWithBranchName>[] => {
               {description}
             </div>
           ) : (
-            <span className="text-muted-foreground">No description</span>
+            <span className="text-muted-foreground">{t("noDescription")}</span>
           );
         },
       },
       {
         accessorKey: "branchName",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Branch" />,
+        header: ({ column }) => <DataTableColumnHeader column={column} title={t("branch")} />,
         cell: ({ row }) => {
           const service = row.original;
           const branchName = service.is_global ? "Global" : service.branchName || "N/A";
@@ -54,11 +56,11 @@ export const useServiceColumns = (): ColumnDef<ServiceWithBranchName>[] => {
       },
       {
         accessorKey: "price",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Price" />,
+        header: ({ column }) => <DataTableColumnHeader column={column} title={t("price")} />,
       },
       {
         accessorKey: "duration_min",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Duration (min)" />,
+        header: ({ column }) => <DataTableColumnHeader column={column} title={t("duration")} />,
       },
       {
         id: "actions",
@@ -81,7 +83,7 @@ export const useServiceColumns = (): ColumnDef<ServiceWithBranchName>[] => {
     }
 
     return baseColumns;
-  }, [isMobile]);
+  }, [isMobile, t]);
 
   return columns;
 };

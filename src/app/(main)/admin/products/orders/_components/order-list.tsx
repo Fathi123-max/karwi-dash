@@ -14,6 +14,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ChevronDown, Download, AlertCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -34,6 +35,7 @@ import { useOrderColumns } from "./columns";
 import { OrderDetailsDialog } from "./order-details-dialog";
 
 export function OrderList() {
+  const t = useTranslations("admin.products");
   const { orders, loading, error, fetchOrders } = useAdminProductOrderStore();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -89,7 +91,7 @@ export function OrderList() {
   if (loading) {
     return (
       <div className="flex h-32 items-center justify-center">
-        <div className="text-muted-foreground">Loading orders...</div>
+        <div className="text-muted-foreground">{t("loading")}</div>
       </div>
     );
   }
@@ -99,7 +101,7 @@ export function OrderList() {
       <div className="rounded-md border border-red-200 bg-red-50 p-4">
         <div className="flex items-center gap-2">
           <AlertCircle className="h-5 w-5 text-red-500" />
-          <div className="font-medium text-red-800">Error loading orders</div>
+          <div className="font-medium text-red-800">{t("error")}</div>
         </div>
         <div className="mt-2 text-sm text-red-700">{error}</div>
         <Button
@@ -108,7 +110,7 @@ export function OrderList() {
           className="mt-3 border-red-300 text-red-700 hover:bg-red-100"
           onClick={() => fetchOrders()}
         >
-          Retry
+          {t("retry")}
         </Button>
       </div>
     );
@@ -119,7 +121,7 @@ export function OrderList() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Input
-            placeholder="Filter by franchise..."
+            placeholder={`${t("filters.franchise")}...`}
             value={(table.getColumn("franchise")?.getFilterValue() as string) ?? ""}
             onChange={(event) => table.getColumn("franchise")?.setFilterValue(event.target.value)}
             className="max-w-sm"
@@ -128,17 +130,17 @@ export function OrderList() {
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" onClick={handleExport}>
             <Download className="mr-2 h-4 w-4" />
-            Export
+            {t("export")}
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
                 <ChevronDown className="mr-2 h-4 w-4" />
-                Columns
+                {t("columns.actions")}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("toggleColumns")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {table
                 .getAllColumns()
@@ -151,7 +153,7 @@ export function OrderList() {
                       checked={column.getIsVisible()}
                       onCheckedChange={(value) => column.toggleVisibility(!!value)}
                     >
-                      {column.id}
+                      {t(`columns.${column.id}`) || column.id}
                     </DropdownMenuCheckboxItem>
                   );
                 })}
@@ -196,7 +198,7 @@ export function OrderList() {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No orders found.
+                  {t("noOrdersFound")}
                 </TableCell>
               </TableRow>
             )}
