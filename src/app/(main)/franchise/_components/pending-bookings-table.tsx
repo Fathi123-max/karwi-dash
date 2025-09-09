@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 
+import { useTranslations } from "next-intl";
 import { EnrichedBooking } from "@/app/(main)/franchise/utils/bookings";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -11,31 +12,32 @@ interface PendingBookingsTableProps {
 }
 
 const PendingBookingsTable: React.FC<PendingBookingsTableProps> = ({ bookings }) => {
+  const t = useTranslations("franchise.pendingBookings");
   const pending = bookings.filter((b) => b.status === "pending");
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Pending Bookings</CardTitle>
-        <CardDescription>These bookings require approval or action.</CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Booking ID</TableHead>
-              <TableHead>User</TableHead>
-              <TableHead>Branch</TableHead>
-              <TableHead>Service</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead>{t("bookingId")}</TableHead>
+              <TableHead>{t("user")}</TableHead>
+              <TableHead>{t("branch")}</TableHead>
+              <TableHead>{t("service")}</TableHead>
+              <TableHead>{t("date")}</TableHead>
+              <TableHead>{t("status")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {pending.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={6} className="text-muted-foreground text-center">
-                  No pending bookings
+                  {t("noPendingBookings")}
                 </TableCell>
               </TableRow>
             ) : (

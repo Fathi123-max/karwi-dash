@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -29,6 +30,7 @@ interface PromotionFormProps {
 }
 
 export function PromotionForm({ promotion, onSubmit }: PromotionFormProps) {
+  const t = useTranslations("franchise.promotions.form");
   const form = useForm<PromotionFormValues>({
     resolver: zodResolver(promotionSchema),
     defaultValues: {
@@ -56,9 +58,9 @@ export function PromotionForm({ promotion, onSubmit }: PromotionFormProps) {
           name="code"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Code</FormLabel>
+              <FormLabel>{t("code")}</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., SUMMER20" {...field} />
+                <Input placeholder={t("codePlaceholder")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -69,7 +71,7 @@ export function PromotionForm({ promotion, onSubmit }: PromotionFormProps) {
           name="discount"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Discount (%)</FormLabel>
+              <FormLabel>{t("discount")}</FormLabel>
               <FormControl>
                 <Input type="number" min="0" max="100" step="0.1" {...field} />
               </FormControl>
@@ -83,7 +85,7 @@ export function PromotionForm({ promotion, onSubmit }: PromotionFormProps) {
             name="startDate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Start Date</FormLabel>
+                <FormLabel>{t("startDate")}</FormLabel>
                 <FormControl>
                   <Input type="date" {...field} />
                 </FormControl>
@@ -96,7 +98,7 @@ export function PromotionForm({ promotion, onSubmit }: PromotionFormProps) {
             name="endDate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>End Date</FormLabel>
+                <FormLabel>{t("endDate")}</FormLabel>
                 <FormControl>
                   <Input type="date" {...field} />
                 </FormControl>
@@ -106,7 +108,7 @@ export function PromotionForm({ promotion, onSubmit }: PromotionFormProps) {
           />
         </div>
         <div className="flex justify-end space-x-2 pt-4">
-          <Button type="submit">Save</Button>
+          <Button type="submit">{t("save")}</Button>
         </div>
       </form>
     </Form>

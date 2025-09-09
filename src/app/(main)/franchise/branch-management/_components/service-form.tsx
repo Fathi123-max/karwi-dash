@@ -6,6 +6,7 @@
 
 import { useEffect } from "react";
 
+import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Tag, DollarSign, Clock, Globe } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -40,6 +41,7 @@ interface ServiceFormProps {
 }
 
 export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) {
+  const t = useTranslations("franchise.services.form");
   const { addService, addGlobalService, updateService } = useFranchiseServiceStore();
   const { fetchBranches } = useFranchiseBranchStore();
 
@@ -73,7 +75,7 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
       if (service) {
         // EDIT FEATURE: Update existing service with new data
         await updateService({ ...service, ...processedData });
-        toast.success("Service updated successfully!");
+        toast.success(t("serviceUpdated"));
       } else {
         if (data.is_global) {
           // ADD FEATURE: Create global service that applies to all branches
@@ -83,7 +85,7 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
             price: processedData.price,
             duration_min: processedData.duration_min,
           });
-          toast.success("Global service created successfully! It will be available at all branches.");
+          toast.success(t("globalServiceCreated"));
         } else {
           // ADD FEATURE: Create branch-specific service
           await addService({
@@ -91,13 +93,13 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
             branchId: branchId,
             is_global: false,
           });
-          toast.success("Service created successfully!");
+          toast.success(t("serviceCreated"));
         }
       }
       await fetchBranches(); // Refetch branches to get updated service lists
       onSuccess();
     } catch (error) {
-      toast.error("An error occurred. Please try again.");
+      toast.error(t("errorOccurred"));
       console.error(error);
     }
   };
@@ -117,16 +119,14 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
           <>
             <Tabs defaultValue="details" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="details">Details</TabsTrigger>
-                <TabsTrigger value="promotions">Promotions</TabsTrigger>
+                <TabsTrigger value="details">{t("details")}</TabsTrigger>
+                <TabsTrigger value="promotions">{t("promotions")}</TabsTrigger>
               </TabsList>
               <TabsContent value="details" className="mt-4">
                 <div className="space-y-4">
                   <div className="bg-muted rounded-lg p-4">
                     <h3 className="font-medium">{service.name}</h3>
-                    <p className="text-muted-foreground text-sm">
-                      This is a global service. You can only modify the price for this branch.
-                    </p>
+                    <p className="text-muted-foreground text-sm">{t("globalServiceInfo")}</p>
                   </div>
 
                   <FormField
@@ -134,11 +134,17 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                     name="price"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Price</FormLabel>
+                        <FormLabel>{t("price")}</FormLabel>
                         <FormControl>
                           <div className="relative">
                             <DollarSign className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                            <Input type="number" step="0.01" placeholder="e.g., 25.00" {...field} className="pl-10" />
+                            <Input
+                              type="number"
+                              step="0.01"
+                              placeholder={t("pricePlaceholder")}
+                              {...field}
+                              className="pl-10"
+                            />
                           </div>
                         </FormControl>
                         <FormMessage />
@@ -155,7 +161,7 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
             <div className="flex justify-end pt-4">
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Update Price
+                {t("updatePrice")}
               </Button>
             </div>
           </>
@@ -163,17 +169,15 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
           <>
             <Tabs defaultValue="details" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="details">Details</TabsTrigger>
-                <TabsTrigger value="promotions">Promotions</TabsTrigger>
+                <TabsTrigger value="details">{t("details")}</TabsTrigger>
+                <TabsTrigger value="promotions">{t("promotions")}</TabsTrigger>
               </TabsList>
               <TabsContent value="details" className="mt-4">
                 <div className="space-y-4">
                   <div className="bg-muted rounded-lg p-4">
                     <h3 className="font-medium">{service.name}</h3>
                     <p className="text-muted-foreground text-sm">
-                      {isEditing && service.is_global
-                        ? "This is a global service. You can only modify the price for this branch."
-                        : "You can only modify the price for this service."}
+                      {isEditing && service.is_global ? t("globalServiceEditInfo") : t("serviceEditInfo")}
                     </p>
                   </div>
 
@@ -182,11 +186,17 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                     name="price"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Price</FormLabel>
+                        <FormLabel>{t("price")}</FormLabel>
                         <FormControl>
                           <div className="relative">
                             <DollarSign className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                            <Input type="number" step="0.01" placeholder="e.g., 25.00" {...field} className="pl-10" />
+                            <Input
+                              type="number"
+                              step="0.01"
+                              placeholder={t("pricePlaceholder")}
+                              {...field}
+                              className="pl-10"
+                            />
                           </div>
                         </FormControl>
                         <FormMessage />
@@ -197,16 +207,18 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                   {/* Display other service details as read-only */}
                   <div className="space-y-2">
                     <div>
-                      <FormLabel>Description</FormLabel>
-                      <p className="text-muted-foreground">{service.description ?? "No description provided"}</p>
+                      <FormLabel>{t("description")}</FormLabel>
+                      <p className="text-muted-foreground">{service.description ?? t("noDescription")}</p>
                     </div>
                     <div>
-                      <FormLabel>Duration</FormLabel>
-                      <p className="text-muted-foreground">{service.duration_min ?? "N/A"} minutes</p>
+                      <FormLabel>{t("duration")}</FormLabel>
+                      <p className="text-muted-foreground">
+                        {service.duration_min ?? t("na")} {t("minutes")}
+                      </p>
                     </div>
                     {service.todos && service.todos.length > 0 && (
                       <div>
-                        <FormLabel>To-Dos</FormLabel>
+                        <FormLabel>{t("toDos")}</FormLabel>
                         <ul className="text-muted-foreground list-inside list-disc">
                           {service.todos.map((todo: string, index: number) => (
                             <li key={index}>{todo}</li>
@@ -216,7 +228,7 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                     )}
                     {service.include && service.include.length > 0 && (
                       <div>
-                        <FormLabel>Includes</FormLabel>
+                        <FormLabel>{t("includes")}</FormLabel>
                         <ul className="text-muted-foreground list-inside list-disc">
                           {service.include.map((item: string, index: number) => (
                             <li key={index}>{item}</li>
@@ -234,7 +246,7 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
             <div className="flex justify-end pt-4">
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Update Price
+                {t("updatePrice")}
               </Button>
             </div>
           </>
@@ -246,11 +258,11 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Service Name</FormLabel>
+                    <FormLabel>{t("serviceName")}</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Tag className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                        <Input placeholder="e.g., Standard Wash" {...field} className="pl-10" />
+                        <Input placeholder={t("serviceNamePlaceholder")} {...field} className="pl-10" />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -262,9 +274,9 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>{t("description")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Service description" {...field} />
+                      <Input placeholder={t("serviceDescriptionPlaceholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -275,11 +287,17 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel>{t("price")}</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <DollarSign className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                        <Input type="number" step="0.01" placeholder="e.g., 25.00" {...field} className="pl-10" />
+                        <Input
+                          type="number"
+                          step="0.01"
+                          placeholder={t("pricePlaceholder")}
+                          {...field}
+                          className="pl-10"
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -291,11 +309,17 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                 name="duration_min"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Duration (minutes)</FormLabel>
+                    <FormLabel>{t("durationMinutes")}</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Clock className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                        <Input type="number" step="5" placeholder="e.g., 45" {...field} className="pl-10" />
+                        <Input
+                          type="number"
+                          step="5"
+                          placeholder={t("durationPlaceholder")}
+                          {...field}
+                          className="pl-10"
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -307,9 +331,9 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                 name="todos"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>To-Dos</FormLabel>
+                    <FormLabel>{t("toDos")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Comma-separated list of to-dos" {...field} />
+                      <Input placeholder={t("todosPlaceholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -320,9 +344,9 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                 name="include"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Include</FormLabel>
+                    <FormLabel>{t("includes")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Comma-separated list of included items" {...field} />
+                      <Input placeholder={t("includePlaceholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -336,12 +360,10 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
                     <div className="space-y-0.5">
                       <FormLabel className="flex items-center text-base">
                         <Globe className="mr-2 h-4 w-4" />
-                        Global Service
+                        {t("globalService")}
                       </FormLabel>
                       <p className="text-muted-foreground text-sm">
-                        {field.value
-                          ? "This service will be available at all branches in your franchise"
-                          : "This service will only be available at this branch"}
+                        {field.value ? t("globalServiceDescription") : t("branchServiceDescription")}
                       </p>
                     </div>
                     <FormControl>
@@ -354,7 +376,7 @@ export function ServiceForm({ branchId, service, onSuccess }: ServiceFormProps) 
             <div className="flex justify-end pt-4">
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {service ? "Update Service" : "Create Service"}
+                {service ? t("updateService") : t("createService")}
               </Button>
             </div>
           </>

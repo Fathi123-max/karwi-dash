@@ -78,16 +78,8 @@ export function ImageUploadField({ value, onChange, bucket = "images" }: ImageUp
       ) : (
         <div className="rounded-lg border-2 border-dashed p-6 text-center">
           <ImageIcon className="text-muted-foreground mx-auto h-12 w-12" />
-          <p className="text-muted-foreground mt-2 text-sm">
-            Drag and drop your image here, or click to browse
-          </p>
-          <Button
-            type="button"
-            variant="secondary"
-            className="mt-4"
-            onClick={triggerFileInput}
-            disabled={isUploading}
-          >
+          <p className="text-muted-foreground mt-2 text-sm">Drag and drop your image here, or click to browse</p>
+          <Button type="button" variant="secondary" className="mt-4" onClick={triggerFileInput} disabled={isUploading}>
             {isUploading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

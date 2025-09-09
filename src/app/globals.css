@@ -127,29 +127,29 @@ These serve as the fallback; there is no separate default.css file. */
   .text-left {
     text-align: right;
   }
-  
+
   .text-right {
     text-align: left;
   }
-  
+
   .float-left {
     float: right;
   }
-  
+
   .float-right {
     float: left;
   }
-  
+
   .ml-0 {
     margin-right: 0;
     margin-left: 0;
   }
-  
+
   .mr-0 {
     margin-left: 0;
     margin-right: 0;
   }
-  
+
   /* Add more RTL-specific styles as needed */
 }
 

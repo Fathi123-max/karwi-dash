@@ -16,18 +16,18 @@ This project uses `next-intl` for internationalization without locale routing. H
 For client components, use the `useTranslations` hook:
 
 ```tsx
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
 export function MyComponent() {
-  const t = useTranslations('navigation');
-  const tCommon = useTranslations('common');
-  
+  const t = useTranslations("navigation");
+  const tCommon = useTranslations("common");
+
   return (
     <div>
-      <h1>{t('dashboard')}</h1>
-      <button>{tCommon('save')}</button>
+      <h1>{t("dashboard")}</h1>
+      <button>{tCommon("save")}</button>
     </div>
   );
 }
@@ -38,16 +38,16 @@ export function MyComponent() {
 For server components, use the `getTranslations` function:
 
 ```tsx
-import { getTranslations } from 'next-intl/server';
+import { getTranslations } from "next-intl/server";
 
 export default async function MyServerComponent() {
-  const t = await getTranslations('navigation');
-  const tCommon = await getTranslations('common');
-  
+  const t = await getTranslations("navigation");
+  const tCommon = await getTranslations("common");
+
   return (
     <div>
-      <h1>{t('dashboard')}</h1>
-      <button>{tCommon('save')}</button>
+      <h1>{t("dashboard")}</h1>
+      <button>{tCommon("save")}</button>
     </div>
   );
 }
@@ -64,7 +64,7 @@ export default async function MyServerComponent() {
 Import and use one of the language switcher components:
 
 ```tsx
-import { LanguageSwitcherButtons } from '@/components/i18n/language-switcher-buttons';
+import { LanguageSwitcherButtons } from "@/components/i18n/language-switcher-buttons";
 
 export function Header() {
   return (
@@ -80,12 +80,12 @@ export function Header() {
 Use `generateMetadata` with `getTranslations` to set page titles:
 
 ```tsx
-import { getTranslations } from 'next-intl/server';
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata() {
-  const t = await getTranslations('dashboard');
+  const t = await getTranslations("dashboard");
   return {
-    title: t('welcome'),
+    title: t("welcome"),
   };
 }
 ```

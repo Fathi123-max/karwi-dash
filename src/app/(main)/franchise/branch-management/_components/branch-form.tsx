@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Building2, Loader2, PlusCircle, Trash2, Edit } from "lucide-react";
@@ -82,6 +83,7 @@ const parseLocation = (locationStr: string | null | undefined): { lat: number; l
 };
 
 export function BranchForm({ branch, onSuccess }: BranchFormProps) {
+  const t = useTranslations("franchise.branches.form");
   const { addBranch, updateBranch, fetchBranches } = useFranchiseBranchStore();
   const { deleteService } = useFranchiseServiceStore();
 
@@ -89,7 +91,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
     () =>
       dynamic(() => import("./location-picker").then((mod) => mod.LocationPicker), {
         ssr: false,
-        loading: () => <p className="text-muted-foreground text-sm">Loading map...</p>,
+        loading: () => <p className="text-muted-foreground text-sm">{t("loadingMap")}</p>,
       }),
     [],
   );
@@ -116,13 +118,13 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
       if (isEditMode && branch) {
         // EDIT FEATURE: In edit mode, we don't update name or location
         // Just show success message since there's nothing to update
-        toast.success("Branch details updated successfully!");
+        toast.success(t("branchUpdated"));
         onSuccess();
       } else {
         // ADD FEATURE: Create new branch with provided data
         // Type guard to ensure we have the required data
         if (!data.name || !data.location) {
-          toast.error("Please provide all required information.");
+          toast.error(t("provideRequiredInfo"));
           return;
         }
 
@@ -131,11 +133,11 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
           name: data.name,
           location: locationString,
         });
-        toast.success("Branch created successfully!");
+        toast.success(t("branchCreated"));
         onSuccess();
       }
     } catch (error) {
-      toast.error(`Failed to ${isEditMode ? "update" : "create"} branch.`);
+      toast.error(t("failedToActionBranch", { action: isEditMode ? t("update") : t("create") }));
     }
   };
 
@@ -143,9 +145,9 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
     try {
       await deleteService(serviceId);
       await fetchBranches(); // Refetch to update the service list
-      toast.success("Service deleted successfully!");
+      toast.success(t("serviceDeleted"));
     } catch (error) {
-      toast.error("Failed to delete service.");
+      toast.error(t("failedToDeleteService"));
     }
   };
 
@@ -156,10 +158,10 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
           <Card className="border-0 shadow-none md:border md:shadow-sm">
             <CardHeader className="px-0 md:px-6">
               <CardTitle className="text-xl md:text-2xl">
-                {isEditMode ? "Manage Branch Services" : "Add New Branch"}
+                {isEditMode ? t("manageBranchServices") : t("addNewBranch")}
               </CardTitle>
               <CardDescription>
-                {isEditMode ? "Manage services for this branch." : "Enter the details for the new branch."}
+                {isEditMode ? t("manageServicesDescription") : t("addBranchDescription")}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4 px-0 md:px-6">
@@ -169,11 +171,11 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Branch Name</FormLabel>
+                      <FormLabel>{t("branchName")}</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Building2 className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                          <Input placeholder="e.g., Karwi Residential Compound" {...field} className="h-12 pl-10" />
+                          <Input placeholder={t("branchNamePlaceholder")} {...field} className="h-12 pl-10" />
                         </div>
                       </FormControl>
                       <FormMessage />
@@ -187,7 +189,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                   name="location"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Location</FormLabel>
+                      <FormLabel>{t("location")}</FormLabel>
                       <FormControl>
                         <LocationPicker
                           onLocationSelect={field.onChange}
@@ -208,16 +210,16 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
               <CardContent className="px-0 md:px-6">
                 <Tabs defaultValue="services" className="w-full">
                   <TabsList className="grid w-full grid-cols-3">
-                    <TabsTrigger value="services">Services</TabsTrigger>
-                    <TabsTrigger value="bookings">Bookings</TabsTrigger>
-                    <TabsTrigger value="details">Branch Details</TabsTrigger>
+                    <TabsTrigger value="services">{t("services")}</TabsTrigger>
+                    <TabsTrigger value="bookings">{t("bookings")}</TabsTrigger>
+                    <TabsTrigger value="details">{t("branchDetails")}</TabsTrigger>
                   </TabsList>
                   <TabsContent value="services" className="mt-4">
                     <div className="space-y-4">
                       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                         <div className="space-y-1.5">
-                          <h3 className="text-lg font-medium">Manage Services</h3>
-                          <p className="text-muted-foreground text-sm">Edit or remove services for this branch.</p>
+                          <h3 className="text-lg font-medium">{t("manageServices")}</h3>
+                          <p className="text-muted-foreground text-sm">{t("editRemoveServices")}</p>
                         </div>
                         {/* Add Service button hidden as per requirements */}
                       </div>
@@ -232,35 +234,35 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                                 <div className="flex-1">
                                   <p className="font-medium">{service.name}</p>
                                   <p className="text-muted-foreground text-sm">
-                                    ${service.price?.toFixed(2) ?? "N/A"} &middot; {service.duration_min ?? "N/A"} mins
+                                    ${service.price?.toFixed(2) ?? t("na")} &middot; {service.duration_min ?? t("na")}{" "}
+                                    {t("mins")}
                                   </p>
                                 </div>
                                 <div className="flex shrink-0 items-center gap-2">
                                   <ServiceDialog branchId={branch.id} service={service}>
                                     <Button variant="outline" size="sm">
                                       <Edit className="h-4 w-4" />
-                                      <span className="sr-only">Edit</span>
+                                      <span className="sr-only">{t("edit")}</span>
                                     </Button>
                                   </ServiceDialog>
                                   <AlertDialog>
                                     <AlertDialogTrigger asChild>
                                       <Button variant="outline" size="sm" className="text-red-500 hover:text-red-600">
                                         <Trash2 className="h-4 w-4" />
-                                        <span className="sr-only">Delete</span>
+                                        <span className="sr-only">{t("delete")}</span>
                                       </Button>
                                     </AlertDialogTrigger>
                                     <AlertDialogContent>
                                       <AlertDialogHeader>
-                                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                        <AlertDialogTitle>{t("areYouSure")}</AlertDialogTitle>
                                         <AlertDialogDescription>
-                                          This will permanently delete the &quot;{service.name}&quot; service. This
-                                          action cannot be undone.
+                                          {t("deleteServiceConfirmation", { name: service.name })}
                                         </AlertDialogDescription>
                                       </AlertDialogHeader>
                                       <AlertDialogFooter>
-                                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                        <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
                                         <AlertDialogAction onClick={() => handleDeleteService(service.id)}>
-                                          Continue
+                                          {t("continue")}
                                         </AlertDialogAction>
                                       </AlertDialogFooter>
                                     </AlertDialogContent>
@@ -270,8 +272,8 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                             ))
                           ) : (
                             <div className="text-muted-foreground flex h-[200px] flex-col items-center justify-center p-4 text-center">
-                              <div className="mb-2 text-lg font-medium">No services added</div>
-                              <p className="mb-4 max-w-xs">No services are currently available for this branch.</p>
+                              <div className="mb-2 text-lg font-medium">{t("noServicesAdded")}</div>
+                              <p className="mb-4 max-w-xs">{t("noServicesAvailable")}</p>
                             </div>
                           )}
                         </div>
@@ -281,8 +283,8 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                   <TabsContent value="bookings" className="mt-4">
                     <div className="space-y-4">
                       <div className="space-y-1.5">
-                        <h3 className="text-lg font-medium">Booking Management</h3>
-                        <p className="text-muted-foreground text-sm">Manage bookings for this branch.</p>
+                        <h3 className="text-lg font-medium">{t("bookingManagement")}</h3>
+                        <p className="text-muted-foreground text-sm">{t("manageBookings")}</p>
                       </div>
                       <div className="rounded-lg border p-4">
                         <BranchBookingManagement branchId={branch.id} />
@@ -292,19 +294,19 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
                   <TabsContent value="details" className="mt-4">
                     <div className="space-y-4">
                       <div className="space-y-1.5">
-                        <h3 className="text-lg font-medium">Branch Details</h3>
-                        <p className="text-muted-foreground text-sm">Additional information about this branch.</p>
+                        <h3 className="text-lg font-medium">{t("branchDetails")}</h3>
+                        <p className="text-muted-foreground text-sm">{t("additionalInfo")}</p>
                       </div>
                       <div className="rounded-lg border p-4">
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                           <div>
-                            <h4 className="font-medium">Branch ID</h4>
+                            <h4 className="font-medium">{t("branchId")}</h4>
                             <p className="text-muted-foreground text-sm">{branch.id}</p>
                           </div>
                           <div>
-                            <h4 className="font-medium">Created At</h4>
+                            <h4 className="font-medium">{t("createdAt")}</h4>
                             <p className="text-muted-foreground text-sm">
-                              {branch.created_at ? new Date(branch.created_at).toLocaleString() : "N/A"}
+                              {branch.created_at ? new Date(branch.created_at).toLocaleString() : t("na")}
                             </p>
                           </div>
                         </div>
@@ -319,7 +321,7 @@ export function BranchForm({ branch, onSuccess }: BranchFormProps) {
           <div className="flex justify-end">
             <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {isEditMode ? "Done" : "Add Branch"}
+              {isEditMode ? t("done") : t("addBranch")}
             </Button>
           </div>
         </form>

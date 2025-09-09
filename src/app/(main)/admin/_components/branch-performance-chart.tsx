@@ -11,7 +11,7 @@ import { useBranchStore } from "@/stores/admin-dashboard/branch-store";
 import { useFranchiseStore } from "@/stores/admin-dashboard/franchise-store";
 
 export function BranchPerformanceChart() {
-  const t = useTranslations();
+  const t = useTranslations("admin.branchPerformance");
   const { branches } = useBranchStore();
   const { franchises } = useFranchiseStore();
   const [selectedFranchise, setSelectedFranchise] = useState<string>("all");
@@ -37,22 +37,22 @@ export function BranchPerformanceChart() {
   // Get unique franchises for filter dropdown
   const franchiseOptions = useMemo(() => {
     return [
-      { value: "all", label: "All Franchises" },
+      { value: "all", label: t("allFranchises") },
       ...franchises.map((franchise) => ({
         value: franchise.id,
         label: franchise.name,
       })),
     ];
-  }, [franchises]);
+  }, [franchises, t]);
 
   return (
     <Card>
       <CardHeader>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <CardTitle>{t("admin.branchPerformance.title")}</CardTitle>
+          <CardTitle>{t("title")}</CardTitle>
           <Select value={selectedFranchise} onValueChange={setSelectedFranchise}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Filter by franchise" />
+              <SelectValue placeholder={t("filterByFranchise")} />
             </SelectTrigger>
             <SelectContent>
               {franchiseOptions.map((option) => (
@@ -93,16 +93,17 @@ export function BranchPerformanceChart() {
                 axisLine={false}
                 tickFormatter={(value) => `${value}`}
               />
-              <Tooltip formatter={(value) => [value, "Count"]} labelFormatter={(value) => `Branch: ${value}`} />
+              <Tooltip
+                formatter={(value) => [value, t("count")]}
+                labelFormatter={(value) => `${t("branch")}: ${value}`}
+              />
               <Legend />
-              <Bar dataKey="services" fill="#3b82f6" name="Services Offered" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Active Bookings" fill="#10b981" name="Active Bookings" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="services" fill="#3b82f6" name={t("servicesOffered")} radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Active Bookings" fill="#10b981" name={t("activeBookings")} radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <div className="text-muted-foreground flex h-[350px] items-center justify-center">
-            No branch data available
-          </div>
+          <div className="text-muted-foreground flex h-[350px] items-center justify-center">{t("noData")}</div>
         )}
       </CardContent>
     </Card>

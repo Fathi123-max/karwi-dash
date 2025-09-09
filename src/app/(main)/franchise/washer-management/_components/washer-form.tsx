@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 
+import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User, Building, Star, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -36,26 +37,28 @@ async function handleSubmission(
   addWasher: (data: any) => Promise<void>,
   updateWasher: (data: any) => Promise<void>,
   onSuccess: () => void,
+  t: (key: string) => string,
 ) {
   try {
     if (washer) {
       // EDIT FEATURE: Update existing washer with new data
       await updateWasher({ ...washer, ...data });
-      toast.success("Washer updated successfully!");
+      toast.success(t("washerUpdated"));
     } else {
       // ADD FEATURE: Create new washer with provided data
       await addWasher(data);
-      toast.success("Washer created successfully!");
+      toast.success(t("washerCreated"));
     }
     onSuccess();
   } catch (error) {
-    toast.error("An error occurred. Please try again.");
+    toast.error(t("errorOccurred"));
     console.error(error);
   }
 }
 
 // eslint-disable-next-line complexity
 export function WasherForm({ washer, onSuccess }: WasherFormProps) {
+  const t = useTranslations("franchise.washers.form");
   const { addWasher, updateWasher } = useFranchiseUserStore();
   const { branches, fetchBranches } = useFranchiseBranchStore();
 
@@ -80,7 +83,7 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
   } = form;
 
   // Simplified onSubmit handler that delegates to handleSubmission
-  const onSubmit = (data: WasherFormValues) => handleSubmission(data, washer, addWasher, updateWasher, onSuccess);
+  const onSubmit = (data: WasherFormValues) => handleSubmission(data, washer, addWasher, updateWasher, onSuccess, t);
 
   return (
     <Form {...form}>
@@ -91,11 +94,11 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Washer Name</FormLabel>
+                <FormLabel>{t("washerName")}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <User className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                    <Input placeholder="e.g., Mohammed Ahmed" {...field} className="pl-10" />
+                    <Input placeholder={t("washerNamePlaceholder")} {...field} className="pl-10" />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -107,13 +110,13 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
             name="branch_id"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Branch</FormLabel>
+                <FormLabel>{t("branch")}</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <div className="relative">
                       <Building className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                       <SelectTrigger className="pl-10">
-                        <SelectValue placeholder="Select a branch" />
+                        <SelectValue placeholder={t("selectBranch")} />
                       </SelectTrigger>
                     </div>
                   </FormControl>
@@ -134,16 +137,16 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
             name="status"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Status</FormLabel>
+                <FormLabel>{t("status")}</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a status" />
+                      <SelectValue placeholder={t("selectStatus")} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="inactive">Inactive</SelectItem>
+                    <SelectItem value="active">{t("active")}</SelectItem>
+                    <SelectItem value="inactive">{t("inactive")}</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -155,7 +158,7 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
             name="rating"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Rating</FormLabel>
+                <FormLabel>{t("rating")}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Star className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
@@ -170,7 +173,7 @@ export function WasherForm({ washer, onSuccess }: WasherFormProps) {
         <div className="flex justify-end pt-4">
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {washer ? "Update Washer" : "Create Washer"}
+            {washer ? t("updateWasher") : t("createWasher")}
           </Button>
         </div>
       </form>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { Globe, DollarSign } from "lucide-react";
 import { toast } from "sonner";
 
@@ -18,6 +19,7 @@ interface ServicePriceFormProps {
 }
 
 export function ServicePriceForm({ service, branchId }: ServicePriceFormProps) {
+  const t = useTranslations("franchise.services.priceForm");
   const { updateService } = useFranchiseServiceStore();
 
   const [price, setPrice] = useState<string>(service.price?.toString() ?? "0");
@@ -31,10 +33,10 @@ export function ServicePriceForm({ service, branchId }: ServicePriceFormProps) {
         ...service,
         price: parseFloat(price),
       });
-      toast.success("Service price updated successfully!");
+      toast.success(t("priceUpdated"));
       setIsEditing(false);
     } catch (error: any) {
-      toast.error(error.message ?? "Failed to update service price.");
+      toast.error(error.message ?? t("failedToUpdatePrice"));
       console.error("Error updating service:", error);
     } finally {
       setIsUpdating(false);
@@ -54,7 +56,7 @@ export function ServicePriceForm({ service, branchId }: ServicePriceFormProps) {
           {service.is_global && (
             <Badge variant="secondary" className="flex items-center gap-1">
               <Globe className="h-3 w-3" />
-              Global
+              {t("global")}
             </Badge>
           )}
         </div>
@@ -82,14 +84,14 @@ export function ServicePriceForm({ service, branchId }: ServicePriceFormProps) {
         {isEditing ? (
           <>
             <Button variant="outline" onClick={handleCancel} disabled={isUpdating}>
-              Cancel
+              {t("cancel")}
             </Button>
             <Button onClick={handleSave} disabled={isUpdating}>
-              {isUpdating ? "Saving..." : "Save"}
+              {isUpdating ? t("saving") : t("save")}
             </Button>
           </>
         ) : (
-          <Button onClick={() => setIsEditing(true)}>Edit Price</Button>
+          <Button onClick={() => setIsEditing(true)}>{t("editPrice")}</Button>
         )}
       </div>
     </div>

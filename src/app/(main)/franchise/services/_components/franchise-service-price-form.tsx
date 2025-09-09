@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -25,6 +26,7 @@ interface FranchiseServicePriceFormProps {
 }
 
 export function FranchiseServicePriceForm({ service, onSuccess }: FranchiseServicePriceFormProps) {
+  const t = useTranslations("franchise.services.priceForm");
   const { updateService } = useFranchiseServiceStore();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -41,11 +43,11 @@ export function FranchiseServicePriceForm({ service, onSuccess }: FranchiseServi
         ...service,
         price: data.price,
       });
-      toast.success("Service price updated successfully!");
+      toast.success(t("priceUpdated"));
       setIsEditing(false);
       onSuccess();
     } catch (error) {
-      toast.error("Failed to update service price.");
+      toast.error(t("failedToUpdatePrice"));
       console.error("Error updating service price:", error);
     }
   };
@@ -59,7 +61,7 @@ export function FranchiseServicePriceForm({ service, onSuccess }: FranchiseServi
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Price ($)</FormLabel>
+                <FormLabel>{t("priceLabel")}</FormLabel>
                 <FormControl>
                   <Input type="number" step="0.01" min="0" {...field} className="w-32" />
                 </FormControl>
@@ -68,7 +70,7 @@ export function FranchiseServicePriceForm({ service, onSuccess }: FranchiseServi
             )}
           />
           <Button type="submit" size="sm">
-            Save
+            {t("save")}
           </Button>
           <Button
             type="button"
@@ -79,7 +81,7 @@ export function FranchiseServicePriceForm({ service, onSuccess }: FranchiseServi
               setIsEditing(false);
             }}
           >
-            Cancel
+            {t("cancel")}
           </Button>
         </form>
       </Form>
@@ -90,7 +92,7 @@ export function FranchiseServicePriceForm({ service, onSuccess }: FranchiseServi
     <div className="flex items-center gap-2">
       <span className="text-lg font-bold">${service.price?.toFixed(2) ?? "0.00"}</span>
       <Button variant="outline" size="sm" onClick={() => setIsEditing(true)}>
-        Edit Price
+        {t("editPrice")}
       </Button>
     </div>
   );

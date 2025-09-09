@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { CalendarIcon } from "lucide-react";
 import { addDays, format } from "date-fns";
 import { DateRange } from "react-day-picker";
@@ -16,6 +17,7 @@ interface DateRangePickerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function DateRangePicker({ className, date, onDateChange }: DateRangePickerProps) {
+  const t = useTranslations("ui.dateRangePicker");
   const [internalDate, setInternalDate] = React.useState<DateRange | undefined>({
     from: date?.from ?? new Date(),
     to: date?.to ?? addDays(new Date(), 7),
@@ -51,7 +53,7 @@ export function DateRangePicker({ className, date, onDateChange }: DateRangePick
                 format(internalDate.from, "LLL dd, y")
               )
             ) : (
-              <span>Pick a date</span>
+              <span>{t("pickDate")}</span>
             )}
           </Button>
         </PopoverTrigger>

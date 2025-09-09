@@ -8,7 +8,7 @@ Product stock is automatically managed through database triggers that update the
 
 ## How It Works
 
-1. **Database Triggers**: 
+1. **Database Triggers**:
    - When an order item is inserted, the product's stock quantity is decreased by the ordered quantity
    - When an order item is updated, the product's stock quantity is adjusted accordingly (old quantity is returned, new quantity is deducted)
    - When an order item is deleted, the product's stock quantity is increased by the removed quantity

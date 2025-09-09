@@ -27,14 +27,14 @@ import { WashersActivityTable } from "./_components/washers-activity-table";
 
 export default function AdminHomePage() {
   const t = useTranslations("admin.dashboard.tabs");
-  const { fetchBranches } = useBranchStore();
-  const { fetchFranchises } = useFranchiseStore();
-  const { fetchPayments } = usePaymentStore();
-  const { fetchReviews } = useReviewStore();
-  const { fetchServices } = useServiceStore();
-  const { fetchUsers } = useUserStore();
-  const { fetchWashers } = useWasherStore();
-  const { fetchBookings } = useBookingStore();
+  // const { fetchBranches } = useBranchStore();
+  // const { fetchFranchises } = useFranchiseStore();
+  // const { fetchPayments } = usePaymentStore();
+  // const { fetchReviews } = useReviewStore();
+  // const { fetchServices } = useServiceStore();
+  // const { fetchUsers } = useUserStore();
+  // const { fetchWashers } = useWasherStore();
+  // const { fetchBookings } = useBookingStore();
 
   useEffect(() => {
     const fetchData = async () => {

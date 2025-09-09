@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -21,6 +22,7 @@ interface ProductOrderFormProps {
 }
 
 export function ProductOrderForm({ product, onClose }: ProductOrderFormProps) {
+  const t = useTranslations("franchise.products.orderForm");
   const { placeOrder, checkStockAvailability } = useFranchiseProductStore();
 
   const form = useForm<OrderFormValues>({
@@ -35,7 +37,7 @@ export function ProductOrderForm({ product, onClose }: ProductOrderFormProps) {
       // Check stock availability before placing order
       const isAvailable = await checkStockAvailability(product.id, data.quantity);
       if (!isAvailable) {
-        toast.error("Insufficient stock for this product");
+        toast.error(t("insufficientStock"));
         return;
       }
 
@@ -44,11 +46,11 @@ export function ProductOrderForm({ product, onClose }: ProductOrderFormProps) {
         quantity: data.quantity,
         price_per_unit: product.price,
       });
-      toast.success("Order placed successfully!");
+      toast.success(t("orderPlaced"));
       onClose();
     } catch (error) {
       console.error("Error placing order:", error);
-      toast.error("Failed to place order. Please try again.");
+      toast.error(t("failedToPlaceOrder"));
     }
   };
 
@@ -58,10 +60,10 @@ export function ProductOrderForm({ product, onClose }: ProductOrderFormProps) {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-medium">{product.name}</h3>
-            <p className="text-muted-foreground text-sm">${product.price.toFixed(2)} per unit</p>
+            <p className="text-muted-foreground text-sm">{t("pricePerUnit", { price: product.price.toFixed(2) })}</p>
           </div>
           <div className="text-right">
-            <p className="text-muted-foreground text-sm">In stock: {product.stock_quantity}</p>
+            <p className="text-muted-foreground text-sm">{t("inStock", { quantity: product.stock_quantity })}</p>
           </div>
         </div>
 
@@ -70,7 +72,7 @@ export function ProductOrderForm({ product, onClose }: ProductOrderFormProps) {
           name="quantity"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Quantity</FormLabel>
+              <FormLabel>{t("quantity")}</FormLabel>
               <FormControl>
                 <Input type="number" min="1" max={product.stock_quantity} {...field} />
               </FormControl>
@@ -81,9 +83,9 @@ export function ProductOrderForm({ product, onClose }: ProductOrderFormProps) {
 
         <div className="flex justify-end space-x-2 pt-4">
           <Button type="button" variant="ghost" onClick={onClose}>
-            Cancel
+            {t("cancel")}
           </Button>
-          <Button type="submit">Place Order</Button>
+          <Button type="submit">{t("placeOrder")}</Button>
         </div>
       </form>
     </Form>

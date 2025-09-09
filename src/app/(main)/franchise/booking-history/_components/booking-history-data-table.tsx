@@ -2,6 +2,7 @@
 
 import { Download } from "lucide-react";
 
+import { useTranslations } from "next-intl";
 import { EnrichedBooking } from "@/app/(main)/franchise/utils/bookings";
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
@@ -11,13 +12,15 @@ import { Input } from "@/components/ui/input";
 import { useDataTableInstance } from "@/hooks/use-data-table-instance";
 import { exportToCSV } from "@/lib/export-utils";
 
-import { columns } from "./columns";
+import { getColumns } from "./columns";
 
 interface BookingHistoryDataTableProps {
   data: EnrichedBooking[];
 }
 
 export function BookingHistoryDataTable({ data }: BookingHistoryDataTableProps) {
+  const t = useTranslations("franchise.bookings.table");
+  const columns = getColumns(t);
   const table = useDataTableInstance({
     data,
     columns,
@@ -28,7 +31,7 @@ export function BookingHistoryDataTable({ data }: BookingHistoryDataTableProps) 
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <Input
-          placeholder="Filter by user..."
+          placeholder={t("filterByUser")}
           value={(table.getColumn("user")?.getFilterValue() as string) || ""}
           onChange={(event) => table.getColumn("user")?.setFilterValue(event.target.value)}
           className="max-w-sm"
@@ -37,7 +40,7 @@ export function BookingHistoryDataTable({ data }: BookingHistoryDataTableProps) 
           <DataTableViewOptions table={table} />
           <Button variant="outline" size="sm" onClick={() => exportToCSV(table, "booking-history.csv")}>
             <Download className="mr-2 h-4 w-4" />
-            <span className="hidden lg:inline">Export</span>
+            <span className="hidden lg:inline">{t("export")}</span>
           </Button>
         </div>
       </div>

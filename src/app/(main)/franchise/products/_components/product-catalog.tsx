@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { ShoppingCart } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ import { useFranchiseProductStore, Product } from "@/stores/franchise-dashboard/
 import { ProductOrderForm } from "./product-order-form";
 
 export function ProductCatalog() {
+  const t = useTranslations("franchise.products");
   const { products, fetchProducts } = useFranchiseProductStore();
   const { categories, fetchCategories } = useProductCategoryStore();
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("all");
@@ -39,7 +41,7 @@ export function ProductCatalog() {
     if (!pictures || pictures.length === 0) {
       return (
         <div className="flex h-48 items-center justify-center rounded-t-lg bg-gray-100">
-          <div className="text-gray-400">No image</div>
+          <div className="text-gray-400">{t("noImage")}</div>
         </div>
       );
     }
@@ -49,7 +51,7 @@ export function ProductCatalog() {
         <div className="h-48 overflow-hidden rounded-t-lg">
           <img
             src={pictures[0]}
-            alt="Product"
+            alt={t("productImage")}
             className="h-full w-full object-cover"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
@@ -70,7 +72,7 @@ export function ProductCatalog() {
                 <div className="h-full overflow-hidden">
                   <img
                     src={picture}
-                    alt={`Product ${index + 1}`}
+                    alt={`${t("productImage")} ${index + 1}`}
                     className="h-full w-full object-cover"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -92,24 +94,24 @@ export function ProductCatalog() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Product Store</h2>
-        <p className="text-muted-foreground">Browse and order products for your franchise.</p>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <p className="text-muted-foreground">{t("description")}</p>
       </div>
 
       <Card>
         <CardHeader>
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <CardTitle>Available Products</CardTitle>
-              <CardDescription>Browse our catalog of products for your franchise.</CardDescription>
+              <CardTitle>{t("availableProducts")}</CardTitle>
+              <CardDescription>{t("browseCatalog")}</CardDescription>
             </div>
             <div className="w-full md:w-64">
               <Select value={selectedCategoryId} onValueChange={setSelectedCategoryId}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a category" />
+                  <SelectValue placeholder={t("selectCategory")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
+                  <SelectItem value="all">{t("allCategories")}</SelectItem>
                   {categories.map((category) => (
                     <SelectItem key={category.id} value={category.id}>
                       {category.name}
@@ -129,25 +131,29 @@ export function ProductCatalog() {
                   <CardHeader className="pb-2">
                     <CardTitle className="text-lg">{product.name}</CardTitle>
                     <CardDescription>
-                      {categories.find((c) => c.id === product.category_id)?.name || "Uncategorized"}
+                      {categories.find((c) => c.id === product.category_id)?.name || t("uncategorized")}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex-1 pb-2">
                     <p className="text-2xl font-bold">${product.price.toFixed(2)}</p>
                     <p className="text-muted-foreground mt-2 line-clamp-2">{product.description}</p>
-                    <p className="mt-2 text-sm">In stock: {product.stock_quantity}</p>
+                    <p className="mt-2 text-sm">
+                      {t("inStock")}: {product.stock_quantity}
+                    </p>
                   </CardContent>
                   <div className="p-4 pt-0">
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button className="w-full">
                           <ShoppingCart className="mr-2 h-4 w-4" />
-                          Order Product
+                          {t("orderProduct")}
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="max-w-md">
                         <DialogHeader>
-                          <DialogTitle>Order {product.name}</DialogTitle>
+                          <DialogTitle>
+                            {t("order")} {product.name}
+                          </DialogTitle>
                         </DialogHeader>
                         <ProductOrderForm
                           product={product}
@@ -163,9 +169,7 @@ export function ProductCatalog() {
             ) : (
               <div className="col-span-full py-8 text-center">
                 <p className="text-muted-foreground">
-                  {selectedCategoryId === "all"
-                    ? "No products found."
-                    : "No products available in the selected category."}
+                  {selectedCategoryId === "all" ? t("noProductsFound") : t("noProductsInCategory")}
                 </p>
               </div>
             )}

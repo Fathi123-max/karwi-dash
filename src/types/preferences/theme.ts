@@ -53,7 +53,7 @@ export const THEME_PRESET_OPTIONS = [
     value: "midnight",
     primary: {
       light: "oklch(0.65 0.25 280)",
-      dark: "oklch(0.70 0.25 280)",
+      dark: "oklch(0.7 0.25 280)",
     },
   },
   {

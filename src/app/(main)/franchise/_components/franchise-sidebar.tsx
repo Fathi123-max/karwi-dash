@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { AppLogo } from "@/components/app-logo";
 import {
   Sidebar,
@@ -18,6 +19,7 @@ import { APP_CONFIG } from "@/config/app-config";
 import { NavFranchise } from "./nav-franchise";
 
 export function FranchiseSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const t = useTranslations("franchise.sidebar");
   const [sidebarSide, setSidebarSide] = useState<"left" | "right">("left");
 
   useEffect(() => {
@@ -62,7 +64,7 @@ export function FranchiseSidebar({ ...props }: React.ComponentProps<typeof Sideb
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="group-data-[collapsible=icon]:!hidden">Franchise Menu</SidebarGroupLabel>
+          <SidebarGroupLabel className="group-data-[collapsible=icon]:!hidden">{t("menu")}</SidebarGroupLabel>
           <NavFranchise />
         </SidebarGroup>
       </SidebarContent>

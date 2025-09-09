@@ -23,7 +23,7 @@ export const useBannersOffersStore = create<BannersOffersState>((set, get) => ({
   banners: [],
   offers: [],
   loading: true,
-  
+
   fetchBanners: async () => {
     const { data, error } = await supabase
       .from("banners")
@@ -56,10 +56,7 @@ export const useBannersOffersStore = create<BannersOffersState>((set, get) => ({
   },
 
   fetchOffers: async () => {
-    const { data, error } = await supabase
-      .from("offers")
-      .select("*")
-      .order("created_at", { ascending: false });
+    const { data, error } = await supabase.from("offers").select("*").order("created_at", { ascending: false });
 
     if (error) {
       console.error("Error fetching offers:", error);

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
@@ -49,6 +50,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function BookingsChartInteractive() {
+  const t = useTranslations("admin.bookingsChart");
   const isMobile = useIsMobile();
   const { theme } = useTheme();
   const [timeRange, setTimeRange] = React.useState("90d");
@@ -95,10 +97,10 @@ export function BookingsChartInteractive() {
   return (
     <Card className="@container/card">
       <CardHeader>
-        <CardTitle>Bookings Overview</CardTitle>
+        <CardTitle>{t("title")}</CardTitle>
         <CardDescription>
-          <span className="hidden @[540px]/card:block">Total bookings for the last 3 months</span>
-          <span className="@[540px]/card:hidden">Last 3 months</span>
+          <span className="hidden @[540px]/card:block">{t("descriptionLong")}</span>
+          <span className="@[540px]/card:hidden">{t("descriptionShort")}</span>
         </CardDescription>
         <CardAction>
           <ToggleGroup
@@ -108,27 +110,27 @@ export function BookingsChartInteractive() {
             variant="outline"
             className="hidden *:data-[slot=toggle-group-item]:!px-4 @[767px]/card:flex"
           >
-            <ToggleGroupItem value="90d">Last 3 months</ToggleGroupItem>
-            <ToggleGroupItem value="30d">Last 30 days</ToggleGroupItem>
-            <ToggleGroupItem value="7d">Last 7 days</ToggleGroupItem>
+            <ToggleGroupItem value="90d">{t("last3Months")}</ToggleGroupItem>
+            <ToggleGroupItem value="30d">{t("last30Days")}</ToggleGroupItem>
+            <ToggleGroupItem value="7d">{t("last7Days")}</ToggleGroupItem>
           </ToggleGroup>
           <Select value={timeRange} onValueChange={setTimeRange}>
             <SelectTrigger
               className="flex w-40 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden"
               size="sm"
-              aria-label="Select a value"
+              aria-label={t("selectValue")}
             >
-              <SelectValue placeholder="Last 3 months" />
+              <SelectValue placeholder={t("last3Months")} />
             </SelectTrigger>
             <SelectContent className="rounded-xl">
               <SelectItem value="90d" className="rounded-lg">
-                Last 3 months
+                {t("last3Months")}
               </SelectItem>
               <SelectItem value="30d" className="rounded-lg">
-                Last 30 days
+                {t("last30Days")}
               </SelectItem>
               <SelectItem value="7d" className="rounded-lg">
-                Last 7 days
+                {t("last7Days")}
               </SelectItem>
             </SelectContent>
           </Select>

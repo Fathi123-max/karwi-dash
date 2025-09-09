@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { MoreHorizontal, PlusCircle, Tag } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,7 @@ interface ServicePromotionManagementProps {
 }
 
 export function ServicePromotionManagement({ serviceId }: ServicePromotionManagementProps) {
+  const t = useTranslations("franchise.services.promotions");
   const { servicePromotions, fetchServicePromotions, addServicePromotion, removeServicePromotion } =
     useServicePromotionStore();
   const { promotions, fetchPromotions } = usePromotionStore();
@@ -80,20 +82,20 @@ export function ServicePromotionManagement({ serviceId }: ServicePromotionManage
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Promotions</CardTitle>
-            <CardDescription>Manage promotions for this service</CardDescription>
+            <CardTitle>{t("promotions")}</CardTitle>
+            <CardDescription>{t("managePromotions")}</CardDescription>
           </div>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button size="sm">
                 <PlusCircle className="mr-2 h-4 w-4" />
-                Add Promotion
+                {t("addPromotion")}
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Add Promotion</DialogTitle>
-                <DialogDescription>Select a promotion to associate with this service.</DialogDescription>
+                <DialogTitle>{t("addPromotion")}</DialogTitle>
+                <DialogDescription>{t("selectPromotion")}</DialogDescription>
               </DialogHeader>
               <div className="max-h-60 overflow-y-auto">
                 {availablePromotions.length > 0 ? (
@@ -107,14 +109,14 @@ export function ServicePromotionManagement({ serviceId }: ServicePromotionManage
                         disabled={isLoading}
                       >
                         <span>{promotion.code}</span>
-                        <span className="text-muted-foreground">{promotion.discount}% off</span>
+                        <span className="text-muted-foreground">
+                          {t("percentOff", { percent: promotion.discount })}
+                        </span>
                       </Button>
                     ))}
                   </div>
                 ) : (
-                  <p className="text-muted-foreground py-4 text-center">
-                    No available promotions. Create a new promotion first.
-                  </p>
+                  <p className="text-muted-foreground py-4 text-center">{t("noAvailablePromotions")}</p>
                 )}
               </div>
             </DialogContent>
@@ -129,25 +131,25 @@ export function ServicePromotionManagement({ serviceId }: ServicePromotionManage
                 <div className="flex items-center gap-2">
                   <Tag className="text-muted-foreground h-4 w-4" />
                   <span>{sp.promotion.code}</span>
-                  <span className="text-muted-foreground">({sp.promotion.discount}% off)</span>
+                  <span className="text-muted-foreground">({t("percentOff", { percent: sp.promotion.discount })})</span>
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="h-8 w-8 p-0">
-                      <span className="sr-only">Open menu</span>
+                      <span className="sr-only">{t("openMenu")}</span>
                       <MoreHorizontal className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => handleRemovePromotion(sp.id)}>Remove</DropdownMenuItem>
+                    <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+                    <DropdownMenuItem onClick={() => handleRemovePromotion(sp.id)}>{t("remove")}</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-muted-foreground py-4 text-center">No promotions associated with this service.</p>
+          <p className="text-muted-foreground py-4 text-center">{t("noPromotionsAssociated")}</p>
         )}
       </CardContent>
     </Card>

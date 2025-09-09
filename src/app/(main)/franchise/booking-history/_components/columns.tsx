@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
@@ -20,26 +21,27 @@ import {
 import { BookingDetailsDialog } from "./booking-details-dialog";
 import { UpdateStatusDialog } from "./update-status-dialog";
 
-export const columns: ColumnDef<EnrichedBooking>[] = [
+// Create a function that returns the columns with translations
+export const getColumns = (t: (key: string) => string): ColumnDef<EnrichedBooking>[] => [
   {
     accessorKey: "id",
-    header: "Booking ID",
+    header: t("bookingId"),
   },
   {
     accessorKey: "user",
-    header: "User",
+    header: t("user"),
   },
   {
     accessorKey: "branch",
-    header: "Branch",
+    header: t("branch"),
   },
   {
     accessorKey: "service",
-    header: "Service",
+    header: t("service"),
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: t("status"),
     cell: ({ row }) => {
       const status = row.getValue("status");
       return (
@@ -70,7 +72,7 @@ export const columns: ColumnDef<EnrichedBooking>[] = [
   },
   {
     accessorKey: "date",
-    header: "Date",
+    header: t("date"),
     cell: ({ row }) => {
       const date = new Date(row.getValue("date"));
       return <span>{date.toLocaleString()}</span>;
@@ -90,16 +92,18 @@ export const columns: ColumnDef<EnrichedBooking>[] = [
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
+                <span className="sr-only">{t("openMenu")}</span>
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem onClick={() => navigator.clipboard.writeText(booking.id)}>Copy ID</DropdownMenuItem>
+              <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+              <DropdownMenuItem onClick={() => navigator.clipboard.writeText(booking.id)}>
+                {t("copyId")}
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => setIsDetailsOpen(true)}>View Details</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setIsUpdateOpen(true)}>Update Status</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setIsDetailsOpen(true)}>{t("viewDetails")}</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setIsUpdateOpen(true)}>{t("updateStatus")}</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </>

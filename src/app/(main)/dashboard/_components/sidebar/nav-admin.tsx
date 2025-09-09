@@ -36,7 +36,7 @@ const adminNavItems = (t: (key: string) => string) => [
   },
   { href: "/admin/users", label: t("navigation.users"), icon: UsersRound },
   { href: "/admin/payments", label: t("navigation.payments"), icon: FileText },
-  { href: "/admin/schedule", label: t("navigation.schedule"), icon: Calendar },
+  // { href: "/admin/schedule", label: t("navigation.schedule"), icon: Calendar }, // Hidden as per requirement
   { href: "/admin/reviews", label: t("navigation.reviews"), icon: FileText },
   // { href: "/admin/promotions", label: t("navigation.promotions"), icon: FileText }, // Hidden as per requirement
   {

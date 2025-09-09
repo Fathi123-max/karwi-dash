@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getCurrentUserFranchiseId } from "@/server/server-actions";
 import { useFranchiseDashboardStore } from "@/stores/franchise-dashboard/franchise-store";
 
 export function DebugData() {
+  const t = useTranslations("franchise.debug");
   const { branches, services, washers, bookings } = useFranchiseDashboardStore();
   const [franchiseId, setFranchiseId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +19,7 @@ export function DebugData() {
         const id = await getCurrentUserFranchiseId();
         setFranchiseId(id);
       } catch (err) {
-        setError("Failed to fetch franchise ID");
+        setError(t("failedToFetchFranchiseId"));
         console.error("Error fetching franchise ID:", err);
       }
     };
@@ -29,25 +31,25 @@ export function DebugData() {
     <div className="space-y-4">
       <Card>
         <CardHeader>
-          <CardTitle>Debug Information</CardTitle>
+          <CardTitle>{t("debugInformation")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
             <p>
-              <strong>Franchise ID:</strong> {franchiseId ?? "Not loaded"}
+              <strong>{t("franchiseId")}:</strong> {franchiseId ?? t("notLoaded")}
             </p>
             {error && <p className="text-red-500">{error}</p>}
             <p>
-              <strong>Branches Count:</strong> {branches.length}
+              <strong>{t("branchesCount")}:</strong> {branches.length}
             </p>
             <p>
-              <strong>Services Count:</strong> {services.length}
+              <strong>{t("servicesCount")}:</strong> {services.length}
             </p>
             <p>
-              <strong>Washers Count:</strong> {washers.length}
+              <strong>{t("washersCount")}:</strong> {washers.length}
             </p>
             <p>
-              <strong>Bookings Count:</strong> {bookings.length}
+              <strong>{t("bookingsCount")}:</strong> {bookings.length}
             </p>
           </div>
         </CardContent>
@@ -56,7 +58,7 @@ export function DebugData() {
       {branches.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle>Branches Data</CardTitle>
+            <CardTitle>{t("branchesData")}</CardTitle>
           </CardHeader>
           <CardContent>
             <pre className="max-h-40 overflow-auto text-xs">{JSON.stringify(branches, null, 2)}</pre>

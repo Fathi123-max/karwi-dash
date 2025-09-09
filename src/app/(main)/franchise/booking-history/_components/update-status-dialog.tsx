@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { useTranslations } from "next-intl";
 import { EnrichedBooking } from "@/app/(main)/franchise/utils/bookings";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,6 +31,7 @@ interface UpdateStatusDialogProps {
 }
 
 export function UpdateStatusDialog({ booking, isOpen, onClose }: UpdateStatusDialogProps) {
+  const t = useTranslations("franchise.updateStatus");
   const { updateBooking } = useFranchiseDashboardStore();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,8 +57,8 @@ export function UpdateStatusDialog({ booking, isOpen, onClose }: UpdateStatusDia
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Update Status</DialogTitle>
-          <DialogDescription>Update the status for booking ID: {booking?.id}</DialogDescription>
+          <DialogTitle>{t("title")}</DialogTitle>
+          <DialogDescription>{t("updateStatusForBooking", { id: booking?.id })}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -65,18 +67,18 @@ export function UpdateStatusDialog({ booking, isOpen, onClose }: UpdateStatusDia
               name="status"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Status</FormLabel>
+                  <FormLabel>{t("status")}</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a status" />
+                        <SelectValue placeholder={t("selectStatus")} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="pending">Pending</SelectItem>
-                      <SelectItem value="in-progress">In Progress</SelectItem>
-                      <SelectItem value="completed">Completed</SelectItem>
-                      <SelectItem value="cancelled">Cancelled</SelectItem>
+                      <SelectItem value="pending">{t("pending")}</SelectItem>
+                      <SelectItem value="in-progress">{t("inProgress")}</SelectItem>
+                      <SelectItem value="completed">{t("completed")}</SelectItem>
+                      <SelectItem value="cancelled">{t("cancelled")}</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -84,7 +86,7 @@ export function UpdateStatusDialog({ booking, isOpen, onClose }: UpdateStatusDia
               )}
             />
             <DialogFooter>
-              <Button type="submit">Save changes</Button>
+              <Button type="submit">{t("saveChanges")}</Button>
             </DialogFooter>
           </form>
         </Form>

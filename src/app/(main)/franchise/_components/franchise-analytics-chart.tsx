@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
 
@@ -23,6 +24,7 @@ export function FranchiseAnalyticsChart<T extends Record<string, any>>({
   color,
   type = "area",
 }: FranchiseAnalyticsChartProps<T>) {
+  const t = useTranslations("franchise.analytics.chart");
   const { theme } = useTheme();
 
   // Get the first key that's not the dataKey to use as the x-axis
@@ -40,7 +42,7 @@ export function FranchiseAnalyticsChart<T extends Record<string, any>>({
   }, [data, dataKey]);
 
   if (data.length === 0) {
-    return <div className="text-muted-foreground flex h-[250px] items-center justify-center">No data available</div>;
+    return <div className="text-muted-foreground flex h-[250px] items-center justify-center">{t("noData")}</div>;
   }
 
   const chartColors =

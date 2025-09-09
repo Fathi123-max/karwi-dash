@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -41,6 +42,7 @@ const daysOfWeek = [
 ];
 
 export function FranchiseAvailabilityForm({ serviceId, availability, onClose }: AvailabilityFormProps) {
+  const t = useTranslations("franchise.services.availability.form");
   const { addAvailability, updateAvailability } = useFranchiseServiceAvailabilityStore();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -97,17 +99,17 @@ export function FranchiseAvailabilityForm({ serviceId, availability, onClose }: 
           name="dayOfWeek"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Day of Week</FormLabel>
+              <FormLabel>{t("dayOfWeek")}</FormLabel>
               <Select onValueChange={(value) => field.onChange(Number(value))} defaultValue={field.value.toString()}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a day" />
+                    <SelectValue placeholder={t("selectDay")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   {daysOfWeek.map((day) => (
                     <SelectItem key={day.value} value={day.value.toString()}>
-                      {day.label}
+                      {t(day.label.toLowerCase())}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -122,7 +124,7 @@ export function FranchiseAvailabilityForm({ serviceId, availability, onClose }: 
             name="startTime"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Start Time</FormLabel>
+                <FormLabel>{t("startTime")}</FormLabel>
                 <FormControl>
                   <Input type="time" {...field} />
                 </FormControl>
@@ -135,7 +137,7 @@ export function FranchiseAvailabilityForm({ serviceId, availability, onClose }: 
             name="endTime"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>End Time</FormLabel>
+                <FormLabel>{t("endTime")}</FormLabel>
                 <FormControl>
                   <Input type="time" {...field} />
                 </FormControl>
@@ -150,8 +152,8 @@ export function FranchiseAvailabilityForm({ serviceId, availability, onClose }: 
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
               <div className="space-y-0.5">
-                <FormLabel className="text-base">Active</FormLabel>
-                <p className="text-muted-foreground text-sm">Set whether this availability slot is active</p>
+                <FormLabel className="text-base">{t("active")}</FormLabel>
+                <p className="text-muted-foreground text-sm">{t("activeDescription")}</p>
               </div>
               <FormControl>
                 <Switch checked={field.value} onCheckedChange={field.onChange} />
@@ -161,10 +163,10 @@ export function FranchiseAvailabilityForm({ serviceId, availability, onClose }: 
         />
         <div className="flex justify-end space-x-2">
           <Button type="button" variant="ghost" onClick={onClose} disabled={isLoading}>
-            Cancel
+            {t("cancel")}
           </Button>
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Saving..." : availability ? "Update" : "Add"}
+            {isLoading ? t("saving") : availability ? t("update") : t("add")}
           </Button>
         </div>
       </form>

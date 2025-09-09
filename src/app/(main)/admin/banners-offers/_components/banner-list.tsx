@@ -39,19 +39,19 @@ export function BannerList({ onEdit }: { onEdit: (banner: Banner) => void }) {
   return (
     <div className="space-y-4">
       {banners.length === 0 ? (
-        <div className="text-center py-8">
+        <div className="py-8 text-center">
           <p className="text-muted-foreground">No banners found</p>
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {banners.map((banner) => (
-            <div key={banner.id} className="border rounded-lg overflow-hidden">
+            <div key={banner.id} className="overflow-hidden rounded-lg border">
               {banner.image_url ? (
-                <div className="aspect-video bg-muted relative">
+                <div className="bg-muted relative aspect-video">
                   <img
                     src={banner.image_url}
                     alt={banner.title}
-                    className="w-full h-full object-cover"
+                    className="h-full w-full object-cover"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src =
@@ -60,13 +60,13 @@ export function BannerList({ onEdit }: { onEdit: (banner: Banner) => void }) {
                   />
                 </div>
               ) : (
-                <div className="aspect-video bg-muted flex items-center justify-center">
+                <div className="bg-muted flex aspect-video items-center justify-center">
                   <span className="text-muted-foreground">No image</span>
                 </div>
               )}
               <div className="p-4">
-                <div className="flex justify-between items-start">
-                  <h3 className="font-semibold line-clamp-1">{banner.title}</h3>
+                <div className="flex items-start justify-between">
+                  <h3 className="line-clamp-1 font-semibold">{banner.title}</h3>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="h-8 w-8 p-0">
@@ -89,17 +89,13 @@ export function BannerList({ onEdit }: { onEdit: (banner: Banner) => void }) {
                   </DropdownMenu>
                 </div>
                 {banner.description && (
-                  <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
-                    {banner.description}
-                  </p>
+                  <p className="text-muted-foreground mt-2 line-clamp-2 text-sm">{banner.description}</p>
                 )}
-                <div className="flex items-center justify-between mt-4">
+                <div className="mt-4 flex items-center justify-between">
                   <Badge variant={banner.is_active ? "default" : "secondary"}>
                     {banner.is_active ? "Active" : "Inactive"}
                   </Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Priority: {banner.priority}
-                  </span>
+                  <span className="text-muted-foreground text-sm">Priority: {banner.priority}</span>
                 </div>
               </div>
             </div>

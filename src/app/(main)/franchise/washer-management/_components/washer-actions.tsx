@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -20,19 +21,20 @@ interface WasherActionsProps {
 }
 
 export function WasherActions({ washer }: WasherActionsProps) {
+  const t = useTranslations("franchise.washers.actions");
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   return (
     <DropdownMenu open={isMenuOpen} onOpenChange={setMenuOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-8 w-8 p-0">
-          <span className="sr-only">Open menu</span>
+          <span className="sr-only">{t("openMenu")}</span>
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DropdownMenuItem onClick={() => navigator.clipboard.writeText(washer.id)}>Copy ID</DropdownMenuItem>
+        <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+        <DropdownMenuItem onClick={() => navigator.clipboard.writeText(washer.id)}>{t("copyId")}</DropdownMenuItem>
         <DropdownMenuSeparator />
         {/* EDIT FEATURE DISABLED */}
         {/* DELETE FEATURE DISABLED */}

@@ -40,7 +40,7 @@ export function BannerCarousel() {
         (payload) => {
           // Refetch banners when there are changes
           fetchBanners();
-        }
+        },
       )
       .subscribe();
 
@@ -61,19 +61,15 @@ export function BannerCarousel() {
   }, [banners.length]);
 
   const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? banners.length - 1 : prevIndex - 1
-    );
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? banners.length - 1 : prevIndex - 1));
   };
 
   const goToNext = () => {
-    setCurrentIndex((prevIndex) => 
-      (prevIndex + 1) % banners.length
-    );
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
   };
 
   if (loading) {
-    return <div className="bg-muted h-64 w-full rounded-lg animate-pulse" />;
+    return <div className="bg-muted h-64 w-full animate-pulse rounded-lg" />;
   }
 
   if (banners.length === 0) {
@@ -102,22 +98,18 @@ export function BannerCarousel() {
                 }}
               />
             ) : (
-              <div className="bg-muted h-full w-full flex items-center justify-center">
+              <div className="bg-muted flex h-full w-full items-center justify-center">
                 <span className="text-muted-foreground">No image</span>
               </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-4 md:p-6 text-white">
-              <h2 className="text-xl md:text-2xl font-bold">{banner.title}</h2>
-              {banner.description && (
-                <p className="text-sm md:text-base mt-1 max-w-md">
-                  {banner.description}
-                </p>
-              )}
+            <div className="absolute bottom-0 left-0 p-4 text-white md:p-6">
+              <h2 className="text-xl font-bold md:text-2xl">{banner.title}</h2>
+              {banner.description && <p className="mt-1 max-w-md text-sm md:text-base">{banner.description}</p>}
               {banner.link_url && (
-                <Button 
-                  variant="secondary" 
-                  size="sm" 
+                <Button
+                  variant="secondary"
+                  size="sm"
                   className="mt-2"
                   onClick={() => window.open(banner.link_url!, "_blank")}
                 >
@@ -134,7 +126,7 @@ export function BannerCarousel() {
           <Button
             variant="ghost"
             size="icon"
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 text-white hover:bg-black/50"
+            className="absolute top-1/2 left-2 -translate-y-1/2 bg-black/30 text-white hover:bg-black/50"
             onClick={goToPrevious}
           >
             <ChevronLeft className="h-5 w-5" />
@@ -142,19 +134,17 @@ export function BannerCarousel() {
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 text-white hover:bg-black/50"
+            className="absolute top-1/2 right-2 -translate-y-1/2 bg-black/30 text-white hover:bg-black/50"
             onClick={goToNext}
           >
             <ChevronRight className="h-5 w-5" />
           </Button>
 
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1">
+          <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 space-x-1">
             {banners.map((_, index) => (
               <button
                 key={index}
-                className={`h-2 w-2 rounded-full ${
-                  index === currentIndex ? "bg-white" : "bg-white/50"
-                }`}
+                className={`h-2 w-2 rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
                 onClick={() => setCurrentIndex(index)}
                 aria-label={`Go to banner ${index + 1}`}
               />

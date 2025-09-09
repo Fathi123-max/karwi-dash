@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
 
@@ -12,6 +13,7 @@ interface FranchiseBookingsChartProps {
 }
 
 const FranchiseBookingsChart: React.FC<FranchiseBookingsChartProps> = ({ data }) => {
+  const t = useTranslations("franchise.bookingsChart");
   const { theme } = useTheme();
 
   const areaColors =
@@ -28,14 +30,14 @@ const FranchiseBookingsChart: React.FC<FranchiseBookingsChartProps> = ({ data })
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Daily Bookings</CardTitle>
-        <CardDescription>Recent booking trends for your franchise.</CardDescription>
+        <CardTitle>{t("dailyBookings")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer
           config={{
             count: {
-              label: "Bookings",
+              label: t("bookings"),
               color: areaColors.fill,
             },
           }}

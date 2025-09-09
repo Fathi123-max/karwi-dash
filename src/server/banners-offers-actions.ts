@@ -8,21 +8,17 @@ import { Banner, Offer } from "@/types/banners-offers";
 // Helper function to get Supabase client
 async function getSupabaseClient() {
   const cookieStore = await cookies();
-  
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet) {
-          // We're just reading, so we don't need to set cookies
-        },
+
+  return createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+    cookies: {
+      getAll() {
+        return cookieStore.getAll();
       },
-    }
-  );
+      setAll(cookiesToSet) {
+        // We're just reading, so we don't need to set cookies
+      },
+    },
+  });
 }
 
 // Banners CRUD operations
@@ -39,7 +35,7 @@ export async function getBanners(): Promise<Banner[]> {
     throw new Error("Failed to fetch banners");
   }
 
-  return data.map(item => ({
+  return data.map((item) => ({
     id: item.id,
     title: item.title,
     description: item.description,
@@ -73,7 +69,7 @@ export async function getActiveBanners(): Promise<Banner[]> {
   // Filter by date if start_date and end_date are set
   const today = new Date();
   return data
-    .map(item => ({
+    .map((item) => ({
       id: item.id,
       title: item.title,
       description: item.description,
@@ -88,7 +84,7 @@ export async function getActiveBanners(): Promise<Banner[]> {
       created_at: item.created_at,
       updated_at: item.updated_at,
     }))
-    .filter(banner => {
+    .filter((banner) => {
       if (banner.start_date && new Date(banner.start_date) > today) return false;
       if (banner.end_date && new Date(banner.end_date) < today) return false;
       return true;
@@ -181,10 +177,7 @@ export async function updateBanner(id: string, banner: Partial<Banner>) {
 
 export async function deleteBanner(id: string) {
   const supabase = await getSupabaseClient();
-  const { error } = await supabase
-    .from("banners")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.from("banners").delete().eq("id", id);
 
   if (error) {
     console.error("Error deleting banner:", error);
@@ -197,17 +190,14 @@ export async function deleteBanner(id: string) {
 // Offers CRUD operations
 export async function getOffers(): Promise<Offer[]> {
   const supabase = await getSupabaseClient();
-  const { data, error } = await supabase
-    .from("offers")
-    .select("*")
-    .order("created_at", { ascending: false });
+  const { data, error } = await supabase.from("offers").select("*").order("created_at", { ascending: false });
 
   if (error) {
     console.error("Error fetching offers:", error);
     throw new Error("Failed to fetch offers");
   }
 
-  return data.map(item => ({
+  return data.map((item) => ({
     id: item.id,
     title: item.title,
     description: item.description,
@@ -243,7 +233,7 @@ export async function getActiveOffers(): Promise<Offer[]> {
   // Filter by date if start_date and end_date are set
   const today = new Date();
   return data
-    .map(item => ({
+    .map((item) => ({
       id: item.id,
       title: item.title,
       description: item.description,
@@ -261,7 +251,7 @@ export async function getActiveOffers(): Promise<Offer[]> {
       created_at: item.created_at,
       updated_at: item.updated_at,
     }))
-    .filter(offer => {
+    .filter((offer) => {
       if (offer.start_date && new Date(offer.start_date) > today) return false;
       if (offer.end_date && new Date(offer.end_date) < today) return false;
       return true;
@@ -366,10 +356,7 @@ export async function updateOffer(id: string, offer: Partial<Offer>) {
 
 export async function deleteOffer(id: string) {
   const supabase = await getSupabaseClient();
-  const { error } = await supabase
-    .from("offers")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.from("offers").delete().eq("id", id);
 
   if (error) {
     console.error("Error deleting offer:", error);

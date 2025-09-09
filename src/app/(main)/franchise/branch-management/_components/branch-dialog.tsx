@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -23,6 +24,7 @@ interface BranchDialogProps {
 }
 
 export function BranchDialog({ branch, children, onDialogClose, open, onOpenChange }: BranchDialogProps) {
+  const t = useTranslations("franchise.branches.dialog");
   const [internalOpen, setInternalOpen] = useState(false);
 
   const isOpen = open ?? internalOpen;
@@ -41,10 +43,8 @@ export function BranchDialog({ branch, children, onDialogClose, open, onOpenChan
       <DialogContent className="max-h-[90vh] max-w-4xl gap-0 overflow-y-auto p-0 sm:rounded-lg">
         <div className="bg-background sticky top-0 z-10 border-b p-6">
           <DialogHeader className="text-left">
-            <DialogTitle className="text-2xl">{branch ? "Manage Branch Services" : "Add New Branch"}</DialogTitle>
-            <DialogDescription>
-              {branch ? "Manage services for this branch." : "Add a new branch to your system."}
-            </DialogDescription>
+            <DialogTitle className="text-2xl">{branch ? t("manageBranchServices") : t("addNewBranch")}</DialogTitle>
+            <DialogDescription>{branch ? t("manageServicesDescription") : t("addBranchDescription")}</DialogDescription>
           </DialogHeader>
         </div>
         <div className="p-6">

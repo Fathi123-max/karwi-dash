@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 // Fix for default icon issue with webpack
 import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
@@ -92,6 +93,8 @@ const SearchField = ({ onLocationSelect }: { onLocationSelect: (location: { lat:
 };
 
 export function LocationPicker({ onLocationSelect, initialPosition, className }: LocationPickerProps) {
+  const t = useTranslations("franchise.branches.locationPicker");
+
   return (
     <div className={cn("relative", className)}>
       <MapContainer
@@ -109,7 +112,7 @@ export function LocationPicker({ onLocationSelect, initialPosition, className }:
       </MapContainer>
       <div className="bg-background/80 absolute bottom-2 left-2 z-10 flex items-center gap-2 rounded-md px-3 py-2 text-sm backdrop-blur-sm">
         <Info className="h-4 w-4" />
-        <span>Click on the map to select location</span>
+        <span>{t("clickToSelect")}</span>
       </div>
     </div>
   );

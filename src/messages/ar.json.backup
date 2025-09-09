@@ -1,0 +1,1185 @@
+{
+  "navigation": {
+    "dashboard": "لوحة التحكم",
+    "services": "الخدمات",
+    "bookings": "الحجوزات",
+    "staff": "الموظفون",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
+    "bannersOffers": "[MISSING_AR] navigation.bannersOffers",
+    "branches": "[MISSING_AR] navigation.branches",
+    "franchises": "[MISSING_AR] navigation.franchises",
+    "manageAll": "[MISSING_AR] navigation.manageAll",
+    "manageProducts": "[MISSING_AR] navigation.manageProducts",
+    "orders": "[MISSING_AR] navigation.orders",
+    "payments": "[MISSING_AR] navigation.payments",
+    "products": "[MISSING_AR] navigation.products",
+    "promotions": "[MISSING_AR] navigation.promotions",
+    "reviews": "[MISSING_AR] navigation.reviews",
+    "schedule": "[MISSING_AR] navigation.schedule",
+    "users": "[MISSING_AR] navigation.users",
+    "washers": "[MISSING_AR] navigation.washers"
+  },
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "add": "إضافة",
+    "search": "بحث",
+    "filter": "تصفية",
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "success": "نجاح",
+    "notifications": "الإشعارات",
+    "profile": "الملف الشخصي",
+    "close": "إغلاق",
+    "actions": "[MISSING_AR] common.actions",
+    "adminLogin": "[MISSING_AR] common.adminLogin",
+    "bookings": "[MISSING_AR] common.bookings",
+    "contactAdmin": "[MISSING_AR] common.contactAdmin",
+    "dashboard": "[MISSING_AR] common.dashboard",
+    "franchiseLogin": "[MISSING_AR] common.franchiseLogin",
+    "newToPlatform": "[MISSING_AR] common.newToPlatform",
+    "professionalCarCare": "[MISSING_AR] common.professionalCarCare",
+    "recentBookings": "[MISSING_AR] common.recentBookings",
+    "reports": "[MISSING_AR] common.reports",
+    "services": "[MISSING_AR] common.services",
+    "settings": "[MISSING_AR] common.settings",
+    "staff": "[MISSING_AR] common.staff",
+    "welcome": "[MISSING_AR] common.welcome",
+    "welcomeTo": "[MISSING_AR] common.welcomeTo"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "loggingIn": "جاري تسجيل الدخول...",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "you@example.com",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "rememberMe": "تذكرني",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "welcomeBack": "مرحباً بك مرة أخرى",
+    "loginToContinue": "سجل دخولك للمتابعة",
+    "loginDescription": "مرحباً بعودتك. أدخل بريدك الإلكتروني وكلمة المرور، نأمل أن تتذكرهما هذه المرة.",
+    "welcomeTo": "مرحباً بك في",
+    "professionalCarCare": "نظام إدارة رعاية السيارات الاحترافي",
+    "adminLogin": "تسجيل دخول المشرف",
+    "franchiseLogin": "تسجيل دخول الفرع",
+    "branchAdminLogin": "تسجيل دخول مشرف الفرع",
+    "branchAdminLoginDescription": "أدخل بيانات الاعتماد الخاصة بك للوصول إلى لوحة تحكم مشرف الفرع",
+    "franchiseLoginDescription": "أدخل بيانات الاعتماد الخاصة بك للوصول إلى لوحة تحكم الفرع",
+    "newToPlatform": "هل أنت جديد على منصتنا؟",
+    "contactAdmin": "اتصل بمسؤول النظام للبدء في استخدام حل إدارة رعاية السيارات لدينا.",
+    "validEmail": "الرجاء إدخال عنوان بريد إلكتروني صحيح.",
+    "passwordMinLength": "يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل.",
+    "confirmPasswordMinLength": "يجب أن يكون تأكيد كلمة المرور مكوناً من 6 أحرف على الأقل.",
+    "passwordsDoNotMatch": "كلمات المرور غير متطابقة.",
+    "selectRole": "اختر دورك",
+    "admin": "مشرف",
+    "franchiseManager": "مدير الفرع",
+    "register": "تسجيل",
+    "registering": "جاري التسجيل...",
+    "registerDescription": "املأ التفاصيل الخاصة بك أدناه. نعدك ألا نختبرك حول اسم حيوانك الأليف الأول (هذه المرة).",
+    "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+    "welcome": "مرحباً!",
+    "youAreInRightPlace": "أنت في المكان الصحيح.",
+    "createAccount": "إنشاء حساب",
+    "joinOurPlatform": "انضم إلى منصة رعاية السيارات الاحترافية لدينا",
+    "orContinueWith": "أو تابع باستخدام",
+    "premiumCarCareSolutions": "حلول رعاية السيارات المتميزة",
+    "professionalCarWashServices": "خدمات غسيل السيارات الاحترافية",
+    "ecoFriendlySolutions": "استمتع بأرقى خدمات رعاية السيارات مع حلول التنظيف الصديقة للبيئة.",
+    "supportTitle": "الدعم على مدار الساعة",
+    "supportDescription": "فريقنا مستعد دائماً لمساعدتك في أي احتياجات لرعاية السيارات.",
+    "lookingForFranchiseLogin": "هل تبحث عن تسجيل دخول الفرع؟",
+    "lookingForAdminLogin": "هل تبحث عن تسجيل دخول المشرف؟"
+  },
+  "dashboard": {
+    "welcome": "مرحباً بك مرة أخرى",
+    "totalBookings": "إجمالي الحجزات",
+    "revenue": "الإيرادات",
+    "customers": "العملاء",
+    "recentBookings": "الحجوزات الأخيرة"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "لوحة تحكم مسؤول كاروي",
+      "description": "إشراف على شبكة غسيل السيارات كاروي بأكملها",
+      "tabs": {
+        "overview": "نظرة عامة",
+        "analytics": "تحليلات",
+        "activity": "النشاط الأخير"
+        "branch": "الفرع",
+  "services": "الخدمات"
+}
+    },
+    "menu": {
+      "admin": "قائمة الإدارة",
+      "marketing": "التسويق",
+      "emailMarketing": "التسويق عبر البريد الإلكتروني"
+    },
+    "navigation": {
+      "dashboard": "لوحة التحكم",
+      "branches": "الفروع",
+      "franchises": "الامتيازات",
+      "washers": "الغسالون",
+      "services": "الخدمات",
+      "products": "المنتجات",
+      "manageProducts": "إدارة المنتجات",
+      "orders": "الطلبات",
+      "users": "المستخدمون",
+      "payments": "المدفوعات",
+      "schedule": "الجدول",
+      "reviews": "التقييمات",
+      "promotions": "العروض",
+      "bannersOffers": "البانرات والعروض",
+      "manageAll": "إدارة الكل"
+    },
+    "branches": {
+      "title": "الفروع",
+      "description": "إدارة جميع فروع كاروي وخدماتها",
+      "edit": "تعديل الفرع",
+      "add": "إضافة فرع جديد",
+      "editDescription": "تحديث تفاصيل الفرع.",
+      "addDescription": "إضافة فرع جديد إلى نظامك.",
+      "delete": "حذف الفرع",
+      "copyId": "نسخ المعرف",
+      "actions": "الإجراءات",
+      "deleteConfirm": {
+        "title": "هل أنت متأكد تماماً؟",
+        "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف الفرع وجميع بياناته نهائياً.",
+        "continue": "متابعة"
+        "branch": "الفرع",
+  "services": "الخدمات"
+}
+    },
+    "franchises": {
+      "title": "الامتيازات",
+      "description": "إدارة جميع امتيازات كاروي وفروعها",
+      "edit": "تعديل الامتياز",
+      "add": "إضافة امتياز",
+      "editDescription": "تحديث تفاصيل الامتياز.",
+      "addDescription": "إضافة امتياز جديد إلى نظامك.",
+      "note": "ملاحظة: سيحتاج مسؤول الامتياز إلى تأكيد عنوان بريده الإلكتروني بعد الإنشاء. سيتلقون رسالة تحقق.",
+      "delete": "حذف الامتياز",
+      "copyId": "نسخ المعرف",
+      "actions": "الإجراءات",
+      "deleteConfirm": {
+        "title": "هل أنت متأكد تماماً؟",
+        "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف الامتياز وجميع بياناته نهائياً.",
+        "continue": "متابعة"
+        "branch": "الفرع",
+  "services": "الخدمات"
+}
+    },
+    "payments": {
+      "title": "المدفوعات",
+      "description": "تتبع وإدارة جميع المدفوعات",
+      "copyId": "نسخ معرف الدفع",
+      "viewBooking": "عرض تفاصيل الحجز",
+      "viewPayment": "عرض تفاصيل الدفع",
+      "refund": "استرداد الدفع",
+      "bookingId": "معرف الحجز",
+      "amount": "المبلغ",
+      "status": "الحالة",
+      "provider": "المزود",
+      "transactionId": "معرف المعاملة",
+      "date": "التاريخ",
+      "actions": "الإجراءات"
+    },
+    "users": {
+      "title": "المستخدمون",
+      "description": "إدارة جميع مستخدمي كاروي وسجل حجزهم",
+      "edit": "تعديل المستخدم",
+      "editDescription": "تحديث تفاصيل المستخدم.",
+      "delete": "حذف المستخدم",
+      "copyId": "نسخ المعرف",
+      "actions": "الإجراءات",
+      "deleteConfirm": {
+        "title": "هل أنت متأكد تماماً؟",
+        "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف المستخدم وجميع بياناته نهائياً.",
+        "continue": "متابعة"
+        "branch": "الفرع",
+  "services": "الخدمات"
+}
+    },
+    "washers": {
+      "title": "الغسالون",
+      "description": "إدارة جميع غسالات كاروي ومهماتهم",
+      "edit": "تعديل الغسال",
+      "add": "إضافة غسال",
+      "editDescription": "تحديث تفاصيل الغسال.",
+      "addDescription": "إضافة غسال جديد إلى نظامك.",
+      "manageSchedule": "إدارة الجدول",
+      "actions": "الإجراءات",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "activeStatusValue": "active",
+      "deleteConfirm": {
+        "title": "هل أنت متأكد تماماً؟",
+        "description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف الغسال وجميع بياناته نهائياً.",
+        "continue": "متابعة"
+      },
+      "schedule": {
+        "title": "إدارة جدول {name}",
+        "description": "إضافة أو إزالة ورديات العمل الأسبوعية.",
+        "addShift": {
+          "title": "إضافة وردية جديدة",
+          "dayOfWeek": "يوم الأسبوع",
+          "selectDay": "اختر يوماً",
+          "startTime": "وقت البدء",
+          "endTime": "وقت الانتهاء",
+          "button": "إضافة وردية",
+          "invalidTimeFormat": "تنسيق الوقت غير صحيح (HH:MM)",
+          "defaultDay": "1",
+          "defaultStartTime": "09:00",
+          "defaultEndTime": "17:00"
+        },
+        "currentSchedule": {
+          "title": "الجدول الحالي",
+          "noShifts": "لا توجد ورديات مجدولة لهذا الغسال."
+        },
+        "days": {
+          "monday": "الاثنين",
+          "tuesday": "الثلاثاء",
+          "wednesday": "الأربعاء",
+          "thursday": "الخميس",
+          "friday": "الجمعة",
+          "saturday": "السبت",
+          "sunday": "الأحد",
+          "mondayValue": "1",
+          "tuesdayValue": "2",
+          "wednesdayValue": "3",
+          "thursdayValue": "4",
+          "fridayValue": "5",
+          "saturdayValue": "6",
+          "sundayValue": "0",
+          "unknown": "غير معروف"
+          "branch": "الفرع",
+  "services": "الخدمات"
+}
+      },
+      "days": {
+        "monday": "الاثنين",
+        "tuesday": "الثلاثاء",
+        "wednesday": "الأربعاء",
+        "thursday": "الخميس",
+        "friday": "الجمعة",
+        "saturday": "السبت",
+        "sunday": "الأحد",
+        "mondayValue": "1",
+        "tuesdayValue": "2",
+        "wednesdayValue": "3",
+        "thursdayValue": "4",
+        "fridayValue": "5",
+        "saturdayValue": "6",
+        "sundayValue": "0",
+        "unknown": "غير معروف"
+      },
+      "form": {
+        "name": "اسم الغسال",
+        "namePlaceholder": "مثال: محمد أحمد",
+        "nameMinLength": "يجب أن يكون اسم الغسال مكونًا من حرفين على الأقل.",
+        "branch": "الفرع",
+        "branchRequired": "الرجاء اختيار فرع.",
+        "selectBranch": "اختر فرعًا",
+        "status": "الحالة",
+        "selectStatus": "اختر الحالة",
+        "rating": "التقييم",
+        "updateButton": "تحديث الغسال",
+        "createButton": "إنشاء غسال",
+        "defaultStatus": "inactive",
+        "defaultRating": "0",
+        "activeStatusValue": "active",
+        "inactiveStatusValue": "inactive"
+      },
+      "table": {
+        "name": "الاسم",
+        "branch": "الفرع",
+        "status": "الحالة",
+        "rating": "التقييم",
+        "filterPlaceholder": "تصفية حسب الاسم...",
+        "filterBranchPlaceholder": "تصفية حسب الفرع",
+        "allBranches": "جميع الفروع",
+        "allBranchesValue": "all",
+        "export": "تصدير",
+        "noResults": "لا توجد نتائج.",
+        "previous": "السابق",
+        "next": "التالي"
+      },
+      "branch": "[MISSING_AR] admin.washers.branch",
+      "copyId": "[MISSING_AR] admin.washers.copyId",
+      "delete": "[MISSING_AR] admin.washers.delete",
+      "name": "[MISSING_AR] admin.washers.name",
+      "rating": "[MISSING_AR] admin.washers.rating",
+      "status": "[MISSING_AR] admin.washers.status"
+    },
+    "activity": {
+      "title": "[MISSING_AR] admin.activity.title"
+    },
+    "bannersOffers": {
+      "description": "[MISSING_AR] admin.bannersOffers.description",
+      "title": "[MISSING_AR] admin.bannersOffers.title"
+    },
+    "bookings": {
+      "bookingId": "[MISSING_AR] admin.bookings.bookingId",
+      "branch": "[MISSING_AR] admin.bookings.branch",
+      "cancel": {
+        "no": "[MISSING_AR] admin.bookings.cancel.no",
+        "title": "[MISSING_AR] admin.bookings.cancel.title",
+        "yes": "[MISSING_AR] admin.bookings.cancel.yes"
+      },
+      "cancelBooking": "[MISSING_AR] admin.bookings.cancelBooking",
+      "copyId": "[MISSING_AR] admin.bookings.copyId",
+      "date": "[MISSING_AR] admin.bookings.date",
+      "service": "[MISSING_AR] admin.bookings.service",
+      "status": "[MISSING_AR] admin.bookings.status",
+      "update": {
+        "button": "[MISSING_AR] admin.bookings.update.button",
+        "title": "[MISSING_AR] admin.bookings.update.title"
+      },
+      "updateStatus": "[MISSING_AR] admin.bookings.updateStatus",
+      "user": "[MISSING_AR] admin.bookings.user",
+      "viewDetails": "[MISSING_AR] admin.bookings.viewDetails"
+    },
+    "bookingsChart": {
+      "descriptionLong": "[MISSING_AR] admin.bookingsChart.descriptionLong",
+      "descriptionShort": "[MISSING_AR] admin.bookingsChart.descriptionShort",
+      "last30Days": "[MISSING_AR] admin.bookingsChart.last30Days",
+      "last3Months": "[MISSING_AR] admin.bookingsChart.last3Months",
+      "last7Days": "[MISSING_AR] admin.bookingsChart.last7Days",
+      "selectValue": "[MISSING_AR] admin.bookingsChart.selectValue",
+      "title": "[MISSING_AR] admin.bookingsChart.title"
+    },
+    "branchPerformance": {
+      "activeBookings": "[MISSING_AR] admin.branchPerformance.activeBookings",
+      "allFranchises": "[MISSING_AR] admin.branchPerformance.allFranchises",
+      "branch": "[MISSING_AR] admin.branchPerformance.branch",
+      "count": "[MISSING_AR] admin.branchPerformance.count",
+      "filterByFranchise": "[MISSING_AR] admin.branchPerformance.filterByFranchise",
+      "noData": "[MISSING_AR] admin.branchPerformance.noData",
+      "servicesOffered": "[MISSING_AR] admin.branchPerformance.servicesOffered",
+      "title": "[MISSING_AR] admin.branchPerformance.title"
+    },
+    "metrics": {
+      "activeWashers": "[MISSING_AR] admin.metrics.activeWashers",
+      "totalBookings": "[MISSING_AR] admin.metrics.totalBookings",
+      "totalRevenue": "[MISSING_AR] admin.metrics.totalRevenue",
+      "totalUsers": "[MISSING_AR] admin.metrics.totalUsers"
+    },
+    "products": {
+      "orders": {
+        "description": "[MISSING_AR] admin.products.orders.description",
+        "title": "[MISSING_AR] admin.products.orders.title"
+        "branch": "الفرع",
+  "services": "الخدمات"
+}
+    },
+    "reports": {
+      "bookingTrends": "[MISSING_AR] admin.reports.bookingTrends",
+      "dateRange": "[MISSING_AR] admin.reports.dateRange",
+      "download": "[MISSING_AR] admin.reports.download",
+      "generatedOn": "[MISSING_AR] admin.reports.generatedOn",
+      "monthlyRevenue": "[MISSING_AR] admin.reports.monthlyRevenue",
+      "reportName": "[MISSING_AR] admin.reports.reportName",
+      "userGrowth": "[MISSING_AR] admin.reports.userGrowth",
+      "washerPerformance": "[MISSING_AR] admin.reports.washerPerformance"
+    },
+    "schedule": {
+      "description": "[MISSING_AR] admin.schedule.description",
+      "title": "[MISSING_AR] admin.schedule.title"
+      "branch": "الفرع",
+  "services": "الخدمات"
+}
+  },
+  "schedule": {
+    "title": "جدول الغسالين",
+    "description": "إدارة وعرض جداول الغسالين عبر جميع الفروع"
+  },
+  "services": {
+    "title": "الخدمات"
+  },
+  "bannersOffers": {
+    "title": "البانرات والعروض",
+    "description": "إدارة البنرات والعروض الترويجية على مستوى الموقع",
+    "banners": {
+      "title": "البانرات",
+      "description": "إدارة البنرات المعروضة للمستخدمين على مستوى الموقع"
+    },
+    "offers": {
+      "title": "العروض",
+      "description": "إدارة العروض الترويجية للخدمات والمنتجات"
+      "branch": "الفرع",
+  "services": "الخدمات"
+}
+  },
+  "products": {
+    "orders": {
+      "title": "طلبات المنتجات",
+      "description": "إدارة طلبات منتجات الفروع"
+      "branch": "الفرع",
+  "services": "الخدمات"
+}
+  },
+  "metrics": {
+    "totalRevenue": "إجمالي الإيرادات",
+    "totalBookings": "إجمالي الحجزات",
+    "totalUsers": "إجمالي المستخدمين",
+    "activeWashers": "الغسالون النشطون"
+  },
+  "bookings": {
+    "title": "الحجوزات",
+    "recent": {
+      "title": "الحجوزات الأخيرة",
+      "description": "تتبع وإدارة أحدث الحجوزات"
+    },
+    "details": {
+      "title": "تفاصيل الحجز",
+      "description": "تفاصيل الحجز بالمعرف: {id}",
+      "user": "المستخدم",
+      "branch": "الفرع",
+      "service": "الخدمة",
+      "status": "الحالة",
+      "date": "التاريخ"
+    },
+    "cancel": {
+      "title": "إلغاء الحجز",
+      "confirm": "هل أنت متأكد من إلغاء الحجز {bookingId}؟ لا يمكن التراجع عن هذا الإجراء.",
+      "yes": "نعم، إلغاء الحجز",
+      "no": "لا، الاحتفاظ بالحجز"
+    },
+    "update": {
+      "title": "تحديث حالة الحجز",
+      "button": "تحديث الحالة"
+    },
+    "bookingId": "معرف الحجز",
+    "user": "المستخدم",
+    "branch": "الفرع",
+    "service": "الخدمة",
+    "status": {
+      "title": "الحالة",
+      "pending": "معلق",
+      "inProgress": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "scheduled": "مجدول",
+      "cancelled": "ملغى"
+    },
+    "date": "التاريخ",
+    "copyId": "نسخ المعرف",
+    "viewDetails": "عرض التفاصيل",
+    "updateStatus": "تحديث الحالة",
+    "cancelBooking": "إلغاء الحجز",
+    "updateSuccess": "تم تحديث حالة الحجز بنجاح",
+    "updateError": "فشل في تحديث حالة الحجز",
+    "cancelSuccess": "تم إلغاء الحجز بنجاح",
+    "cancelError": "فشل في إلغاء الحجز"
+  },
+  "reports": {
+    "title": "التقارير",
+    "description": "عرض وتحميل التقارير المُولدة",
+    "reportName": "اسم التقرير",
+    "dateRange": "نطاق التاريخ",
+    "generatedOn": "تم الإنشاء في",
+    "download": "تحميل",
+    "monthlyRevenue": "الإيرادات الشهرية",
+    "userGrowth": "نمو المستخدمين",
+    "washerPerformance": "أداء الغسالين",
+    "bookingTrends": "اتجاهات الحجز"
+  },
+  "activity": {
+    "title": "النشاط الأخير"
+  },
+  "reviews": {
+    "title": "آخر التقييمات"
+  },
+  "washersActivity": {
+    "title": "نشاط الغسالين"
+  },
+  "washers": {
+    "name": "الاسم",
+    "branch": "الفرع",
+    "status": "الحالة",
+    "rating": "التقييم"
+  },
+  "branchPerformance": {
+    "title": "أداء الفرع",
+    "chartTitle": "[MISSING_AR] branchPerformance.chartTitle",
+    "description": "[MISSING_AR] branchPerformance.description"
+  },
+  "paymentsOverview": {
+    "title": "نظرة عامة على المدفوعات"
+  },
+  "actions": "[MISSING_AR] actions",
+  "addShift": {
+    "button": "[MISSING_AR] addShift.button",
+    "dayOfWeek": "[MISSING_AR] addShift.dayOfWeek",
+    "defaultDay": "[MISSING_AR] addShift.defaultDay",
+    "defaultEndTime": "[MISSING_AR] addShift.defaultEndTime",
+    "defaultStartTime": "[MISSING_AR] addShift.defaultStartTime",
+    "endTime": "[MISSING_AR] addShift.endTime",
+    "invalidTimeFormat": "[MISSING_AR] addShift.invalidTimeFormat",
+    "selectDay": "[MISSING_AR] addShift.selectDay",
+    "startTime": "[MISSING_AR] addShift.startTime",
+    "title": "[MISSING_AR] addShift.title"
+  },
+  "alreadyHaveAccount": "[MISSING_AR] alreadyHaveAccount",
+  "banners": {
+    "description": "[MISSING_AR] banners.description",
+    "title": "[MISSING_AR] banners.title"
+  },
+  "bookingId": "[MISSING_AR] bookingId",
+  "bookingTrends": {
+    "chartTitle": "[MISSING_AR] bookingTrends.chartTitle",
+    "description": "[MISSING_AR] bookingTrends.description",
+    "title": "[MISSING_AR] bookingTrends.title"
+  },
+  "branch": "[MISSING_AR] branch",
+  "copyId": "[MISSING_AR] copyId",
+  "currentSchedule": {
+    "noShifts": "[MISSING_AR] currentSchedule.noShifts",
+    "title": "[MISSING_AR] currentSchedule.title"
+  },
+  "dataTable": {
+    "columnHeader": {
+      "asc": "[MISSING_AR] dataTable.columnHeader.asc",
+      "desc": "[MISSING_AR] dataTable.columnHeader.desc",
+      "hide": "[MISSING_AR] dataTable.columnHeader.hide"
+    },
+    "pagination": {
+      "firstPage": "[MISSING_AR] dataTable.pagination.firstPage",
+      "lastPage": "[MISSING_AR] dataTable.pagination.lastPage",
+      "nextPage": "[MISSING_AR] dataTable.pagination.nextPage",
+      "of": "[MISSING_AR] dataTable.pagination.of",
+      "page": "[MISSING_AR] dataTable.pagination.page",
+      "previousPage": "[MISSING_AR] dataTable.pagination.previousPage",
+      "rowsPerPage": "[MISSING_AR] dataTable.pagination.rowsPerPage",
+      "rowsSelected": "[MISSING_AR] dataTable.pagination.rowsSelected"
+    },
+    "viewOptions": {
+      "toggleColumns": "[MISSING_AR] dataTable.viewOptions.toggleColumns",
+      "view": "[MISSING_AR] dataTable.viewOptions.view"
+      "branch": "الفرع",
+  "services": "الخدمات"
+}
+  },
+  "date": "[MISSING_AR] date",
+  "days": {
+    "friday": "[MISSING_AR] days.friday",
+    "fridayValue": "[MISSING_AR] days.fridayValue",
+    "monday": "[MISSING_AR] days.monday",
+    "mondayValue": "[MISSING_AR] days.mondayValue",
+    "saturday": "[MISSING_AR] days.saturday",
+    "saturdayValue": "[MISSING_AR] days.saturdayValue",
+    "sunday": "[MISSING_AR] days.sunday",
+    "sundayValue": "[MISSING_AR] days.sundayValue",
+    "thursday": "[MISSING_AR] days.thursday",
+    "thursdayValue": "[MISSING_AR] days.thursdayValue",
+    "tuesday": "[MISSING_AR] days.tuesday",
+    "tuesdayValue": "[MISSING_AR] days.tuesdayValue",
+    "unknown": "[MISSING_AR] days.unknown",
+    "wednesday": "[MISSING_AR] days.wednesday",
+    "wednesdayValue": "[MISSING_AR] days.wednesdayValue"
+  },
+  "deleteConfirm": {
+    "continue": "[MISSING_AR] deleteConfirm.continue",
+    "description": "[MISSING_AR] deleteConfirm.description",
+    "title": "[MISSING_AR] deleteConfirm.title"
+  },
+  "form": {
+    "activeStatusValue": "[MISSING_AR] form.activeStatusValue",
+    "branch": "[MISSING_AR] form.branch",
+    "branchRequired": "[MISSING_AR] form.branchRequired",
+    "createButton": "[MISSING_AR] form.createButton",
+    "defaultRating": "[MISSING_AR] form.defaultRating",
+    "defaultStatus": "[MISSING_AR] form.defaultStatus",
+    "inactiveStatusValue": "[MISSING_AR] form.inactiveStatusValue",
+    "name": "[MISSING_AR] form.name",
+    "nameMinLength": "[MISSING_AR] form.nameMinLength",
+    "namePlaceholder": "[MISSING_AR] form.namePlaceholder",
+    "rating": "[MISSING_AR] form.rating",
+    "selectBranch": "[MISSING_AR] form.selectBranch",
+    "selectStatus": "[MISSING_AR] form.selectStatus",
+    "status": "[MISSING_AR] form.status",
+    "updateButton": "[MISSING_AR] form.updateButton"
+  },
+  "franchise": {
+    "account": {
+      "logout": "[MISSING_AR] franchise.account.logout"
+    },
+    "activity": {
+      "aService": "[MISSING_AR] franchise.activity.aService",
+      "avatar": "[MISSING_AR] franchise.activity.avatar",
+      "noRecentActivity": "[MISSING_AR] franchise.activity.noRecentActivity",
+      "recentActivity": "[MISSING_AR] franchise.activity.recentActivity",
+      "unknownWasher": "[MISSING_AR] franchise.activity.unknownWasher"
+    },
+    "analytics": {
+      "chart": {
+        "noData": "[MISSING_AR] franchise.analytics.chart.noData"
+      },
+      "description": "[MISSING_AR] franchise.analytics.description",
+      "title": "[MISSING_AR] franchise.analytics.title"
+    },
+    "bookingDetails": {
+      "branch": "[MISSING_AR] franchise.bookingDetails.branch",
+      "date": "[MISSING_AR] franchise.bookingDetails.date",
+      "service": "[MISSING_AR] franchise.bookingDetails.service",
+      "status": "[MISSING_AR] franchise.bookingDetails.status",
+      "title": "[MISSING_AR] franchise.bookingDetails.title",
+      "user": "[MISSING_AR] franchise.bookingDetails.user"
+    },
+    "bookings": {
+      "table": {
+        "export": "[MISSING_AR] franchise.bookings.table.export",
+        "filterByUser": "[MISSING_AR] franchise.bookings.table.filterByUser"
+      },
+      "title": "[MISSING_AR] franchise.bookings.title"
+    },
+    "bookingsChart": {
+      "bookings": "[MISSING_AR] franchise.bookingsChart.bookings",
+      "dailyBookings": "[MISSING_AR] franchise.bookingsChart.dailyBookings",
+      "description": "[MISSING_AR] franchise.bookingsChart.description"
+    },
+    "branchAnalytics": {
+      "acrossAllBranches": "[MISSING_AR] franchise.branchAnalytics.acrossAllBranches",
+      "activeWashers": "[MISSING_AR] franchise.branchAnalytics.activeWashers",
+      "allBranches": "[MISSING_AR] franchise.branchAnalytics.allBranches",
+      "bookingTrends": "[MISSING_AR] franchise.branchAnalytics.bookingTrends",
+      "bookings": "[MISSING_AR] franchise.branchAnalytics.bookings",
+      "bookingsByBranch": "[MISSING_AR] franchise.branchAnalytics.bookingsByBranch",
+      "bookingsByService": "[MISSING_AR] franchise.branchAnalytics.bookingsByService",
+      "bookingsByWasher": "[MISSING_AR] franchise.branchAnalytics.bookingsByWasher",
+      "branchComparison": "[MISSING_AR] franchise.branchAnalytics.branchComparison",
+      "dailyBookings": "[MISSING_AR] franchise.branchAnalytics.dailyBookings",
+      "description": "[MISSING_AR] franchise.branchAnalytics.description",
+      "forSelectedBranch": "[MISSING_AR] franchise.branchAnalytics.forSelectedBranch",
+      "selectBranch": "[MISSING_AR] franchise.branchAnalytics.selectBranch",
+      "servicePerformance": "[MISSING_AR] franchise.branchAnalytics.servicePerformance",
+      "title": "[MISSING_AR] franchise.branchAnalytics.title",
+      "totalBookings": "[MISSING_AR] franchise.branchAnalytics.totalBookings",
+      "totalServices": "[MISSING_AR] franchise.branchAnalytics.totalServices",
+      "washerPerformance": "[MISSING_AR] franchise.branchAnalytics.washerPerformance"
+    },
+    "branches": {
+      "actions": {
+        "actions": "[MISSING_AR] franchise.branches.actions.actions",
+        "copyId": "[MISSING_AR] franchise.branches.actions.copyId",
+        "editBranch": "[MISSING_AR] franchise.branches.actions.editBranch",
+        "openMenu": "[MISSING_AR] franchise.branches.actions.openMenu"
+      },
+      "bookings": {
+        "actions": "[MISSING_AR] franchise.branches.bookings.actions",
+        "bookingId": "[MISSING_AR] franchise.branches.bookings.bookingId",
+        "branchBookings": "[MISSING_AR] franchise.branches.bookings.branchBookings",
+        "cancel": "[MISSING_AR] franchise.branches.bookings.cancel",
+        "cancelled": "[MISSING_AR] franchise.branches.bookings.cancelled",
+        "completed": "[MISSING_AR] franchise.branches.bookings.completed",
+        "copyId": "[MISSING_AR] franchise.branches.bookings.copyId",
+        "date": "[MISSING_AR] franchise.branches.bookings.date",
+        "inProgress": "[MISSING_AR] franchise.branches.bookings.inProgress",
+        "openMenu": "[MISSING_AR] franchise.branches.bookings.openMenu",
+        "pending": "[MISSING_AR] franchise.branches.bookings.pending",
+        "saveChanges": "[MISSING_AR] franchise.branches.bookings.saveChanges",
+        "selectStatus": "[MISSING_AR] franchise.branches.bookings.selectStatus",
+        "service": "[MISSING_AR] franchise.branches.bookings.service",
+        "status": "[MISSING_AR] franchise.branches.bookings.status",
+        "unassigned": "[MISSING_AR] franchise.branches.bookings.unassigned",
+        "unknownService": "[MISSING_AR] franchise.branches.bookings.unknownService",
+        "updateBookingStatus": "[MISSING_AR] franchise.branches.bookings.updateBookingStatus",
+        "updateStatus": "[MISSING_AR] franchise.branches.bookings.updateStatus",
+        "washer": "[MISSING_AR] franchise.branches.bookings.washer"
+      },
+      "description": "[MISSING_AR] franchise.branches.description",
+      "dialog": {
+        "addBranchDescription": "[MISSING_AR] franchise.branches.dialog.addBranchDescription",
+        "addNewBranch": "[MISSING_AR] franchise.branches.dialog.addNewBranch",
+        "manageBranchServices": "[MISSING_AR] franchise.branches.dialog.manageBranchServices",
+        "manageServicesDescription": "[MISSING_AR] franchise.branches.dialog.manageServicesDescription"
+      },
+      "form": {
+        "addBranch": "[MISSING_AR] franchise.branches.form.addBranch",
+        "addBranchDescription": "[MISSING_AR] franchise.branches.form.addBranchDescription",
+        "addNewBranch": "[MISSING_AR] franchise.branches.form.addNewBranch",
+        "additionalInfo": "[MISSING_AR] franchise.branches.form.additionalInfo",
+        "areYouSure": "[MISSING_AR] franchise.branches.form.areYouSure",
+        "bookingManagement": "[MISSING_AR] franchise.branches.form.bookingManagement",
+        "bookings": "[MISSING_AR] franchise.branches.form.bookings",
+        "branchCreated": "[MISSING_AR] franchise.branches.form.branchCreated",
+        "branchDetails": "[MISSING_AR] franchise.branches.form.branchDetails",
+        "branchId": "[MISSING_AR] franchise.branches.form.branchId",
+        "branchName": "[MISSING_AR] franchise.branches.form.branchName",
+        "branchNamePlaceholder": "[MISSING_AR] franchise.branches.form.branchNamePlaceholder",
+        "branchUpdated": "[MISSING_AR] franchise.branches.form.branchUpdated",
+        "cancel": "[MISSING_AR] franchise.branches.form.cancel",
+        "continue": "[MISSING_AR] franchise.branches.form.continue",
+        "create": "[MISSING_AR] franchise.branches.form.create",
+        "createdAt": "[MISSING_AR] franchise.branches.form.createdAt",
+        "delete": "[MISSING_AR] franchise.branches.form.delete",
+        "done": "[MISSING_AR] franchise.branches.form.done",
+        "edit": "[MISSING_AR] franchise.branches.form.edit",
+        "editRemoveServices": "[MISSING_AR] franchise.branches.form.editRemoveServices",
+        "failedToDeleteService": "[MISSING_AR] franchise.branches.form.failedToDeleteService",
+        "loadingMap": "[MISSING_AR] franchise.branches.form.loadingMap",
+        "location": "[MISSING_AR] franchise.branches.form.location",
+        "manageBookings": "[MISSING_AR] franchise.branches.form.manageBookings",
+        "manageBranchServices": "[MISSING_AR] franchise.branches.form.manageBranchServices",
+        "manageServices": "[MISSING_AR] franchise.branches.form.manageServices",
+        "manageServicesDescription": "[MISSING_AR] franchise.branches.form.manageServicesDescription",
+        "mins": "[MISSING_AR] franchise.branches.form.mins",
+        "na": "[MISSING_AR] franchise.branches.form.na",
+        "noServicesAdded": "[MISSING_AR] franchise.branches.form.noServicesAdded",
+        "noServicesAvailable": "[MISSING_AR] franchise.branches.form.noServicesAvailable",
+        "provideRequiredInfo": "[MISSING_AR] franchise.branches.form.provideRequiredInfo",
+        "serviceDeleted": "[MISSING_AR] franchise.branches.form.serviceDeleted",
+        "services": "[MISSING_AR] franchise.branches.form.services",
+        "update": "[MISSING_AR] franchise.branches.form.update"
+      },
+      "locationPicker": {
+        "clickToSelect": "[MISSING_AR] franchise.branches.locationPicker.clickToSelect"
+      },
+      "table": {
+        "export": "[MISSING_AR] franchise.branches.table.export",
+        "filterByName": "[MISSING_AR] franchise.branches.table.filterByName"
+      },
+      "title": "[MISSING_AR] franchise.branches.title",
+      "viewAnalytics": "[MISSING_AR] franchise.branches.viewAnalytics"
+    },
+    "dashboard": {
+      "description": "[MISSING_AR] franchise.dashboard.description",
+      "title": "[MISSING_AR] franchise.dashboard.title"
+    },
+    "debug": {
+      "bookingsCount": "[MISSING_AR] franchise.debug.bookingsCount",
+      "branchesCount": "[MISSING_AR] franchise.debug.branchesCount",
+      "branchesData": "[MISSING_AR] franchise.debug.branchesData",
+      "debugInformation": "[MISSING_AR] franchise.debug.debugInformation",
+      "failedToFetchFranchiseId": "[MISSING_AR] franchise.debug.failedToFetchFranchiseId",
+      "franchiseId": "[MISSING_AR] franchise.debug.franchiseId",
+      "notLoaded": "[MISSING_AR] franchise.debug.notLoaded",
+      "servicesCount": "[MISSING_AR] franchise.debug.servicesCount",
+      "washersCount": "[MISSING_AR] franchise.debug.washersCount"
+    },
+    "metrics": {
+      "activeWashers": "[MISSING_AR] franchise.metrics.activeWashers",
+      "allBookingsAcrossBranches": "[MISSING_AR] franchise.metrics.allBookingsAcrossBranches",
+      "availableForBookings": "[MISSING_AR] franchise.metrics.availableForBookings",
+      "managedByFranchise": "[MISSING_AR] franchise.metrics.managedByFranchise",
+      "offeredAcrossBranches": "[MISSING_AR] franchise.metrics.offeredAcrossBranches",
+      "totalBookings": "[MISSING_AR] franchise.metrics.totalBookings",
+      "totalBranches": "[MISSING_AR] franchise.metrics.totalBranches",
+      "totalServices": "[MISSING_AR] franchise.metrics.totalServices"
+    },
+    "nav": {
+      "bookingHistory": "[MISSING_AR] franchise.nav.bookingHistory",
+      "branchAnalytics": "[MISSING_AR] franchise.nav.branchAnalytics",
+      "branchManagement": "[MISSING_AR] franchise.nav.branchManagement",
+      "franchiseAnalytics": "[MISSING_AR] franchise.nav.franchiseAnalytics",
+      "products": "[MISSING_AR] franchise.nav.products",
+      "promotions": "[MISSING_AR] franchise.nav.promotions",
+      "reports": "[MISSING_AR] franchise.nav.reports",
+      "washerManagement": "[MISSING_AR] franchise.nav.washerManagement"
+    },
+    "pendingBookings": {
+      "bookingId": "[MISSING_AR] franchise.pendingBookings.bookingId",
+      "branch": "[MISSING_AR] franchise.pendingBookings.branch",
+      "date": "[MISSING_AR] franchise.pendingBookings.date",
+      "description": "[MISSING_AR] franchise.pendingBookings.description",
+      "noPendingBookings": "[MISSING_AR] franchise.pendingBookings.noPendingBookings",
+      "service": "[MISSING_AR] franchise.pendingBookings.service",
+      "status": "[MISSING_AR] franchise.pendingBookings.status",
+      "title": "[MISSING_AR] franchise.pendingBookings.title",
+      "user": "[MISSING_AR] franchise.pendingBookings.user"
+    },
+    "products": {
+      "allCategories": "[MISSING_AR] franchise.products.allCategories",
+      "availableProducts": "[MISSING_AR] franchise.products.availableProducts",
+      "browseCatalog": "[MISSING_AR] franchise.products.browseCatalog",
+      "description": "[MISSING_AR] franchise.products.description",
+      "inStock": "[MISSING_AR] franchise.products.inStock",
+      "noImage": "[MISSING_AR] franchise.products.noImage",
+      "noProductsFound": "[MISSING_AR] franchise.products.noProductsFound",
+      "noProductsInCategory": "[MISSING_AR] franchise.products.noProductsInCategory",
+      "order": "[MISSING_AR] franchise.products.order",
+      "orderForm": {
+        "cancel": "[MISSING_AR] franchise.products.orderForm.cancel",
+        "failedToPlaceOrder": "[MISSING_AR] franchise.products.orderForm.failedToPlaceOrder",
+        "insufficientStock": "[MISSING_AR] franchise.products.orderForm.insufficientStock",
+        "orderPlaced": "[MISSING_AR] franchise.products.orderForm.orderPlaced",
+        "placeOrder": "[MISSING_AR] franchise.products.orderForm.placeOrder",
+        "quantity": "[MISSING_AR] franchise.products.orderForm.quantity"
+      },
+      "orderHistory": {
+        "cancelled": "[MISSING_AR] franchise.products.orderHistory.cancelled",
+        "close": "[MISSING_AR] franchise.products.orderHistory.close",
+        "delivered": "[MISSING_AR] franchise.products.orderHistory.delivered",
+        "description": "[MISSING_AR] franchise.products.orderHistory.description",
+        "each": "[MISSING_AR] franchise.products.orderHistory.each",
+        "export": "[MISSING_AR] franchise.products.orderHistory.export",
+        "noOrdersFound": "[MISSING_AR] franchise.products.orderHistory.noOrdersFound",
+        "order": "[MISSING_AR] franchise.products.orderHistory.order",
+        "orderDate": "[MISSING_AR] franchise.products.orderHistory.orderDate",
+        "orderDetails": "[MISSING_AR] franchise.products.orderHistory.orderDetails",
+        "orderItems": "[MISSING_AR] franchise.products.orderHistory.orderItems",
+        "pending": "[MISSING_AR] franchise.products.orderHistory.pending",
+        "processing": "[MISSING_AR] franchise.products.orderHistory.processing",
+        "product": "[MISSING_AR] franchise.products.orderHistory.product",
+        "quantity": "[MISSING_AR] franchise.products.orderHistory.quantity",
+        "shipped": "[MISSING_AR] franchise.products.orderHistory.shipped",
+        "status": "[MISSING_AR] franchise.products.orderHistory.status",
+        "title": "[MISSING_AR] franchise.products.orderHistory.title",
+        "totalAmount": "[MISSING_AR] franchise.products.orderHistory.totalAmount",
+        "unknown": "[MISSING_AR] franchise.products.orderHistory.unknown"
+      },
+      "orderProduct": "[MISSING_AR] franchise.products.orderProduct",
+      "productImage": "[MISSING_AR] franchise.products.productImage",
+      "selectCategory": "[MISSING_AR] franchise.products.selectCategory",
+      "title": "[MISSING_AR] franchise.products.title",
+      "uncategorized": "[MISSING_AR] franchise.products.uncategorized"
+    },
+    "promotions": {
+      "addPromotion": "[MISSING_AR] franchise.promotions.addPromotion",
+      "description": "[MISSING_AR] franchise.promotions.description",
+      "form": {
+        "code": "[MISSING_AR] franchise.promotions.form.code",
+        "codePlaceholder": "[MISSING_AR] franchise.promotions.form.codePlaceholder",
+        "discount": "[MISSING_AR] franchise.promotions.form.discount",
+        "endDate": "[MISSING_AR] franchise.promotions.form.endDate",
+        "save": "[MISSING_AR] franchise.promotions.form.save",
+        "startDate": "[MISSING_AR] franchise.promotions.form.startDate"
+      },
+      "formDialog": {
+        "create": "[MISSING_AR] franchise.promotions.formDialog.create",
+        "createDescription": "[MISSING_AR] franchise.promotions.formDialog.createDescription",
+        "createdSuccessfully": "[MISSING_AR] franchise.promotions.formDialog.createdSuccessfully",
+        "edit": "[MISSING_AR] franchise.promotions.formDialog.edit",
+        "failedToSave": "[MISSING_AR] franchise.promotions.formDialog.failedToSave",
+        "updateDescription": "[MISSING_AR] franchise.promotions.formDialog.updateDescription",
+        "updatedSuccessfully": "[MISSING_AR] franchise.promotions.formDialog.updatedSuccessfully"
+      },
+      "list": {
+        "actions": "[MISSING_AR] franchise.promotions.list.actions",
+        "active": "[MISSING_AR] franchise.promotions.list.active",
+        "code": "[MISSING_AR] franchise.promotions.list.code",
+        "createFirstPromotion": "[MISSING_AR] franchise.promotions.list.createFirstPromotion",
+        "deletedSuccessfully": "[MISSING_AR] franchise.promotions.list.deletedSuccessfully",
+        "discount": "[MISSING_AR] franchise.promotions.list.discount",
+        "failedToDelete": "[MISSING_AR] franchise.promotions.list.failedToDelete",
+        "inactive": "[MISSING_AR] franchise.promotions.list.inactive",
+        "noPromotions": "[MISSING_AR] franchise.promotions.list.noPromotions",
+        "status": "[MISSING_AR] franchise.promotions.list.status",
+        "to": "[MISSING_AR] franchise.promotions.list.to",
+        "validityPeriod": "[MISSING_AR] franchise.promotions.list.validityPeriod"
+      },
+      "manageOffers": "[MISSING_AR] franchise.promotions.manageOffers",
+      "promotions": "[MISSING_AR] franchise.promotions.promotions",
+      "title": "[MISSING_AR] franchise.promotions.title"
+    },
+    "reports": {
+      "bookings": "[MISSING_AR] franchise.reports.bookings",
+      "branchRevenueReport": "[MISSING_AR] franchise.reports.branchRevenueReport",
+      "branches": "[MISSING_AR] franchise.reports.branches",
+      "dateRange": "[MISSING_AR] franchise.reports.dateRange",
+      "description": "[MISSING_AR] franchise.reports.description",
+      "download": "[MISSING_AR] franchise.reports.download",
+      "generatedOn": "[MISSING_AR] franchise.reports.generatedOn",
+      "monthlyBookingsReport": "[MISSING_AR] franchise.reports.monthlyBookingsReport",
+      "reportName": "[MISSING_AR] franchise.reports.reportName",
+      "servicePopularityReport": "[MISSING_AR] franchise.reports.servicePopularityReport",
+      "services": "[MISSING_AR] franchise.reports.services",
+      "title": "[MISSING_AR] franchise.reports.title",
+      "type": "[MISSING_AR] franchise.reports.type",
+      "washerPerformanceReport": "[MISSING_AR] franchise.reports.washerPerformanceReport",
+      "washers": "[MISSING_AR] franchise.reports.washers"
+    },
+    "services": {
+      "allBranches": "[MISSING_AR] franchise.services.allBranches",
+      "availability": {
+        "form": {
+          "active": "[MISSING_AR] franchise.services.availability.form.active",
+          "activeDescription": "[MISSING_AR] franchise.services.availability.form.activeDescription",
+          "add": "[MISSING_AR] franchise.services.availability.form.add",
+          "cancel": "[MISSING_AR] franchise.services.availability.form.cancel",
+          "dayOfWeek": "[MISSING_AR] franchise.services.availability.form.dayOfWeek",
+          "endTime": "[MISSING_AR] franchise.services.availability.form.endTime",
+          "saving": "[MISSING_AR] franchise.services.availability.form.saving",
+          "selectDay": "[MISSING_AR] franchise.services.availability.form.selectDay",
+          "startTime": "[MISSING_AR] franchise.services.availability.form.startTime",
+          "update": "[MISSING_AR] franchise.services.availability.form.update"
+        },
+        "list": {
+          "actions": "[MISSING_AR] franchise.services.availability.list.actions",
+          "addAvailability": "[MISSING_AR] franchise.services.availability.list.addAvailability",
+          "delete": "[MISSING_AR] franchise.services.availability.list.delete",
+          "edit": "[MISSING_AR] franchise.services.availability.list.edit",
+          "editAvailability": "[MISSING_AR] franchise.services.availability.list.editAvailability",
+          "inactive": "[MISSING_AR] franchise.services.availability.list.inactive",
+          "manageAvailability": "[MISSING_AR] franchise.services.availability.list.manageAvailability",
+          "noAvailabilitySet": "[MISSING_AR] franchise.services.availability.list.noAvailabilitySet",
+          "openMenu": "[MISSING_AR] franchise.services.availability.list.openMenu",
+          "serviceAvailability": "[MISSING_AR] franchise.services.availability.list.serviceAvailability"
+          "branch": "الفرع",
+  "services": "الخدمات"
+}
+      },
+      "card": {
+        "availableAtAllBranches": "[MISSING_AR] franchise.services.card.availableAtAllBranches",
+        "branchSpecific": "[MISSING_AR] franchise.services.card.branchSpecific",
+        "description": "[MISSING_AR] franchise.services.card.description",
+        "duration": "[MISSING_AR] franchise.services.card.duration",
+        "global": "[MISSING_AR] franchise.services.card.global",
+        "includes": "[MISSING_AR] franchise.services.card.includes",
+        "manage": "[MISSING_AR] franchise.services.card.manage",
+        "manageService": "[MISSING_AR] franchise.services.card.manageService",
+        "mins": "[MISSING_AR] franchise.services.card.mins",
+        "noDescription": "[MISSING_AR] franchise.services.card.noDescription",
+        "price": "[MISSING_AR] franchise.services.card.price",
+        "toDos": "[MISSING_AR] franchise.services.card.toDos",
+        "type": "[MISSING_AR] franchise.services.card.type",
+        "unknownBranch": "[MISSING_AR] franchise.services.card.unknownBranch"
+      },
+      "description": "[MISSING_AR] franchise.services.description",
+      "dialog": {
+        "add": "[MISSING_AR] franchise.services.dialog.add",
+        "addServiceDescription": "[MISSING_AR] franchise.services.dialog.addServiceDescription",
+        "edit": "[MISSING_AR] franchise.services.dialog.edit",
+        "service": "[MISSING_AR] franchise.services.dialog.service",
+        "updateServiceDescription": "[MISSING_AR] franchise.services.dialog.updateServiceDescription"
+      },
+      "form": {
+        "branchServiceDescription": "[MISSING_AR] franchise.services.form.branchServiceDescription",
+        "createService": "[MISSING_AR] franchise.services.form.createService",
+        "description": "[MISSING_AR] franchise.services.form.description",
+        "details": "[MISSING_AR] franchise.services.form.details",
+        "duration": "[MISSING_AR] franchise.services.form.duration",
+        "durationMinutes": "[MISSING_AR] franchise.services.form.durationMinutes",
+        "durationPlaceholder": "[MISSING_AR] franchise.services.form.durationPlaceholder",
+        "errorOccurred": "[MISSING_AR] franchise.services.form.errorOccurred",
+        "globalService": "[MISSING_AR] franchise.services.form.globalService",
+        "globalServiceCreated": "[MISSING_AR] franchise.services.form.globalServiceCreated",
+        "globalServiceDescription": "[MISSING_AR] franchise.services.form.globalServiceDescription",
+        "globalServiceEditInfo": "[MISSING_AR] franchise.services.form.globalServiceEditInfo",
+        "globalServiceInfo": "[MISSING_AR] franchise.services.form.globalServiceInfo",
+        "includePlaceholder": "[MISSING_AR] franchise.services.form.includePlaceholder",
+        "includes": "[MISSING_AR] franchise.services.form.includes",
+        "minutes": "[MISSING_AR] franchise.services.form.minutes",
+        "na": "[MISSING_AR] franchise.services.form.na",
+        "noDescription": "[MISSING_AR] franchise.services.form.noDescription",
+        "price": "[MISSING_AR] franchise.services.form.price",
+        "pricePlaceholder": "[MISSING_AR] franchise.services.form.pricePlaceholder",
+        "promotions": "[MISSING_AR] franchise.services.form.promotions",
+        "serviceCreated": "[MISSING_AR] franchise.services.form.serviceCreated",
+        "serviceDescriptionPlaceholder": "[MISSING_AR] franchise.services.form.serviceDescriptionPlaceholder",
+        "serviceEditInfo": "[MISSING_AR] franchise.services.form.serviceEditInfo",
+        "serviceName": "[MISSING_AR] franchise.services.form.serviceName",
+        "serviceNamePlaceholder": "[MISSING_AR] franchise.services.form.serviceNamePlaceholder",
+        "serviceUpdated": "[MISSING_AR] franchise.services.form.serviceUpdated",
+        "toDos": "[MISSING_AR] franchise.services.form.toDos",
+        "todosPlaceholder": "[MISSING_AR] franchise.services.form.todosPlaceholder",
+        "updatePrice": "[MISSING_AR] franchise.services.form.updatePrice",
+        "updateService": "[MISSING_AR] franchise.services.form.updateService"
+      },
+      "management": {
+        "editRemoveServices": "[MISSING_AR] franchise.services.management.editRemoveServices",
+        "failedToDeleteService": "[MISSING_AR] franchise.services.management.failedToDeleteService",
+        "manageServices": "[MISSING_AR] franchise.services.management.manageServices",
+        "noServicesAdded": "[MISSING_AR] franchise.services.management.noServicesAdded",
+        "serviceDeleted": "[MISSING_AR] franchise.services.management.serviceDeleted"
+      },
+      "noServicesForBranch": "[MISSING_AR] franchise.services.noServicesForBranch",
+      "noServicesFound": "[MISSING_AR] franchise.services.noServicesFound",
+      "priceForm": {
+        "cancel": "[MISSING_AR] franchise.services.priceForm.cancel",
+        "editPrice": "[MISSING_AR] franchise.services.priceForm.editPrice",
+        "failedToUpdatePrice": "[MISSING_AR] franchise.services.priceForm.failedToUpdatePrice",
+        "global": "[MISSING_AR] franchise.services.priceForm.global",
+        "priceLabel": "[MISSING_AR] franchise.services.priceForm.priceLabel",
+        "priceUpdated": "[MISSING_AR] franchise.services.priceForm.priceUpdated",
+        "save": "[MISSING_AR] franchise.services.priceForm.save",
+        "saving": "[MISSING_AR] franchise.services.priceForm.saving"
+      },
+      "pricePromotionForm": {
+        "addPromotion": "[MISSING_AR] franchise.services.pricePromotionForm.addPromotion",
+        "adding": "[MISSING_AR] franchise.services.pricePromotionForm.adding",
+        "availableAtAllBranches": "[MISSING_AR] franchise.services.pricePromotionForm.availableAtAllBranches",
+        "cancel": "[MISSING_AR] franchise.services.pricePromotionForm.cancel",
+        "duration": "[MISSING_AR] franchise.services.pricePromotionForm.duration",
+        "editPrice": "[MISSING_AR] franchise.services.pricePromotionForm.editPrice",
+        "failedToAddPromotionToService": "[MISSING_AR] franchise.services.pricePromotionForm.failedToAddPromotionToService",
+        "failedToRemovePromotionFromService": "[MISSING_AR] franchise.services.pricePromotionForm.failedToRemovePromotionFromService",
+        "failedToUpdateServicePrice": "[MISSING_AR] franchise.services.pricePromotionForm.failedToUpdateServicePrice",
+        "global": "[MISSING_AR] franchise.services.pricePromotionForm.global",
+        "noPromotionsAssociated": "[MISSING_AR] franchise.services.pricePromotionForm.noPromotionsAssociated",
+        "price": "[MISSING_AR] franchise.services.pricePromotionForm.price",
+        "promotion": "[MISSING_AR] franchise.services.pricePromotionForm.promotion",
+        "promotionAddedToService": "[MISSING_AR] franchise.services.pricePromotionForm.promotionAddedToService",
+        "promotionRemovedFromService": "[MISSING_AR] franchise.services.pricePromotionForm.promotionRemovedFromService",
+        "promotions": "[MISSING_AR] franchise.services.pricePromotionForm.promotions",
+        "remove": "[MISSING_AR] franchise.services.pricePromotionForm.remove",
+        "removePromotion": "[MISSING_AR] franchise.services.pricePromotionForm.removePromotion",
+        "save": "[MISSING_AR] franchise.services.pricePromotionForm.save",
+        "saving": "[MISSING_AR] franchise.services.pricePromotionForm.saving",
+        "selectPromotion": "[MISSING_AR] franchise.services.pricePromotionForm.selectPromotion",
+        "selectPromotionDescription": "[MISSING_AR] franchise.services.pricePromotionForm.selectPromotionDescription",
+        "servicePriceUpdated": "[MISSING_AR] franchise.services.pricePromotionForm.servicePriceUpdated",
+        "unknownBranch": "[MISSING_AR] franchise.services.pricePromotionForm.unknownBranch"
+      },
+      "pricePromotionManager": {
+        "cancel": "[MISSING_AR] franchise.services.pricePromotionManager.cancel",
+        "edit": "[MISSING_AR] franchise.services.pricePromotionManager.edit",
+        "failedToUpdateServicePrice": "[MISSING_AR] franchise.services.pricePromotionManager.failedToUpdateServicePrice",
+        "price": "[MISSING_AR] franchise.services.pricePromotionManager.price",
+        "save": "[MISSING_AR] franchise.services.pricePromotionManager.save",
+        "saving": "[MISSING_AR] franchise.services.pricePromotionManager.saving",
+        "servicePriceUpdated": "[MISSING_AR] franchise.services.pricePromotionManager.servicePriceUpdated"
+      },
+      "promotions": {
+        "actions": "[MISSING_AR] franchise.services.promotions.actions",
+        "addPromotion": "[MISSING_AR] franchise.services.promotions.addPromotion",
+        "managePromotions": "[MISSING_AR] franchise.services.promotions.managePromotions",
+        "noAvailablePromotions": "[MISSING_AR] franchise.services.promotions.noAvailablePromotions",
+        "noPromotionsAssociated": "[MISSING_AR] franchise.services.promotions.noPromotionsAssociated",
+        "openMenu": "[MISSING_AR] franchise.services.promotions.openMenu",
+        "promotions": "[MISSING_AR] franchise.services.promotions.promotions",
+        "remove": "[MISSING_AR] franchise.services.promotions.remove",
+        "selectPromotion": "[MISSING_AR] franchise.services.promotions.selectPromotion"
+      },
+      "selectBranch": "[MISSING_AR] franchise.services.selectBranch",
+      "services": "[MISSING_AR] franchise.services.services",
+      "title": "[MISSING_AR] franchise.services.title",
+      "viewAndManage": "[MISSING_AR] franchise.services.viewAndManage"
+    },
+    "sidebar": {
+      "menu": "[MISSING_AR] franchise.sidebar.menu"
+    },
+    "updateStatus": {
+      "cancelled": "[MISSING_AR] franchise.updateStatus.cancelled",
+      "completed": "[MISSING_AR] franchise.updateStatus.completed",
+      "inProgress": "[MISSING_AR] franchise.updateStatus.inProgress",
+      "pending": "[MISSING_AR] franchise.updateStatus.pending",
+      "saveChanges": "[MISSING_AR] franchise.updateStatus.saveChanges",
+      "selectStatus": "[MISSING_AR] franchise.updateStatus.selectStatus",
+      "status": "[MISSING_AR] franchise.updateStatus.status",
+      "title": "[MISSING_AR] franchise.updateStatus.title"
+    },
+    "washers": {
+      "actions": {
+        "actions": "[MISSING_AR] franchise.washers.actions.actions",
+        "copyId": "[MISSING_AR] franchise.washers.actions.copyId",
+        "openMenu": "[MISSING_AR] franchise.washers.actions.openMenu"
+      },
+      "dialog": {
+        "add": "[MISSING_AR] franchise.washers.dialog.add",
+        "addWasher": "[MISSING_AR] franchise.washers.dialog.addWasher",
+        "edit": "[MISSING_AR] franchise.washers.dialog.edit",
+        "updateWasher": "[MISSING_AR] franchise.washers.dialog.updateWasher",
+        "washer": "[MISSING_AR] franchise.washers.dialog.washer"
+      },
+      "form": {
+        "active": "[MISSING_AR] franchise.washers.form.active",
+        "branch": "[MISSING_AR] franchise.washers.form.branch",
+        "createWasher": "[MISSING_AR] franchise.washers.form.createWasher",
+        "errorOccurred": "[MISSING_AR] franchise.washers.form.errorOccurred",
+        "inactive": "[MISSING_AR] franchise.washers.form.inactive",
+        "rating": "[MISSING_AR] franchise.washers.form.rating",
+        "selectBranch": "[MISSING_AR] franchise.washers.form.selectBranch",
+        "selectStatus": "[MISSING_AR] franchise.washers.form.selectStatus",
+        "status": "[MISSING_AR] franchise.washers.form.status",
+        "updateWasher": "[MISSING_AR] franchise.washers.form.updateWasher",
+        "washerCreated": "[MISSING_AR] franchise.washers.form.washerCreated",
+        "washerName": "[MISSING_AR] franchise.washers.form.washerName",
+        "washerNamePlaceholder": "[MISSING_AR] franchise.washers.form.washerNamePlaceholder",
+        "washerUpdated": "[MISSING_AR] franchise.washers.form.washerUpdated"
+      },
+      "table": {
+        "allBranches": "[MISSING_AR] franchise.washers.table.allBranches",
+        "export": "[MISSING_AR] franchise.washers.table.export",
+        "filterByBranch": "[MISSING_AR] franchise.washers.table.filterByBranch",
+        "filterByName": "[MISSING_AR] franchise.washers.table.filterByName"
+      },
+      "title": "[MISSING_AR] franchise.washers.title"
+      "branch": "الفرع",
+  "services": "الخدمات"
+}
+  },
+  "location": "[MISSING_AR] location",
+  "login": "[MISSING_AR] login",
+  "loginDescription": "[MISSING_AR] loginDescription",
+  "loginToContinue": "[MISSING_AR] loginToContinue",
+  "menu": {
+    "admin": "[MISSING_AR] menu.admin",
+    "emailMarketing": "[MISSING_AR] menu.emailMarketing",
+    "marketing": "[MISSING_AR] menu.marketing"
+  },
+  "na": "[MISSING_AR] na",
+  "name": "[MISSING_AR] name",
+  "noServices": "[MISSING_AR] noServices",
+  "notSet": "[MISSING_AR] notSet",
+  "offers": {
+    "description": "[MISSING_AR] offers.description",
+    "title": "[MISSING_AR] offers.title"
+  },
+  "openMenu": "[MISSING_AR] openMenu",
+  "rating": "[MISSING_AR] rating",
+  "recentBookings": "[MISSING_AR] recentBookings",
+  "register": "[MISSING_AR] register",
+  "registerDescription": "[MISSING_AR] registerDescription",
+  "revenueTrends": {
+    "chartTitle": "[MISSING_AR] revenueTrends.chartTitle",
+    "description": "[MISSING_AR] revenueTrends.description",
+    "title": "[MISSING_AR] revenueTrends.title"
+  },
+  "service": "[MISSING_AR] service",
+  "servicePerformance": {
+    "chartTitle": "[MISSING_AR] servicePerformance.chartTitle",
+    "description": "[MISSING_AR] servicePerformance.description",
+    "title": "[MISSING_AR] servicePerformance.title"
+  },
+  "status": "[MISSING_AR] status",
+  "table": {
+    "allBranches": "[MISSING_AR] table.allBranches",
+    "allBranchesValue": "[MISSING_AR] table.allBranchesValue",
+    "branch": "[MISSING_AR] table.branch",
+    "export": "[MISSING_AR] table.export",
+    "filterBranchPlaceholder": "[MISSING_AR] table.filterBranchPlaceholder",
+    "filterPlaceholder": "[MISSING_AR] table.filterPlaceholder",
+    "name": "[MISSING_AR] table.name",
+    "rating": "[MISSING_AR] table.rating",
+    "status": "[MISSING_AR] table.status"
+  },
+  "ui": {
+    "dateRangePicker": {
+      "pickDate": "[MISSING_AR] ui.dateRangePicker.pickDate"
+    },
+    "pagination": {
+      "morePages": "[MISSING_AR] ui.pagination.morePages",
+      "next": "[MISSING_AR] ui.pagination.next",
+      "nextPage": "[MISSING_AR] ui.pagination.nextPage",
+      "pagination": "[MISSING_AR] ui.pagination.pagination",
+      "previous": "[MISSING_AR] ui.pagination.previous",
+      "previousPage": "[MISSING_AR] ui.pagination.previousPage"
+      "branch": "الفرع",
+  "services": "الخدمات"
+}
+  },
+  "unassigned": "[MISSING_AR] unassigned",
+  "updateStatus": "[MISSING_AR] updateStatus",
+  "user": "[MISSING_AR] user",
+  "viewDetails": "[MISSING_AR] viewDetails",
+  "viewOnMap": "[MISSING_AR] viewOnMap",
+  "washerPerformance": {
+    "chartTitle": "[MISSING_AR] washerPerformance.chartTitle",
+    "description": "[MISSING_AR] washerPerformance.description",
+    "title": "[MISSING_AR] washerPerformance.title"
+  },
+  "welcome": "[MISSING_AR] welcome",
+  "welcomeBack": "[MISSING_AR] welcomeBack",
+  "youAreInRightPlace": "[MISSING_AR] youAreInRightPlace",
+  "branch": "الفرع",
+  "services": "الخدمات"
+,
+  "branch": "الفرع",
+  "services": "الخدمات"
+}

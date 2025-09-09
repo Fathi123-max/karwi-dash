@@ -27,7 +27,7 @@ export default function TestBannersOffersPage() {
         },
         (payload) => {
           fetchBanners();
-        }
+        },
       )
       .subscribe();
 
@@ -42,7 +42,7 @@ export default function TestBannersOffersPage() {
         },
         (payload) => {
           fetchOffers();
-        }
+        },
       )
       .subscribe();
 
@@ -58,26 +58,20 @@ export default function TestBannersOffersPage() {
   }
 
   return (
-    <div className="container mx-auto py-8 space-y-8">
+    <div className="container mx-auto space-y-8 py-8">
       <h1 className="text-3xl font-bold">Banners & Offers Test Page</h1>
-      
+
       <section>
-        <h2 className="text-2xl font-semibold mb-4">Active Banners</h2>
+        <h2 className="mb-4 text-2xl font-semibold">Active Banners</h2>
         {banners.length > 0 ? (
           <div className="grid gap-4">
             {banners.map((banner) => (
-              <div key={banner.id} className="border p-4 rounded-lg">
+              <div key={banner.id} className="rounded-lg border p-4">
                 <h3 className="font-semibold">{banner.title}</h3>
                 <p className="text-muted-foreground">{banner.description}</p>
-                {banner.image_url && (
-                  <img 
-                    src={banner.image_url} 
-                    alt={banner.title} 
-                    className="mt-2 max-w-xs h-auto"
-                  />
-                )}
+                {banner.image_url && <img src={banner.image_url} alt={banner.title} className="mt-2 h-auto max-w-xs" />}
                 <div className="mt-2 text-sm">
-                  <span className="font-medium">Active:</span> {banner.is_active ? 'Yes' : 'No'}
+                  <span className="font-medium">Active:</span> {banner.is_active ? "Yes" : "No"}
                 </div>
                 <div className="mt-1 text-sm">
                   <span className="font-medium">Priority:</span> {banner.priority}
@@ -89,24 +83,18 @@ export default function TestBannersOffersPage() {
           <p>No active banners found</p>
         )}
       </section>
-      
+
       <section>
-        <h2 className="text-2xl font-semibold mb-4">Active Offers</h2>
+        <h2 className="mb-4 text-2xl font-semibold">Active Offers</h2>
         {offers.length > 0 ? (
           <div className="grid gap-4">
             {offers.map((offer) => (
-              <div key={offer.id} className="border p-4 rounded-lg">
+              <div key={offer.id} className="rounded-lg border p-4">
                 <h3 className="font-semibold">{offer.title}</h3>
                 <p className="text-muted-foreground">{offer.description}</p>
-                {offer.image_url && (
-                  <img 
-                    src={offer.image_url} 
-                    alt={offer.title} 
-                    className="mt-2 max-w-xs h-auto"
-                  />
-                )}
+                {offer.image_url && <img src={offer.image_url} alt={offer.title} className="mt-2 h-auto max-w-xs" />}
                 <div className="mt-2 text-sm">
-                  <span className="font-medium">Active:</span> {offer.is_active ? 'Yes' : 'No'}
+                  <span className="font-medium">Active:</span> {offer.is_active ? "Yes" : "No"}
                 </div>
                 {offer.code && (
                   <div className="mt-1 text-sm">
@@ -115,10 +103,8 @@ export default function TestBannersOffersPage() {
                 )}
                 {offer.discount_type && offer.discount_value && (
                   <div className="mt-1 text-sm">
-                    <span className="font-medium">Discount:</span> 
-                    {offer.discount_type === 'percentage' 
-                      ? ` ${offer.discount_value}%` 
-                      : ` ${offer.discount_value}`}
+                    <span className="font-medium">Discount:</span>
+                    {offer.discount_type === "percentage" ? ` ${offer.discount_value}%` : ` ${offer.discount_value}`}
                   </div>
                 )}
               </div>

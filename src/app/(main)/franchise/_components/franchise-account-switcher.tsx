@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { LogOut } from "lucide-react";
 
 import { logout } from "@/app/(main)/auth/_actions/logout";
@@ -26,6 +27,8 @@ export function FranchiseAccountSwitcher({
     readonly role: string;
   };
 }) {
+  const t = useTranslations("franchise.account");
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -50,7 +53,7 @@ export function FranchiseAccountSwitcher({
           <DropdownMenuItem asChild>
             <button type="submit" className="flex w-full items-center gap-2">
               <LogOut className="size-4" />
-              <span>Log out</span>
+              <span>{t("logout")}</span>
             </button>
           </DropdownMenuItem>
         </form>

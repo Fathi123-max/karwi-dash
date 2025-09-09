@@ -25,7 +25,7 @@ export async function calculateBranchRating(branchId: string): Promise<number | 
   }
 
   // Get booking IDs
-  const bookingIds = bookings.map(booking => booking.id);
+  const bookingIds = bookings.map((booking) => booking.id);
 
   // Fetch all reviews for these bookings
   const { data: reviews, error: reviewsError } = await supabase
@@ -58,12 +58,9 @@ export async function calculateBranchRating(branchId: string): Promise<number | 
 export async function updateBranchRating(branchId: string): Promise<boolean> {
   try {
     const newRating = await calculateBranchRating(branchId);
-    
+
     // Update the branch with the new rating (null if no reviews)
-    const { error } = await supabase
-      .from("branches")
-      .update({ ratings: newRating })
-      .eq("id", branchId);
+    const { error } = await supabase.from("branches").update({ ratings: newRating }).eq("id", branchId);
 
     if (error) {
       console.error("Error updating branch rating:", error);
@@ -84,9 +81,7 @@ export async function updateBranchRating(branchId: string): Promise<boolean> {
 export async function updateAllBranchRatings(): Promise<boolean> {
   try {
     // Get all branches
-    const { data: branches, error: branchesError } = await supabase
-      .from("branches")
-      .select("id");
+    const { data: branches, error: branchesError } = await supabase.from("branches").select("id");
 
     if (branchesError) {
       console.error("Error fetching branches:", branchesError);
@@ -94,12 +89,10 @@ export async function updateAllBranchRatings(): Promise<boolean> {
     }
 
     // Update rating for each branch
-    const results = await Promise.all(
-      branches.map(branch => updateBranchRating(branch.id))
-    );
+    const results = await Promise.all(branches.map((branch) => updateBranchRating(branch.id)));
 
     // Check if all updates were successful
-    return results.every(result => result);
+    return results.every((result) => result);
   } catch (error) {
     console.error("Error updating all branch ratings:", error);
     return false;

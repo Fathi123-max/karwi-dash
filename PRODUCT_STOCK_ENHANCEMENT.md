@@ -12,16 +12,19 @@ We've implemented a comprehensive solution to better reflect stock in product or
 ## Key Changes
 
 ### Database Level
+
 - Created database triggers that automatically update product stock when order items are created, modified, or deleted
 - Added a function `manage_product_stock()` that handles all stock adjustments
 - Added comments to document the stock_quantity field
 
 ### Application Level
+
 - Added `checkStockAvailability()` function to verify stock before placing orders
 - Updated `placeOrder()` to use the new stock checking functionality
 - Modified order fetching to include product information with order items
 
 ### User Interface
+
 - Updated order details dialogs (both admin and franchise) to show product names instead of IDs
 - Added current stock information display in order views
 - Enhanced order history with expandable order items showing product details

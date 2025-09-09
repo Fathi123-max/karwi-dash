@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useFranchiseAnalyticsStore } from "@/stores/franchise-dashboard/analytics-store";
@@ -9,6 +11,7 @@ import { useFranchiseAnalyticsStore } from "@/stores/franchise-dashboard/analyti
 import { FranchiseAnalyticsChart } from "./franchise-analytics-chart";
 
 export function BranchAnalyticsView() {
+  const t = useTranslations("franchise.branchAnalytics");
   const { branches, services, washers, bookings, fetchAllData } = useFranchiseAnalyticsStore();
 
   const [selectedBranch, setSelectedBranch] = useState<string>("all");
@@ -83,16 +86,16 @@ export function BranchAnalyticsView() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Branch Analytics</h2>
-          <p className="text-muted-foreground">View performance metrics for specific branches.</p>
+          <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+          <p className="text-muted-foreground">{t("description")}</p>
         </div>
         <div className="w-64">
           <Select value={selectedBranch} onValueChange={setSelectedBranch}>
             <SelectTrigger>
-              <SelectValue placeholder="Select a branch" />
+              <SelectValue placeholder={t("selectBranch")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Branches</SelectItem>
+              <SelectItem value="all">{t("allBranches")}</SelectItem>
               {branches.map((branch) => (
                 <SelectItem key={branch.id} value={branch.id}>
                   {branch.name}
@@ -106,34 +109,34 @@ export function BranchAnalyticsView() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Bookings</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("totalBookings")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{filteredBookings.length}</div>
             <p className="text-muted-foreground text-xs">
-              {selectedBranch === "all" ? "Across all branches" : "For selected branch"}
+              {selectedBranch === "all" ? t("acrossAllBranches") : t("forSelectedBranch")}
             </p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Washers</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("activeWashers")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{filteredWashers.length}</div>
             <p className="text-muted-foreground text-xs">
-              {selectedBranch === "all" ? "Across all branches" : "For selected branch"}
+              {selectedBranch === "all" ? t("acrossAllBranches") : t("forSelectedBranch")}
             </p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Services</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("totalServices")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{filteredServices.length}</div>
             <p className="text-muted-foreground text-xs">
-              {selectedBranch === "all" ? "Across all branches" : "For selected branch"}
+              {selectedBranch === "all" ? t("acrossAllBranches") : t("forSelectedBranch")}
             </p>
           </CardContent>
         </Card>
@@ -142,24 +145,24 @@ export function BranchAnalyticsView() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Booking Trends</CardTitle>
-            <CardDescription>Daily bookings over time</CardDescription>
+            <CardTitle>{t("bookingTrends")}</CardTitle>
+            <CardDescription>{t("dailyBookings")}</CardDescription>
           </CardHeader>
           <CardContent>
-            <FranchiseAnalyticsChart data={bookingTrendData} dataKey="count" title="Bookings" color="#5eead4" />
+            <FranchiseAnalyticsChart data={bookingTrendData} dataKey="count" title={t("bookings")} color="#5eead4" />
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Service Performance</CardTitle>
-            <CardDescription>Bookings by service</CardDescription>
+            <CardTitle>{t("servicePerformance")}</CardTitle>
+            <CardDescription>{t("bookingsByService")}</CardDescription>
           </CardHeader>
           <CardContent>
             <FranchiseAnalyticsChart
               data={servicePerformance}
               dataKey="bookings"
-              title="Bookings"
+              title={t("bookings")}
               color="#f87171"
               type="bar"
             />
@@ -170,14 +173,14 @@ export function BranchAnalyticsView() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Washer Performance</CardTitle>
-            <CardDescription>Bookings by washer</CardDescription>
+            <CardTitle>{t("washerPerformance")}</CardTitle>
+            <CardDescription>{t("bookingsByWasher")}</CardDescription>
           </CardHeader>
           <CardContent>
             <FranchiseAnalyticsChart
               data={washerPerformance}
               dataKey="bookings"
-              title="Bookings"
+              title={t("bookings")}
               color="#fbbf24"
               type="bar"
             />
@@ -187,14 +190,14 @@ export function BranchAnalyticsView() {
         {selectedBranch === "all" && (
           <Card>
             <CardHeader>
-              <CardTitle>Branch Comparison</CardTitle>
-              <CardDescription>Bookings by branch</CardDescription>
+              <CardTitle>{t("branchComparison")}</CardTitle>
+              <CardDescription>{t("bookingsByBranch")}</CardDescription>
             </CardHeader>
             <CardContent>
               <FranchiseAnalyticsChart
                 data={branchMetrics}
                 dataKey="total_bookings"
-                title="Bookings"
+                title={t("bookings")}
                 color="#a78bfa"
                 type="bar"
               />

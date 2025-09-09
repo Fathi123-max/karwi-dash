@@ -1,5 +1,6 @@
 import React from "react";
 
+import { useTranslations } from "next-intl";
 import { Building2, Wrench, UsersRound, Calendar } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,30 +18,32 @@ const FranchiseMetrics: React.FC<FranchiseMetricsProps> = ({
   activeWashers,
   totalBookings = 0,
 }) => {
+  const t = useTranslations("franchise.metrics");
+
   const metrics = [
     {
-      title: "Total Branches",
+      title: t("totalBranches"),
       value: totalBranches,
       icon: Building2,
-      description: "Managed by your franchise",
+      description: t("managedByFranchise"),
     },
     {
-      title: "Total Services",
+      title: t("totalServices"),
       value: totalServices,
       icon: Wrench,
-      description: "Offered across all branches",
+      description: t("offeredAcrossBranches"),
     },
     {
-      title: "Active Washers",
+      title: t("activeWashers"),
       value: activeWashers,
       icon: UsersRound,
-      description: "Currently available for bookings",
+      description: t("availableForBookings"),
     },
     {
-      title: "Total Bookings",
+      title: t("totalBookings"),
       value: totalBookings,
       icon: Calendar,
-      description: "All bookings across branches",
+      description: t("allBookingsAcrossBranches"),
     },
   ];
 

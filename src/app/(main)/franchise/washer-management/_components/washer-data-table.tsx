@@ -2,6 +2,7 @@
 
 import { Download } from "lucide-react";
 
+import { useTranslations } from "next-intl";
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";
@@ -13,14 +14,16 @@ import { exportToCSV } from "@/lib/export-utils";
 import { useFranchiseBranchStore } from "@/stores/franchise-dashboard/branch-store";
 import { WasherWithBranch } from "@/stores/franchise-dashboard/user-store";
 
-import { columns } from "./columns";
+import { getColumns } from "./columns";
 
 interface WasherDataTableProps {
   data: WasherWithBranch[];
 }
 
 export function WasherDataTable({ data }: WasherDataTableProps) {
+  const t = useTranslations("franchise.washers.table");
   const { branches } = useFranchiseBranchStore();
+  const columns = getColumns(t);
   const table = useDataTableInstance({
     data,
     columns,
@@ -32,7 +35,7 @@ export function WasherDataTable({ data }: WasherDataTableProps) {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <Input
-            placeholder="Filter by name..."
+            placeholder={t("filterByName")}
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
             onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
             className="max-w-sm"
@@ -43,10 +46,10 @@ export function WasherDataTable({ data }: WasherDataTableProps) {
             }}
           >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Filter by Branch" />
+              <SelectValue placeholder={t("filterByBranch")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Branches</SelectItem>
+              <SelectItem value="all">{t("allBranches")}</SelectItem>
               {branches.map((branch) => (
                 <SelectItem key={branch.id} value={branch.name}>
                   {branch.name}
@@ -59,7 +62,7 @@ export function WasherDataTable({ data }: WasherDataTableProps) {
           <DataTableViewOptions table={table} />
           <Button variant="outline" size="sm" onClick={() => exportToCSV(table, "washers.csv")}>
             <Download className="mr-2 h-4 w-4" />
-            <span className="hidden lg:inline">Export</span>
+            <span className="hidden lg:inline">{t("export")}</span>
           </Button>
         </div>
       </div>

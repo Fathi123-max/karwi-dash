@@ -38,6 +38,7 @@ Authentication is handled by Supabase Auth. The logic is implemented using Next.
 ## Internationalization (i18n)
 
 The project uses `next-intl` for i18n.
+
 - Locale-based message files are stored in `src/messages`.
 - Configuration and middleware for i18n can be found in `src/i18n` and `src/middleware.ts`.
 

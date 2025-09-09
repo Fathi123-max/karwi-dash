@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import { Download, FileText } from "lucide-react";
 
@@ -19,7 +20,13 @@ type Report = {
   type: string;
 };
 
-const generateReports = (bookings: any[], services: any[], washers: any[], branches: any[]) => {
+const generateReports = (
+  bookings: any[],
+  services: any[],
+  washers: any[],
+  branches: any[],
+  t: (key: string) => string,
+) => {
   // Calculate date range from data
   const bookingDates = bookings.filter((b) => b.scheduled_at).map((b) => new Date(b.scheduled_at));
 
@@ -31,28 +38,28 @@ const generateReports = (bookings: any[], services: any[], washers: any[], branc
     return [
       {
         id: "1",
-        name: "Monthly Bookings Report",
+        name: t("monthlyBookingsReport"),
         dateRange: `${thirtyDaysAgo.toLocaleDateString()} - ${today.toLocaleDateString()}`,
         generatedOn: today.toISOString().split("T")[0],
         type: "bookings",
       },
       {
         id: "2",
-        name: "Washer Performance Report",
+        name: t("washerPerformanceReport"),
         dateRange: `${thirtyDaysAgo.toLocaleDateString()} - ${today.toLocaleDateString()}`,
         generatedOn: today.toISOString().split("T")[0],
         type: "washers",
       },
       {
         id: "3",
-        name: "Service Popularity Report",
+        name: t("servicePopularityReport"),
         dateRange: `${thirtyDaysAgo.toLocaleDateString()} - ${today.toLocaleDateString()}`,
         generatedOn: today.toISOString().split("T")[0],
         type: "services",
       },
       {
         id: "4",
-        name: "Branch Revenue Report",
+        name: t("branchRevenueReport"),
         dateRange: `${thirtyDaysAgo.toLocaleDateString()} - ${today.toLocaleDateString()}`,
         generatedOn: today.toISOString().split("T")[0],
         type: "branches",
@@ -76,28 +83,28 @@ const generateReports = (bookings: any[], services: any[], washers: any[], branc
   return [
     {
       id: "1",
-      name: "Monthly Bookings Report",
+      name: t("monthlyBookingsReport"),
       dateRange,
       generatedOn,
       type: "bookings",
     },
     {
       id: "2",
-      name: "Washer Performance Report",
+      name: t("washerPerformanceReport"),
       dateRange,
       generatedOn,
       type: "washers",
     },
     {
       id: "3",
-      name: "Service Popularity Report",
+      name: t("servicePopularityReport"),
       dateRange,
       generatedOn,
       type: "services",
     },
     {
       id: "4",
-      name: "Branch Revenue Report",
+      name: t("branchRevenueReport"),
       dateRange,
       generatedOn,
       type: "branches",
@@ -105,29 +112,29 @@ const generateReports = (bookings: any[], services: any[], washers: any[], branc
   ];
 };
 
-const columns: ColumnDef<Report>[] = [
+const getColumns = (t: (key: string) => string): ColumnDef<Report>[] => [
   {
     accessorKey: "name",
-    header: "Report Name",
+    header: t("reportName"),
   },
   {
     accessorKey: "dateRange",
-    header: "Date Range",
+    header: t("dateRange"),
   },
   {
     accessorKey: "generatedOn",
-    header: "Generated On",
+    header: t("generatedOn"),
   },
   {
     accessorKey: "type",
-    header: "Type",
+    header: t("type"),
     cell: ({ row }) => {
       const type = row.getValue("type");
       const typeLabels: Record<string, string> = {
-        bookings: "Bookings",
-        washers: "Washers",
-        services: "Services",
-        branches: "Branches",
+        bookings: t("bookings"),
+        washers: t("washers"),
+        services: t("services"),
+        branches: t("branches"),
       };
       return <span className="capitalize">{typeLabels[type as string] ?? type}</span>;
     },
@@ -139,7 +146,7 @@ const columns: ColumnDef<Report>[] = [
       return (
         <Button variant="outline" size="sm">
           <Download className="mr-2 h-4 w-4" />
-          Download
+          {t("download")}
         </Button>
       );
     },
@@ -147,6 +154,7 @@ const columns: ColumnDef<Report>[] = [
 ];
 
 export function FranchiseReportsView() {
+  const t = useTranslations("franchise.reports");
   const { bookings, services, washers, branches, fetchAllData } = useFranchiseAnalyticsStore();
   const [reports, setReports] = useState<Report[]>([]);
 
@@ -155,9 +163,10 @@ export function FranchiseReportsView() {
   }, [fetchAllData]);
 
   useEffect(() => {
-    setReports(generateReports(bookings, services, washers, branches));
-  }, [bookings, services, washers, branches]);
+    setReports(generateReports(bookings, services, washers, branches, t));
+  }, [bookings, services, washers, branches, t]);
 
+  const columns = getColumns(t);
   const table = useDataTableInstance({
     data: reports,
     columns,
@@ -168,9 +177,9 @@ export function FranchiseReportsView() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <FileText className="h-5 w-5" />
-          Reports
+          {t("title")}
         </CardTitle>
-        <CardDescription>View and download reports for your Karwi franchise.</CardDescription>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <DataTable table={table} columns={columns} />

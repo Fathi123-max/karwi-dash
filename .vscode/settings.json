@@ -8,5 +8,6 @@
     "src/messages",
     "src/components/i18n",
     "src/lib/i18n"
-  ]
+  ],
+  "i18n-ally.keystyle": "nested"
 }

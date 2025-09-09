@@ -7,6 +7,7 @@ This document describes the implementation of the banners and offers management 
 The implementation includes two new tables:
 
 ### Banners Table
+
 ```sql
 CREATE TABLE public.banners (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -27,6 +28,7 @@ CREATE TABLE public.banners (
 ```
 
 ### Offers Table
+
 ```sql
 CREATE TABLE public.offers (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -92,9 +94,11 @@ src/
 ## Usage
 
 ### Admin Panel
+
 Navigate to `/admin/banners-offers` to manage banners and offers.
 
 ### Client-Side Components
+
 Import and use the components in your frontend:
 
 ```tsx
@@ -113,6 +117,7 @@ export default function HomePage() {
 ## Extensibility
 
 The schema includes additional fields for future enhancements:
+
 - `link_url` for clickable banners/offers
 - `start_date` and `end_date` for time-based visibility
 - `priority` for banner ordering

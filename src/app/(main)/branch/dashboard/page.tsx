@@ -5,15 +5,17 @@ import { useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useBranchAdminStore } from "@/stores/branch-admin-store";
 
+import { useTranslations } from "next-intl";
+
 export default function BranchDashboardPage() {
   const { services, washers, bookings, fetchAllData, isLoading, error } = useBranchAdminStore();
-
+  const t = useTranslations();
   useEffect(() => {
     fetchAllData();
   }, [fetchAllData]);
 
   if (isLoading) {
-    return <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">Loading...</div>;
+    return <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">{t("common.loading")}</div>;
   }
 
   if (error) {
@@ -73,8 +75,8 @@ export default function BranchDashboardPage() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <Card className="col-span-4">
           <CardHeader>
-            <CardTitle>Recent Bookings</CardTitle>
-            <CardDescription>Latest bookings for your branch</CardDescription>
+            <CardTitle>{t("admin.bookings.recent.title")}</CardTitle>
+            <CardDescription>{t("admin.bookings.recent.description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -97,8 +99,8 @@ export default function BranchDashboardPage() {
         </Card>
         <Card className="col-span-3">
           <CardHeader>
-            <CardTitle>Services</CardTitle>
-            <CardDescription>Services offered at your branch</CardDescription>
+            <CardTitle>{t("admin.services.title")}</CardTitle>
+            <CardDescription>{t("admin.services.description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">

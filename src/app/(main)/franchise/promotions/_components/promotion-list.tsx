@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { MoreHorizontal, Pencil, Trash } from "lucide-react";
 import { toast } from "sonner";
 
@@ -18,6 +19,7 @@ interface PromotionListProps {
 }
 
 export function PromotionList({ promotions }: PromotionListProps) {
+  const t = useTranslations("franchise.promotions.list");
   const { deletePromotion } = usePromotionStore();
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
@@ -25,9 +27,9 @@ export function PromotionList({ promotions }: PromotionListProps) {
     setDeletingId(id);
     try {
       await deletePromotion(id);
-      toast.success("Promotion deleted successfully!");
+      toast.success(t("deletedSuccessfully"));
     } catch (error) {
-      toast.error("Failed to delete promotion.");
+      toast.error(t("failedToDelete"));
       console.error("Error deleting promotion:", error);
     } finally {
       setDeletingId(null);
@@ -37,10 +39,8 @@ export function PromotionList({ promotions }: PromotionListProps) {
   if (promotions.length === 0) {
     return (
       <div className="py-8 text-center">
-        <p className="text-muted-foreground">No promotions found.</p>
-        <p className="text-muted-foreground mt-2 text-sm">
-          Create your first promotion to offer discounts on services.
-        </p>
+        <p className="text-muted-foreground">{t("noPromotions")}</p>
+        <p className="text-muted-foreground mt-2 text-sm">{t("createFirstPromotion")}</p>
       </div>
     );
   }
@@ -49,11 +49,11 @@ export function PromotionList({ promotions }: PromotionListProps) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Code</TableHead>
-          <TableHead>Discount</TableHead>
-          <TableHead>Validity Period</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead className="text-right">Actions</TableHead>
+          <TableHead>{t("code")}</TableHead>
+          <TableHead>{t("discount")}</TableHead>
+          <TableHead>{t("validityPeriod")}</TableHead>
+          <TableHead>{t("status")}</TableHead>
+          <TableHead className="text-right">{t("actions")}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -64,13 +64,13 @@ export function PromotionList({ promotions }: PromotionListProps) {
             <TableCell>
               <div className="text-sm">
                 <div>{new Date(promotion.startDate).toLocaleDateString()}</div>
-                <div className="text-muted-foreground">to</div>
+                <div className="text-muted-foreground">{t("to")}</div>
                 <div>{new Date(promotion.endDate).toLocaleDateString()}</div>
               </div>
             </TableCell>
             <TableCell>
               <Badge variant={promotion.active ? "default" : "secondary"}>
-                {promotion.active ? "Active" : "Inactive"}
+                {promotion.active ? t("active") : t("inactive")}
               </Badge>
             </TableCell>
             <TableCell className="text-right">

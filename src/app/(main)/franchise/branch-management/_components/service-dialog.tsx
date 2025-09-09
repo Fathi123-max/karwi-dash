@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -21,6 +22,7 @@ interface ServiceDialogProps {
 }
 
 export function ServiceDialog({ branchId, service, children }: ServiceDialogProps) {
+  const t = useTranslations("franchise.services.dialog");
   const [open, setOpen] = useState(false);
 
   return (
@@ -28,10 +30,10 @@ export function ServiceDialog({ branchId, service, children }: ServiceDialogProp
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{service ? "Edit" : "Add"} Service</DialogTitle>
-          <DialogDescription>
-            {service ? "Update the details of this service." : "Add a new service to this branch."}
-          </DialogDescription>
+          <DialogTitle>
+            {service ? t("edit") : t("add")} {t("service")}
+          </DialogTitle>
+          <DialogDescription>{service ? t("updateServiceDescription") : t("addServiceDescription")}</DialogDescription>
         </DialogHeader>
         <ServiceForm branchId={branchId} service={service} onSuccess={() => setOpen(false)} />
       </DialogContent>

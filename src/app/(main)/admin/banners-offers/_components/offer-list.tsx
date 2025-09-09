@@ -39,19 +39,19 @@ export function OfferList({ onEdit }: { onEdit: (offer: Offer) => void }) {
   return (
     <div className="space-y-4">
       {offers.length === 0 ? (
-        <div className="text-center py-8">
+        <div className="py-8 text-center">
           <p className="text-muted-foreground">No offers found</p>
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {offers.map((offer) => (
-            <div key={offer.id} className="border rounded-lg overflow-hidden">
+            <div key={offer.id} className="overflow-hidden rounded-lg border">
               {offer.image_url ? (
-                <div className="aspect-video bg-muted relative">
+                <div className="bg-muted relative aspect-video">
                   <img
                     src={offer.image_url}
                     alt={offer.title}
-                    className="w-full h-full object-cover"
+                    className="h-full w-full object-cover"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src =
@@ -60,13 +60,13 @@ export function OfferList({ onEdit }: { onEdit: (offer: Offer) => void }) {
                   />
                 </div>
               ) : (
-                <div className="aspect-video bg-muted flex items-center justify-center">
+                <div className="bg-muted flex aspect-video items-center justify-center">
                   <span className="text-muted-foreground">No image</span>
                 </div>
               )}
               <div className="p-4">
-                <div className="flex justify-between items-start">
-                  <h3 className="font-semibold line-clamp-1">{offer.title}</h3>
+                <div className="flex items-start justify-between">
+                  <h3 className="line-clamp-1 font-semibold">{offer.title}</h3>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="h-8 w-8 p-0">
@@ -89,11 +89,9 @@ export function OfferList({ onEdit }: { onEdit: (offer: Offer) => void }) {
                   </DropdownMenu>
                 </div>
                 {offer.description && (
-                  <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
-                    {offer.description}
-                  </p>
+                  <p className="text-muted-foreground mt-2 line-clamp-2 text-sm">{offer.description}</p>
                 )}
-                <div className="flex items-center justify-between mt-4">
+                <div className="mt-4 flex items-center justify-between">
                   <Badge variant={offer.is_active ? "default" : "secondary"}>
                     {offer.is_active ? "Active" : "Inactive"}
                   </Badge>
@@ -106,9 +104,10 @@ export function OfferList({ onEdit }: { onEdit: (offer: Offer) => void }) {
                 {offer.discount_type && offer.discount_value && (
                   <div className="mt-2 text-sm">
                     <span className="font-medium">
-                      {offer.discount_type === "percentage" 
-                        ? `${offer.discount_value}%` 
-                        : `${offer.discount_value.toFixed(2)}`} off
+                      {offer.discount_type === "percentage"
+                        ? `${offer.discount_value}%`
+                        : `${offer.discount_value.toFixed(2)}`}{" "}
+                      off
                     </span>
                   </div>
                 )}

@@ -39,7 +39,7 @@ export function OfferGrid() {
         (payload) => {
           // Refetch offers when there are changes
           fetchOffers();
-        }
+        },
       )
       .subscribe();
 
@@ -51,9 +51,9 @@ export function OfferGrid() {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-muted h-48 rounded-lg animate-pulse" />
+          <div key={i} className="bg-muted h-48 animate-pulse rounded-lg" />
         ))}
       </div>
     );
@@ -64,15 +64,15 @@ export function OfferGrid() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {offers.map((offer) => (
         <Card key={offer.id} className="overflow-hidden">
           {offer.image_url ? (
-            <div className="aspect-video bg-muted relative">
+            <div className="bg-muted relative aspect-video">
               <img
                 src={offer.image_url}
                 alt={offer.title}
-                className="w-full h-full object-cover"
+                className="h-full w-full object-cover"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.src =
@@ -81,38 +81,26 @@ export function OfferGrid() {
               />
             </div>
           ) : (
-            <div className="aspect-video bg-muted flex items-center justify-center">
+            <div className="bg-muted flex aspect-video items-center justify-center">
               <span className="text-muted-foreground">No image</span>
             </div>
           )}
           <CardContent className="p-4">
-            <h3 className="font-semibold text-lg">{offer.title}</h3>
-            {offer.description && (
-              <p className="text-muted-foreground text-sm mt-1">
-                {offer.description}
-              </p>
-            )}
+            <h3 className="text-lg font-semibold">{offer.title}</h3>
+            {offer.description && <p className="text-muted-foreground mt-1 text-sm">{offer.description}</p>}
             {offer.discount_type && offer.discount_value && (
               <div className="mt-2">
-                <span className="inline-block bg-primary/10 text-primary text-sm font-medium px-2 py-1 rounded">
-                  {offer.discount_type === "percentage" 
-                    ? `${offer.discount_value}% off` 
+                <span className="bg-primary/10 text-primary inline-block rounded px-2 py-1 text-sm font-medium">
+                  {offer.discount_type === "percentage"
+                    ? `${offer.discount_value}% off`
                     : `${offer.discount_value.toFixed(2)} off`}
                 </span>
               </div>
             )}
-            <div className="mt-4 flex justify-between items-center">
-              {offer.code && (
-                <span className="text-xs font-mono bg-muted px-2 py-1 rounded">
-                  Code: {offer.code}
-                </span>
-              )}
+            <div className="mt-4 flex items-center justify-between">
+              {offer.code && <span className="bg-muted rounded px-2 py-1 font-mono text-xs">Code: {offer.code}</span>}
               {offer.link_url && (
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => window.open(offer.link_url!, "_blank")}
-                >
+                <Button variant="outline" size="sm" onClick={() => window.open(offer.link_url!, "_blank")}>
                   View Offer
                 </Button>
               )}

@@ -68,17 +68,6 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
           <SidebarGroupLabel className="group-data-[collapsible=icon]:!hidden">{t("menu.admin")}</SidebarGroupLabel>
           <NavAdmin />
         </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel className="group-data-[collapsible=icon]:!hidden">{t("menu.marketing")}</SidebarGroupLabel>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="/admin/email-marketing">
-                <Mail className="rtl:sidebar-icon" />
-                <span className="group-data-[collapsible=icon]:!hidden">{t("menu.emailMarketing")}</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarGroup>
       </SidebarContent>
     </Sidebar>
   );

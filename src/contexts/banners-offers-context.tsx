@@ -30,7 +30,7 @@ export function BannersOffersProvider({ children }: { children: ReactNode }) {
 
       if (error) throw error;
 
-      const formattedBanners = data.map(item => ({
+      const formattedBanners = data.map((item) => ({
         id: item.id,
         title: item.title,
         description: item.description,
@@ -54,14 +54,11 @@ export function BannersOffersProvider({ children }: { children: ReactNode }) {
 
   const fetchOffers = async () => {
     try {
-      const { data, error } = await supabase
-        .from("offers")
-        .select("*")
-        .order("created_at", { ascending: false });
+      const { data, error } = await supabase.from("offers").select("*").order("created_at", { ascending: false });
 
       if (error) throw error;
 
-      const formattedOffers = data.map(item => ({
+      const formattedOffers = data.map((item) => ({
         id: item.id,
         title: item.title,
         description: item.description,
@@ -114,7 +111,7 @@ export function BannersOffersProvider({ children }: { children: ReactNode }) {
         },
         (payload) => {
           refreshBanners();
-        }
+        },
       )
       .subscribe();
 
@@ -129,7 +126,7 @@ export function BannersOffersProvider({ children }: { children: ReactNode }) {
         },
         (payload) => {
           refreshOffers();
-        }
+        },
       )
       .subscribe();
 

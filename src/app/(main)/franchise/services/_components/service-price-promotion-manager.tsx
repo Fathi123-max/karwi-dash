@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ interface ServicePricePromotionManagerProps {
 }
 
 export function ServicePricePromotionManager({ service, onServiceUpdate }: ServicePricePromotionManagerProps) {
+  const t = useTranslations("franchise.services.pricePromotionManager");
   const { updateService } = useFranchiseServiceStore();
   const [price, setPrice] = useState<string>(service.price?.toString() ?? "0");
   const [isEditing, setIsEditing] = useState(false);
@@ -28,11 +30,11 @@ export function ServicePricePromotionManager({ service, onServiceUpdate }: Servi
         ...service,
         price: parseFloat(price),
       });
-      toast.success("Service price updated successfully!");
+      toast.success(t("servicePriceUpdated"));
       setIsEditing(false);
       onServiceUpdate();
     } catch (error: any) {
-      toast.error(error.message ?? "Failed to update service price.");
+      toast.error(error.message ?? t("failedToUpdateServicePrice"));
       console.error("Error updating service:", error);
     } finally {
       setIsUpdating(false);
@@ -47,7 +49,7 @@ export function ServicePricePromotionManager({ service, onServiceUpdate }: Servi
   return (
     <div className="space-y-4">
       <div>
-        <Label htmlFor={`price-${service.id}`}>Price</Label>
+        <Label htmlFor={`price-${service.id}`}>{t("price")}</Label>
         {isEditing ? (
           <div className="mt-1 flex gap-2">
             <div className="relative flex-1">
@@ -64,17 +66,17 @@ export function ServicePricePromotionManager({ service, onServiceUpdate }: Servi
               />
             </div>
             <Button variant="outline" onClick={handleCancel} disabled={isUpdating}>
-              Cancel
+              {t("cancel")}
             </Button>
             <Button onClick={handleSave} disabled={isUpdating}>
-              {isUpdating ? "Saving..." : "Save"}
+              {isUpdating ? t("saving") : t("save")}
             </Button>
           </div>
         ) : (
           <div className="mt-1 flex items-center gap-2">
             <p className="text-2xl font-bold">${service.price?.toFixed(2) ?? "0.00"}</p>
             <Button variant="outline" size="sm" onClick={() => setIsEditing(true)}>
-              Edit
+              {t("edit")}
             </Button>
           </div>
         )}

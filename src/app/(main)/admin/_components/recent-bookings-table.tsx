@@ -40,23 +40,23 @@ const getColumns = (
 ): ColumnDef<BookingType>[] => [
   {
     accessorKey: "id",
-    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.bookingId")} />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("bookings.bookingId")} />,
   },
   {
     accessorKey: "user",
-    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.user")} />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("bookings.user")} />,
   },
   {
     accessorKey: "branch",
-    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.branch")} />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("bookings.branch")} />,
   },
   {
     accessorKey: "service",
-    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.service")} />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("bookings.service")} />,
   },
   {
     accessorKey: "status",
-    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.status")} />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("bookings.status.title")} />,
     cell: ({ row }) => {
       const status = row.getValue("status");
       return (
@@ -91,7 +91,7 @@ const getColumns = (
   },
   {
     accessorKey: "date",
-    header: ({ column }) => <DataTableColumnHeader column={column} title={t("admin.bookings.date")} />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title={t("bookings.date")} />,
     cell: ({ row }) => format(row.getValue("date"), "MMM d, yyyy"),
   },
   {
@@ -110,21 +110,17 @@ const getColumns = (
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>{t("common.actions")}</DropdownMenuLabel>
             <DropdownMenuItem onClick={() => navigator.clipboard.writeText(booking.id)}>
-              {t("admin.bookings.copyId")}
+              {t("bookings.copyId")}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => onViewDetails(booking)}>
-              {t("admin.bookings.viewDetails")}
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => onUpdateStatus(booking)}>
-              {t("admin.bookings.updateStatus")}
-            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onViewDetails(booking)}>{t("bookings.viewDetails")}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onUpdateStatus(booking)}>{t("bookings.updateStatus")}</DropdownMenuItem>
             <DropdownMenuItem
               className="text-red-600"
               onClick={() => onCancelBooking(booking)}
               disabled={booking.status === "cancelled"}
             >
-              {t("admin.bookings.cancelBooking")}
+              {t("bookings.cancelBooking")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

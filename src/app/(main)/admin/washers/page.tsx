@@ -13,7 +13,7 @@ import { WasherDialog } from "./_components/washer-dialog";
 export default function WashersPage() {
   const t = useTranslations("admin.washers");
   const { washers } = useWasherStore();
-  const columns = useWasherColumns();
+  // const columns = useWasherColumns();
 
   return (
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">

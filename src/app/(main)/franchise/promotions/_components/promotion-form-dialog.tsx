@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,7 @@ interface PromotionFormDialogProps {
 }
 
 export function PromotionFormDialog({ promotion, children }: PromotionFormDialogProps) {
+  const t = useTranslations("franchise.promotions.formDialog");
   const [open, setOpen] = useState(false);
   const { addPromotion, updatePromotion } = usePromotionStore();
 
@@ -31,14 +33,14 @@ export function PromotionFormDialog({ promotion, children }: PromotionFormDialog
     try {
       if (promotion) {
         await updatePromotion(data as Promotion);
-        toast.success("Promotion updated successfully!");
+        toast.success(t("updatedSuccessfully"));
       } else {
         await addPromotion(data as Omit<Promotion, "id">);
-        toast.success("Promotion created successfully!");
+        toast.success(t("createdSuccessfully"));
       }
       setOpen(false);
     } catch (error) {
-      toast.error("Failed to save promotion.");
+      toast.error(t("failedToSave"));
       console.error("Error saving promotion:", error);
     }
   };
@@ -48,12 +50,8 @@ export function PromotionFormDialog({ promotion, children }: PromotionFormDialog
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{promotion ? "Edit Promotion" : "Create Promotion"}</DialogTitle>
-          <DialogDescription>
-            {promotion
-              ? "Update the details of this promotion."
-              : "Create a new promotion that can be applied to services."}
-          </DialogDescription>
+          <DialogTitle>{promotion ? t("edit") : t("create")}</DialogTitle>
+          <DialogDescription>{promotion ? t("updateDescription") : t("createDescription")}</DialogDescription>
         </DialogHeader>
         <PromotionForm promotion={promotion} onSubmit={handleSubmit} />
       </DialogContent>

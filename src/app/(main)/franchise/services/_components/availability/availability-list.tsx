@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -27,6 +28,7 @@ interface AvailabilityListProps {
 }
 
 export function FranchiseAvailabilityList({ serviceId }: AvailabilityListProps) {
+  const t = useTranslations("franchise.services.availability.list");
   const { availability, fetchAvailabilityForService, deleteAvailability } = useFranchiseServiceAvailabilityStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingAvailability, setEditingAvailability] = useState<ServiceAvailability | undefined>(undefined);
@@ -72,16 +74,16 @@ export function FranchiseAvailabilityList({ serviceId }: AvailabilityListProps) 
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Service Availability</CardTitle>
-            <CardDescription>Manage when this service is available</CardDescription>
+            <CardTitle>{t("serviceAvailability")}</CardTitle>
+            <CardDescription>{t("manageAvailability")}</CardDescription>
           </div>
           <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
             <DialogTrigger asChild>
-              <Button onClick={() => setEditingAvailability(undefined)}>Add Availability</Button>
+              <Button onClick={() => setEditingAvailability(undefined)}>{t("addAvailability")}</Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>{editingAvailability ? "Edit Availability" : "Add Availability"}</DialogTitle>
+                <DialogTitle>{editingAvailability ? t("editAvailability") : t("addAvailability")}</DialogTitle>
               </DialogHeader>
               <FranchiseAvailabilityForm
                 serviceId={serviceId}
@@ -94,16 +96,14 @@ export function FranchiseAvailabilityList({ serviceId }: AvailabilityListProps) 
       </CardHeader>
       <CardContent>
         {Object.keys(groupedAvailability).length === 0 ? (
-          <p className="text-muted-foreground py-4 text-center">
-            No availability set. Add time slots when this service is available.
-          </p>
+          <p className="text-muted-foreground py-4 text-center">{t("noAvailabilitySet")}</p>
         ) : (
           <div className="space-y-4">
             {Object.entries(groupedAvailability)
               .sort(([a], [b]) => Number(a) - Number(b))
               .map(([day, availabilities]) => (
                 <div key={day}>
-                  <h3 className="font-medium">{daysOfWeek[Number(day)]}</h3>
+                  <h3 className="font-medium">{t(daysOfWeek[Number(day)].toLowerCase())}</h3>
                   <div className="mt-2 space-y-2">
                     {availabilities
                       .sort((a, b) => a.startTime.localeCompare(b.startTime))
@@ -114,20 +114,22 @@ export function FranchiseAvailabilityList({ serviceId }: AvailabilityListProps) 
                               {avail.startTime} - {avail.endTime}
                             </span>
                             {!avail.isActive && (
-                              <span className="bg-muted text-muted-foreground rounded px-2 py-1 text-xs">Inactive</span>
+                              <span className="bg-muted text-muted-foreground rounded px-2 py-1 text-xs">
+                                {t("inactive")}
+                              </span>
                             )}
                           </div>
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                               <Button variant="ghost" className="h-8 w-8 p-0">
-                                <span className="sr-only">Open menu</span>
+                                <span className="sr-only">{t("openMenu")}</span>
                                 <MoreHorizontal className="h-4 w-4" />
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
-                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuItem onClick={() => handleEdit(avail)}>Edit</DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handleDelete(avail.id)}>Delete</DropdownMenuItem>
+                              <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+                              <DropdownMenuItem onClick={() => handleEdit(avail)}>{t("edit")}</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handleDelete(avail.id)}>{t("delete")}</DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
                         </div>

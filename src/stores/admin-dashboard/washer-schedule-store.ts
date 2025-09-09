@@ -35,11 +35,7 @@ export const useWasherScheduleStore = create<ScheduleState>((set, get) => ({
     return get().schedules.filter((schedule) => schedule.washer_id === washerId);
   },
   addSchedule: async (schedule) => {
-    const { data, error } = await supabase
-      .from("washer_schedules")
-      .insert([schedule])
-      .select()
-      .single();
+    const { data, error } = await supabase.from("washer_schedules").insert([schedule]).select().single();
 
     if (error) {
       console.error("Error adding washer schedule:", error);
@@ -51,10 +47,7 @@ export const useWasherScheduleStore = create<ScheduleState>((set, get) => ({
     }));
   },
   deleteSchedule: async (scheduleId) => {
-    const { error } = await supabase
-      .from("washer_schedules")
-      .delete()
-      .eq("id", scheduleId);
+    const { error } = await supabase.from("washer_schedules").delete().eq("id", scheduleId);
 
     if (error) {
       console.error("Error deleting washer schedule:", error);

@@ -13,15 +13,15 @@ import { useWasherStore } from "@/stores/admin-dashboard/washer-store";
 const getColumns = (t: ReturnType<typeof useTranslations>): ColumnDef<Washer>[] => [
   {
     accessorKey: "name",
-    header: t("admin.washers.name"),
+    header: t("washers.name"),
   },
   {
     accessorKey: "branch",
-    header: t("admin.washers.branch"),
+    header: t("washers.branch"),
   },
   {
     accessorKey: "status",
-    header: t("admin.washers.status"),
+    header: t("washers.status"),
     cell: ({ row }) => {
       const status = row.getValue("status");
       return <Badge variant={status === "active" ? "default" : "destructive"}>{status}</Badge>;
@@ -29,7 +29,7 @@ const getColumns = (t: ReturnType<typeof useTranslations>): ColumnDef<Washer>[] 
   },
   {
     accessorKey: "rating",
-    header: t("admin.washers.rating"),
+    header: t("washers.rating"),
   },
 ];
 

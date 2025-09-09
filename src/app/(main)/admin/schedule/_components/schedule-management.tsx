@@ -6,20 +6,8 @@ import { Plus, Calendar, Clock, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogTrigger 
-} from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -34,13 +22,13 @@ export function ScheduleManagement() {
   const [selectedDay, setSelectedDay] = useState<number>(1); // Monday default
   const [startTime, setStartTime] = useState<string>("09:00");
   const [endTime, setEndTime] = useState<string>("17:00");
-  
+
   const { washers } = useWasherStore();
   const { schedules, addSchedule, deleteSchedule } = useWasherScheduleStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!selectedWasherId) {
       toast.error("Please select a washer");
       return;
@@ -53,7 +41,7 @@ export function ScheduleManagement() {
         start_time: startTime,
         end_time: endTime,
       });
-      
+
       toast.success("Schedule added successfully");
       setIsDialogOpen(false);
       // Reset form
@@ -71,13 +59,13 @@ export function ScheduleManagement() {
   const getSchedulesByDay = () => {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const grouped: { [key: number]: ScheduleDetail[] } = {};
-    
+
     days.forEach((_, index) => {
       grouped[index] = [];
     });
 
     schedules.forEach((schedule) => {
-      const washer = washers.find(w => w.id === schedule.washer_id);
+      const washer = washers.find((w) => w.id === schedule.washer_id);
       if (washer) {
         grouped[schedule.day_of_week].push({
           id: schedule.id,
@@ -95,12 +83,10 @@ export function ScheduleManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="text-lg font-semibold">Weekly Schedule Management</h3>
-          <p className="text-muted-foreground text-sm">
-            Add and manage washer schedules for each day of the week
-          </p>
+          <p className="text-muted-foreground text-sm">Add and manage washer schedules for each day of the week</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
@@ -129,13 +115,10 @@ export function ScheduleManagement() {
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="day">Day of Week</Label>
-                <Select 
-                  value={selectedDay.toString()} 
-                  onValueChange={(value) => setSelectedDay(parseInt(value))}
-                >
+                <Select value={selectedDay.toString()} onValueChange={(value) => setSelectedDay(parseInt(value))}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a day" />
                   </SelectTrigger>
@@ -150,12 +133,12 @@ export function ScheduleManagement() {
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="start-time">Start Time</Label>
                   <div className="relative">
-                    <Clock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Clock className="text-muted-foreground absolute top-3 left-3 h-4 w-4" />
                     <Input
                       id="start-time"
                       type="time"
@@ -165,11 +148,11 @@ export function ScheduleManagement() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="end-time">End Time</Label>
                   <div className="relative">
-                    <Clock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Clock className="text-muted-foreground absolute top-3 left-3 h-4 w-4" />
                     <Input
                       id="end-time"
                       type="time"
@@ -180,7 +163,7 @@ export function ScheduleManagement() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex justify-end space-x-2">
                 <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                   Cancel
@@ -193,10 +176,12 @@ export function ScheduleManagement() {
       </div>
 
       {/* Weekly Schedule View */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {Object.entries(schedulesByDay).map(([dayIndex, daySchedules]) => {
-          const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][parseInt(dayIndex)];
-          
+          const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][
+            parseInt(dayIndex)
+          ];
+
           return (
             <Card key={dayIndex} className="flex flex-col">
               <CardHeader className="pb-2">
@@ -205,17 +190,14 @@ export function ScheduleManagement() {
                   {dayName}
                 </CardTitle>
                 <CardDescription>
-                  {daySchedules.length} {daySchedules.length === 1 ? 'schedule' : 'schedules'}
+                  {daySchedules.length} {daySchedules.length === 1 ? "schedule" : "schedules"}
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex-1">
                 {daySchedules.length > 0 ? (
                   <div className="space-y-3">
                     {daySchedules.map((schedule) => (
-                      <div 
-                        key={schedule.id} 
-                        className="p-3 border rounded-lg bg-muted/50 relative"
-                      >
+                      <div key={schedule.id} className="bg-muted/50 relative rounded-lg border p-3">
                         <Button
                           variant="ghost"
                           size="icon"
@@ -232,15 +214,13 @@ export function ScheduleManagement() {
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
-                        <div className="flex justify-between items-start">
+                        <div className="flex items-start justify-between">
                           <div>
-                            <p className="font-medium text-sm">{schedule.washer.name}</p>
-                            <p className="text-xs text-muted-foreground">
-                              {schedule.washer.branch}
-                            </p>
+                            <p className="text-sm font-medium">{schedule.washer.name}</p>
+                            <p className="text-muted-foreground text-xs">{schedule.washer.branch}</p>
                           </div>
                           <div className="text-right">
-                            <p className="text-xs font-mono">
+                            <p className="font-mono text-xs">
                               {schedule.startTime} - {schedule.endTime}
                             </p>
                           </div>
@@ -250,9 +230,7 @@ export function ScheduleManagement() {
                   </div>
                 ) : (
                   <div className="flex h-full items-center justify-center">
-                    <p className="text-muted-foreground text-center text-sm">
-                      No schedules
-                    </p>
+                    <p className="text-muted-foreground text-center text-sm">No schedules</p>
                   </div>
                 )}
               </CardContent>

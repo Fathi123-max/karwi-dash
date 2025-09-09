@@ -110,7 +110,7 @@ export default async function FranchiseLayout({ children }: Readonly<{ children:
             <div className="flex items-center gap-1 lg:gap-2">
               <SidebarTrigger className="-ml-1" />
               <Separator orientation="vertical" className="mx-2 data-[orientation=vertical]:h-4" />
-              <SearchDialog />
+              {/* <SearchDialog /> */}
             </div>
             <div className="flex items-center gap-2">
               <LayoutControls {...layoutPreferences} />

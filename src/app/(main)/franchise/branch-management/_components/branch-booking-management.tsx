@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
@@ -43,6 +44,7 @@ interface BranchBookingManagementProps {
 }
 
 export function BranchBookingManagement({ branchId }: BranchBookingManagementProps) {
+  const t = useTranslations("franchise.branches.bookings");
   const { bookings, services, washers, updateBooking } = useFranchiseDashboardStore();
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -57,8 +59,8 @@ export function BranchBookingManagement({ branchId }: BranchBookingManagementPro
 
     return {
       ...booking,
-      service_name: service?.name ?? "Unknown Service",
-      washer_name: washer?.name ?? "Unassigned",
+      service_name: service?.name ?? t("unknownService"),
+      washer_name: washer?.name ?? t("unassigned"),
     };
   });
 
@@ -92,19 +94,19 @@ export function BranchBookingManagement({ branchId }: BranchBookingManagementPro
   const columns: ColumnDef<Booking>[] = [
     {
       accessorKey: "id",
-      header: "Booking ID",
+      header: t("bookingId"),
     },
     {
       accessorKey: "service_name",
-      header: "Service",
+      header: t("service"),
     },
     {
       accessorKey: "washer_name",
-      header: "Washer",
+      header: t("washer"),
     },
     {
       accessorKey: "scheduled_at",
-      header: "Date",
+      header: t("date"),
       cell: ({ row }) => {
         const date = new Date(row.getValue("scheduled_at"));
         return <span>{date.toLocaleString()}</span>;
@@ -112,7 +114,7 @@ export function BranchBookingManagement({ branchId }: BranchBookingManagementPro
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("status"),
       cell: ({ row }) => {
         const status = row.getValue("status");
         return (
@@ -149,13 +151,15 @@ export function BranchBookingManagement({ branchId }: BranchBookingManagementPro
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
+                <span className="sr-only">{t("openMenu")}</span>
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem onClick={() => navigator.clipboard.writeText(booking.id)}>Copy ID</DropdownMenuItem>
+              <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+              <DropdownMenuItem onClick={() => navigator.clipboard.writeText(booking.id)}>
+                {t("copyId")}
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DialogTrigger asChild>
                 <DropdownMenuItem
@@ -165,7 +169,7 @@ export function BranchBookingManagement({ branchId }: BranchBookingManagementPro
                     setIsDialogOpen(true);
                   }}
                 >
-                  Update Status
+                  {t("updateStatus")}
                 </DropdownMenuItem>
               </DialogTrigger>
             </DropdownMenuContent>
@@ -183,9 +187,9 @@ export function BranchBookingManagement({ branchId }: BranchBookingManagementPro
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-medium">Branch Bookings</h3>
+        <h3 className="text-lg font-medium">{t("branchBookings")}</h3>
         <p className="text-muted-foreground text-sm">
-          {branchBookings.length} booking{branchBookings.length !== 1 ? "s" : ""}
+          {branchBookings.length} {t("booking", { count: branchBookings.length })}
         </p>
       </div>
 
@@ -194,8 +198,8 @@ export function BranchBookingManagement({ branchId }: BranchBookingManagementPro
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Update Booking Status</DialogTitle>
-            <DialogDescription>Update the status for booking ID: {selectedBooking?.id}</DialogDescription>
+            <DialogTitle>{t("updateBookingStatus")}</DialogTitle>
+            <DialogDescription>{t("updateStatusForBooking", { id: selectedBooking?.id })}</DialogDescription>
           </DialogHeader>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleUpdateStatus)} className="space-y-6">
@@ -204,18 +208,18 @@ export function BranchBookingManagement({ branchId }: BranchBookingManagementPro
                 name="status"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Status</FormLabel>
+                    <FormLabel>{t("status")}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a status" />
+                          <SelectValue placeholder={t("selectStatus")} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="in-progress">In Progress</SelectItem>
-                        <SelectItem value="completed">Completed</SelectItem>
-                        <SelectItem value="cancelled">Cancelled</SelectItem>
+                        <SelectItem value="pending">{t("pending")}</SelectItem>
+                        <SelectItem value="in-progress">{t("inProgress")}</SelectItem>
+                        <SelectItem value="completed">{t("completed")}</SelectItem>
+                        <SelectItem value="cancelled">{t("cancelled")}</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -224,9 +228,9 @@ export function BranchBookingManagement({ branchId }: BranchBookingManagementPro
               />
               <div className="flex justify-end space-x-2">
                 <Button type="button" variant="ghost" onClick={() => setIsDialogOpen(false)}>
-                  Cancel
+                  {t("cancel")}
                 </Button>
-                <Button type="submit">Save Changes</Button>
+                <Button type="submit">{t("saveChanges")}</Button>
               </div>
             </form>
           </Form>

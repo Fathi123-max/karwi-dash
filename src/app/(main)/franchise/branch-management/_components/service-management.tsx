@@ -2,6 +2,7 @@
 
 import { Edit, PlusCircle, Trash2, Globe } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 import {
   AlertDialog,
@@ -29,6 +30,7 @@ interface ServiceManagementProps {
 }
 
 export function ServiceManagement({ branch }: ServiceManagementProps) {
+  const t = useTranslations("franchise.services.management");
   const { fetchBranches } = useFranchiseBranchStore();
   const { deleteService } = useFranchiseServiceStore();
 
@@ -36,9 +38,9 @@ export function ServiceManagement({ branch }: ServiceManagementProps) {
     try {
       await deleteService(serviceId);
       await fetchBranches(); // Refetch to update the service list
-      toast.success("Service deleted successfully!");
+      toast.success(t("serviceDeleted"));
     } catch (error) {
-      toast.error("Failed to delete service.");
+      toast.error(t("failedToDeleteService"));
     }
   };
 
@@ -46,8 +48,8 @@ export function ServiceManagement({ branch }: ServiceManagementProps) {
     <Card>
       <CardHeader className="flex-row items-center justify-between">
         <div className="space-y-1.5">
-          <CardTitle>Manage Services</CardTitle>
-          <CardDescription>Edit or remove services for this branch.</CardDescription>
+          <CardTitle>{t("manageServices")}</CardTitle>
+          <CardDescription>{t("editRemoveServices")}</CardDescription>
         </div>
         {/* ADD FEATURE: Hidden as per requirements */}
       </CardHeader>
@@ -60,7 +62,7 @@ export function ServiceManagement({ branch }: ServiceManagementProps) {
               ))
             ) : (
               <div className="text-muted-foreground flex h-[200px] items-center justify-center text-center">
-                No services have been added to this branch yet.
+                {t("noServicesAdded")}
               </div>
             )}
           </div>

@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useFranchiseAnalyticsStore } from "@/stores/franchise-dashboard/analytics-store";
 
@@ -9,6 +11,7 @@ import { FranchiseAnalyticsChart } from "./franchise-analytics-chart";
 import FranchiseMetrics from "./franchise-metrics";
 
 export function FranchiseAnalyticsDashboard() {
+  const t = useTranslations("franchise.analytics");
   const {
     branches,
     services,
@@ -56,8 +59,8 @@ export function FranchiseAnalyticsDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Analytics Dashboard</h2>
-        <p className="text-muted-foreground">View insights and performance metrics for your franchise.</p>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <p className="text-muted-foreground">{t("description")}</p>
       </div>
 
       <FranchiseMetrics
@@ -70,21 +73,31 @@ export function FranchiseAnalyticsDashboard() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Booking Trends</CardTitle>
-            <CardDescription>Daily bookings over time</CardDescription>
+            <CardTitle>{t("bookingTrends.title")}</CardTitle>
+            <CardDescription>{t("bookingTrends.description")}</CardDescription>
           </CardHeader>
           <CardContent>
-            <FranchiseAnalyticsChart data={bookingTrends} dataKey="count" title="Bookings" color="#5eead4" />
+            <FranchiseAnalyticsChart
+              data={bookingTrends}
+              dataKey="count"
+              title={t("bookingTrends.chartTitle")}
+              color="#5eead4"
+            />
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Revenue Trends</CardTitle>
-            <CardDescription>Daily revenue over time</CardDescription>
+            <CardTitle>{t("revenueTrends.title")}</CardTitle>
+            <CardDescription>{t("revenueTrends.description")}</CardDescription>
           </CardHeader>
           <CardContent>
-            <FranchiseAnalyticsChart data={revenueData} dataKey="amount" title="Revenue" color="#60a5fa" />
+            <FranchiseAnalyticsChart
+              data={revenueData}
+              dataKey="amount"
+              title={t("revenueTrends.chartTitle")}
+              color="#60a5fa"
+            />
           </CardContent>
         </Card>
       </div>
@@ -92,14 +105,14 @@ export function FranchiseAnalyticsDashboard() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Service Performance</CardTitle>
-            <CardDescription>Bookings by service</CardDescription>
+            <CardTitle>{t("servicePerformance.title")}</CardTitle>
+            <CardDescription>{t("servicePerformance.description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <FranchiseAnalyticsChart
               data={servicePerformance}
               dataKey="bookings"
-              title="Bookings"
+              title={t("servicePerformance.chartTitle")}
               color="#f87171"
               type="bar"
             />
@@ -108,14 +121,14 @@ export function FranchiseAnalyticsDashboard() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Washer Performance</CardTitle>
-            <CardDescription>Bookings by washer</CardDescription>
+            <CardTitle>{t("washerPerformance.title")}</CardTitle>
+            <CardDescription>{t("washerPerformance.description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <FranchiseAnalyticsChart
               data={washerPerformance}
               dataKey="bookings"
-              title="Bookings"
+              title={t("washerPerformance.chartTitle")}
               color="#fbbf24"
               type="bar"
             />
@@ -125,14 +138,14 @@ export function FranchiseAnalyticsDashboard() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Branch Performance</CardTitle>
-          <CardDescription>Bookings by branch</CardDescription>
+          <CardTitle>{t("branchPerformance.title")}</CardTitle>
+          <CardDescription>{t("branchPerformance.description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <FranchiseAnalyticsChart
             data={branchPerformance}
             dataKey="bookings"
-            title="Bookings"
+            title={t("branchPerformance.chartTitle")}
             color="#a78bfa"
             type="bar"
           />

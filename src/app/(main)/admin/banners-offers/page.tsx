@@ -71,7 +71,7 @@ export default function BannersOffersPage() {
                 </div>
                 <Button onClick={() => setIsBannerFormOpen(true)}>
                   <PlusCircle className="mr-2 h-4 w-4" />
-                  Add Banner
+                  {t("banners.addbanner")}
                 </Button>
               </div>
             </CardHeader>

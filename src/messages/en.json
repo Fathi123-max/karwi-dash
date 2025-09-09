@@ -1,11 +1,24 @@
 {
   "navigation": {
     "dashboard": "Dashboard",
-    "services": "Services",
     "bookings": "Bookings",
     "staff": "Staff",
     "reports": "Reports",
-    "settings": "Settings"
+    "settings": "Settings",
+    "bannersOffers": "Banners & Offers",
+    "branches": "Branches",
+    "franchises": "Franchises",
+    "manageAll": "Manage All",
+    "manageProducts": "Manage Products",
+    "orders": "Orders",
+    "payments": "Payments",
+    "products": "Products",
+    "promotions": "Promotions",
+    "reviews": "Reviews",
+    "schedule": "Schedule",
+    "users": "Users",
+    "washers": "Washers",
+    "services": "Services"
   },
   "common": {
     "save": "Save",
@@ -20,7 +33,22 @@
     "success": "Success",
     "notifications": "Notifications",
     "profile": "Profile",
-    "close": "Close"
+    "close": "Close",
+    "actions": "Actions",
+    "adminLogin": "Admin Login",
+    "bookings": "Bookings",
+    "contactAdmin": "Contact Admin",
+    "dashboard": "Dashboard",
+    "franchiseLogin": "Franchise Login",
+    "newToPlatform": "New to Platform",
+    "professionalCarCare": "Professional Car Care",
+    "recentBookings": "Recent Bookings",
+    "reports": "Reports",
+    "services": "Services",
+    "settings": "Settings",
+    "staff": "Staff",
+    "welcome": "Welcome",
+    "welcomeTo": "Welcome to"
   },
   "auth": {
     "login": "Login",
@@ -86,6 +114,12 @@
         "activity": "Recent Activity"
       }
     },
+    "metrics": {
+      "totalRevenue": "Total Revenue",
+      "totalBookings": "Total Bookings",
+      "totalUsers": "Total Users",
+      "activeWashers": "Active Washers"
+    },
     "menu": {
       "admin": "Admin Menu",
       "marketing": "Marketing",
@@ -96,7 +130,6 @@
       "branches": "Branches",
       "franchises": "Franchises",
       "washers": "Washers",
-      "services": "Services",
       "products": "Products",
       "manageProducts": "Manage Products",
       "orders": "Orders",
@@ -106,7 +139,8 @@
       "reviews": "Reviews",
       "promotions": "Promotions",
       "bannersOffers": "Banners & Offers",
-      "manageAll": "Manage All"
+      "manageAll": "Manage All",
+      "services": "Services"
     },
     "branches": {
       "title": "Branches",
@@ -122,7 +156,9 @@
         "title": "Are you absolutely sure?",
         "description": "This action cannot be undone. This will permanently delete the branch and all its data.",
         "continue": "Continue"
-      }
+      },
+      "branch": "Branch",
+      "services": "Services"
     },
     "franchises": {
       "title": "Franchises",
@@ -139,7 +175,9 @@
         "title": "Are you absolutely sure?",
         "description": "This action cannot be undone. This will permanently delete the franchise and all its data.",
         "continue": "Continue"
-      }
+      },
+      "branch": "Branch",
+      "services": "Services"
     },
     "payments": {
       "title": "Payments",
@@ -154,7 +192,12 @@
       "provider": "Provider",
       "transactionId": "Transaction ID",
       "date": "Date",
-      "actions": "Actions"
+      "actions": "Actions",
+      "refundProcessed": "Refund processed",
+      "refundSuccess": "The payment has been successfully refunded.",
+      "refundFailed": "Refund failed",
+      "refundFailedDescription": "Failed to process refund",
+      "unexpectedError": "An unexpected error occurred while processing the refund."
     },
     "users": {
       "title": "Users",
@@ -168,85 +211,38 @@
         "title": "Are you absolutely sure?",
         "description": "This action cannot be undone. This will permanently delete the user and all their data.",
         "continue": "Continue"
-      }
+      },
+      "branch": "Branch",
+      "services": "Services"
     },
     "washers": {
       "title": "Washers",
-      "description": "Manage all Karwi washers and their assignments",
-      "edit": "Edit Washer",
-      "add": "Add Washer",
-      "editDescription": "Update the details of the washer.",
-      "addDescription": "Add a new washer to your system.",
-      "manageSchedule": "Manage Schedule",
-      "actions": "Actions",
+      "description": "Manage all Karwi washers and their bookings",
+      "name": "Name",
+      "status": "Status",
+      "rating": "Rating",
+      "branch": "Branch",
+      "add": "Add Washer ",
       "active": "Active",
-      "inactive": "Inactive",
-      "activeStatusValue": "active",
-      "deleteConfirm": {
-        "title": "Are you absolutely sure?",
-        "description": "This action cannot be undone. This will permanently delete the washer and all their data.",
-        "continue": "Continue"
-      },
-      "schedule": {
-        "title": "Manage Schedule for {name}",
-        "description": "Add or remove weekly work shifts.",
-        "addShift": {
-          "title": "Add New Shift",
-          "dayOfWeek": "Day of Week",
-          "selectDay": "Select a day",
-          "startTime": "Start Time",
-          "endTime": "End Time",
-          "button": "Add Shift",
-          "invalidTimeFormat": "Invalid time format (HH:MM)",
-          "defaultDay": "1",
-          "defaultStartTime": "09:00",
-          "defaultEndTime": "17:00"
-        },
-        "currentSchedule": {
-          "title": "Current Schedule",
-          "noShifts": "No shifts scheduled for this washer."
-        },
-        "days": {
-          "monday": "Monday",
-          "tuesday": "Tuesday",
-          "wednesday": "Wednesday",
-          "thursday": "Thursday",
-          "friday": "Friday",
-          "saturday": "Saturday",
-          "sunday": "Sunday",
-          "mondayValue": "1",
-          "tuesdayValue": "2",
-          "wednesdayValue": "3",
-          "thursdayValue": "4",
-          "fridayValue": "5",
-          "saturdayValue": "6",
-          "sundayValue": "0",
-          "unknown": "Unknown"
-        }
-      },
-      "days": {
-        "monday": "Monday",
-        "tuesday": "Tuesday",
-        "wednesday": "Wednesday",
-        "thursday": "Thursday",
-        "friday": "Friday",
-        "saturday": "Saturday",
-        "sunday": "Sunday",
-        "mondayValue": "1",
-        "tuesdayValue": "2",
-        "wednesdayValue": "3",
-        "thursdayValue": "4",
-        "fridayValue": "5",
-        "saturdayValue": "6",
-        "sundayValue": "0",
-        "unknown": "Unknown"
+      "table": {
+        "name": "Name",
+        "status": "Status",
+        "rating": "Rating",
+        "filterPlaceholder": "Filter by name...",
+        "filterBranchPlaceholder": "Filter by Branch",
+        "allBranches": "All Branches",
+        "allBranchesValue": "all",
+        "export": "Export",
+        "noResults": "No results.",
+        "previous": "Previous",
+        "next": "Next",
+        "branch": "Branch"
       }
     },
     "form": {
       "name": "Washer Name",
       "namePlaceholder": "e.g., Mohammed Ahmed",
       "nameMinLength": "Washer name must be at least 2 characters.",
-      "branch": "Branch",
       "branchRequired": "Please select a branch.",
       "selectBranch": "Select a branch",
       "status": "Status",
@@ -261,7 +257,6 @@
     },
     "table": {
       "name": "Name",
-      "branch": "Branch",
       "status": "Status",
       "rating": "Rating",
       "filterPlaceholder": "Filter by name...",
@@ -272,117 +267,945 @@
       "noResults": "No results.",
       "previous": "Previous",
       "next": "Next"
-    }
-  },
-  "schedule": {
-    "title": "Washer Schedule",
-    "description": "Manage and view washer schedules across all branches"
-  },
-  "services": {
-    "title": "Services"
-  },
-  "bannersOffers": {
-    "title": "Banners & Offers",
-    "description": "Manage site-wide banners and promotional offers",
-    "banners": {
-      "title": "Banners",
-      "description": "Manage site-wide banners displayed to users"
     },
-    "offers": {
-      "title": "Offers",
-      "description": "Manage promotional offers for services and products"
-    }
-  },
-  "products": {
-    "orders": {
-      "title": "Product Orders",
-      "description": "Manage franchise product orders"
-    }
-  },
-  "metrics": {
-    "totalRevenue": "Total Revenue",
-    "totalBookings": "Total Bookings",
-    "totalUsers": "Total Users",
-    "activeWashers": "Active Washers"
-  },
-  "bookings": {
-    "title": "Bookings",
-    "recent": {
-      "title": "Recent Bookings",
-      "description": "Track and manage your latest bookings"
+    "activity": {
+      "title": "Recent Activity"
     },
-    "details": {
-      "title": "Booking Details",
-      "description": "Details for booking ID: {id}",
-      "user": "User",
+    "bannersOffers": {
+      "title": "Banners & Offers",
+      "description": "Manage site-wide banners and promotional offers",
+      "banners": {
+        "addbanner": "Add Banners",
+        "title": "Banners",
+        "description": "Manage site-wide banners displayed to users"
+      },
+      "offers": {
+        "title": "Offers",
+        "description": "Manage promotional offers for services and products"
+      },
       "branch": "Branch",
+      "services": "Services"
+    },
+    "bookings": {
+      "title": "Bookings",
+      "description": "Manage and view all bookings",
+      "recent": {
+        "title": "Recent Bookings",
+        "description": "Track and manage your latest bookings"
+      },
+      "branch": "Branch",
+
+      "details": {
+        "title": "Booking Details",
+        "description": "Details for booking ID: {id}",
+        "user": "User",
+        "service": "Service",
+        "status": "Status",
+        "date": "Date"
+      },
+      "cancel": {
+        "title": "Cancel Booking",
+        "confirm": "Are you sure you want to cancel booking {bookingId}? This action cannot be undone.",
+        "yes": "Yes, Cancel Booking",
+        "no": "No, Keep Booking"
+      },
+      "update": {
+        "title": "Update Booking Status",
+        "button": "Update Status"
+      },
+      "bookingId": "Booking ID",
+      "user": "User",
+      "service": "Service",
+      "status": {
+        "title": "Status",
+        "pending": "Pending",
+        "inProgress": "In Progress",
+        "completed": "Completed",
+        "scheduled": "Scheduled",
+        "cancelled": "Cancelled"
+      },
+      "date": "Date",
+      "copyId": "Copy ID",
+      "viewDetails": "View Details",
+      "updateStatus": "Update Status",
+      "cancelBooking": "Cancel Booking",
+      "updateSuccess": "Booking status updated successfully",
+      "updateError": "Failed to update booking status",
+      "cancelSuccess": "Booking cancelled successfully",
+      "cancelError": "Failed to cancel booking"
+    },
+    "bookingsChart": {
+      "descriptionLong": "Track booking trends over time",
+      "descriptionShort": "Booking trends",
+      "last30Days": "Last 30 Days",
+      "last3Months": "Last 3 Months",
+      "last7Days": "Last 7 Days",
+      "selectValue": "Select a value",
+      "title": "Bookings Chart"
+    },
+    "branchPerformance": {
+      "activeBookings": "Active Bookings",
+      "allFranchises": "All Franchises",
+      "branch": "Branch",
+      "count": "Count",
+      "filterByFranchise": "Filter by Franchise",
+      "noData": "No data available",
+      "servicesOffered": "Services Offered",
+      "title": "Branch Performance"
+    },
+    "products": {
+      "orders": {
+        "title": "Product Orders",
+        "description": "Manage franchise product orders"
+      },
+      "branch": "Branch",
+      "services": "Services"
+    },
+    "schedule": {
+      "title": "Washer Schedule",
+      "description": "Manage and view washer schedules across all branches"
+    },
+    "paymentsOverview": {
+      "title": "Payments Overview"
+    },
+    "services": {
+      "title": "Services",
+      "branch": "Branch",
+      "services": "Services"
+    },
+    "reports": {
+      "title": "Reports",
+      "description": "View and download generated reports",
+      "reportName": "Report Name",
+      "dateRange": "Date Range",
+      "generatedOn": "Generated On",
+      "download": "Download",
+      "monthlyRevenue": "Monthly Revenue",
+      "userGrowth": "User Growth",
+      "washerPerformance": "Washer Performance",
+      "bookingTrends": "Booking Trends"
+    },
+    "reviews": {
+      "title": "Recent Reviews",
+      "booking_id": "Booking ID",
+      "comment": "Comment",
+      "rating": "Rating",
+      "user": "User"
+    },
+    "washersActivity": {
+      "title": "Washers Activity"
+    }
+  },
+  "franchise": {
+    "washers": {
+      "title": "Washer Management",
+      "description": "Manage washers across all branches",
+      "actions": {
+        "openMenu": "Open menu",
+        "actions": "Actions",
+        "copyId": "Copy ID"
+      },
+      "table": {
+        "name": "Name",
+        "status": "Status",
+        "rating": "Rating",
+        "na": "N/A",
+        "filterByName": "Filter by name",
+        "filterByBranch": "Filter by Branch",
+        "allBranches": "All Branches",
+        "export": "Export",
+        "unassigned": "Unassigned"
+      },
+      "dialog": {
+        "edit": "Edit",
+        "add": "Add",
+        "washer": "Washer",
+        "updateWasher": "Update Washer",
+        "addWasher": "Add Washer"
+      },
+      "form": {
+        "washerName": "Washer Name",
+        "washerNamePlaceholder": "e.g., John Smith",
+        "selectBranch": "Select a branch",
+        "status": "Status",
+        "selectStatus": "Select a status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "rating": "Rating",
+        "updateWasher": "Update Washer",
+        "createWasher": "Create Washer",
+        "errorOccurred": "An error occurred",
+        "washerCreated": "Washer created successfully",
+        "washerUpdated": "Washer updated successfully"
+      },
+      "branch": "Branch",
+      "services": "Services"
+    },
+    "products": {
+      "title": "Product Catalog",
+      "description": "Browse and order products for your franchise",
+      "availableProducts": "Available Products",
+      "browseCatalog": "Browse our product catalog",
+      "selectCategory": "Select Category",
+      "allCategories": "All Categories",
+      "noImage": "No image",
+      "productImage": "Product image",
+      "uncategorized": "Uncategorized",
+      "inStock": "In Stock",
+      "orderProduct": "Order Product",
+      "order": "Order",
+      "noProductsFound": "No products found",
+      "noProductsInCategory": "No products found in this category",
+      "orderForm": {
+        "pricePerUnit": "${price} per unit",
+        "inStock": "{quantity} in stock",
+        "quantity": "Quantity",
+        "cancel": "Cancel",
+        "placeOrder": "Place Order",
+        "insufficientStock": "Insufficient stock available",
+        "orderPlaced": "Order placed successfully",
+        "failedToPlaceOrder": "Failed to place order"
+      },
+      "orderHistory": {
+        "title": "Order History",
+        "description": "View your product order history",
+        "export": "Export",
+        "noOrdersFound": "No orders found",
+        "orderDetails": "Order Details",
+        "order": "Order",
+        "orderDate": "Order Date",
+        "status": "Status",
+        "totalAmount": "Total Amount",
+        "orderItems": "Order Items",
+        "product": "Product",
+        "quantity": "Quantity",
+        "each": "each",
+        "close": "Close",
+        "pending": "Pending",
+        "processing": "Processing",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled",
+        "unknown": "Unknown"
+      },
+      "branch": "Branch",
+      "services": "Services"
+    },
+    "branchAnalytics": {
+      "title": "Branch Analytics",
+      "description": "Detailed analytics for your branches",
+      "selectBranch": "Select Branch",
+      "allBranches": "All Branches",
+      "totalBookings": "Total Bookings",
+      "activeWashers": "Active Washers",
+      "totalServices": "Total Services",
+      "acrossAllBranches": "Across all branches",
+      "forSelectedBranch": "For selected branch",
+      "bookingTrends": "Booking Trends",
+      "dailyBookings": "Daily Bookings",
+      "bookings": "Bookings",
+      "servicePerformance": "Service Performance",
+      "bookingsByService": "Bookings by Service",
+      "washerPerformance": "Washer Performance",
+      "bookingsByWasher": "Bookings by Washer",
+      "branchComparison": "Branch Comparison",
+      "bookingsByBranch": "Bookings by Branch"
+    },
+    "debug": {
+      "debugInformation": "Debug Information",
+      "franchiseId": "Franchise ID",
+      "notLoaded": "Not loaded",
+      "branchesCount": "Branches Count",
+      "servicesCount": "Services Count",
+      "washersCount": "Washers Count",
+      "bookingsCount": "Bookings Count",
+      "branchesData": "Branches Data",
+      "failedToFetchFranchiseId": "Failed to fetch franchise ID"
+    },
+    "account": {
+      "logout": "Logout"
+    },
+    "activity": {
+      "recentActivity": "Recent Activity",
+      "newBooking": "New booking for {service}",
+      "aService": "a service",
+      "unknownWasher": "Unknown washer",
+      "avatar": "Avatar",
+      "byUser": "By {user} on {date}",
+      "noRecentActivity": "No recent activity"
+    },
+    "analytics": {
+      "title": "Franchise Analytics",
+      "description": "Comprehensive analytics for your franchise",
+      "bookingTrends": {
+        "title": "Booking Trends",
+        "description": "Track booking patterns over time",
+        "chartTitle": "Bookings"
+      },
+      "revenueTrends": {
+        "title": "Revenue Trends",
+        "description": "Track revenue generation over time",
+        "chartTitle": "Revenue"
+      },
+      "servicePerformance": {
+        "title": "Service Performance",
+        "description": "Performance metrics by service",
+        "chartTitle": "Bookings"
+      },
+      "washerPerformance": {
+        "title": "Washer Performance",
+        "description": "Performance metrics by washer",
+        "chartTitle": "Bookings"
+      },
+      "branchPerformance": {
+        "title": "Branch Performance",
+        "description": "Performance metrics by branch",
+        "chartTitle": "Bookings"
+      },
+      "chart": {
+        "noData": "No data available"
+      },
+      "branch": "Branch",
+      "services": "Services"
+    },
+    "bookingsChart": {
+      "dailyBookings": "Daily Bookings",
+      "description": "Track your daily booking trends",
+      "bookings": "Bookings"
+    },
+    "dashboard": {
+      "title": "Franchise Dashboard",
+      "description": "Manage your franchise operations"
+    },
+    "metrics": {
+      "totalBranches": "Total Branches",
+      "managedByFranchise": "Managed by this franchise",
+      "totalServices": "Total Services",
+      "offeredAcrossBranches": "Offered across all branches",
+      "activeWashers": "Active Washers",
+      "availableForBookings": "Available for bookings",
+      "totalBookings": "Total Bookings",
+      "allBookingsAcrossBranches": "All bookings across branches"
+    },
+    "reports": {
+      "title": "Reports",
+      "description": "Generate and download franchise reports",
+      "monthlyBookingsReport": "Monthly Bookings Report",
+      "washerPerformanceReport": "Washer Performance Report",
+      "servicePopularityReport": "Service Popularity Report",
+      "branchRevenueReport": "Branch Revenue Report",
+      "reportName": "Report Name",
+      "dateRange": "Date Range",
+      "generatedOn": "Generated On",
+      "type": "Type",
+      "bookings": "Bookings",
+      "washers": "Washers",
+      "branches": "Branches",
+      "download": "Download"
+    },
+    "sidebar": {
+      "menu": "Franchise Menu"
+    },
+    "nav": {
+      "franchiseAnalytics": "Franchise Analytics",
+      "branchAnalytics": "Branch Analytics",
+      "promotions": "Promotions",
+      "reports": "Reports",
+      "branchManagement": "Branch Management",
+      "washerManagement": "Washer Management",
+      "bookingHistory": "Booking History",
+      "products": "Products"
+    },
+    "pendingBookings": {
+      "title": "Pending Bookings",
+      "description": "Recent bookings requiring attention",
+      "bookingId": "Booking ID",
+      "user": "User",
+      "service": "Service",
+      "date": "Date",
+      "status": "Status",
+      "noPendingBookings": "No pending bookings"
+    },
+    "branches": {
+      "title": "Branch Management",
+      "description": "Manage your franchise branches",
+      "viewAnalytics": "View Analytics",
+      "actions": {
+        "openMenu": "Open menu",
+        "actions": "Actions",
+        "copyId": "Copy ID",
+        "editBranch": "Edit Branch"
+      },
+      "table": {
+        "name": "Name",
+        "location": "Location",
+        "notSet": "Not set",
+        "viewOnMap": "View on Map",
+        "noServices": "No services",
+        "filterByName": "Filter by name",
+        "export": "Export"
+      },
+      "dialog": {
+        "manageBranchServices": "Manage Branch Services",
+        "addNewBranch": "Add New Branch",
+        "manageServicesDescription": "Manage services and view branch details",
+        "addBranchDescription": "Add a new branch to your franchise",
+        "branchUpdated": "Branch updated successfully",
+        "update": "Update",
+        "branchCreated": "Branch created successfully",
+        "create": "Create",
+        "provideRequiredInfo": "Please provide required information",
+        "failedToActionBranch": "Failed to {action} branch",
+        "serviceDeleted": "Service deleted successfully",
+        "failedToDeleteService": "Failed to delete service"
+      },
+      "form": {
+        "loadingMap": "Loading map...",
+        "branchName": "Branch Name",
+        "branchNamePlaceholder": "e.g., Downtown Branch",
+        "location": "Location",
+        "bookings": "Bookings",
+        "branchDetails": "Branch Details",
+        "manageServices": "Manage Services",
+        "editRemoveServices": "Edit or remove services from this branch",
+        "noServicesAdded": "No services added",
+        "noServicesAvailable": "No services available for this branch",
+        "na": "N/A",
+        "mins": "mins",
+        "areYouSure": "Are you sure?",
+        "deleteServiceConfirmation": "Are you sure you want to delete the service '{name}'?",
+        "cancel": "Cancel",
+        "continue": "Continue",
+        "edit": "Edit",
+        "delete": "Delete",
+        "bookingManagement": "Booking Management",
+        "manageBookings": "Manage and update bookings for this branch",
+        "additionalInfo": "Additional branch information",
+        "branchId": "Branch ID",
+        "createdAt": "Created At",
+        "done": "Done",
+        "addBranch": "Add Branch",
+        "addBranchDescription": "Add a new branch to your franchise",
+        "addNewBranch": "Add New Branch",
+        "branchCreated": "Branch created successfully",
+        "branchUpdated": "Branch updated successfully",
+        "create": "Create",
+        "failedToDeleteService": "Failed to delete service",
+        "manageBranchServices": "Manage Branch Services",
+        "manageServicesDescription": "Manage services and view branch details",
+        "provideRequiredInfo": "Please provide required information",
+        "serviceDeleted": "Service deleted successfully",
+        "update": "Update"
+      },
+      "locationPicker": {
+        "clickToSelect": "Click on the map to select a location"
+      },
+      "bookings": {
+        "branchBookings": "Branch Bookings",
+        "booking_one": "booking",
+        "booking_other": "bookings",
+        "bookingId": "Booking ID",
+        "service": "Service",
+        "washer": "Washer",
+        "date": "Date",
+        "status": "Status",
+        "openMenu": "Open menu",
+        "copyId": "Copy ID",
+        "updateStatus": "Update Status",
+        "updateBookingStatus": "Update Booking Status",
+        "updateStatusForBooking": "Update status for booking {id}",
+        "selectStatus": "Select a status",
+        "pending": "Pending",
+        "inProgress": "In Progress",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "saveChanges": "Save Changes",
+        "unknownService": "Unknown Service",
+        "unassigned": "Unassigned",
+        "actions": "Actions",
+        "cancel": "Cancel"
+      },
+      "branch": "Branch",
+      "services": "Services"
+    },
+    "services": {
+      "title": "Service Management",
+      "description": "Manage services across all branches",
+      "viewAndManage": "View and manage your services",
+      "selectBranch": "Select Branch",
+      "allBranches": "All Branches",
+      "noServicesFound": "No services found",
+      "noServicesForBranch": "No services found for selected branch",
+      "card": {
+        "unknownBranch": "Unknown Branch",
+        "availableAtAllBranches": "Available at all branches",
+        "branchLabel": "Branch: {name}",
+        "global": "Global",
+        "manage": "Manage",
+        "manageService": "Manage Service",
+        "editDetails": "Edit details for {name}",
+        "price": "Price",
+        "duration": "Duration",
+        "mins": "mins",
+        "type": "Type",
+        "branchSpecific": "Branch Specific",
+        "description": "Description",
+        "noDescription": "No description provided",
+        "toDos": "To-Dos",
+        "includes": "Includes"
+      },
+      "management": {
+        "manageServices": "Manage Services",
+        "editRemoveServices": "Edit or remove services from this branch",
+        "noServicesAdded": "No services added",
+        "serviceDeleted": "Service deleted successfully",
+        "failedToDeleteService": "Failed to delete service"
+      },
+      "priceForm": {
+        "global": "Global",
+        "priceUpdated": "Price updated successfully",
+        "failedToUpdatePrice": "Failed to update price",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving...",
+        "editPrice": "Edit Price",
+        "availableAtAllBranches": "Available at all branches",
+        "branchLabel": "Branch: {name}",
+        "unknownBranch": "Unknown Branch",
+        "priceLabel": "Price"
+      },
+      "form": {
+        "details": "Details",
+        "promotions": "Promotions",
+        "globalServiceInfo": "This is a global service. You can only update the price for your franchise.",
+        "price": "Price",
+        "pricePlaceholder": "e.g., 25.99",
+        "updatePrice": "Update Price",
+        "description": "Description",
+        "noDescription": "No description",
+        "duration": "Duration",
+        "minutes": "minutes",
+        "toDos": "To-Dos",
+        "includes": "Includes",
+        "na": "N/A",
+        "globalServiceEditInfo": "This is a global service. You can only update the price.",
+        "serviceEditInfo": "Service details",
+        "serviceName": "Service Name",
+        "serviceNamePlaceholder": "e.g., Basic Wash",
+        "serviceDescriptionPlaceholder": "Describe the service...",
+        "durationMinutes": "Duration (Minutes)",
+        "durationPlaceholder": "e.g., 30",
+        "todosPlaceholder": "Comma-separated items",
+        "includePlaceholder": "Comma-separated items",
+        "globalService": "Global Service",
+        "globalServiceDescription": "This service will be available at all branches",
+        "branchServiceDescription": "This service will only be available at this branch",
+        "updateService": "Update Service",
+        "createService": "Create Service",
+        "serviceUpdated": "Service updated successfully",
+        "globalServiceCreated": "Global service created successfully",
+        "serviceCreated": "Service created successfully",
+        "errorOccurred": "An error occurred"
+      },
+      "promotions": {
+        "promotions": "Promotions",
+        "managePromotions": "Manage promotions for this service",
+        "addPromotion": "Add Promotion",
+        "selectPromotion": "Select a promotion",
+        "percentOff": "{percent}% off",
+        "openMenu": "Open menu",
+        "actions": "Actions",
+        "remove": "Remove",
+        "noAvailablePromotions": "No available promotions",
+        "noPromotionsAssociated": "No promotions associated with this service"
+      },
+      "availability": {
+        "list": {
+          "serviceAvailability": "Service Availability",
+          "manageAvailability": "Manage when this service is available",
+          "addAvailability": "Add Availability",
+          "editAvailability": "Edit Availability",
+          "noAvailabilitySet": "No availability set for this service",
+          "sunday": "Sunday",
+          "monday": "Monday",
+          "tuesday": "Tuesday",
+          "wednesday": "Wednesday",
+          "thursday": "Thursday",
+          "friday": "Friday",
+          "saturday": "Saturday",
+          "inactive": "Inactive",
+          "openMenu": "Open menu",
+          "actions": "Actions",
+          "edit": "Edit",
+          "delete": "Delete"
+        },
+        "form": {
+          "dayOfWeek": "Day of Week",
+          "selectDay": "Select a day",
+          "sunday": "Sunday",
+          "monday": "Monday",
+          "tuesday": "Tuesday",
+          "wednesday": "Wednesday",
+          "thursday": "Thursday",
+          "friday": "Friday",
+          "saturday": "Saturday",
+          "startTime": "Start Time",
+          "endTime": "End Time",
+          "active": "Active",
+          "activeDescription": "Make this availability slot active",
+          "cancel": "Cancel",
+          "saving": "Saving...",
+          "update": "Update",
+          "add": "Add"
+        },
+        "branch": "Branch",
+        "services": "Services"
+      },
+      "dialog": {
+        "add": "Add Service",
+        "addServiceDescription": "Add a new service to your franchise",
+        "edit": "Edit Service",
+        "service": "Service",
+        "updateServiceDescription": "Update service details"
+      },
+      "pricePromotionForm": {
+        "addPromotion": "Add Promotion",
+        "adding": "Adding...",
+        "availableAtAllBranches": "Available at all branches",
+        "cancel": "Cancel",
+        "duration": "Duration",
+        "editPrice": "Edit Price",
+        "failedToAddPromotionToService": "Failed to add promotion to service",
+        "failedToRemovePromotionFromService": "Failed to remove promotion from service",
+        "failedToUpdateServicePrice": "Failed to update service price",
+        "global": "Global",
+        "noPromotionsAssociated": "No promotions associated",
+        "price": "Price",
+        "promotion": "Promotion",
+        "promotionAddedToService": "Promotion added to service successfully",
+        "promotionRemovedFromService": "Promotion removed from service successfully",
+        "promotions": "Promotions",
+        "remove": "Remove",
+        "removePromotion": "Remove Promotion",
+        "save": "Save",
+        "saving": "Saving...",
+        "selectPromotion": "Select Promotion",
+        "selectPromotionDescription": "Select a promotion to apply",
+        "servicePriceUpdated": "Service price updated successfully",
+        "unknownBranch": "Unknown Branch"
+      },
+      "pricePromotionManager": {
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "failedToUpdateServicePrice": "Failed to update service price",
+        "price": "Price",
+        "save": "Save",
+        "saving": "Saving...",
+        "servicePriceUpdated": "Service price updated successfully"
+      },
+      "services": "Services"
+    },
+    "bookings": {
+      "title": "Booking History",
+      "table": {
+        "filterByUser": "Filter by user...",
+        "export": "Export",
+        "bookingId": "Booking ID",
+        "user": "User",
+        "service": "Service",
+        "status": "Status",
+        "date": "Date",
+        "openMenu": "Open menu",
+        "actions": "Actions",
+        "copyId": "Copy ID",
+        "viewDetails": "View Details",
+        "updateStatus": "Update Status"
+      },
+      "bookingDetails": {
+        "title": "Booking Details",
+        "detailsForBooking": "Details for booking {id}",
+        "user": "User",
+        "service": "Service",
+        "status": "Status",
+        "date": "Date"
+      },
+      "updateStatus": {
+        "title": "Update Booking Status",
+        "updateStatusForBooking": "Update status for booking {id}",
+        "status": "Status",
+        "selectStatus": "Select a status",
+        "pending": "Pending",
+        "inProgress": "In Progress",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "saveChanges": "Save Changes"
+      },
+      "branch": "Branch",
+      "services": "Services"
+    },
+    "promotions": {
+      "title": "Promotion Management",
+      "description": "Create and manage promotional offers",
+      "promotions": "Promotions",
+      "manageOffers": "Manage your promotional offers",
+      "addPromotion": "Add Promotion",
+      "formDialog": {
+        "edit": "Edit",
+        "create": "Create",
+        "updateDescription": "Update promotion details",
+        "createDescription": "Create a new promotion",
+        "updatedSuccessfully": "Promotion updated successfully",
+        "createdSuccessfully": "Promotion created successfully",
+        "failedToSave": "Failed to save promotion"
+      },
+      "form": {
+        "code": "Code",
+        "codePlaceholder": "e.g., SAVE10",
+        "discount": "Discount",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "save": "Save"
+      },
+      "list": {
+        "code": "Code",
+        "discount": "Discount",
+        "validityPeriod": "Validity Period",
+        "to": "to",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "actions": "Actions",
+        "deletedSuccessfully": "Promotion deleted successfully",
+        "failedToDelete": "Failed to delete promotion",
+        "noPromotions": "No promotions found",
+        "createFirstPromotion": "Create your first promotion to get started"
+      },
+      "branch": "Branch",
+      "services": "Services"
+    },
+    "bookingDetails": {
+      "branch": "Branch",
+      "date": "Date",
       "service": "Service",
       "status": "Status",
-      "date": "Date"
+      "title": "Booking Details",
+      "user": "User"
     },
-    "cancel": {
-      "title": "Cancel Booking",
-      "confirm": "Are you sure you want to cancel booking {bookingId}? This action cannot be undone.",
-      "yes": "Yes, Cancel Booking",
-      "no": "No, Keep Booking"
-    },
-    "update": {
-      "title": "Update Booking Status",
-      "button": "Update Status"
-    },
-    "bookingId": "Booking ID",
-    "user": "User",
-    "branch": "Branch",
-    "service": "Service",
-    "status": {
-      "title": "Status",
-      "pending": "Pending",
-      "inProgress": "In Progress",
+    "updateStatus": {
+      "cancelled": "Cancelled",
       "completed": "Completed",
-      "scheduled": "Scheduled",
-      "cancelled": "Cancelled"
-    },
-    "date": "Date",
-    "copyId": "Copy ID",
-    "viewDetails": "View Details",
-    "updateStatus": "Update Status",
-    "cancelBooking": "Cancel Booking",
-    "updateSuccess": "Booking status updated successfully",
-    "updateError": "Failed to update booking status",
-    "cancelSuccess": "Booking cancelled successfully",
-    "cancelError": "Failed to cancel booking"
+      "inProgress": "In Progress",
+      "pending": "Pending",
+      "saveChanges": "Save Changes",
+      "selectStatus": "Select a status",
+      "status": "Status",
+      "title": "Update Booking Status"
+    }
   },
-  "reports": {
-    "title": "Reports",
-    "description": "View and download generated reports",
-    "reportName": "Report Name",
-    "dateRange": "Date Range",
-    "generatedOn": "Generated On",
-    "download": "Download",
-    "monthlyRevenue": "Monthly Revenue",
-    "userGrowth": "User Growth",
-    "washerPerformance": "Washer Performance",
-    "bookingTrends": "Booking Trends"
-  },
-  "activity": {
-    "title": "Recent Activity"
-  },
-  "reviews": {
-    "title": "Recent Reviews"
-  },
-  "washersActivity": {
-    "title": "Washers Activity"
-  },
-  "washers": {
+  "branch": {
+    "filterByName": "Filter by name...",
+    "filterByBranch": "Filter by Branch",
     "name": "Name",
-    "branch": "Branch",
     "status": "Status",
-    "rating": "Rating"
+    "rating": "Rating",
+    "bookingId": "Booking ID",
+    "scheduledTime": "Scheduled Time",
+    "service": "Service",
+    "washer": "Washer",
+    "phone": "Phone",
+    "vehicles": "Vehicles",
+    "equipment": "Equipment",
+    "dashboard": "Dashboard",
+    "bookings": "Bookings",
+    "washers": "Washers",
+    "branch": "Branch",
+    "services": "Services"
   },
-  "branchPerformance": {
-    "title": "Branch Performance"
+  "ui": {
+    "commandPalette": "Command Palette",
+    "commandPaletteDescription": "Search for a command to run...",
+    "selectServices": "Select services...",
+    "searchServices": "Search services...",
+    "toggleSidebar": "Toggle Sidebar",
+    "previousPage": "Go to previous page",
+    "nextPage": "Go to next page",
+    "dateRangePicker": {
+      "pickDate": "Pick a date"
+    },
+    "pagination": {
+      "morePages": "More pages",
+      "next": "Next",
+      "nextPage": "Next Page",
+      "pagination": "Pagination",
+      "previous": "Previous",
+      "previousPage": "Previous Page"
+    },
+    "branch": "Branch",
+    "services": "Services"
   },
-  "paymentsOverview": {
-    "title": "Payments Overview"
+  "dataTable": {
+    "ref": "Ref",
+    "name": "Name",
+    "company": "Company",
+    "source": "Source",
+    "lastActivity": "Last Activity",
+    "header": "Header",
+    "sectionType": "Section Type",
+    "target": "Target",
+    "done": "Done",
+    "selectAll": "Select all",
+    "selectRow": "Select row",
+    "selectView": "Select a view",
+    "columnHeader": {
+      "asc": "Ascending",
+      "desc": "Descending",
+      "hide": "Hide"
+    },
+    "pagination": {
+      "firstPage": "First Page",
+      "lastPage": "Last Page",
+      "nextPage": "Next Page",
+      "of": "of",
+      "page": "Page",
+      "previousPage": "Previous Page",
+      "rowsPerPage": "Rows per page",
+      "rowsSelected": "Rows selected"
+    },
+    "viewOptions": {
+      "toggleColumns": "Toggle Columns",
+      "view": "View"
+    },
+    "branch": "Branch",
+    "services": "Services"
+  },
+  "actions": "Actions",
+  "addShift": {
+    "button": "Add Shift",
+    "dayOfWeek": "Day of Week",
+    "defaultDay": "1",
+    "defaultEndTime": "17:00",
+    "defaultStartTime": "09:00",
+    "endTime": "End Time",
+    "invalidTimeFormat": "Invalid time format (HH:MM)",
+    "selectDay": "Select a day",
+    "startTime": "Start Time",
+    "title": "Add New Shift"
+  },
+  "alreadyHaveAccount": "Already have an account?",
+  "banners": {
+    "description": "Manage site-wide banners displayed to users",
+    "title": "Banners"
+  },
+  "bookingId": "Booking ID",
+  "bookingTrends": {
+    "chartTitle": "Bookings",
+    "description": "Track booking patterns over time",
+    "title": "Booking Trends"
+  },
+  "copyId": "Copy ID",
+  "currentSchedule": {
+    "noShifts": "No shifts scheduled",
+    "title": "Current Schedule"
+  },
+  "date": "Date",
+  "days": {
+    "friday": "Friday",
+    "fridayValue": "5",
+    "monday": "Monday",
+    "mondayValue": "1",
+    "saturday": "Saturday",
+    "saturdayValue": "6",
+    "sunday": "Sunday",
+    "sundayValue": "0",
+    "thursday": "Thursday",
+    "thursdayValue": "4",
+    "tuesday": "Tuesday",
+    "tuesdayValue": "2",
+    "unknown": "Unknown",
+    "wednesday": "Wednesday",
+    "wednesdayValue": "3"
+  },
+  "deleteConfirm": {
+    "continue": "Continue",
+    "description": "This action cannot be undone.",
+    "title": "Are you sure?"
+  },
+  "form": {
+    "activeStatusValue": "active",
+    "branch": "Branch",
+    "branchRequired": "Please select a branch",
+    "createButton": "Create",
+    "defaultRating": "0",
+    "defaultStatus": "inactive",
+    "inactiveStatusValue": "inactive",
+    "name": "Name",
+    "nameMinLength": "Name must be at least 2 characters",
+    "namePlaceholder": "e.g., John Smith",
+    "rating": "Rating",
+    "selectBranch": "Select a branch",
+    "selectStatus": "Select a status",
+    "status": "Status",
+    "updateButton": "Update"
+  },
+  "location": "Location",
+  "login": "Login",
+  "loginDescription": "Enter your credentials to access the system",
+  "loginToContinue": "Login to continue",
+  "menu": {
+    "admin": "Admin Menu",
+    "emailMarketing": "Email Marketing",
+    "marketing": "Marketing"
+  },
+  "na": "N/A",
+  "name": "Name",
+  "noServices": "No services",
+  "notSet": "Not set",
+  "offers": {
+    "description": "Manage promotional offers for services and products",
+    "title": "Offers"
+  },
+  "openMenu": "Open menu",
+  "rating": "Rating",
+  "recentBookings": "Recent Bookings",
+  "register": "Register",
+  "registerDescription": "Create a new account",
+  "revenueTrends": {
+    "chartTitle": "Revenue",
+    "description": "Track revenue generation over time",
+    "title": "Revenue Trends"
+  },
+  "service": "Service",
+  "servicePerformance": {
+    "chartTitle": "Bookings",
+    "description": "Performance metrics by service",
+    "title": "Service Performance"
+  },
+  "status": "Status",
+  "table": {
+    "allBranches": "All Branches",
+    "allBranchesValue": "all",
+    "branch": "Branch",
+    "export": "Export",
+    "filterBranchPlaceholder": "Filter by Branch",
+    "filterPlaceholder": "Filter by name...",
+    "name": "Name",
+    "rating": "Rating",
+    "status": "Status"
+  },
+  "unassigned": "Unassigned",
+  "updateStatus": "Update Status",
+  "user": "User",
+  "viewDetails": "View Details",
+  "viewOnMap": "View on Map",
+  "washerPerformance": {
+    "chartTitle": "Bookings",
+    "description": "Performance metrics by washer",
+    "title": "Washer Performance"
+  },
+  "welcome": "Welcome",
+  "welcomeBack": "Welcome back",
+  "youAreInRightPlace": "You're in the right place",
+  "bookings": {
+    "branch": ""
   }
 }

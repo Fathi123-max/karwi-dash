@@ -43,47 +43,49 @@ export const useBranchStore = create<BranchState>((set, get) => ({
     const { franchises } = useFranchiseStore.getState();
     const { services } = useServiceStore.getState();
 
-    const transformedBranches = await Promise.all(data.map(async (branch) => {
-      // Get branch-specific services
-      const branchServices = services.filter((s) => s.branchId === branch.id);
+    const transformedBranches = await Promise.all(
+      data.map(async (branch) => {
+        // Get branch-specific services
+        const branchServices = services.filter((s) => s.branchId === branch.id);
 
-      // Get global services (services that are marked as global)
-      const globalServices = services.filter((s) => s.is_global);
+        // Get global services (services that are marked as global)
+        const globalServices = services.filter((s) => s.is_global);
 
-      // Combine branch-specific and global services, removing duplicates
-      const allServices = [...branchServices];
-      globalServices.forEach((globalService) => {
-        // Only add global service if it's not already in branch services
-        if (!allServices.some((s) => s.name === globalService.name)) {
-          allServices.push(globalService);
+        // Combine branch-specific and global services, removing duplicates
+        const allServices = [...branchServices];
+        globalServices.forEach((globalService) => {
+          // Only add global service if it's not already in branch services
+          if (!allServices.some((s) => s.name === globalService.name)) {
+            allServices.push(globalService);
+          }
+        });
+
+        // Calculate rating if not already set or if it's null
+        let ratings = branch.ratings;
+        if (ratings === null || ratings === undefined) {
+          ratings = await calculateBranchRating(branch.id);
         }
-      });
 
-      // Calculate rating if not already set or if it's null
-      let ratings = branch.ratings;
-      if (ratings === null || ratings === undefined) {
-        ratings = await calculateBranchRating(branch.id);
-      }
-
-      return {
-        id: branch.id,
-        name: branch.name,
-        location: typeof branch.location === "string" ? branch.location : JSON.stringify(branch.location),
-        location_text: branch.location_text,
-        franchise_id: branch.franchise_id,
-        franchise: franchises.find((f) => f.id === branch.franchise_id)?.name ?? "N/A",
-        services: allServices,
-        activeBookings: branch.active_bookings,
-        createdAt: new Date(branch.created_at),
-        address: branch.address,
-        city: branch.city,
-        phone_number: branch.phone_number,
-        ratings: ratings,
-        pictures: branch.pictures,
-        latitude: branch.latitude,
-        longitude: branch.longitude,
-      };
-    }));
+        return {
+          id: branch.id,
+          name: branch.name,
+          location: typeof branch.location === "string" ? branch.location : JSON.stringify(branch.location),
+          location_text: branch.location_text,
+          franchise_id: branch.franchise_id,
+          franchise: franchises.find((f) => f.id === branch.franchise_id)?.name ?? "N/A",
+          services: allServices,
+          activeBookings: branch.active_bookings,
+          createdAt: new Date(branch.created_at),
+          address: branch.address,
+          city: branch.city,
+          phone_number: branch.phone_number,
+          ratings: ratings,
+          pictures: branch.pictures,
+          latitude: branch.latitude,
+          longitude: branch.longitude,
+        };
+      }),
+    );
 
     set({ branches: transformedBranches });
   },

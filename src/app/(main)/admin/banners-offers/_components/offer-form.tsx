@@ -5,15 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
@@ -42,7 +34,7 @@ interface OfferFormProps {
 
 export function OfferForm({ offer, onClose }: OfferFormProps) {
   const { addOffer, updateOffer } = useBannersOffersStore();
-  
+
   const form = useForm<OfferFormValues>({
     resolver: zodResolver(offerSchema),
     defaultValues: offer ?? {
@@ -74,12 +66,10 @@ export function OfferForm({ offer, onClose }: OfferFormProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
-      <div className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-2xl translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 sm:rounded-lg">
-        <h2 className="text-lg font-semibold">
-          {offer ? "Edit Offer" : "Create Offer"}
-        </h2>
-        
+    <div className="bg-background/80 fixed inset-0 z-50 backdrop-blur-sm">
+      <div className="bg-background fixed top-[50%] left-[50%] z-50 grid w-full max-w-2xl translate-x-[-50%] translate-y-[-50%] gap-4 border p-6 shadow-lg duration-200 sm:rounded-lg">
+        <h2 className="text-lg font-semibold">{offer ? "Edit Offer" : "Create Offer"}</h2>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
@@ -95,7 +85,7 @@ export function OfferForm({ offer, onClose }: OfferFormProps) {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="description"
@@ -103,17 +93,13 @@ export function OfferForm({ offer, onClose }: OfferFormProps) {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      {...field} 
-                      placeholder="Offer description" 
-                      className="min-h-[100px]" 
-                    />
+                    <Textarea {...field} placeholder="Offer description" className="min-h-[100px]" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="image_url"
@@ -121,17 +107,13 @@ export function OfferForm({ offer, onClose }: OfferFormProps) {
                 <FormItem>
                   <FormLabel>Image</FormLabel>
                   <FormControl>
-                    <ImageUploadField
-                      value={field.value || ""}
-                      onChange={field.onChange}
-                      bucket="offers"
-                    />
+                    <ImageUploadField value={field.value || ""} onChange={field.onChange} bucket="offers" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="link_url"
@@ -141,14 +123,12 @@ export function OfferForm({ offer, onClose }: OfferFormProps) {
                   <FormControl>
                     <Input {...field} placeholder="https://example.com" />
                   </FormControl>
-                  <FormDescription>
-                    Optional URL for the offer to link to
-                  </FormDescription>
+                  <FormDescription>Optional URL for the offer to link to</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            
+
             <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -159,34 +139,27 @@ export function OfferForm({ offer, onClose }: OfferFormProps) {
                     <FormControl>
                       <Input {...field} placeholder="OFFER10" />
                     </FormControl>
-                    <FormDescription>
-                      Optional promotional code
-                    </FormDescription>
+                    <FormDescription>Optional promotional code</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="is_active"
                 render={({ field }) => (
                   <FormItem className="flex flex-col justify-end">
                     <div className="flex items-center space-x-2">
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
+                      <Switch checked={field.value} onCheckedChange={field.onChange} />
                       <FormLabel className="!mt-0">Active</FormLabel>
                     </div>
-                    <FormDescription>
-                      Inactive offers won't be displayed
-                    </FormDescription>
+                    <FormDescription>Inactive offers won't be displayed</FormDescription>
                   </FormItem>
                 )}
               />
             </div>
-            
+
             <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -197,7 +170,7 @@ export function OfferForm({ offer, onClose }: OfferFormProps) {
                     <FormControl>
                       <select
                         {...field}
-                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         <option value="percentage">Percentage</option>
                         <option value="fixed">Fixed Amount</option>
@@ -207,7 +180,7 @@ export function OfferForm({ offer, onClose }: OfferFormProps) {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="discount_value"
@@ -222,14 +195,12 @@ export function OfferForm({ offer, onClose }: OfferFormProps) {
                 )}
               />
             </div>
-            
+
             <div className="flex justify-end space-x-2 pt-4">
               <Button type="button" variant="ghost" onClick={onClose}>
                 Cancel
               </Button>
-              <Button type="submit">
-                {offer ? "Update Offer" : "Create Offer"}
-              </Button>
+              <Button type="submit">{offer ? "Update Offer" : "Create Offer"}</Button>
             </div>
           </form>
         </Form>

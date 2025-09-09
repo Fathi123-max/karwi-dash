@@ -6,6 +6,7 @@
 
 import { useState, useEffect } from "react";
 
+import { useTranslations } from "next-intl";
 import { Globe, Tag, Plus, X } from "lucide-react";
 import { toast } from "sonner";
 
@@ -47,6 +48,7 @@ interface ServicePricePromotionFormProps {
 }
 
 export function ServicePricePromotionForm({ service, branches, selectedBranchId }: ServicePricePromotionFormProps) {
+  const t = useTranslations("franchise.services.pricePromotionForm");
   const { updateService } = useFranchiseServiceStore();
   const { promotions, fetchPromotions } = usePromotionStore();
   const { servicePromotions, fetchServicePromotions, addServicePromotion, removeServicePromotion } =
@@ -62,7 +64,7 @@ export function ServicePricePromotionForm({ service, branches, selectedBranchId 
   const [promotionToRemove, setPromotionToRemove] = useState<{ id: string; code: string } | null>(null);
 
   // Find the branch name for display
-  const branchName = branches.find((b) => b.id === service.branchId)?.name ?? "Unknown Branch";
+  const branchName = branches.find((b) => b.id === service.branchId)?.name ?? t("unknownBranch");
 
   // Get promotions for this service
   const servicePromotionsList = servicePromotions.filter((sp) => sp.serviceId === service.id);
@@ -85,10 +87,10 @@ export function ServicePricePromotionForm({ service, branches, selectedBranchId 
         ...service,
         price: parseFloat(price),
       });
-      toast.success("Service price updated successfully!");
+      toast.success(t("servicePriceUpdated"));
       setIsEditing(false);
     } catch (error: any) {
-      toast.error(error.message ?? "Failed to update service price.");
+      toast.error(error.message ?? t("failedToUpdateServicePrice"));
       console.error("Error updating service:", error);
     } finally {
       setIsUpdating(false);
@@ -106,11 +108,11 @@ export function ServicePricePromotionForm({ service, branches, selectedBranchId 
     setIsAddingPromotion(true);
     try {
       await addServicePromotion(service.id, selectedPromotionId);
-      toast.success("Promotion added to service!");
+      toast.success(t("promotionAddedToService"));
       setSelectedPromotionId("");
       setIsPromotionDialogOpen(false);
     } catch (error: any) {
-      toast.error(error.message ?? "Failed to add promotion to service.");
+      toast.error(error.message ?? t("failedToAddPromotionToService"));
       console.error("Error adding promotion:", error);
     } finally {
       setIsAddingPromotion(false);
@@ -123,10 +125,10 @@ export function ServicePricePromotionForm({ service, branches, selectedBranchId 
     setIsRemovingPromotion(promotionToRemove.id);
     try {
       await removeServicePromotion(promotionToRemove.id);
-      toast.success("Promotion removed from service!");
+      toast.success(t("promotionRemovedFromService"));
       setPromotionToRemove(null);
     } catch (error: any) {
-      toast.error(error.message ?? "Failed to remove promotion from service.");
+      toast.error(error.message ?? t("failedToRemovePromotionFromService"));
       console.error("Error removing promotion:", error);
     } finally {
       setIsRemovingPromotion(null);
@@ -143,26 +145,26 @@ export function ServicePricePromotionForm({ service, branches, selectedBranchId 
               {service.is_global && (
                 <Badge variant="secondary" className="flex items-center gap-1">
                   <Globe className="h-3 w-3" />
-                  Global
+                  {t("global")}
                 </Badge>
               )}
             </CardTitle>
             <CardDescription>
-              {service.is_global ? "Available at all branches" : `Branch: ${branchName}`}
+              {service.is_global ? t("availableAtAllBranches") : t("branchLabel", { name: branchName })}
             </CardDescription>
           </div>
           <div className="flex gap-2">
             {isEditing ? (
               <>
                 <Button variant="outline" onClick={handleCancel} disabled={isUpdating}>
-                  Cancel
+                  {t("cancel")}
                 </Button>
                 <Button onClick={handleSave} disabled={isUpdating}>
-                  {isUpdating ? "Saving..." : "Save"}
+                  {isUpdating ? t("saving") : t("save")}
                 </Button>
               </>
             ) : (
-              <Button onClick={() => setIsEditing(true)}>Edit Price</Button>
+              <Button onClick={() => setIsEditing(true)}>{t("editPrice")}</Button>
             )}
           </div>
         </div>
@@ -171,7 +173,7 @@ export function ServicePricePromotionForm({ service, branches, selectedBranchId 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="space-y-4">
             <div>
-              <Label htmlFor={`price-${service.id}`}>Price</Label>
+              <Label htmlFor={`price-${service.id}`}>{t("price")}</Label>
               {isEditing ? (
                 <div className="relative mt-1">
                   <span className="text-muted-foreground absolute inset-y-0 left-0 flex items-center pl-3">$</span>
@@ -194,40 +196,40 @@ export function ServicePricePromotionForm({ service, branches, selectedBranchId 
             </div>
 
             <div>
-              <Label>Duration</Label>
-              <p className="text-muted-foreground">{service.duration_min} minutes</p>
+              <Label>{t("duration")}</Label>
+              <p className="text-muted-foreground">{t("minutesLabel", { count: service.duration_min })}</p>
             </div>
           </div>
 
           <div className="space-y-4">
             <div>
               <div className="flex items-center justify-between">
-                <Label>Promotions</Label>
+                <Label>{t("promotions")}</Label>
                 <Dialog open={isPromotionDialogOpen} onOpenChange={setIsPromotionDialogOpen}>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="sm">
                       <Plus className="mr-2 h-4 w-4" />
-                      Add Promotion
+                      {t("addPromotion")}
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>Add Promotion</DialogTitle>
-                      <DialogDescription>Select a promotion to associate with this service.</DialogDescription>
+                      <DialogTitle>{t("addPromotion")}</DialogTitle>
+                      <DialogDescription>{t("selectPromotionDescription")}</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4">
                       <div>
-                        <Label htmlFor="promotion-select">Promotion</Label>
+                        <Label htmlFor="promotion-select">{t("promotion")}</Label>
                         <Select value={selectedPromotionId} onValueChange={setSelectedPromotionId}>
                           <SelectTrigger id="promotion-select">
-                            <SelectValue placeholder="Select a promotion" />
+                            <SelectValue placeholder={t("selectPromotion")} />
                           </SelectTrigger>
                           <SelectContent>
                             {promotions
                               .filter((p) => !servicePromotionsList.some((sp) => sp.promotionId === p.id))
                               .map((promotion) => (
                                 <SelectItem key={promotion.id} value={promotion.id}>
-                                  {promotion.code} - {promotion.discount}% off
+                                  {promotion.code} - {t("percentOff", { percent: promotion.discount })}
                                 </SelectItem>
                               ))}
                           </SelectContent>
@@ -235,10 +237,10 @@ export function ServicePricePromotionForm({ service, branches, selectedBranchId 
                       </div>
                       <div className="flex justify-end gap-2">
                         <Button variant="outline" onClick={() => setIsPromotionDialogOpen(false)}>
-                          Cancel
+                          {t("cancel")}
                         </Button>
                         <Button onClick={handleAddPromotion} disabled={!selectedPromotionId || isAddingPromotion}>
-                          {isAddingPromotion === true ? "Adding..." : "Add Promotion"}
+                          {isAddingPromotion === true ? t("adding") : t("addPromotion")}
                         </Button>
                       </div>
                     </div>
@@ -271,22 +273,21 @@ export function ServicePricePromotionForm({ service, branches, selectedBranchId 
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
-                            <AlertDialogTitle>Remove Promotion</AlertDialogTitle>
+                            <AlertDialogTitle>{t("removePromotion")}</AlertDialogTitle>
                             <AlertDialogDescription>
-                              Are you sure you want to remove the promotion &quot;{sp.promotion.code}&quot; from this
-                              service? This action cannot be undone.
+                              {t("removePromotionConfirmation", { code: sp.promotion.code })}
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={handleRemovePromotion}>Remove</AlertDialogAction>
+                            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+                            <AlertDialogAction onClick={handleRemovePromotion}>{t("remove")}</AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>
                     </div>
                   ))
                 ) : (
-                  <p className="text-muted-foreground text-sm">No promotions associated with this service.</p>
+                  <p className="text-muted-foreground text-sm">{t("noPromotionsAssociated")}</p>
                 )}
               </div>
             </div>

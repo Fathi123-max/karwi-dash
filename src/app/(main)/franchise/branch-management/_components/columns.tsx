@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { MapPin } from "lucide-react";
 
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Branch } from "@/stores/franchise-dashboard/branch-store";
@@ -18,20 +19,21 @@ const parseLocation = (locationStr: string | null | undefined): { lat: number; l
   return undefined;
 };
 
-export const columns: ColumnDef<Branch>[] = [
+// Create a function that returns the columns with translations
+export const getColumns = (t: (key: string) => string): ColumnDef<Branch>[] => [
   {
     accessorKey: "name",
-    header: "Name",
+    header: t("name"),
   },
   {
     accessorKey: "location_text",
-    header: "Location",
+    header: t("location"),
     cell: ({ row }) => {
       const locationStr = row.getValue("location_text");
       const location = parseLocation(locationStr);
 
       if (!location) {
-        return <span className="text-muted-foreground">Not set</span>;
+        return <span className="text-muted-foreground">{t("notSet")}</span>;
       }
 
       const { lat, lng } = location;
@@ -41,7 +43,7 @@ export const columns: ColumnDef<Branch>[] = [
         <a href={mapUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
           <Button variant="outline" size="sm">
             <MapPin className="mr-2 h-4 w-4" />
-            View on Map
+            {t("viewOnMap")}
           </Button>
         </a>
       );
@@ -49,11 +51,11 @@ export const columns: ColumnDef<Branch>[] = [
   },
   {
     accessorKey: "services",
-    header: "Services",
+    header: t("services"),
     cell: ({ row }) => {
       const services = row.original.services ?? [];
       if (services.length === 0) {
-        return <span className="text-muted-foreground">No services</span>;
+        return <span className="text-muted-foreground">{t("noServices")}</span>;
       }
       return (
         <div className="flex max-w-xs flex-wrap gap-1">
